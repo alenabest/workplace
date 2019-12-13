@@ -1,0 +1,12 @@
+{
+  "/workplace/api": {
+    "target": "http://localhost:3000",
+    "secure": false,
+    "pathRewrite": {"^/workplace/api" : "/workplace/api"}
+  },
+  "/media/*": {
+    "target": "http://localhost:3000/media",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
