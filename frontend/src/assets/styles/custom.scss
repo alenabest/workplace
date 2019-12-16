@@ -1,0 +1,28 @@
+.login-field {
+  .mat-form-field-label {
+    color: #ffffff !important;
+    font-size: 18px !important;
+  }
+
+  .mat-form-field-underline {
+    background: #ffffff !important;
+  }
+
+  .mat-input-element {
+    caret-color: #ffffff;
+    color: #ffffff;
+    font-size: 18px !important;
+  }
+
+  input:-webkit-autofill {
+    -webkit-box-shadow: inset 0 1px 4px 0 transparent, /* Внутренняя тень */
+    inset 0 0 0 50px #00adde, /* Цвет фона */
+    0 1px transparent !important; /* Наружная тень */
+    -webkit-text-fill-color: #ffffff !important;
+  }
+}
+
+.white-button {
+  color: #00adde;
+  background-color: white;
+}

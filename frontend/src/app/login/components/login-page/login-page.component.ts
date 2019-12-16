@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormValidationService } from '../../../core/services/form-validation/form-validation.service';
 
 
 @Component({
@@ -10,17 +11,34 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginPageComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  get username(): AbstractControl {
+    return this.loginForm.get('username');
+  }
+
+  get password(): AbstractControl {
+    return this.loginForm.get('password');
+  }
+
+  constructor(private formBuilder: FormBuilder,
+              private formValidationService: FormValidationService) {
+  }
+
+  getValidatorErrorMessage(field: AbstractControl): string {
+    return this.formValidationService.getValidatorErrorMessage(field);
   }
 
   ngOnInit() {
     this.initForm();
   }
 
+  login() {
+    console.log(this.loginForm.value);
+  }
+
   initForm() {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 }

@@ -1,21 +1,23 @@
 <div class="login-container" fxLayout="column" fxLayoutAlign="center center">
   <div class="login-form" fxLayout="column" fxLayoutAlign="center center">
-    <form role="form" [formGroup]="loginForm" fxLayout="column">
-      <div fxLayout="row">
-        <mat-form-field floatLabel="always" fxFlex>
+    <form role="form" [formGroup]="loginForm" fxLayout="column" fxLayoutGap="8px">
+      <div fxLayout="row" class="field-row">
+        <mat-form-field floatLabel="always" class="login-field" fxFlex>
           <mat-label>Логин</mat-label>
           <input matInput placeholder="Введите логин" formControlName="username" required>
+          <mat-error *ngIf="username.invalid">{{ getValidatorErrorMessage(username) }}</mat-error>
         </mat-form-field>
       </div>
 
       <div fxLayout="row">
-        <mat-form-field floatLabel="always" fxFlex>
+        <mat-form-field floatLabel="always" class="login-field" fxFlex>
           <mat-label>Пароль</mat-label>
           <input matInput placeholder="Введите пароль" formControlName="password" type="password" required>
+          <mat-error *ngIf="password.invalid">{{ getValidatorErrorMessage(password) }}</mat-error>
         </mat-form-field>
       </div>
 
-      <button mat-raised-button color="primary" type="submit">ВОЙТИ</button>
+      <button mat-raised-button type="submit" class="white-button" (click)="login()">ВОЙТИ</button>
     </form>
   </div>
 </div>

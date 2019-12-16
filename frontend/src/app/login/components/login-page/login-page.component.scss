@@ -16,17 +16,16 @@
     background: #00adde;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
-    mat-form-field label {
-      color: #ffffff !important;
-      font-size: 16px;
+    .white-button {
+      font-size: 18px;
     }
 
-    .mat-form-field-underline {
-      background: #ffffff !important;
+    .field-row {
+      width: 240px;
     }
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1000px) {
     .login-form {
       border-radius: 0;
       height: 100vh;
@@ -41,4 +40,17 @@ input:-webkit-autofill {
   0 1px transparent !important; /* Наружная тень */
   -webkit-text-fill-color: #ffffff !important;
 }
+
+::ng-deep mat-form-field.mat-focused {
+  .mat-form-field-ripple {
+    background-color: transparent !important;
+  }
+}
+
+::ng-deep mat-form-field.mat-form-field-invalid {
+  .mat-form-field-ripple {
+    background-color: #94241c !important;
+  }
+}
+
 

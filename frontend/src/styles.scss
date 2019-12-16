@@ -12,8 +12,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$frontend-primary: mat-palette($mat-indigo);
-$frontend-accent: mat-palette($mat-pink, A200, A100, A400);
+$frontend-primary: mat-palette($mat-light-blue, A700);
+$frontend-accent: mat-palette($mat-deep-purple, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $frontend-warn: mat-palette($mat-red);
@@ -28,6 +28,7 @@ $frontend-theme: mat-light-theme($frontend-primary, $frontend-accent, $frontend-
 
 /* You can add global styles to this file, and also import other style files */
 @import "~roboto-fontface/css/roboto/roboto-fontface.css";
+@import "assets/styles/custom";
 
 html, body {
   margin: 0;
