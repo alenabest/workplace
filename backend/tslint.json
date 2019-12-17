@@ -5,6 +5,8 @@
     "no-unused-expression": true
   },
   "rules": {
+    "no-consecutive-blank-lines": false,
+    "component-class-suffix": true,
     "quotemark": [true, "single"],
     "member-access": [false],
     "ordered-imports": [false],
@@ -12,7 +14,10 @@
     "member-ordering": [false],
     "interface-name": [false],
     "arrow-parens": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "no-console": false,
+    "max-classes-per-file": true,
+    "trailing-comma": true
   },
   "rulesDirectory": []
 }
