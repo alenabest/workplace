@@ -1,1 +1,3 @@
-export class Auth {}
+export class AuthModel {
+  token: string;
+}

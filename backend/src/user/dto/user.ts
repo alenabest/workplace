@@ -8,3 +8,9 @@ export class UserDto {
   password: string;
   id: number;
 }
+
+
+export class UserFilterDto {
+  @ApiProperty()
+  username: string;
+}

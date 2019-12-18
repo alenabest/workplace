@@ -2,28 +2,26 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
 import { Repository } from 'typeorm';
-import { Request } from 'express';
 
-import { User } from '../db/user.entity';
-import { UserDto } from '../dto/user.dto';
+import { UserListModel, UserModel } from '../models';
+import { UserDto, UserFilterDto } from '../dto';
+import { User } from '../db';
 
 
 @Injectable()
 
 export class UserService {
 
-  constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
-  ) {
+  constructor(@InjectRepository(User)
+              private readonly userRepository: Repository<User>) {
   }
 
-  getUsers(request: Request): Observable<UserDto[]> {
-    return from(this.userRepository.find());
+  getUsers(query: UserFilterDto): Observable<UserListModel[]> {
+    return from(this.userRepository.find({where: query}));
   }
 
-  getUser(id: string): Observable<UserDto> {
-    return from(this.userRepository.findOne(id));
+  getUser(id?: string, query?: UserFilterDto): Observable<UserModel> {
+    return from(this.userRepository.findOne(id, {where: query}));
   }
 
   createUser(user: UserDto): Observable<UserDto> {

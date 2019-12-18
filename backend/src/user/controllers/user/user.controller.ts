@@ -1,13 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { ApiTags } from '@nestjs/swagger';
 import { map } from 'rxjs/operators';
-import { Request } from 'express';
 import { Observable } from 'rxjs';
 
 import { UserService } from '../../services/user.service';
-import { UserDto } from '../../dto/user.dto';
-import { UserListModel } from '../../models/user.model';
+import { UserListModel } from '../../models';
+import { UserDto, UserFilterDto } from '../../dto';
 
 
 @Controller('user')
@@ -17,8 +16,11 @@ export class UserController {
 
   @Get()
   @ApiTags('user')
-  getUsers(@Req() request: Request): Observable<UserDto[]> {
-    return this.userService.getUsers(request);
+  getUsers(@Query() query: UserFilterDto): Observable<UserListModel[]> {
+    return this.userService.getUsers(query)
+      .pipe(
+        map(users => plainToClass(UserListModel, users))
+      );
   }
 
   @Get(':id')

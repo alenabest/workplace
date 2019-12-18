@@ -17,7 +17,8 @@
     "object-literal-sort-keys": false,
     "no-console": false,
     "max-classes-per-file": true,
-    "trailing-comma": true
+    "trailing-comma": true,
+    "object-literal-shorthand": false
   },
   "rulesDirectory": []
 }
