@@ -1,11 +1,11 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { UserService } from '../../../user/services/user.service';
 import { UserModel } from '../../../user/models';
 import { AuthModel } from '../../models';
-import { JwtService } from '@nestjs/jwt';
 
 
 @Injectable()
