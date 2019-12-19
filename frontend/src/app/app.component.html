@@ -3,3 +3,9 @@
     <router-outlet></router-outlet>
   </div>
 </ng-container>
+
+<ng-container *ngIf="!isWithSidebarHeaderState()">
+  <div class="content-container with-sidebar common-theme">
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>

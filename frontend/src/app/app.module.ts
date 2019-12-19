@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfileModule } from './profile/profile.module';
 
 const modules = [
-  LoginModule
+  LoginModule,
+  ProfileModule
 ];
 
 @NgModule({
