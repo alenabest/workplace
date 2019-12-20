@@ -1,9 +1,10 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { UserService } from '../../../user/services/user.service';
+import { UserNotExistException } from '../../exceptions';
 import { UserModel } from '../../../user/models';
 import { AuthModel } from '../../models';
 
@@ -26,7 +27,7 @@ export class AuthService {
       return this.getToken(user);
     }
 
-    throw new BadRequestException('Невозможно войти с предоставленными учетными данными');
+    throw new UserNotExistException();
   }
 
   getToken(user: UserModel): AuthModel {
