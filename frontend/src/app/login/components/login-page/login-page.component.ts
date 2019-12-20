@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormValidationService } from '../../../core/services/form-validation/form-validation.service';
+
+import { FormValidationService } from '../../../core/services/form-validation/';
+import { AuthService } from '../../../core/services/auth';
 
 
 @Component({
@@ -20,7 +22,9 @@ export class LoginPageComponent implements OnInit {
   }
 
   constructor(private formBuilder: FormBuilder,
-              private formValidationService: FormValidationService) {
+              private formValidationService: FormValidationService,
+              private authService: AuthService) {
+    localStorage.clear();
   }
 
   getValidatorErrorMessage(field: AbstractControl): string {
@@ -32,7 +36,12 @@ export class LoginPageComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginForm.value);
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.value)
+        .subscribe();
+    } else {
+      this.formValidationService.validateAllFormFields(this.loginForm);
+    }
   }
 
   initForm() {

@@ -26,3 +26,19 @@
   color: #00adde;
   background-color: white;
 }
+
+.custom-snack-bar, .custom-snack-bar-warning {
+  color: white;
+
+  span {
+    font-size: 18px;
+  }
+}
+
+.custom-snack-bar {
+  background-color: rgba(0, 65, 89, 0.81);
+}
+
+.custom-snack-bar-warning {
+  background-color: #ca271bd1;
+}

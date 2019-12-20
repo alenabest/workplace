@@ -1,0 +1,25 @@
+.header-toolbar {
+  position: fixed;
+  color: white;
+
+  .toolbar-button {
+    text-transform: uppercase;
+    line-height: 64px;
+    padding: 0 8px 0 8px;
+    cursor: pointer;
+    opacity: 0.7;
+
+    &.current, &:hover {
+      opacity: 1;
+    }
+
+    &.current {
+      border-bottom: 2px solid white;
+    }
+  }
+
+  .header-login, .toolbar-button {
+    font-size: 15px;
+    font-weight: 500;
+  }
+}

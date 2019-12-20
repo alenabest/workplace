@@ -1,11 +1,18 @@
-<ng-container *ngIf="isWithSidebarHeaderState()">
+<ng-container *ngIf="isWithoutSidebarHeaderState">
   <div class="without-sidebar-header common-theme">
     <router-outlet></router-outlet>
   </div>
 </ng-container>
 
-<ng-container *ngIf="!isWithSidebarHeaderState()">
-  <div class="content-container with-sidebar common-theme">
+<ng-container *ngIf="!isWithoutSidebarHeaderState">
+  <app-header></app-header>
+  <app-sidebar *ngIf="!isWithoutSidebarState"></app-sidebar>
+  <div [ngClass]="{
+  'content-container': true,
+  'with-sidebar': !isWithoutSidebarState,
+  'without-sidebar': isWithoutSidebarState,
+  'common-theme': true
+  }">
     <router-outlet></router-outlet>
   </div>
 </ng-container>
