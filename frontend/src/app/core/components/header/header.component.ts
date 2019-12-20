@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  get greetingWords(): string {
+    return 'Привет, ';
+  }
   constructor() { }
 
   ngOnInit() {
