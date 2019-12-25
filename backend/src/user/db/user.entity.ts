@@ -12,4 +12,13 @@ export class User {
 
   @Column({nullable: false})
   password: string;
+
+  @Column({nullable: false, default: ''})
+  firstName: string;
+
+  @Column({nullable: true, default: ''})
+  middleName: string;
+
+  @Column({nullable: false, default: ''})
+  lastName: string;
 }

@@ -15,10 +15,10 @@ cd ".."
 # create db, $name.ts, index.ts
 mkdir "db" || exit
 cd "db" || exit
-echo "import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';" | tee -a "$1.ts"
+echo "import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';" | tee -a "$1.entity.ts"
 echo "@Entity()" | tee -a "$1.ts"
-echo "export class $1 {}" | awk -F ";" '{$name=substr($name, 1, 13)toupper(substr($name, 14, 1))substr($name, 15) }1' | tee -a "$1.ts"
-echo "export * from './$1';" | tee -a "index.ts"
+echo "export class $1 {}" | awk -F ";" '{$name=substr($name, 1, 13)toupper(substr($name, 14, 1))substr($name, 15) }1' | tee -a "$1.entity.ts"
+echo "export * from './$1.entity';" | tee -a "index.ts"
 cd ".."
 
 # create dto, $name.ts, index.ts
