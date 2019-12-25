@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { UserService } from '../../../user/services/user.service';
-import { UserNotExistException } from '../../exceptions';
+import { UserNotExistException } from '../../../core/exceptions';
 import { UserModel } from '../../../user/models';
 import { AuthModel } from '../../models';
 

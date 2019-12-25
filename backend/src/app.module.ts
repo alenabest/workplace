@@ -10,10 +10,10 @@ import { AuthModule } from './auth/auth.module';
     UserModule,
     AuthModule,
 
-    TypeOrmModule.forRoot(),
+    TypeOrmModule.forRoot()
   ],
   controllers: [],
-  providers: [],
+  providers: []
 })
 export class AppModule {
 }
