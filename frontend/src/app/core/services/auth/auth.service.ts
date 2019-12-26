@@ -22,6 +22,11 @@ export class AuthService {
               private router: Router) {
   }
 
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['login']).then();
+  }
+
   login(user: UserModel): Observable<UserModel> {
     return this.http
       .post(`${AUTH_API}login/`, user)

@@ -1,8 +1,16 @@
-<mat-toolbar color="primary" class="header-toolbar" fxLayout="row">
+<mat-toolbar color="primary" class="header-toolbar" fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="16px">
   <div fxFlex fxLayout="row">
-    <a [ngClass]="{'toolbar-button': true, 'current': isState('profile')}">Активность</a>
-    <a [ngClass]="{'toolbar-button': true}">Задачи</a>
-    <a [ngClass]="{'toolbar-button': true}">Отчеты</a>
+    <a [ngClass]="{'toolbar-button': true, 'current': isState('active')}" fxLayoutAlign="center center">Активность</a>
+    <a [ngClass]="{'toolbar-button': true, 'current': isState('tasks')}" fxLayoutAlign="center center">Задачи</a>
+    <a [ngClass]="{'toolbar-button': true, 'current': isState('order')}" fxLayoutAlign="center center">Отчеты</a>
   </div>
   <span class="header-login"> {{ greetingWords }} {{ userFirstName }} </span>
+  <a [ngClass]="{'toolbar-button': true, 'current': isState('profile')}" fxLayoutAlign="center center"
+     matTooltip="Профиль пользователя" matTooltipClass="custom-tooltip" routerLink="app/profile">
+    <mat-icon>account_circle</mat-icon>
+  </a>
+  <a class="toolbar-button" fxLayoutAlign="center center" (click)="logout()"
+     matTooltip="Выход" matTooltipClass="custom-tooltip">
+    <mat-icon>exit_to_app</mat-icon>
+  </a>
 </mat-toolbar>

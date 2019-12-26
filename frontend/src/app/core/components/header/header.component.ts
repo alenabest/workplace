@@ -40,4 +40,8 @@ export class HeaderComponent implements OnInit {
   isState(state: string): boolean {
     return this.router.url.includes(`/${state}`);
   }
+
+  logout() {
+    this.authService.logout();
+  }
 }
