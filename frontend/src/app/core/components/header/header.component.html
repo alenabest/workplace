@@ -1,15 +1,22 @@
-<mat-toolbar color="primary" class="header-toolbar" fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="16px">
+<mat-toolbar color="primary" class="header-toolbar" fxLayout="row" fxLayoutAlign="flex-start center">
   <div fxFlex fxLayout="row">
-    <a [ngClass]="{'toolbar-button': true, 'current': isState('active')}" fxLayoutAlign="center center">Активность</a>
-    <a [ngClass]="{'toolbar-button': true, 'current': isState('tasks')}" fxLayoutAlign="center center">Задачи</a>
-    <a [ngClass]="{'toolbar-button': true, 'current': isState('order')}" fxLayoutAlign="center center">Отчеты</a>
+    <a class="phone-menu-button" fxLayoutAlign="center center">
+      <mat-icon>menu</mat-icon>
+    </a>
+
+    <a [ngClass]="{'toolbar-button': true, 'current': isState('active')}" fxLayoutAlign="center center">
+      Активность</a>
+    <a [ngClass]="{'toolbar-button': true, 'current': isState('tasks')}" fxLayoutAlign="center center">
+      Задачи</a>
+    <a [ngClass]="{'toolbar-button': true, 'current': isState('order')}" fxLayoutAlign="center center">
+      Отчеты</a>
   </div>
   <span class="header-login"> {{ greetingWords }} {{ userFirstName }} </span>
-  <a [ngClass]="{'toolbar-button': true, 'current': isState('profile')}" fxLayoutAlign="center center"
+  <a [ngClass]="{'toolbar-icon-button': true, 'current': isState('profile')}" fxLayoutAlign="center center"
      matTooltip="Профиль пользователя" matTooltipClass="custom-tooltip" routerLink="app/profile">
     <mat-icon>account_circle</mat-icon>
   </a>
-  <a class="toolbar-button" fxLayoutAlign="center center" (click)="logout()"
+  <a class="toolbar-icon-button" fxLayoutAlign="center center" (click)="logout()"
      matTooltip="Выход" matTooltipClass="custom-tooltip">
     <mat-icon>exit_to_app</mat-icon>
   </a>

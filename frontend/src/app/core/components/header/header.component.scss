@@ -3,7 +3,11 @@
   color: white;
   top: 0;
 
-  .toolbar-button {
+  .phone-menu-button {
+    display: none !important;
+  }
+
+  .toolbar-button, .toolbar-icon-button {
     text-transform: uppercase;
     height: 64px;
     padding: 0 8px 0 8px;
@@ -19,7 +23,7 @@
     }
   }
 
-  .header-login, .toolbar-button {
+  .header-login, .toolbar-button, .toolbar-icon-button {
     text-transform: uppercase;
     font-size: 15px;
     font-weight: 400;
@@ -27,5 +31,17 @@
 
   .header-login {
     cursor: default;
+    padding-right: 16px;
+  }
+
+  @media screen and (max-width: 600px) {
+    .toolbar-button {
+      display: none !important;
+    }
+
+    .phone-menu-button {
+      display: flex !important;
+      height: 64px;
+    }
   }
 }
