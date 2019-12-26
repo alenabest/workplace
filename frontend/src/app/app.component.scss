@@ -1,13 +1,10 @@
 .content-container {
-  height: calc(100% - 64px);
+  height: calc(100vh - 64px);
   overflow: hidden;
+  margin-top: 64px;
 
   &.with-sidebar{
-    margin: 64px 0 0 60px;
-  }
-
-  &.without-sidebar {
-    margin: 64px 0 0 0;
+    margin-left: 60px;
   }
 }
 

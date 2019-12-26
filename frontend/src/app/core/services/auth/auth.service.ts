@@ -27,12 +27,12 @@ export class AuthService {
       .post(`${AUTH_API}login/`, user)
       .pipe(
         tap((res: { token: string }) => addLocalStorageItem('authorization', res.token, true)),
-        switchMap(() => this.profile()),
+        switchMap(() => this.getProfile()),
         finalize(() => this.redirectToUserPage())
       );
   }
 
-  private profile(): Observable<UserModel> {
+  getProfile(): Observable<UserModel> {
     return this.http
       .get(`${AUTH_API}profile/`)
       .pipe(

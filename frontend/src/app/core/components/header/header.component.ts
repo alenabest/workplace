@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import * as dayjs from 'dayjs';
+import { Router } from '@angular/router';
+import * as dayJs from 'dayjs';
+
+import { AuthService } from '../../services/auth';
 
 
 @Component({
@@ -9,8 +12,10 @@ import * as dayjs from 'dayjs';
 })
 export class HeaderComponent implements OnInit {
 
+  userFirstName: string = 'Пользователь';
+
   get greetingWords(): string {
-    const nowHour: number = dayjs().hour();
+    const nowHour: number = dayJs().hour();
     if (nowHour >= 5 && nowHour < 10) {
       return 'Доброе утро, ';
     } else if (nowHour >= 10 && nowHour < 18) {
@@ -22,9 +27,17 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  constructor(private authService: AuthService,
+              private router: Router) {
+    if (this.authService.currentUser.firstName) {
+      this.userFirstName = this.authService.currentUser.firstName;
+    }
+  }
 
   ngOnInit() {
   }
 
+  isState(state: string): boolean {
+    return this.router.url.includes(`/${state}`);
+  }
 }

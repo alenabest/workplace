@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import * as dayJs from 'dayjs';
 
 import { CustomHttpInterceptor } from './core/custom-http-interceptor';
 import { ProfileModule } from './profile/profile.module';
@@ -9,7 +10,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { CoreComponentsModule } from './core/components/core-components.module';
+import { StartupService } from './core/services/startup';
 
+dayJs.locale('ru');
+
+export function startupServiceFactory(startupService: StartupService) {
+  return () => startupService.initializeApp();
+}
 
 const modules = [
   CoreComponentsModule,
@@ -35,6 +42,8 @@ const modules = [
     BrowserAnimationsModule
   ],
   providers: [
+    StartupService,
+    { provide: APP_INITIALIZER, useFactory: startupServiceFactory, deps: [StartupService], multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

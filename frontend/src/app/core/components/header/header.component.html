@@ -1,10 +1,10 @@
 <mat-toolbar color="primary" class="header-toolbar" fxLayout="row" fxLayoutAlign="space-between">
   <div fxLayout="row" fxLayoutAlign="flex-start">
-    <a [ngClass]="{'toolbar-button': true, 'current': true}">Активность</a>
+    <a [ngClass]="{'toolbar-button': true, 'current': isState('profile')}">Активность</a>
     <a [ngClass]="{'toolbar-button': true}">Задачи</a>
     <a [ngClass]="{'toolbar-button': true}">Отчеты</a>
   </div>
   <div fxLayout="row" fxLayoutAlign="flex-start center">
-    <span class="header-login"> {{ greetingWords }} пользователь</span>
+    <span class="header-login"> {{ greetingWords }} {{ userFirstName }} </span>
   </div>
 </mat-toolbar>
