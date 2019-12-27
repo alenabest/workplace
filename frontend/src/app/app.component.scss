@@ -4,7 +4,25 @@
   margin-top: 64px;
 
   &.with-sidebar{
-    margin-left: 60px;
+    margin-left: 160px;
+    margin-right: 160px;
+  }
+
+  @media screen and (max-width: 600px) {
+    height: calc(100vh - 56px);
+    margin-top: 56px;
+
+    &.with-sidebar{
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+  }
+
+  @media screen and (min-width: 601px) and (max-width: 1000px) {
+    &.with-sidebar{
+      margin-left: 100px;
+      margin-right: 100px;
+    }
   }
 }
 
