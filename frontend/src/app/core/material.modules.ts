@@ -29,7 +29,8 @@ import {
   MatGridListModule,
   MatSlideToggleModule,
   MatTreeModule,
-  MatRippleModule
+  MatRippleModule,
+  MatFormFieldModule
 } from '@angular/material';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
@@ -66,5 +67,6 @@ export const MaterialModules = [
   MatSlideToggleModule,
   MatTreeModule,
   DragDropModule,
-  MatRippleModule
+  MatRippleModule,
+  MatFormFieldModule
 ];

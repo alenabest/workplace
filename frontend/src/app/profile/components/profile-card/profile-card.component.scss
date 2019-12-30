@@ -1,11 +1,38 @@
 .profile-card-container {
   height: calc(80vh - 140px);
+  overflow: hidden;
 
-  @media screen and (min-width: 601px) and (max-width: 1000px) {
-    height: calc(80vh - 124px);
+  .profile-form {
+    max-height: calc(80vh - 196px);
+    padding: 12px 10vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+
+    .profile-row {
+      flex-wrap: nowrap;
+
+      .profile-field {
+        flex: 1 1 100%;
+        max-width: 50%;
+      }
+    }
   }
 
-  @media screen and (max-width: 600px) {
-    height: calc(80vh - 120px);
+  @media screen and (max-width: 1000px) {
+    height: calc(80vh - 124px);
+
+    .profile-form {
+      max-height: calc(80vh - 176px);
+      padding: 12px 8px 0 8px;
+
+      .profile-row {
+        flex-wrap: wrap;
+
+        .profile-field {
+          min-width: 100%;
+        }
+      }
+    }
   }
 }
