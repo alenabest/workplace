@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common'
 import { plainToClass } from 'class-transformer';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { UserService } from '../../../user/services/user.service';
@@ -28,8 +28,10 @@ export class AuthController {
   @Get('profile')
   @ApiTags('auth')
   profile(@Request() request): Observable<UserModel> {
-    return this.userService.getUser(request.user.id)
+
+    return request.user
       .pipe(
+        switchMap((user: {id: string}) => this.userService.getUser(user.id)),
         map(user => plainToClass(UserListModel, user))
       );
   }
