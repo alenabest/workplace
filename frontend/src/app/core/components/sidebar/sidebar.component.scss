@@ -1,0 +1,48 @@
+.sidebar-container {
+  height: calc(100vh - 64px);
+  padding: 16px 0;
+  overflow: hidden;
+  position: fixed;
+  width: 160px;
+  top: 64px;
+
+  .sidebar-button {
+    height: 44px;
+    color: #006a88;
+    cursor: pointer;
+    padding-left: 16px;
+
+    &.current, &:hover {
+      background-color: rgba(0, 173, 222, 0.1);
+      border-radius: 0 20px 20px 0;
+    }
+  }
+
+  @media screen and (min-width: 601px) and (max-width: 1000px) {
+    padding: 12px 0;
+    width: 100px;
+
+    .sidebar-button {
+      padding-left: 4px;
+
+      mat-icon {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    height: calc(100vh - 56px);
+    padding: 12px 0;
+    width: 40px;
+    top: 56px;
+
+    .sidebar-button {
+      padding-left: 4px;
+
+      p {
+        display: none;
+      }
+    }
+  }
+}

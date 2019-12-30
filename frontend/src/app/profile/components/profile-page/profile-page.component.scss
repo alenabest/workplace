@@ -1,0 +1,29 @@
+.profile-container {
+  overflow: hidden;
+  margin: 16px;
+
+  .profile-label {
+    cursor: default;
+    font-size: 24px;
+    color: #333333;
+    height: 44px;
+  }
+
+  @media screen and (min-width: 601px) and (max-width: 1000px) {
+    margin: 12px;
+
+    .profile-label {
+      font-size: 20px;
+      height: 40px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    margin: 12px;
+
+    .profile-label {
+      font-size: 20px;
+      height: 40px;
+    }
+  }
+}
