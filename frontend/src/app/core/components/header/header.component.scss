@@ -1,6 +1,7 @@
 .header-toolbar {
   position: fixed;
   color: white;
+  height: 56px;
   top: 0;
 
   .toolbar-menu-button {
@@ -8,7 +9,7 @@
   }
 
   .toolbar-button, .toolbar-icon-button {
-    height: 64px;
+    height: 56px;
     padding: 0 8px 0 8px;
     cursor: pointer;
     opacity: 0.7;
@@ -24,7 +25,7 @@
 
   .header-login, .toolbar-button, .toolbar-icon-button {
     text-transform: uppercase;
-    font-size: 15px;
+    font-size: 0.7em;
     font-weight: 400;
   }
 
@@ -38,19 +39,21 @@
   display: none !important;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
   .header-toolbar {
+    height: 44px;
+
     .toolbar-button {
       display: none !important;
     }
 
     .toolbar-menu-button {
       display: flex !important;
-      height: 56px;
+      height: 44px;
     }
 
     .toolbar-icon-button {
-      height: 56px;
+      height: 44px;
     }
   }
 
@@ -59,7 +62,7 @@
     position: inherit !important;
 
     ::ng-deep .mat-drawer-backdrop, .mat-drawer {
-      top: 56px !important;
+      top: 44px !important;
     }
 
     .mat-drawer {
@@ -70,7 +73,7 @@
         text-transform: uppercase;
         font-size: 15px;
         font-weight: 400;
-        height: 56px;
+        height: 44px;
         cursor: pointer;
         opacity: 0.7;
 

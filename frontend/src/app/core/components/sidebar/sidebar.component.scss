@@ -1,10 +1,10 @@
 .sidebar-container {
-  height: calc(100vh - 64px);
+  height: calc(100vh - 56px);
   padding: 16px 0;
   overflow: hidden;
   position: fixed;
   width: 160px;
-  top: 64px;
+  top: 56px;
 
   .sidebar-button {
     height: 44px;
@@ -21,6 +21,7 @@
   @media screen and (min-width: 601px) and (max-width: 1000px) {
     padding: 12px 0;
     width: 100px;
+    top: 44px;
 
     .sidebar-button {
       padding-left: 4px;
@@ -32,10 +33,10 @@
   }
 
   @media screen and (max-width: 600px) {
-    height: calc(100vh - 56px);
+    height: calc(100vh - 44px);
     padding: 12px 0;
     width: 40px;
-    top: 56px;
+    top: 44px;
 
     .sidebar-button {
       padding-left: 4px;

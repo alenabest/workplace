@@ -35,7 +35,7 @@ $mat-custom-color: (
 );
 
 $frontend-primary: mat-palette($mat-custom-color, 700);
-$frontend-accent: mat-palette($mat-deep-purple, A200, A100, A400);
+$frontend-accent: mat-palette($mat-deep-orange, 500, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $frontend-warn: mat-palette($mat-red);

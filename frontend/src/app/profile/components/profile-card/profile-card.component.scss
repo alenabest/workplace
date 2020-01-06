@@ -1,9 +1,9 @@
 .profile-card-container {
-  height: calc(80vh - 140px);
+  height: calc(80vh - 132px);
   overflow: hidden;
 
   .profile-form {
-    max-height: calc(80vh - 196px);
+    max-height: calc(80vh - 188px);
     padding: 12px 10vh;
     overflow-x: hidden;
     overflow-y: auto;
@@ -20,10 +20,10 @@
   }
 
   @media screen and (max-width: 1000px) {
-    height: calc(80vh - 124px);
+    height: calc(80vh - 96px);
 
     .profile-form {
-      max-height: calc(80vh - 176px);
+      max-height: calc(80vh - 148px);
       padding: 12px 8px 0 8px;
 
       .profile-row {
