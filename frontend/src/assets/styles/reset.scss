@@ -6,3 +6,19 @@ a {
 .mat-raised-button, .mat-button {
   padding: 0 12px !important;
 }
+
+
+.mat-mini-fab {
+  @media screen and (max-width: 1000px) {
+    height: 2em !important;
+    width: 2em !important;
+
+    .mat-button-wrapper {
+      padding: 0 !important;
+    }
+
+    mat-icon {
+      font-size: 1.3em !important;
+    }
+  }
+}

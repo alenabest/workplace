@@ -1,4 +1,4 @@
-<div class="profile-card-container" fxLayout="column" fxLayoutAlign="center center">
+<div class="profile-card-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="4px">
   <form role="form" [formGroup]="profileForm" fxLayout="column" class="profile-form">
     <div fxLayout="row" fxLayoutGap="16px" class="profile-row">
       <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
@@ -29,7 +29,9 @@
       </mat-form-field>
       <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
         <mat-label>Дата рождения</mat-label>
-        <input matInput placeholder="Выберите дату" formControlName="birthday">
+        <input matInput placeholder="Выберите дату" formControlName="birthday" [matDatepicker]="birthdayDatepicker">
+        <mat-datepicker-toggle matSuffix [for]="birthdayDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #birthdayDatepicker></mat-datepicker>
       </mat-form-field>
     </div>
 

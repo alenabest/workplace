@@ -24,6 +24,7 @@ export class ProfileCardComponent implements OnInit {
   }
 
   cancelEdit() {
+    console.log(this.profileForm, this.currentUser);
     this.profileForm.patchValue(this.currentUser);
   }
 
@@ -33,7 +34,7 @@ export class ProfileCardComponent implements OnInit {
       firstName: [''],
       middleName: [''],
       lastName: [''],
-      birthday: [''],
+      birthday: [null],
       email: ['', [Validators.required, Validators.email]],
       mobile: [''],
       phone: [''],
