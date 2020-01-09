@@ -23,6 +23,10 @@ export class ProfileCardComponent implements OnInit {
     this.profileForm.patchValue(this.currentUser);
   }
 
+  cancelEdit() {
+    this.profileForm.patchValue(this.currentUser);
+  }
+
   initForm(): FormGroup {
     return this.formBuilder.group({
       username: ['', Validators.required],
