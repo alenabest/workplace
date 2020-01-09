@@ -7,18 +7,30 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({nullable: false, unique: true})
+  @Column({ type: 'text', nullable: false, unique: true })
   username: string;
 
-  @Column({nullable: false})
+  @Column({ type: 'text', nullable: false })
   password: string;
 
-  @Column({nullable: false, default: ''})
+  @Column({ type: 'text', nullable: true, default: '' })
   firstName: string;
 
-  @Column({nullable: true, default: ''})
+  @Column({ type: 'text', nullable: true, default: '' })
   middleName: string;
 
-  @Column({nullable: false, default: ''})
+  @Column({ type: 'text', nullable: true, default: '' })
   lastName: string;
+
+  @Column({ type: 'text', nullable: false, default: '' })
+  email: string;
+
+  @Column({ type: 'text', nullable: true, default: '' })
+  mobile: string;
+
+  @Column({ type: 'text', nullable: true, default: '' })
+  phone: string;
+
+  @Column({ type: 'date', nullable: true })
+  birthday: Date;
 }

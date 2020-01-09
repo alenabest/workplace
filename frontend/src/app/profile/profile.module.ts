@@ -8,7 +8,7 @@ import { PROFILE_ROUTES } from './profile.routes';
 @NgModule({
   imports: [
     ProfileComponentsModule,
-    RouterModule.forRoot(PROFILE_ROUTES)
+    RouterModule.forChild(PROFILE_ROUTES)
   ],
   exports: [ProfileComponentsModule]
 })

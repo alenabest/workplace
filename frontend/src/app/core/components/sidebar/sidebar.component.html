@@ -1,0 +1,14 @@
+<div class="sidebar-container" fxLayout="column">
+  <ng-container *ngIf="isState('profile') || isState('settings')">
+    <a [ngClass]="{'sidebar-button': true, 'current': isState('profile')}" routerLink="app/profile"
+       fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="16px">
+      <mat-icon>account_circle</mat-icon>
+      <p>Профиль</p>
+    </a>
+    <a [ngClass]="{'sidebar-button': true, 'current': isState('settings')}" routerLink="app/settings"
+       fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="16px">
+      <mat-icon>settings</mat-icon>
+      <p>Настройки</p>
+    </a>
+  </ng-container>
+</div>

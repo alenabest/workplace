@@ -1,0 +1,59 @@
+<div class="profile-card-container" fxLayout="column" fxLayoutAlign="center center">
+  <form role="form" [formGroup]="profileForm" fxLayout="column" class="profile-form">
+    <div fxLayout="row" fxLayoutGap="16px" class="profile-row">
+      <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
+        <mat-label>Логин</mat-label>
+        <input matInput placeholder="Введите логин" formControlName="username" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Введите email" formControlName="email" type="email" required>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="16px" class="profile-row">
+      <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
+        <mat-label>Имя</mat-label>
+        <input matInput placeholder="Введите имя" formControlName="firstName">
+      </mat-form-field>
+      <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
+        <mat-label>Фамилия</mat-label>
+        <input matInput placeholder="Введите фамилию" formControlName="lastName">
+      </mat-form-field>
+      </div>
+
+    <div fxLayout="row" fxLayoutGap="16px" class="profile-row">
+      <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
+        <mat-label>Отчество</mat-label>
+        <input matInput placeholder="Введите отчество" formControlName="middleName">
+      </mat-form-field>
+      <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
+        <mat-label>Дата рождения</mat-label>
+        <input matInput placeholder="Выберите дату" formControlName="birthday">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="16px" class="profile-row">
+      <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
+        <mat-label>Мобильный телефон</mat-label>
+        <input matInput placeholder="Введите мобильный телефон" formControlName="mobile">
+      </mat-form-field>
+      <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
+        <mat-label>Рабочий телефон</mat-label>
+        <input matInput placeholder="Введите рабочий телефон" formControlName="phone">
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div fxLayout="row" fxLayoutAlign="flex-end center" fxLayoutGap="8px">
+    <button mat-button color="primary" type="button" (click)="cancelEdit()">
+      Отмена
+    </button>
+    <button mat-raised-button color="accent" type="button">
+      Новый пароль
+    </button>
+    <button mat-raised-button color="primary" type="button">
+      Сохранить
+    </button>
+  </div>
+</div>

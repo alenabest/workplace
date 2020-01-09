@@ -22,10 +22,10 @@ $mat-custom-color: (
     200: $dark-primary-text,
     300: $dark-primary-text,
     400: $dark-primary-text,
-    500: $dark-primary-text,
-    600: $dark-primary-text,
-    700: $dark-primary-text,
-    800: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
     900: $light-primary-text,
     A100: $dark-primary-text,
     A200: $dark-primary-text,
@@ -35,7 +35,7 @@ $mat-custom-color: (
 );
 
 $frontend-primary: mat-palette($mat-custom-color, 700);
-$frontend-accent: mat-palette($mat-deep-purple, A200, A100, A400);
+$frontend-accent: mat-palette($mat-deep-orange, 500, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $frontend-warn: mat-palette($mat-red);

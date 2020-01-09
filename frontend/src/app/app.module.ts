@@ -4,13 +4,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import * as dayJs from 'dayjs';
 
+import { CoreComponentsModule } from './core/components/core-components.module';
 import { CustomHttpInterceptor } from './core/custom-http-interceptor';
+import { SettingsModule } from './settings/settings.module';
+import { StartupService } from './core/services/startup';
 import { ProfileModule } from './profile/profile.module';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
-import { CoreComponentsModule } from './core/components/core-components.module';
-import { StartupService } from './core/services/startup';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 dayJs.locale('ru');
 
@@ -22,7 +25,8 @@ const modules = [
   CoreComponentsModule,
 
   LoginModule,
-  ProfileModule
+  ProfileModule,
+  SettingsModule
 ];
 
 @NgModule({
@@ -39,7 +43,8 @@ const modules = [
       cookieName: 'csrftoken',
       headerName: 'x-csrftoken'
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StartupService,

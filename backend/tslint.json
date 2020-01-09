@@ -6,7 +6,7 @@
   },
   "rules": {
     "no-consecutive-blank-lines": false,
-    "component-class-suffix": true,
+    "component-class-suffix": false,
     "quotemark": [true, "single"],
     "member-access": [false],
     "ordered-imports": [false],
@@ -18,7 +18,8 @@
     "no-console": false,
     "max-classes-per-file": true,
     "trailing-comma": true,
-    "object-literal-shorthand": false
+    "object-literal-shorthand": false,
+    "directive-class-suffix": false
   },
   "rulesDirectory": []
 }

@@ -17,11 +17,11 @@ export class UserService {
   }
 
   getUsers(query: UserFilterDto): Observable<UserListModel[]> {
-    return from(this.userRepository.find({where: query}));
+    return from(this.userRepository.find({ where: query }));
   }
 
   getUser(id?: string, query?: UserFilterDto): Observable<UserModel> {
-    return from(this.userRepository.findOne(id, {where: query}));
+    return from(this.userRepository.findOne(id, { where: query }));
   }
 
   createUser(user: UserDto): Observable<UserDto> {
