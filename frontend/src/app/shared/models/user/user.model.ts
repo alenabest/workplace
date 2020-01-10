@@ -1,5 +1,4 @@
 import { Transform, Type } from 'class-transformer';
-import { Dayjs } from 'dayjs';
 
 import { formatDateToClass, formatDateToPlain, serializeType } from '../../../core/helpers';
 
@@ -16,8 +15,8 @@ export class UserModel {
   mobile: string;
   phone: string;
 
-  @Type(serializeType(Dayjs))
+  @Type(serializeType(Date))
   @Transform(formatDateToPlain(), { toPlainOnly: true })
   @Transform(formatDateToClass(), { toClassOnly: true })
-  birthday: Dayjs;
+  birthday: Date;
 }

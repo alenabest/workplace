@@ -1,180 +1,149 @@
-import { DateAdapter } from '@angular/material';
-import { Dayjs, isDayjs } from 'dayjs';
-import * as dayjs from 'dayjs';
-import 'dayjs/locale/ru';
+import {Injectable} from '@angular/core';
+import {DateAdapter} from '@angular/material';
+import {addDays, addMonths, addYears, format, getDate, getDaysInMonth, getMonth, getYear, parse, setDay, setMonth, toDate} from 'date-fns';
 
-import * as customParseFormat from 'dayjs/plugin/customParseFormat';
-import * as localizedFormat from 'dayjs/plugin/localizedFormat';
+// CONFIG. Use environment or something for a dynamic locale and settings
 
+import {ru as locale} from 'date-fns/locale';
+const WEEK_STARTS_ON = 1;
 
-/**
- * Custom Date-Formats and Adapter (using https://github.com/iamkun/dayjs)
- */
-
-export const AppDateFormat = {
+export const MAT_DATE_FNS_DATE_FORMATS = {
   parse: {
-    dateInput: 'DD.MM.YYYY'
+    dateInput: 'dd.MM.yyyy',
   },
   display: {
-    dateInput: 'DD.MM.YYYY',
-    monthYearLabel: 'MMMM Y',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM Y'
+    dateInput: 'dd.MM.yyyy',
+    monthYearLabel: 'LLL y',
+    dateA11yLabel: 'MMMM d, y',
+    monthYearA11yLabel: 'MMMM y',
   }
 };
 
-const dateNames: string[] = [];
-for (let date = 1; date <= 31; date++) {
-  dateNames.push(String(date));
+function range(start: number, end: number): number[] {
+  const arr: number[] = [];
+  for (let i = start; i <= end; i++) {
+    arr.push(i);
+  }
+
+  return arr;
 }
 
-export class AppDateAdapter extends DateAdapter<Dayjs> {
-  constructor() {
-    super();
-    dayjs.locale('ru');
-    dayjs.extend(customParseFormat);
-    dayjs.extend(localizedFormat);
-    console.log(dayjs());
+@Injectable()
+export class AppDateAdapter extends DateAdapter<Date> {
+
+  addCalendarDays(date: Date, days: number): Date {
+    return addDays(date, days);
   }
 
-  invalid(): Dayjs {
-    return dayjs();
+  addCalendarMonths(date: Date, months: number): Date {
+    return addMonths(date, months);
   }
 
-  getYear(date: Dayjs): number {
-    return date.year();
+  addCalendarYears(date: Date, years: number): Date {
+    return addYears(date, years);
   }
 
-  getMonth(date: Dayjs): number {
-    return date.month();
+  clone(date: Date): Date {
+    return toDate(date);
   }
 
-  getDate(date: Dayjs): number {
-    return date.date();
+  createDate(year: number, month: number, date: number): Date {
+    return new Date(year, month, date);
   }
 
-  getDayOfWeek(date: Dayjs): number {
-    return date.day();
+  format(date: Date, displayFormat: any): string {
+    return format(date, displayFormat, {
+      locale
+    });
   }
 
-  getFirstDayOfWeek(): number {
-    console.log(dayjs.Ls.ru.weekStart);
-
-    return dayjs.Ls.ru.weekStart;
-  }
-
-  getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
-    switch (style) {
-      case 'long':
-        return 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_');
-      case 'short':
-        return 'янв._февр._март_апр._май_июнь_июль_авг._сент._окт._нояб._дек.'.split('_');
-      case 'narrow':
-        return 'янв._февр._март_апр._май_июнь_июль_авг._сент._окт._нояб._дек.'.split('_');
-    }
+  getDate(date: Date): number {
+    return getDate(date);
   }
 
   getDateNames(): string[] {
-    return dateNames;
+    return range(1, 31).map(day => String(day));
+  }
+
+  getDayOfWeek(date: Date): number {
+    return parseInt(format(date, 'i'), 10);
   }
 
   getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
-    switch (style) {
-      case 'long':
-        return dayjs.Ls.ru.weekdays;
-      case 'short':
-        return dayjs.Ls.ru.weekdaysShort;
-      case 'narrow':
-        return dayjs.Ls.ru.weekdaysMin;
-    }
+    const map = {
+      long: 'EEEE',
+      short: 'E..EEE',
+      narrow: 'EEEEE'
+    };
+
+    const formatStr = map[style];
+    const date = new Date();
+
+    return range(0, 6).map(month => format(setDay(date, month), formatStr, {
+      locale
+    }));
   }
 
-  getYearName(date: Dayjs): string {
-    return String(date.year());
+  getFirstDayOfWeek(): number {
+    return WEEK_STARTS_ON;
   }
 
-  getNumDaysInMonth(date: Dayjs): number {
-    return date.daysInMonth();
+  getMonth(date: Date): number {
+    return getMonth(date);
   }
 
-  clone(date: Dayjs): Dayjs {
-    return date.clone();
+  getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
+    const map = {
+      long: 'LLLL',
+      short: 'LLL',
+      narrow: 'LLLLL'
+    };
+
+    const formatStr = map[style];
+    const date = new Date();
+
+    return range(0, 11).map(month => format(setMonth(date, month), formatStr, {
+      locale
+    }));
   }
 
-  createDate(year: number, month: number, date: number): Dayjs {
-    return dayjs([year, month, date].join('.'));
+  getNumDaysInMonth(date: Date): number {
+    return getDaysInMonth(date);
   }
 
-  today(): Dayjs {
-    return dayjs();
+  getYear(date: Date): number {
+    return getYear(date);
   }
 
-  parse(value: any, parseFormat: any): Dayjs | null {
-    let dateItem = dayjs(value, parseFormat, 'ru');
-    if (!dateItem.isValid()) {
-      dateItem = dayjs(value);
-    }
-
-    if (dateItem.isValid()) {
-      return dateItem;
-    }
-
-    return null;
+  getYearName(date: Date): string {
+    return format(date, 'yyyy', {
+      locale
+    });
   }
 
-  format(date: Dayjs, displayFormat: any): string {
-    if (date) {
-      return dayjs(date).format(displayFormat);
-    }
-
-    return '';
-  }
-
-  addCalendarYears(date: Dayjs, years: number): Dayjs {
-    return date.clone().add(years, 'year');
-  }
-
-  addCalendarMonths(date: Dayjs, months: number): Dayjs {
-    return date.clone().add(months, 'month');
-  }
-
-  addCalendarDays(date: Dayjs, days: number): Dayjs {
-    return date.clone().add(days, 'day');
-  }
-
-  compareDate(first: Dayjs, second: Dayjs): number {
-    return first.diff(second, 'second', true);
-  }
-
-  sameDate(first: Dayjs | null, second: Dayjs | null): boolean {
-    if (first === null) {
-      return second === null;
-    } else if (isDayjs(first)) {
-      return first.isSame(second);
-    }
-
-    return super.sameDate(first, second);
-  }
-
-  clampDate(date: Dayjs, min?: Dayjs | null, max?: Dayjs | null): Dayjs {
-    if (min && date.isBefore(min)) {
-      return min;
-    } else if (max && date.isAfter(max)) {
-      return max;
-    }
-
-    return date;
-  }
-
-  isValid(date: Dayjs): boolean {
-    return date.isValid();
+  invalid(): Date {
+    return new Date(NaN);
   }
 
   isDateInstance(obj: any): boolean {
-    return isDayjs(obj);
+    return obj instanceof Date;
   }
 
-  toIso8601(date: Dayjs): string {
-    return date.format();
+  isValid(date: Date): boolean {
+    return date instanceof Date && !isNaN(date.getTime());
+  }
+
+  parse(value: any, parseFormat: any): Date | null {
+    return parse(value, parseFormat, new Date(), {
+      locale,
+    });
+  }
+
+  toIso8601(date: Date): string {
+    return date.toISOString();
+  }
+
+  today(): Date {
+    return new Date();
   }
 }

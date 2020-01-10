@@ -1,4 +1,4 @@
-import * as dayJs from 'dayjs';
+import {format} from 'date-fns';
 
 export function serializeType<T>(object: T) {
   return function() {
@@ -8,12 +8,12 @@ export function serializeType<T>(object: T) {
 
 export function formatDateToPlain(fullFormat?: boolean) {
   if (fullFormat) {
-    return value => value ? dayJs(value) : value;
+    return value => value ? new Date(value) : value;
   }
 
-  return value => value ? dayJs(value).format('YYYY-MM-DD') : value;
+  return value => value ? format(new Date(value), 'YYYY-MM-DD') : value;
 }
 
 export function formatDateToClass() {
-  return value => value ? dayJs(value, {locale: 'ru'}) : value;
+  return value => value ? new Date(value) : value;
 }
