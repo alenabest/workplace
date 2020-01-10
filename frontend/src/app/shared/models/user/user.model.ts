@@ -18,5 +18,5 @@ export class UserModel {
   @Type(serializeType(Date))
   @Transform(formatDateToPlain(), { toPlainOnly: true })
   @Transform(formatDateToClass(), { toClassOnly: true })
-  birthday: Date;
+  birthday: Date | string;
 }

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserModel } from '../../../shared/models/user';
+import { takeUntil } from 'rxjs/operators';
+
+import { BaseDestroy } from '../../../shared/models/base-destroy';
 import { AuthService } from '../../../core/services/auth';
+import { UserService } from '../../../core/services/user';
+import { UserModel } from '../../../shared/models/user';
 
 
 @Component({
@@ -9,12 +13,15 @@ import { AuthService } from '../../../core/services/auth';
   templateUrl: './profile-card.component.html',
   styleUrls: ['./profile-card.component.scss']
 })
-export class ProfileCardComponent implements OnInit {
+export class ProfileCardComponent extends BaseDestroy implements OnInit {
   profileForm: FormGroup;
   currentUser: UserModel;
 
   constructor(private formBuilder: FormBuilder,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private userService: UserService) {
+    super();
+
     this.currentUser = this.authService.currentUser;
   }
 
@@ -24,8 +31,15 @@ export class ProfileCardComponent implements OnInit {
   }
 
   cancelEdit() {
-    console.log(this.profileForm, this.currentUser);
     this.profileForm.patchValue(this.currentUser);
+  }
+
+  saveProfile() {
+    this.userService.updateUser(this.currentUser.id, this.profileForm.value)
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
   initForm(): FormGroup {
@@ -37,7 +51,7 @@ export class ProfileCardComponent implements OnInit {
       birthday: [null],
       email: ['', [Validators.required, Validators.email]],
       mobile: [''],
-      phone: [''],
+      phone: ['']
     });
   }
 }

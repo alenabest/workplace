@@ -11,7 +11,7 @@ export function formatDateToPlain(fullFormat?: boolean) {
     return value => value ? new Date(value) : value;
   }
 
-  return value => value ? format(new Date(value), 'YYYY-MM-DD') : value;
+  return value => value ? format(new Date(value), 'yyyy-MM-dd') : value;
 }
 
 export function formatDateToClass() {
