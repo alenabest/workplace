@@ -11,6 +11,6 @@ export class SnackBarService {
 
   openSnackBar(message: string, style: string = '') {
     style = this.snackBarStyle + style;
-    this.snackBar.open(message, '', {duration: 10000, panelClass: style});
+    this.snackBar.open('', message, {duration: 10000, panelClass: style, horizontalPosition: 'center'});
   }
 }

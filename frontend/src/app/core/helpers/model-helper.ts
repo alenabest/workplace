@@ -1,4 +1,6 @@
-import {format} from 'date-fns';
+import { format } from 'date-fns';
+import { classToPlain, plainToClass } from 'class-transformer';
+
 
 export function serializeType<T>(object: T) {
   return function() {
@@ -16,4 +18,10 @@ export function formatDateToPlain(fullFormat?: boolean) {
 
 export function formatDateToClass() {
   return value => value ? new Date(value) : value;
+}
+
+export function prepareObject(clsObject, plain) {
+  const object = plainToClass(clsObject, plain);
+
+  return classToPlain(object);
 }

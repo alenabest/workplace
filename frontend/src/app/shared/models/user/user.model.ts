@@ -1,6 +1,6 @@
-import { Transform, Type } from 'class-transformer';
+import { Transform } from 'class-transformer';
 
-import { formatDateToClass, formatDateToPlain, serializeType } from '../../../core/helpers';
+import { formatDateToClass, formatDateToPlain } from '../../../core/helpers';
 
 
 
@@ -15,7 +15,6 @@ export class UserModel {
   mobile: string;
   phone: string;
 
-  @Type(serializeType(Date))
   @Transform(formatDateToPlain(), { toPlainOnly: true })
   @Transform(formatDateToClass(), { toClassOnly: true })
   birthday: Date | string;
