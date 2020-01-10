@@ -1,13 +1,13 @@
-import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { plainToClass } from 'class-transformer';
+import { map, switchMap } from 'rxjs/operators';
+import { Injectable } from '@nestjs/common';
 import { from, Observable } from 'rxjs';
 import { Repository } from 'typeorm';
 
-import { ExternalUserModel, UserModel } from '../models';
 import { UpdateUserDto, UserDto, UserFilterDto } from '../dto';
+import { ExternalUserModel, UserModel } from '../models';
 import { User } from '../db';
-import { map } from 'rxjs/operators';
-import { plainToClass } from 'class-transformer';
 
 
 @Injectable()
@@ -33,6 +33,7 @@ export class UserService {
   updateUser(id: string, user: UpdateUserDto): Observable<ExternalUserModel> {
     return from(this.userRepository.update(id, user))
       .pipe(
+        switchMap(() => from(this.userRepository.findOne(id))),
         map(result => plainToClass(ExternalUserModel, result))
       );
   }

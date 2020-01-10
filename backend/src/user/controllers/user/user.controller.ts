@@ -49,8 +49,11 @@ export class UserController {
   @Patch(':id')
   @ApiTags('user')
   @HttpCode(HttpStatus.OK)
-  update(@Param()id: string, @Body() updateUserDto: UpdateUserDto): Observable<ExternalUserModel> {
-    return this.userService.updateUser(id, updateUserDto);
+  update(@Param('id')id: string, @Body() updateUserDto: UpdateUserDto): Observable<ExternalUserModel> {
+    return this.userService.updateUser(id, updateUserDto)
+      .pipe(
+        map(result => plainToClass(ExternalUserModel, result))
+      );
   }
 
   @UseGuards(AuthGuard('jwt'))
