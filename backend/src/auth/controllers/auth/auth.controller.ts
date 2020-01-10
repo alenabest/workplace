@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 
 import { UserService } from '../../../user/services/user.service';
 import { AuthService } from '../../services/auth/auth.service';
-import { UserListModel, UserModel } from '../../../user/models';
+import { ExternalUserModel, UserModel } from '../../../user/models';
 import { UserDto } from '../../../user/dto';
 import { AuthModel } from '../../models';
 
@@ -32,7 +32,7 @@ export class AuthController {
     return request.user
       .pipe(
         switchMap((user: {id: string}) => this.userService.getUser(user.id)),
-        map(user => plainToClass(UserListModel, user))
+        map(user => plainToClass(ExternalUserModel, user))
       );
   }
 }

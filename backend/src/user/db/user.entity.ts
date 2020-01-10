@@ -10,7 +10,7 @@ export class User {
   @Column({ type: 'text', nullable: false, unique: true })
   username: string;
 
-  @Column({ type: 'text', nullable: false })
+  @Column({ type: 'text', nullable: true })
   password: string;
 
   @Column({ type: 'text', nullable: true, default: '' })
@@ -31,6 +31,6 @@ export class User {
   @Column({ type: 'text', nullable: true, default: '' })
   phone: string;
 
-  @Column({ type: 'date', nullable: true })
-  birthday: Date;
+  @Column({ type: 'text', nullable: true })
+  birthday: string;
 }

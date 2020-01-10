@@ -1,12 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { UserService } from '../../services/user.service';
-import { UserListModel } from '../../models';
-import { UserDto, UserFilterDto } from '../../dto';
+import { ExternalUserModel } from '../../models';
+import { UpdateUserDto, UserDto, UserFilterDto } from '../../dto';
 
 
 @Controller('user')
@@ -14,39 +15,49 @@ export class UserController {
   constructor(private readonly userService: UserService) {
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   @ApiTags('user')
-  getUsers(@Query() query: UserFilterDto): Observable<UserListModel[]> {
+  @HttpCode(HttpStatus.OK)
+  getUsers(@Query() query: UserFilterDto): Observable<ExternalUserModel[]> {
     return this.userService.getUsers(query)
       .pipe(
-        map(users => plainToClass(UserListModel, users))
+        map(users => plainToClass(ExternalUserModel, users))
       );
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   @ApiTags('user')
-  getUser(@Param('id') id: string): Observable<UserListModel> {
+  @HttpCode(HttpStatus.OK)
+  getUser(@Param('id') id: string): Observable<ExternalUserModel> {
     return this.userService.getUser(id)
       .pipe(
-        map(user => plainToClass(UserListModel, user))
+        map(user => plainToClass(ExternalUserModel, user))
       );
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   @ApiTags('user')
-  createUser(@Body() userDto: UserDto): Observable<UserDto> {
+  @HttpCode(HttpStatus.OK)
+  create(@Body() userDto: UserDto): Observable<UserDto> {
     return this.userService.createUser(userDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
   @ApiTags('user')
-  updateUser(@Param()id: string, @Body() userDto: UserDto): UserDto {
-    return this.userService.updateUser(userDto);
+  @HttpCode(HttpStatus.OK)
+  update(@Param()id: string, @Body() updateUserDto: UpdateUserDto): Observable<ExternalUserModel> {
+    return this.userService.updateUser(id, updateUserDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @ApiTags('user')
-  deleteUser(@Param()id: string): string {
+  @HttpCode(HttpStatus.OK)
+  delete(@Param()id: string): string {
     return this.userService.deleteUser(id);
   }
 }

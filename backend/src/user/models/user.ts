@@ -8,10 +8,14 @@ export class UserModel {
   firstName: string;
   middleName: string;
   lastName: string;
+  email: string;
+  mobile: string;
+  phone: string;
+  birthday: string;
 }
 
 
-export class UserListModel extends UserModel {
+export class ExternalUserModel extends UserModel {
   @Exclude()
   password: string;
 }
