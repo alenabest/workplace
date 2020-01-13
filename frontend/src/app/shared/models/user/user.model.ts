@@ -14,6 +14,7 @@ export class UserModel {
   email: string;
   mobile: string;
   phone: string;
+  avatar: string;
 
   @Transform(formatDateToPlain(), { toPlainOnly: true })
   @Transform(formatDateToClass(), { toClassOnly: true })

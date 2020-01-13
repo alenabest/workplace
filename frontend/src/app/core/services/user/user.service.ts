@@ -25,4 +25,12 @@ export class UserService {
         map(result => plainToClass(UserModel, result))
       );
   }
+
+  uploadAvatar(blob: File, userId: number): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', blob);
+
+    return this.http
+      .post(`${USER_API}${userId}/upload-avatar/`, formData);
+  }
 }

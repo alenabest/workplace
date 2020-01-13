@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 
+import { FormValidationService } from '../../../core/services/form-validation';
 import { SnackBarService } from '../../../core/services/snack-bar';
 import { BaseDestroy } from '../../../shared/models/base-destroy';
 import { AuthService } from '../../../core/services/auth';
 import { UserService } from '../../../core/services/user';
 import { UserModel } from '../../../shared/models/user';
-import { FormValidationService } from '../../../core/services/form-validation';
 
 
 @Component({
