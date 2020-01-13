@@ -8,6 +8,7 @@ import { CoreComponentsModule } from './core/components/core-components.module';
 import { CustomHttpInterceptor } from './core/custom-http-interceptor';
 import { AppDateAdapter, MAT_DATE_FNS_DATE_FORMATS } from './app-date-adapter';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ActivityModule } from './activity/activity.module';
 import { SettingsModule } from './settings/settings.module';
 import { environment } from '../environments/environment';
 import { StartupService } from './core/services/startup';
@@ -26,7 +27,8 @@ const modules = [
 
   LoginModule,
   ProfileModule,
-  SettingsModule
+  SettingsModule,
+  ActivityModule
 ];
 
 @NgModule({
