@@ -33,4 +33,7 @@ export class User {
 
   @Column({ type: 'text', nullable: true })
   birthday: string;
+
+  @Column({ type: 'text', nullable: true })
+  avatar: string;
 }

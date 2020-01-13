@@ -1,13 +1,29 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { plainToClass } from 'class-transformer';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+import { UpdateUserDto, UserDto, UserFilterDto } from '../../dto';
 import { UserService } from '../../services/user.service';
 import { ExternalUserModel } from '../../models';
-import { UpdateUserDto, UserDto, UserFilterDto } from '../../dto';
+import { fileAvatarOption } from '../../../core/options';
 
 
 @Controller('user')
@@ -62,5 +78,14 @@ export class UserController {
   @HttpCode(HttpStatus.OK)
   delete(@Param()id: string): string {
     return this.userService.deleteUser(id);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post(':id/upload-avatar')
+  @ApiTags('user')
+  @HttpCode(HttpStatus.OK)
+  @UseInterceptors(FileInterceptor('file', fileAvatarOption))
+  uploadAvatar(@Param('id')userId: string, @UploadedFile() file): Observable<{url: string}> {
+    return this.userService.uploadAvatar(file, userId);
   }
 }

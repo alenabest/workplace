@@ -12,6 +12,7 @@ export class UserModel {
   mobile: string;
   phone: string;
   birthday: string;
+  avatar: string;
 }
 
 

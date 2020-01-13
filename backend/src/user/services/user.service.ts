@@ -4,11 +4,12 @@ import { map, switchMap } from 'rxjs/operators';
 import { Injectable } from '@nestjs/common';
 import { from, Observable } from 'rxjs';
 import { Repository } from 'typeorm';
+import { join } from 'path';
 
 import { UpdateUserDto, UserDto, UserFilterDto } from '../dto';
 import { ExternalUserModel, UserModel } from '../models';
+import { FileUploadModel } from '../../common/models';
 import { User } from '../db';
-
 
 @Injectable()
 
@@ -40,5 +41,13 @@ export class UserService {
 
   deleteUser(id: string): string {
     return `Удаляем пользователя ${id}`;
+  }
+
+  uploadAvatar(file: FileUploadModel, userId: string): Observable<{url: string}> {
+    const avatarUrl: string = join('media', 'avatars', userId, file.originalname);
+    return from(this.userRepository.update(userId, {avatar: avatarUrl}))
+      .pipe(
+        map(() => Object({ url: avatarUrl}))
+      );
   }
 }
