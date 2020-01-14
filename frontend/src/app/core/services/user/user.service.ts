@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { UserModel } from '../../../shared/models/user';
+import { UserModel } from '../../../common/models/user';
 import { prepareObject } from '../../helpers';
 
 
@@ -26,11 +26,11 @@ export class UserService {
       );
   }
 
-  uploadAvatar(blob: File, userId: number): Observable<any> {
+  uploadAvatar(blob: File | Blob, userId: number): Observable<{url: string}> {
     const formData: FormData = new FormData();
     formData.append('file', blob);
 
     return this.http
-      .post(`${USER_API}${userId}/upload-avatar/`, formData);
+      .post<{url: string}>(`${USER_API}${userId}/upload-avatar/`, formData);
   }
 }

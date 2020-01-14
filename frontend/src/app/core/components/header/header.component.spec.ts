@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { RouterStub } from '../../../shared/models/router-stub';
+import { RouterStub } from '../../../common/models/router-stub';
 import { HeaderComponent } from './header.component';
 
 

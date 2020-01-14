@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 
-import { BaseDestroy } from '../../../shared/models/base-destroy';
+import { BaseDestroy } from '../../../common/models/base-destroy';
 import { AuthService } from '../auth';
 
 

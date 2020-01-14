@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { RouterStub } from '../../../shared/models/router-stub';
+import { RouterStub } from '../../../common/models/router-stub';
 import { AuthService } from './auth.service';
 
 

@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { UserModel } from '../../../shared/models/user';
-import { addLocalStorageItem } from '../../../shared';
+import { UserModel } from '../../../common/models/user';
+import { addLocalStorageItem } from '../../../common';
 
 
 const AUTH_API = '/workplace/auth/';

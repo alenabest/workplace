@@ -5,7 +5,7 @@
     "pathRewrite": {"^/workplace/" : ""}
   },
   "/media/*": {
-    "target": "http://localhost:3000/media",
+    "target": "http://localhost:3000/",
     "secure": false,
     "changeOrigin": true
   }
