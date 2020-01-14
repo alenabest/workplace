@@ -17,6 +17,9 @@ export class AvatarEditorDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<AvatarEditorDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public imageChangedEvent: Event) {
+    if (!this.imageChangedEvent.target['files'][0]) {
+      this.dialogRef.close();
+    }
   }
 
   imageCropped(event: ImageCroppedEvent) {

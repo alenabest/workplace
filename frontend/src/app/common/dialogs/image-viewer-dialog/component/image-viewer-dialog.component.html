@@ -1,3 +1,5 @@
-<ng-container *ngIf="images?.length >0">
-  <img [src]="images[imageIndex]" alt="Аватар пользователя">
-</ng-container>
+<mat-card fxLayout="column" fxLayoutAlign="center center">
+  <ng-container *ngIf="images?.length >0">
+    <img [src]="images[imageIndex]" alt="Аватар пользователя">
+  </ng-container>
+</mat-card>

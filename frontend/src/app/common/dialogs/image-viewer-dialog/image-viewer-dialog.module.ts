@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { ImageViewerDialogComponent } from './component/image-viewer-dialog.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { CoreModule, MaterialModules } from '../../../core';
 
 
 @NgModule({
   declarations: [ImageViewerDialogComponent],
   imports: [
-    CommonModule,
-    FlexLayoutModule
+    CoreModule,
+    MaterialModules
   ],
   exports: [ImageViewerDialogComponent]
 })

@@ -1,11 +1,18 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="avatar-container">
   <img [src]="noAvatarUrl" alt="Нет фото" class="avatar-image" *ngIf="!userAvatar">
 
-  <img [src]="userAvatar" id="avatar-image" alt="" class="avatar-image" *ngIf="userAvatar" (click)="openImageViewerDialog()">
+  <img [src]="userAvatar" id="avatar-image" alt="" class="avatar-image" *ngIf="userAvatar"
+       (click)="openImageViewerDialog()">
 
-  <div fxLayout="row" fxLayoutAlign="flex-end flex-end" class="avatar-button">
+  <div fxLayout="column" fxLayoutAlign="space-between flex-end" class="avatar-button">
+    <button mat-mini-fab type="button" color="warn" (click)="deleteAvatar()"
+            matTooltip="Удалить фото" matTooltipClass="custom-tooltip">
+      <mat-icon>delete</mat-icon>
+    </button>
+
     <ng-container>
-      <button mat-mini-fab type="button" color="primary" (click)="avatarInput.click();">
+      <button mat-mini-fab type="button" color="primary" (click)="avatarInput.click();"
+              matTooltip="Прикрепить фото" matTooltipClass="custom-tooltip">
         <mat-icon>camera_alt</mat-icon>
       </button>
       <input type="file" (change)="openAvatarEditorDialog($event)" #avatarInput style="display: none;"/>
