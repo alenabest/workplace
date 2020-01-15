@@ -47,7 +47,7 @@
     <div fxLayout="row" fxLayoutGap="16px" class="profile-row">
       <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
         <mat-label>Мобильный телефон</mat-label>
-        <input matInput placeholder="Введите мобильный телефон" formControlName="mobile">
+        <input matInput placeholder="Введите мобильный телефон" formControlName="mobile" phoneMask>
         <mat-error *ngIf="mobile.invalid">{{getValidationMessage(mobile)}}</mat-error>
       </mat-form-field>
 

@@ -7,6 +7,7 @@ import { AvatarEditorDialogComponent } from '../dialogs/avatar-editor-dialog/ava
 import { ProfileAvatarComponent } from './profile-avatar/profile-avatar.component';
 import { ProfileCardComponent } from './profile-card/profile-card.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { PhoneMaskDirectiveModule } from '../../common/directives/phone-mask';
 import { CoreModule, MaterialModules } from '../../core';
 
 
@@ -17,9 +18,10 @@ import { CoreModule, MaterialModules } from '../../core';
     ProfileAvatarComponent
   ],
   imports: [
+    PhoneMaskDirectiveModule,
     ImageViewerDialogModule,
-    CoreModule,
-    MaterialModules
+    MaterialModules,
+    CoreModule
   ],
   entryComponents: [
     ChangePasswordDialogComponent,
