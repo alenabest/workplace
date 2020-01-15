@@ -1,13 +1,16 @@
-<div class="profile-card-container" fxLayout="column" fxLayoutAlign="center center">
-  <form role="form" [formGroup]="profileForm" fxLayout="column" class="profile-form">
+<div class="profile-card-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="4px">
+  <form role="form" [formGroup]="profileForm" fxLayout="column" fxLayoutGap="4px" class="profile-form">
     <div fxLayout="row" fxLayoutGap="16px" class="profile-row">
       <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
         <mat-label>Логин</mat-label>
         <input matInput placeholder="Введите логин" formControlName="username" required>
+        <mat-error *ngIf="username.invalid">{{getValidationMessage(username)}}</mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
         <mat-label>Email</mat-label>
         <input matInput placeholder="Введите email" formControlName="email" type="email" required>
+        <mat-error *ngIf="email.invalid">{{getValidationMessage(email)}}</mat-error>
       </mat-form-field>
     </div>
 
@@ -15,10 +18,13 @@
       <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
         <mat-label>Имя</mat-label>
         <input matInput placeholder="Введите имя" formControlName="firstName">
+        <mat-error *ngIf="firstName.invalid">{{getValidationMessage(firstName)}}</mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
         <mat-label>Фамилия</mat-label>
         <input matInput placeholder="Введите фамилию" formControlName="lastName">
+        <mat-error *ngIf="lastName.invalid">{{getValidationMessage(lastName)}}</mat-error>
       </mat-form-field>
       </div>
 
@@ -26,21 +32,29 @@
       <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
         <mat-label>Отчество</mat-label>
         <input matInput placeholder="Введите отчество" formControlName="middleName">
+        <mat-error *ngIf="middleName.invalid">{{getValidationMessage(middleName)}}</mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
         <mat-label>Дата рождения</mat-label>
-        <input matInput placeholder="Выберите дату" formControlName="birthday">
+        <input matInput placeholder="Выберите дату" formControlName="birthday" [matDatepicker]="birthdayDatepicker">
+        <mat-datepicker-toggle matSuffix [for]="birthdayDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #birthdayDatepicker></mat-datepicker>
+        <mat-error *ngIf="birthday.invalid">{{getValidationMessage(birthday)}}</mat-error>
       </mat-form-field>
     </div>
 
     <div fxLayout="row" fxLayoutGap="16px" class="profile-row">
       <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
         <mat-label>Мобильный телефон</mat-label>
-        <input matInput placeholder="Введите мобильный телефон" formControlName="mobile">
+        <input matInput placeholder="Введите мобильный телефон" formControlName="mobile" phoneMask>
+        <mat-error *ngIf="mobile.invalid">{{getValidationMessage(mobile)}}</mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="outline" floatLabel="always" class="profile-field">
         <mat-label>Рабочий телефон</mat-label>
         <input matInput placeholder="Введите рабочий телефон" formControlName="phone">
+        <mat-error *ngIf="phone.invalid">{{getValidationMessage(phone)}}</mat-error>
       </mat-form-field>
     </div>
   </form>
@@ -49,10 +63,10 @@
     <button mat-button color="primary" type="button" (click)="cancelEdit()">
       Отмена
     </button>
-    <button mat-raised-button color="accent" type="button">
+    <button mat-raised-button color="accent" type="button" (click)="openChangePasswordDialog()">
       Новый пароль
     </button>
-    <button mat-raised-button color="primary" type="button">
+    <button mat-raised-button color="primary" type="button" (click)="saveProfile()">
       Сохранить
     </button>
   </div>

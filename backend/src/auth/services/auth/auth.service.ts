@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { map, switchMap } from 'rxjs/operators';
 import { JwtService } from '@nestjs/jwt';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+import { UserNotExistException, WrongPasswordException } from '../../../core/exceptions';
+import { ChangesPasswordModel, UserModel } from '../../../user/models';
 import { UserService } from '../../../user/services/user.service';
-import { UserNotExistException } from '../../../core/exceptions';
-import { UserModel } from '../../../user/models';
+import { OkTrueModel } from '../../../common/models';
 import { AuthModel } from '../../models';
 
 
@@ -33,5 +34,21 @@ export class AuthService {
   getToken(user: UserModel): AuthModel {
     const userData = {username: user.username, sub: user.id};
     return {token: this.jwtService.sign(userData)};
+  }
+
+  getUserAndUpdatePassword(userId: string, changesPassword: ChangesPasswordModel): Observable<OkTrueModel> {
+    return this.userService.getUser(userId)
+      .pipe(
+        map(user => this.compareAndGetPassword(user, changesPassword)),
+        switchMap((result: {password: string}) => this.userService.changePassword(userId, result))
+      );
+  }
+
+  compareAndGetPassword(user: UserModel, changesPassword: ChangesPasswordModel): {password: string} {
+    if (user && user.password === changesPassword.oldPassword) {
+      return {password: changesPassword.newPassword};
+    }
+
+    throw new WrongPasswordException();
   }
 }

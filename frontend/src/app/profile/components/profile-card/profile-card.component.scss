@@ -3,8 +3,8 @@
   overflow: hidden;
 
   .profile-form {
-    max-height: calc(80vh - 188px);
-    padding: 12px 10vh;
+    max-height: calc(80vh - 192px);
+    padding: 12px;
     overflow-x: hidden;
     overflow-y: auto;
     width: 100%;
@@ -20,10 +20,10 @@
   }
 
   @media screen and (max-width: 1000px) {
-    height: calc(80vh - 96px);
+    height: calc(80vh - 100px);
 
     .profile-form {
-      max-height: calc(80vh - 148px);
+      max-height: calc(80vh - 152px);
       padding: 12px 8px 0 8px;
 
       .profile-row {

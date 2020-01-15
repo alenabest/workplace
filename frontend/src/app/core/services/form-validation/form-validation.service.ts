@@ -27,11 +27,11 @@ export class FormValidationService {
     } else if (field.hasError('email')) {
       return config.email;
     } else if (field.hasError('maxlength')) {
-      config.maxLength = `Максимальное количество символов - ${field.errors.maxlength.requiredLength}`;
+      config.maxLength = `Максимум ${field.errors.maxlength.requiredLength} символов`;
 
       return config.maxLength;
     } else if (field.hasError('minlength')) {
-      config.minLength = `Минимальное количество символов - ${field.errors.minlength.requiredLength}`;
+      config.minLength = `Минимум ${field.errors.minlength.requiredLength} символов`;
 
       return config.minLength;
     } else if (field.hasError('matDatepickerMin')) {

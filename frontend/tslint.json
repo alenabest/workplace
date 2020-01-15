@@ -85,7 +85,8 @@
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
-    "no-string-literal": false
+    "no-string-literal": false,
+    "only-arrow-functions": false
   },
   "rulesDirectory": [
     "codelyzer"

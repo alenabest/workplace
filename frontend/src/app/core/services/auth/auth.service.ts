@@ -5,8 +5,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { UserModel } from '../../../shared/models/user';
-import { addLocalStorageItem } from '../../../shared';
+import { UserModel, UserPasswordModel } from '../../../common/models/user';
+import { OkTrueModel } from '../../../common/models/response';
+import { addLocalStorageItem } from '../../../common/utils';
 
 
 const AUTH_API = '/workplace/auth/';
@@ -45,6 +46,11 @@ export class AuthService {
         map(user => plainToClass(UserModel, user)),
         tap(currentUser => this.currentUser = currentUser)
       );
+  }
+
+  changePassword(changesPassword: UserPasswordModel): Observable<OkTrueModel> {
+    return this.http
+      .post<OkTrueModel>(`${AUTH_API}change-password/`, changesPassword);
   }
 
   private redirectToUserPage() {

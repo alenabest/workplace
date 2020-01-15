@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../core/services/auth';
-import { UserModel } from '../../../shared/models/user';
+import { UserModel } from '../../../common/models/user';
 
 @Component({
   selector: 'profile-page',

@@ -7,10 +7,10 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    UserModule,
-    AuthModule,
+    TypeOrmModule.forRoot(),
 
-    TypeOrmModule.forRoot()
+    UserModule,
+    AuthModule
   ],
   controllers: [],
   providers: []

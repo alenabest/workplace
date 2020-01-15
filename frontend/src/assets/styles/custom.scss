@@ -4,7 +4,9 @@
   }
 
   .mat-form-field-appearance-outline .mat-form-field-wrapper {
-    margin: 0 !important;
+    @media screen and (min-width: 1000px) {
+      margin: 0 !important;
+    }
   }
 
   .mat-form-field-appearance-outline .mat-form-field-infix {
@@ -22,6 +24,10 @@
     color: #006a88 !important;
   }
 
+  .mat-form-field-subscript-wrapper {
+    margin-top: 0.35em;
+  }
+
   @media screen and (max-width: 600px) {
 
     .mat-form-field-appearance-outline .mat-form-field-infix {
@@ -30,7 +36,7 @@
     }
 
     .mat-form-field-label-wrapper {
-      font-size: 1.2em !important;
+      font-size: 1.3em !important;
     }
   }
 }
@@ -65,13 +71,29 @@
 }
 
 .custom-snack-bar, .custom-snack-bar-warning {
+  margin: 12px !important;
+  max-width: 85vw !important;
+  min-width: 0 !important;
   color: white;
 
   span {
+    cursor: default;
     font-size: 18px;
   }
-}
 
+  .mat-simple-snackbar {
+    justify-content: center;
+  }
+
+  .mat-simple-snackbar-action {
+    color: white;
+    margin: -8px;
+
+    .mat-button {
+      font-weight: 400 !important;
+    }
+  }
+}
 .custom-snack-bar {
   background-color: rgba(0, 65, 89, 0.81);
 }
