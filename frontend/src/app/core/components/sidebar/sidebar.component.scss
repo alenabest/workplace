@@ -11,6 +11,7 @@
     color: #006a88;
     cursor: pointer;
     padding-left: 16px;
+    padding-right: 8px;
 
     &.current, &:hover {
       background-color: rgba(0, 173, 222, 0.1);
@@ -19,8 +20,9 @@
   }
 
   @media screen and (min-width: 601px) and (max-width: 1000px) {
+    height: calc(100vh - 44px);
     padding: 12px 0;
-    width: 100px;
+    width: auto;
     top: 44px;
 
     .sidebar-button {
@@ -35,7 +37,7 @@
   @media screen and (max-width: 600px) {
     height: calc(100vh - 44px);
     padding: 12px 0;
-    width: 40px;
+    width: auto;
     top: 44px;
 
     .sidebar-button {
