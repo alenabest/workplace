@@ -20,3 +20,8 @@ export class UserModel {
   @Transform(formatDateToClass(), { toClassOnly: true })
   birthday?: Date | string;
 }
+
+export class UserPasswordModel {
+  newPassword: string;
+  oldPassword: string;
+}

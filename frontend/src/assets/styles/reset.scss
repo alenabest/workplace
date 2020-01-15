@@ -11,12 +11,23 @@ a {
   padding: 0 !important;
 }
 
-.mat-card {
-  padding: 8px !important;
+mat-error {
+  font-size: 1.3em !important;
 }
-.mat-card-title {
-  padding-left: 12px !important;
+
+mat-card {
+  background: whitesmoke !important;
+  padding: 12px !important;
+}
+
+mat-card-title {
+  padding-left: 8px !important;
   font-size: 1em !important;
+  margin: 8px 0 16px 0 !important;
+}
+
+mat-card-actions, mat-card-content  {
+  margin-bottom: 0 !important;
 }
 
 .mat-mini-fab {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
 
 import { FormValidationService } from '../../../core/services/form-validation';
 import { SnackBarService } from '../../../core/services/snack-bar';
@@ -8,6 +9,7 @@ import { BaseDestroy } from '../../../common/models/base-destroy';
 import { AuthService } from '../../../core/services/auth';
 import { UserService } from '../../../core/services/user';
 import { UserModel } from '../../../common/models/user';
+import { ChangePasswordDialogComponent } from '../../dialogs/change-password-dialog/change-password-dialog.component';
 
 
 @Component({
@@ -32,7 +34,8 @@ export class ProfileCardComponent extends BaseDestroy implements OnInit {
               private snackBarService: SnackBarService,
               private formBuilder: FormBuilder,
               private authService: AuthService,
-              private userService: UserService) {
+              private userService: UserService,
+              private dialog: MatDialog) {
     super();
 
     this.currentUser = this.authService.currentUser;
@@ -47,13 +50,16 @@ export class ProfileCardComponent extends BaseDestroy implements OnInit {
     return this.formValidationService.getValidatorErrorMessage(field);
   }
 
+  openChangePasswordDialog() {
+    this.dialog.open(ChangePasswordDialogComponent, {width: '300px'});
+  }
+
   cancelEdit() {
     this.profileForm.patchValue(this.currentUser);
   }
 
   completeActions(message: string, user: UserModel) {
     this.snackBarService.openSnackBar(message);
-    this.authService.currentUser = user;
     this.currentUser = user;
   }
 
@@ -69,6 +75,7 @@ export class ProfileCardComponent extends BaseDestroy implements OnInit {
   updateUser() {
     this.userService.updateUser(this.currentUser.id, this.profileForm.value)
       .pipe(
+        switchMap(() => this.authService.getProfile()),
         takeUntil(this.destroy$)
       )
       .subscribe((user) => this.completeActions('Изменения сохранены', user));
