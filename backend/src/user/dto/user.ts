@@ -8,6 +8,13 @@ export class UserDto {
   password: string;
 }
 
+export class PasswordDTO {
+  @ApiProperty()
+  newPassword: string;
+  @ApiProperty()
+  oldPassword: string;
+}
+
 export class UpdateUserDto {
   @ApiProperty()
   id: number;

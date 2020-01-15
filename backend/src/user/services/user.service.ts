@@ -6,9 +6,9 @@ import { from, Observable } from 'rxjs';
 import { Repository } from 'typeorm';
 import { join } from 'path';
 
+import { FileUploadModel, OkTrueModel } from '../../common/models';
 import { UpdateUserDto, UserDto, UserFilterDto } from '../dto';
 import { ExternalUserModel, UserModel } from '../models';
-import { FileUploadModel } from '../../common/models';
 import { User } from '../db';
 
 @Injectable()
@@ -23,18 +23,18 @@ export class UserService {
     return from(this.userRepository.find({ where: query }));
   }
 
-  getUser(id?: string, query?: UserFilterDto): Observable<UserModel> {
-    return from(this.userRepository.findOne(id, { where: query }));
+  getUser(userId?: string, query?: UserFilterDto): Observable<UserModel> {
+    return from(this.userRepository.findOne(userId, { where: query }));
   }
 
   createUser(user: UserDto): Observable<UserDto> {
     return from(this.userRepository.save<UserDto>(user));
   }
 
-  updateUser(id: string, user: UpdateUserDto): Observable<ExternalUserModel> {
-    return from(this.userRepository.update(id, user))
+  updateUser(userId: string, user: UpdateUserDto): Observable<ExternalUserModel> {
+    return from(this.userRepository.update(userId, user))
       .pipe(
-        switchMap(() => from(this.userRepository.findOne(id))),
+        switchMap(() => from(this.userRepository.findOne(userId))),
         map(result => plainToClass(ExternalUserModel, result))
       );
   }
@@ -48,6 +48,14 @@ export class UserService {
     return from(this.userRepository.update(userId, {avatar: avatarUrl}))
       .pipe(
         map(() => Object({ url: avatarUrl}))
+      );
+  }
+
+  changePassword(userId: string, changesPassword: {password: string}): Observable<OkTrueModel> {
+    console.log(userId, changesPassword);
+    return from(this.userRepository.update(userId, changesPassword))
+      .pipe(
+        map(() => new OkTrueModel())
       );
   }
 }

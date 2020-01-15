@@ -1,1 +1,2 @@
-export * from './user-not-exist.exception';
+export * from './custom-exceptions';
+

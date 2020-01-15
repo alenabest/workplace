@@ -20,3 +20,8 @@ export class ExternalUserModel extends UserModel {
   @Exclude()
   password: string;
 }
+
+export class ChangesPasswordModel {
+  oldPassword: string;
+  newPassword: string;
+}
