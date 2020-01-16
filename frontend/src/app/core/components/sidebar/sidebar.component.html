@@ -1,4 +1,4 @@
-<div class="sidebar-container" fxLayout="column">
+<div fxLayout="column" [ngClass]="{'sidebar-container': true, 'hide': isState('activity/')}">
   <ng-container *ngIf="isState('profile') || isState('settings')">
     <a [ngClass]="{'sidebar-button': true, 'current': isState('profile')}" routerLink="app/profile"
        fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="16px">
@@ -28,4 +28,9 @@
       <p>Месяц</p>
     </a>
   </ng-container>
+</div>
+
+<div fxLayout="column" fxLayoutGap="8px" class="activity-button" *ngIf="isState('activity/')">
+  <button mat-fab color="primary" type="button"><mat-icon>add</mat-icon></button>
+  <button mat-fab color="primary" type="button"><mat-icon>timer</mat-icon></button>
 </div>

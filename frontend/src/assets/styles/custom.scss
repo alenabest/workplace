@@ -94,6 +94,7 @@
     }
   }
 }
+
 .custom-snack-bar {
   background-color: rgba(0, 65, 89, 0.81);
 }
@@ -106,4 +107,14 @@
   font-size: 14px;
   max-width: 50vw !important;
   word-wrap: break-word !important;
+}
+
+.head-button-icon {
+  height: auto !important;
+  font-size: 40px !important;
+  width: auto !important;
+}
+
+.display-none {
+  display: none;
 }

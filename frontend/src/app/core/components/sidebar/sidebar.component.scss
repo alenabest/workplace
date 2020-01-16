@@ -6,6 +6,10 @@
   width: 160px;
   top: 56px;
 
+  &.hide {
+    display: block;
+  }
+
   .sidebar-button {
     height: 44px;
     color: #006a88;
@@ -25,6 +29,10 @@
     width: auto;
     top: 44px;
 
+    &.hide {
+      display: none !important;
+    }
+
     .sidebar-button {
       padding-left: 4px;
 
@@ -40,6 +48,10 @@
     width: auto;
     top: 44px;
 
+    &.hide {
+      display: none !important;;
+    }
+
     .sidebar-button {
       padding-left: 4px;
 
@@ -48,4 +60,13 @@
       }
     }
   }
+}
+
+.activity-button {
+  padding-bottom: 16px;
+  padding-right: 16px;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  right: 0;
 }
