@@ -1,44 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material';
-import { plainToClass } from 'class-transformer';
 import { ru as locale } from 'date-fns/locale';
 import { add, format } from 'date-fns';
+import { Observable } from 'rxjs';
 
-import { DayActivityClass } from '../../../../common/models/activity';
-
-
-const dayActivity = [
-  {
-    start: '08:00',
-    end: '09:10',
-    description: 'Активность 1'
-  },
-  {
-    start: '09:10',
-    end: '10:30',
-    description: 'Активность 2'
-  },
-  {
-    start: '10:30',
-    end: '12:00',
-    description: 'Активность 3'
-  },
-  {
-    start: '13:00',
-    end: '14:50',
-    description: 'Активность 4'
-  },
-  {
-    start: '14:50',
-    end: '15:45',
-    description: 'Активность 5'
-  },
-  {
-    start: '15:45',
-    end: '17:00',
-    description: 'Активность 6'
-  }
-];
+import { ActivityModel } from '../../../../common/models/activity';
 
 @Component({
   selector: 'day-activity-page',
@@ -48,14 +14,13 @@ const dayActivity = [
 export class DayActivityPageComponent implements OnInit {
   currentDate: Date = new Date();
   dateFormat: string = 'dd MMMM yyyy, cccc';
-  dayActivity: DayActivityClass[];
+  activities$: Observable<ActivityModel[]>;
 
   get currentDayLabel(): string {
     return format(this.currentDate, this.dateFormat, { locale });
   }
 
   constructor() {
-    this.dayActivity = plainToClass(DayActivityClass, dayActivity);
   }
 
   ngOnInit() {

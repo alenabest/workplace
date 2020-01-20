@@ -9,7 +9,7 @@
 
   <div fxFlex>
     <div fxLayout="column" fxLayoutAlign="flex-start center">
-      <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let activity of dayActivity" class="activity-row"
+      <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let activity of activities" class="activity-row"
            matTooltip="{{activity.start }} - {{ activity.end}}"
            [ngStyle]="{
            'height': activity.height,
