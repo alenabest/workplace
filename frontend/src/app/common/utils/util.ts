@@ -4,3 +4,7 @@ export function addLocalStorageItem(key: string, value: string, reset?: boolean)
   }
   localStorage.setItem(key, value);
 }
+
+export function getRandomElement<T>(elements: T[]): T {
+  return elements[Math.floor(Math.random() * elements.length)];
+}

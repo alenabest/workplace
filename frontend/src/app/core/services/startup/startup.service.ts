@@ -42,7 +42,7 @@ export class StartupService extends BaseDestroy {
   checkCurrentStates(currentUrl: string) {
     const router = this.injector.get(Router);
     if (currentUrl === '' || currentUrl === '/') {
-      router.navigate(['app', 'profile']).then();
+      router.navigate(['app', 'activity', 'day']).then();
     }
   }
 }

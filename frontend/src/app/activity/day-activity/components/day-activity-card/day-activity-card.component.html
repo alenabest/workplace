@@ -1,4 +1,4 @@
-<div fxLayout="row" class="activity-container">
+<div fxLayout="row" class="activity-container" [scrollTop]="calculateScrollTop">
   <div fxFlex="64px">
     <div fxLayout="column">
       <div fxLayoutAlign="flex-start center" *ngFor="let hour of hourArray" class="hour-row">
@@ -11,7 +11,12 @@
     <div fxLayout="column" fxLayoutAlign="flex-start center">
       <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let activity of dayActivity" class="activity-row"
            matTooltip="{{activity.start }} - {{ activity.end}}"
-           [ngStyle]="{'height': activity.height, 'margin-bottom': activity.marginBottom, 'margin-top': activity.marginTop}">
+           [ngStyle]="{
+           'height': activity.height,
+           'margin-bottom': activity.marginBottom,
+           'margin-top': activity.marginTop,
+           'background-color': activity.backgroundColor
+           }">
         {{ activity.description }}
       </div>
     </div>

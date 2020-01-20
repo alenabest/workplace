@@ -55,7 +55,7 @@ export class AuthService {
 
   private redirectToUserPage() {
     if (this.currentUser) {
-      this.router.navigate(['app', 'profile']).then();
+      this.router.navigate(['app', 'activity', 'day']).then();
     }
   }
 }

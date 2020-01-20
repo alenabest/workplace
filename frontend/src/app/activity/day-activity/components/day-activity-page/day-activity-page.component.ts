@@ -1,52 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material';
+import { plainToClass } from 'class-transformer';
 import { ru as locale } from 'date-fns/locale';
-import { format, add } from 'date-fns';
-import { Exclude, Expose, plainToClass } from 'class-transformer';
+import { add, format } from 'date-fns';
 
+import { DayActivityClass } from '../../../../common/models/activity';
 
-export class DayActivityClass {
-  start: string;
-  end: string;
-  description: string;
-  marginBottom: string | number;
-  marginTop: string | number;
-
-  @Exclude({ toPlainOnly: true })
-  @Expose()
-  get height() {
-    const startArray: number[] = this.start.split(':').map(item => Number(item));
-    const endArray: number[] = this.end.split(':').map(item => Number(item));
-    const hours = endArray[0] - startArray[0];
-    const minutes = endArray[1] - startArray[1];
-    return hours * 60 + minutes + 'px';
-  }
-
-  @Exclude({ toPlainOnly: true })
-  @Expose()
-  get startHour() {
-    const startHour = this.start.split(':')[0];
-    return Number(startHour);
-  }
-
-  @Exclude({ toPlainOnly: true })
-  @Expose()
-  get endHour() {
-    const endHour = this.end.split(':')[0];
-    return Number(endHour);
-  }
-}
 
 const dayActivity = [
   {
-    start: '08:30',
+    start: '08:00',
     end: '09:10',
-    description: 'Я делала то-то и то-то'
+    description: 'Активность 1'
+  },
+  {
+    start: '09:10',
+    end: '10:30',
+    description: 'Активность 2'
+  },
+  {
+    start: '10:30',
+    end: '12:00',
+    description: 'Активность 3'
+  },
+  {
+    start: '13:00',
+    end: '14:50',
+    description: 'Активность 4'
   },
   {
     start: '14:50',
-    end: '16:10',
-    description: 'Я делала что-то'
+    end: '15:45',
+    description: 'Активность 5'
+  },
+  {
+    start: '15:45',
+    end: '17:00',
+    description: 'Активность 6'
   }
 ];
 
@@ -66,25 +56,6 @@ export class DayActivityPageComponent implements OnInit {
 
   constructor() {
     this.dayActivity = plainToClass(DayActivityClass, dayActivity);
-    this.dayActivity.map((item, index) => {
-
-      if (index === this.dayActivity.length - 1) {
-        item.marginBottom = 0;
-        return item;
-      }
-      const startArray: number[] = item.end.split(':').map(start => Number(start));
-      const endArray: number[] = this.dayActivity[index + 1].start.split(':').map(end => Number(end));
-      const hours = endArray[0] - startArray[0];
-      const minutes = endArray[1] - startArray[1];
-
-      if (index === 0) {
-        item.marginTop = item.start.split(':')[1] + 'px';
-      }
-
-      item.marginBottom = hours * 60 + minutes + 'px';
-
-      return item;
-    });
   }
 
   ngOnInit() {
