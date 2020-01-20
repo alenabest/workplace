@@ -1,51 +1,51 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 
 export class UserDto {
-  @ApiProperty()
+  @ApiPropertyOptional()
   username: string;
-  @ApiProperty()
+  @ApiPropertyOptional()
   password: string;
 }
 
 export class PasswordDTO {
-  @ApiProperty()
+  @ApiPropertyOptional()
   newPassword: string;
-  @ApiProperty()
+  @ApiPropertyOptional()
   oldPassword: string;
 }
 
 export class UpdateUserDto {
-  @ApiProperty()
+  @ApiPropertyOptional()
   id: number;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   username: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   firstName: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   middleName: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   lastName: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   email: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   mobile: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   phone: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   birthday: string;
 }
 
 
 export class UserFilterDto {
-  @ApiProperty()
+  @ApiPropertyOptional()
   username: string;
 }

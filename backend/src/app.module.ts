@@ -3,6 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { ProjectModule } from './project/project.module';
+import { TaskModule } from './task/task.module';
+import { ActivityTypeModule } from './activity-type/activity-type.module';
 
 
 @Module({
@@ -10,7 +13,10 @@ import { AuthModule } from './auth/auth.module';
     TypeOrmModule.forRoot(),
 
     UserModule,
-    AuthModule
+    AuthModule,
+    ProjectModule,
+    TaskModule,
+    ActivityTypeModule
   ],
   controllers: [],
   providers: []

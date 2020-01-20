@@ -24,7 +24,7 @@ cd ".."
 # create dto, $name.ts, index.ts
 mkdir "dto" || exit
 cd "dto" || exit
-echo "import { ApiProperty } from '@nestjs/swagger';" | tee -a "$1.ts"
+echo "import { ApiPropertyOptional } from '@nestjs/swagger';" | tee -a "$1.ts"
 echo "export class $1Dto {}" | awk -F ";" '{$name=substr($name, 1, 13)toupper(substr($name, 14, 1))substr($name, 15) }1' | tee -a "$1.ts"
 echo "export * from './$1';" | tee -a "index.ts"
 cd ".."
