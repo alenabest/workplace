@@ -16,6 +16,7 @@ import { ProfileModule } from './profile/profile.module';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
+import { FlexModule } from '@angular/flex-layout';
 
 
 export function startupServiceFactory(startupService: StartupService) {
@@ -46,7 +47,8 @@ const modules = [
       headerName: 'x-csrftoken'
     }),
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    FlexModule
   ],
   providers: [
     StartupService,

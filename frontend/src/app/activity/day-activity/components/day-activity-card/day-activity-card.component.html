@@ -1,7 +1,7 @@
 <div fxLayout="row" class="activity-container" [scrollTop]="scrollTop">
   <div fxFlex="64px">
     <div fxLayout="column">
-      <div fxLayoutAlign="flex-start center" *ngFor="let hour of hourArray" class="hour-row">
+      <div fxLayoutAlign="flex-start center" *ngFor="let hour of hourArray" class="hour-row" (click)="addActivity(hour)">
         {{ hour }}
       </div>
     </div>
@@ -10,7 +10,6 @@
   <div fxFlex>
     <div fxLayout="column" fxLayoutAlign="flex-start center">
       <div fxLayout="column" fxLayoutAlign="center center" *ngFor="let activity of activities" class="activity-row"
-           matTooltip="{{activity.start }} - {{ activity.end}}"
            [ngStyle]="{
            'height': activity.height,
            'margin-bottom': activity.marginBottom,
@@ -18,6 +17,7 @@
            'background-color': activity.backgroundColor
            }">
         <span fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center" class="activity-header">
+          <span>{{ activity.start }} - {{activity.end}}</span>
           <span class="label">Проект:</span>
           <span>{{ activity.project }}</span>
           <span class="label">Задача:</span>

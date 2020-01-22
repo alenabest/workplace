@@ -1,6 +1,7 @@
 .profile-container {
+  width: calc(100vw - 300px);
   overflow: hidden;
-  margin: 16px;
+  margin: 0 auto;
 
   .profile-label {
     cursor: default;
@@ -10,7 +11,8 @@
   }
 
   @media screen and (max-width: 1000px) {
-    margin: 8px;
+    width: 100vw;
+    margin: 0;
 
     .profile-label {
       font-size: 1.2em;

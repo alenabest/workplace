@@ -1,5 +1,5 @@
 .activity-container {
-  height: calc(100vh - 128px);
+  height: calc(100vh - 124px);
   overflow: auto;
   padding: 8px 0;
 
@@ -35,14 +35,16 @@
 
   .hour-row {
     border-bottom: 1px solid #e4e4e4;
-    width: calc(80vw - 16px);
+    width: calc(100vw - 136px);
     padding-left: 12px;
-    cursor: default;
+    cursor: pointer;
     color: #002430;
     height: 60px;
   }
 
   @media screen and (max-width: 1000px) {
+    padding: 0 0 8px 0;
+
     .hour-row {
       margin: 0 8px;
       padding-left: 8px;

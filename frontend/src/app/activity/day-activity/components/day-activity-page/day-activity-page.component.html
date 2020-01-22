@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutGap="8px">
+<div fxLayout="column" fxLayoutGap="4px" class="component-container">
   <div fxLayout="row" fxLayoutAlign="space-between center" class="calendar-row">
     <button mat-icon-button color="primary" type="button" (click)="changeDay(null, -1)">
       <mat-icon class="head-button-icon">chevron_left</mat-icon>
@@ -14,6 +14,14 @@
       <mat-icon class="head-button-icon">chevron_right</mat-icon>
     </button>
   </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-around center" class="menu-row">
+    <mat-chip class="menu-chip-button" *ngIf="isNotToday">Сегодня</mat-chip>
+    <mat-chip class="menu-chip-button">День</mat-chip>
+    <mat-chip class="menu-chip-button">Неделя</mat-chip>
+    <mat-chip class="menu-chip-button">Месяц</mat-chip>
+  </div>
+
 
   <day-activity-card [activities]="activities$ | async"></day-activity-card>
 </div>

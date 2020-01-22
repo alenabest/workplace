@@ -27,6 +27,10 @@ export class DayActivityCardComponent implements OnChanges {
     }
   }
 
+  addActivity(hour: string) {
+    console.log(hour);
+  }
+
   calculateScrollTop(): number {
     if (!this.activities || this.activities.length === 0) {
       return 0;

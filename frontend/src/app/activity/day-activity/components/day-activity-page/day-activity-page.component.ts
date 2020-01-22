@@ -15,6 +15,7 @@ import { AuthService } from '../../../../core/services/auth';
   styleUrls: ['./day-activity-page.component.scss']
 })
 export class DayActivityPageComponent implements OnInit {
+  isNotToday: boolean = false;
   currentDate: Date = new Date();
   dateFormat: string = 'dd MMMM yyyy, cccc';
   activities$: Observable<ActivityModel[]>;
@@ -41,8 +42,15 @@ export class DayActivityPageComponent implements OnInit {
     } else {
       this.currentDate = add(this.currentDate, { days });
     }
+    this.isNotToday = this.checkDate();
     this.currentDayLabel = this.getCurrentDayLabel();
     this.getActivity();
+  }
+
+  checkDate(): boolean {
+    const current = format(this.currentDate, 'yyyy-MM-dd');
+    const today = format(new Date(), 'yyyy-MM-dd');
+    return current !== today;
   }
 
   getCurrentDayLabel(): string {

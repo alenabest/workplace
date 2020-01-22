@@ -5,13 +5,22 @@
 </ng-container>
 
 <ng-container *ngIf="!isWithoutSidebarHeaderState">
-  <app-header></app-header>
-  <app-sidebar *ngIf="!isWithoutSidebarState"></app-sidebar>
-  <div [ngClass]="{
-  'content-container': true,
-  'with-sidebar': !isWithoutSidebarState,
-  'common-theme': true
-  }">
-    <router-outlet></router-outlet>
+  <!--  <app-header></app-header>-->
+  <!--  <app-sidebar *ngIf="!isWithoutSidebarState"></app-sidebar>-->
+  <!--  <div [ngClass]="{-->
+  <!--  'content-container': true,-->
+  <!--  'with-sidebar': !isWithoutSidebarState,-->
+  <!--  'common-theme': true-->
+  <!--  }">-->
+  <!--    <router-outlet></router-outlet>-->
+  <!--  </div>-->
+  <div fxLayout="column">
+    <app-header></app-header>
+    <div fxLayout="row" fxFill>
+      <app-sidebar *ngIf="!isWithoutSidebarState"></app-sidebar>
+      <div [ngClass]="{'content-container': true, 'with-sidebar': !isWithoutSidebarState,'common-theme': true}">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   </div>
 </ng-container>
