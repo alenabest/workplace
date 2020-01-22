@@ -1,4 +1,5 @@
 .activity-container {
+  margin-top: 4px;
   height: calc(100vh - 124px);
   overflow: auto;
   padding: 8px 0;
@@ -43,6 +44,7 @@
   }
 
   @media screen and (max-width: 1000px) {
+    height: calc(100vh - 120px);
     padding: 0 0 8px 0;
 
     .hour-row {
