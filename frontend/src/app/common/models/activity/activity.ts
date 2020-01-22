@@ -1,4 +1,5 @@
 import { ActivityTypeModel, ProjectModel, TaskModel } from '../dictionary';
+import { UserModel } from '../user';
 
 
 export class ActivityModel {
@@ -17,4 +18,10 @@ export class ActivityModel {
   project: ProjectModel | number;
   task: TaskModel | number;
   type: ActivityTypeModel | number;
+  user: UserModel | number;
+}
+
+export class ActivityDayParam {
+  user: number;
+  activityDate: string;
 }

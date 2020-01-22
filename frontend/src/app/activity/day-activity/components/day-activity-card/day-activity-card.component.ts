@@ -13,23 +13,26 @@ import { getRandomElement } from '../../../../common/utils';
 export class DayActivityCardComponent implements OnChanges {
   @Input() activities: ActivityModel[];
 
+  scrollTop: number = 0;
+
   hourArray = HourArray;
-
-  get calculateScrollTop(): number {
-    if (!this.activities || this.activities.length === 0) {
-      return 0;
-    }
-
-    return this.activities[0].startHour * 60;
-  }
 
   constructor() {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.dayActivity && changes.dayActivity.currentValue && changes.dayActivity.currentValue !== changes.dayActivity.previousValue) {
+    if (changes.activities && changes.activities.currentValue && changes.activities.currentValue !== changes.activities.previousValue) {
       this.activities.map((item, index) => this.prepareStyle(item, index));
+      this.scrollTop = this.calculateScrollTop();
     }
+  }
+
+  calculateScrollTop(): number {
+    if (!this.activities || this.activities.length === 0) {
+      return 0;
+    }
+
+    return this.activities[0].startHour * 60;
   }
 
   prepareStyle(item: ActivityModel, index: number): ActivityModel {
@@ -38,20 +41,24 @@ export class DayActivityCardComponent implements OnChanges {
   }
 
   calculateMargin(item: ActivityModel, index: number): ActivityModel {
-    if (index === this.activities.length - 1) {
-      item.marginBottom = 0;
-      return item;
-    }
-    const nextItem = this.activities[index + 1];
-    const hours = nextItem.startHour - item.endHour;
-    const minutes = nextItem.startMinute - item.endMinute;
+    item.marginBottom = this.calculateMarginBottom(item, index);
 
     if (index === 0) {
       item.marginTop = item.startHour * 60 + item.startMinute + 'px';
     }
 
-    item.marginBottom = hours * 60 + minutes + 'px';
-
     return item;
+  }
+
+  calculateMarginBottom(item: ActivityModel, index: number): string | number {
+    if (this.activities.length === 1) {
+      return 0;
+    }
+
+    const nextItem = this.activities[index + 1];
+    const hours = nextItem.startHour - item.endHour;
+    const minutes = nextItem.startMinute - item.endMinute;
+
+    return hours * 60 + minutes + 'px';
   }
 }

@@ -6,9 +6,31 @@
   .activity-row {
     border: 1px solid white;
     border-radius: 8px;
-    padding: 8px;
-    width: 100%;
     cursor: pointer;
+    padding: 4px;
+    width: 100%;
+
+    .activity-header {
+      display: block;
+      font-style: italic;
+      width: 100% !important;
+
+      .label {
+        font-weight: 500;
+      }
+
+      span {
+        max-width: calc(33% - 100px) !important;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+
+    .activity-description {
+      max-height: 100%;
+      overflow: auto;
+    }
   }
 
   .hour-row {
@@ -26,5 +48,14 @@
       padding-left: 8px;
       width: calc(100vw - 16px);
     }
+
+    .activity-row {
+      padding: 0 4px;
+
+      .activity-header {
+        display: none !important;
+      }
+    }
   }
 }
+

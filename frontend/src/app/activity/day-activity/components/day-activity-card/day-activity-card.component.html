@@ -1,4 +1,4 @@
-<div fxLayout="row" class="activity-container" [scrollTop]="calculateScrollTop">
+<div fxLayout="row" class="activity-container" [scrollTop]="scrollTop">
   <div fxFlex="64px">
     <div fxLayout="column">
       <div fxLayoutAlign="flex-start center" *ngFor="let hour of hourArray" class="hour-row">
@@ -9,7 +9,7 @@
 
   <div fxFlex>
     <div fxLayout="column" fxLayoutAlign="flex-start center">
-      <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let activity of activities" class="activity-row"
+      <div fxLayout="column" fxLayoutAlign="center center" *ngFor="let activity of activities" class="activity-row"
            matTooltip="{{activity.start }} - {{ activity.end}}"
            [ngStyle]="{
            'height': activity.height,
@@ -17,7 +17,15 @@
            'margin-top': activity.marginTop,
            'background-color': activity.backgroundColor
            }">
-        {{ activity.description }}
+        <span fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="center center" class="activity-header">
+          <span class="label">Проект:</span>
+          <span>{{ activity.project }}</span>
+          <span class="label">Задача:</span>
+          <span>{{ activity.task }}</span>
+          <span class="label">Вид работы:</span>
+          <span>{{ activity.type }}</span>
+        </span>
+        <div class="activity-description">{{ activity.description }}</div>
       </div>
     </div>
   </div>
