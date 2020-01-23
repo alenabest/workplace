@@ -21,8 +21,8 @@
           <span>{{ activity.start }} - {{activity.end}}</span>
           <span class="label" *ngIf="activity.project">Проект:</span>
           <span *ngIf="activity.project">{{ activity.project }}</span>
-          <span class="label" *ngIf="activity.task">Задача:</span>
-          <span *ngIf="activity.task">{{ activity.task }}</span>
+          <span class="label" *ngIf="activity.direction">Направление:</span>
+          <span *ngIf="activity.direction">{{ activity.direction }}</span>
           <span class="label" *ngIf="activity.type">Вид работы:</span>
           <span *ngIf="activity.type">{{ activity.type }}</span>
         </span>

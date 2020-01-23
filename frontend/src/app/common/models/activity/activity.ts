@@ -1,5 +1,7 @@
-import { ActivityTypeModel, ProjectModel, TaskModel } from '../dictionary';
+import { ActivityTypeModel, ProjectModel, DirectionModel } from '../dictionary';
 import { UserModel } from '../user';
+import { Transform } from 'class-transformer';
+import { formatDateToClass, formatDateToPlain } from '../../../core/helpers';
 
 
 export class ActivityModel {
@@ -15,9 +17,14 @@ export class ActivityModel {
   startMinute: number;
   endHour: number;
   endMinute: number;
-  project: ProjectModel | number;
-  task: TaskModel | number;
-  type: ActivityTypeModel | number;
+
+  @Transform(formatDateToPlain(), { toPlainOnly: true })
+  @Transform(formatDateToClass(), { toClassOnly: true })
+  activityDate?: Date | string = new Date();
+
+  project: ProjectModel | number | string;
+  direction: DirectionModel | number | string;
+  type: ActivityTypeModel | number | string;
   user: UserModel | number;
 }
 

@@ -1,0 +1,42 @@
+.activity-card {
+  overflow: hidden;
+  max-height: calc(95vh - 24px);
+  width: 700px;
+
+  .activity-form {
+    overflow: auto;
+    max-height: calc(95vh - 112px);
+
+    .time-field {
+      flex: 1 1 80px;
+      max-width: 80px;
+      min-width: 80px;
+    }
+
+    .date-field {
+      flex: 1 1 160px;
+      max-width: 160px;
+      min-width: 160px;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    width: calc(95vw - 24px) !important;
+  }
+
+  @media screen and (max-width: 375px) {
+    .activity-form {
+      .time-field {
+        flex: 1 1 60px;
+        max-width: 60px;
+        min-width: 60px;
+      }
+
+      .date-field {
+        flex: 1 1 124px;
+        max-width: 124px;
+        min-width: 124px;
+      }
+    }
+  }
+}

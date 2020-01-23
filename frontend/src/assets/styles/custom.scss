@@ -4,20 +4,21 @@
   }
 
   .mat-form-field-appearance-outline .mat-form-field-wrapper {
-    @media screen and (min-width: 1000px) {
-      margin: 0 !important;
-    }
+    margin: .32em 0 0 !important;
   }
 
   .mat-form-field-appearance-outline .mat-form-field-infix {
     color: #333333;
     font-size: 18px;
-    padding: 0.46em 0 0.46em 0 !important;
+    padding: 0.26em 0 0.46em 0 !important;
   }
 
   .mat-form-field-label-wrapper {
     font-size: 20px !important;
     top: -0.94375em !important;
+    @media screen and (max-width: 1000px) {
+      top: -0.85375em !important;
+    }
   }
 
   .mat-form-field-appearance-outline .mat-form-field-label {
@@ -29,7 +30,6 @@
   }
 
   @media screen and (max-width: 600px) {
-
     .mat-form-field-appearance-outline .mat-form-field-infix {
       font-size: 1em;
       padding-bottom: 0.46em !important;

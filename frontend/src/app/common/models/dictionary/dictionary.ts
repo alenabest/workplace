@@ -3,7 +3,7 @@ export class ProjectModel {
   name: string;
 }
 
-export class TaskModel {
+export class DirectionModel {
   id: number;
   name: string;
   project: ProjectModel | number;
@@ -12,5 +12,5 @@ export class TaskModel {
 export class ActivityTypeModel {
   id: number;
   name: string;
-  task: TaskModel | number;
+  direction: DirectionModel | number;
 }
