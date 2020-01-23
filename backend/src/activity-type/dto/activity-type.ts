@@ -5,7 +5,7 @@ export class ActivityTypeDto {
   name: string;
 
   @ApiPropertyOptional()
-  task: number;
+  direction: number;
 
   @ApiPropertyOptional()
   user: number;

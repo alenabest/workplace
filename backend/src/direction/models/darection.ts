@@ -4,7 +4,7 @@ import { getPropertyToClass } from '../../core/model-helpers';
 import { ProjectModel } from '../../project/models';
 
 
-export class TaskModel {
+export class DirectionModel {
   id: number;
   name: string;
 

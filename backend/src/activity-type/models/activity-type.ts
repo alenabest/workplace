@@ -1,7 +1,7 @@
 import { Transform } from 'class-transformer';
 
 import { getPropertyToClass } from '../../core/model-helpers';
-import { TaskModel } from '../../task/models';
+import { DirectionModel } from '../../direction/models';
 
 
 export class ActivityTypeModel {
@@ -9,5 +9,5 @@ export class ActivityTypeModel {
   name: string;
 
   @Transform(getPropertyToClass('id'), { toClassOnly: true })
-  task: TaskModel | number;
+  direction: DirectionModel | number;
 }

@@ -1,7 +1,7 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 
 
-export class TaskDto {
+export class DirectionDto {
   @ApiPropertyOptional()
   name?: string;
 

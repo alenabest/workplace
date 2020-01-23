@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { ActivityType } from '../../activity-type/db';
 import { Project } from '../../project/db';
-import { Task } from '../../task/db';
+import { Direction } from '../../direction/db';
 import { User } from '../../user/db';
 
 
@@ -41,8 +41,8 @@ export class Activity {
   @ManyToOne(() => Project, { eager: true })
   project: Project;
 
-  @ManyToOne(() => Task, { eager: true })
-  task: Task;
+  @ManyToOne(() => Direction, { eager: true })
+  direction: Direction;
 
   @ManyToOne(() => ActivityType, { eager: true })
   type: ActivityType;

@@ -6,19 +6,19 @@ import { User } from '../../user/db';
 
 
 @Entity()
-export class Task {
+export class Direction {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'text', nullable: false })
   name: string;
 
-  @ManyToOne(() => Project, project => project.tasks, {eager: true})
+  @ManyToOne(() => Project, project => project.directions, {eager: true})
   project: Project;
+
+  @OneToMany(() => ActivityType, activityType => activityType.direction)
+  types: ActivityType[];
 
   @ManyToOne(() => User)
   user: User;
-
-  @OneToMany(() => ActivityType, activityType => activityType.task)
-  types: ActivityType[];
 }

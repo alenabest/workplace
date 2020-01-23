@@ -45,7 +45,7 @@ export class ActivityCreateUpdateDto {
   project: number;
 
   @ApiPropertyOptional()
-  task: number;
+  direction: number;
 
   @ApiPropertyOptional()
   type: number;

@@ -2,7 +2,7 @@ import { Transform } from 'class-transformer';
 import { getPropertyToClass } from '../../core/model-helpers';
 import { UserModel } from '../../user/models';
 import { ActivityTypeModel } from '../../activity-type/models';
-import { TaskModel } from '../../task/models';
+import { DirectionModel } from '../../direction/models';
 import { ProjectModel } from '../../project/models';
 
 
@@ -21,7 +21,7 @@ export class ActivityListModel {
   project: ProjectModel | string;
 
   @Transform(getPropertyToClass('name'), { toClassOnly: true })
-  task: TaskModel | string;
+  direction: DirectionModel | string;
 
   @Transform(getPropertyToClass('name'), { toClassOnly: true })
   type: ActivityTypeModel | string;
