@@ -27,18 +27,6 @@
     }
   }
 
-  .menu-row {
-    height: 24px;
-    display: none !important;
-
-    .menu-button {
-      padding: 1px 8px;
-      border-radius: 8px;
-      background-color: #9575cd;
-      cursor: pointer;
-    }
-  }
-
   @media screen and (max-width: 1000px)  {
     width: 100vw;
     margin-left: 0;

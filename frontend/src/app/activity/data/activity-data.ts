@@ -16,3 +16,7 @@ export const BackgroundColors: string[] = [
   '#e6b3d2',
   '#f7aec1'
 ];
+
+export class DateValue {
+  value: Date;
+}

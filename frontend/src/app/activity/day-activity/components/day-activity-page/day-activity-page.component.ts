@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { ActivityService } from '../../../../core/services/activity/activity.service';
 import { ActivityDayParam, ActivityModel } from '../../../../common/models/activity';
 import { AuthService } from '../../../../core/services/auth';
+import { DateValue } from '../../../data';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class DayActivityPageComponent implements OnInit {
     this.activities$ = this._getActivity();
   }
 
-  changeDay(event: MatDatepickerInputEvent<any>, days?: number) {
+  changeDay(event: MatDatepickerInputEvent<any> | DateValue, days?: number) {
     if (event) {
       this.currentDate = event.value;
     } else {

@@ -55,7 +55,7 @@ export class DayActivityCardComponent implements OnChanges {
   }
 
   calculateMarginBottom(item: ActivityModel, index: number): string | number {
-    if (this.activities.length === 1) {
+    if (this.activities.length === 1 || (this.activities.length - 1) === index) {
       return 0;
     }
 

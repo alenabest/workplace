@@ -15,13 +15,7 @@
     </button>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="space-around center" class="menu-row">
-    <a class="menu-button" *ngIf="isNotToday">Сегодня</a>
-    <a class="menu-button">День</a>
-    <a class="menu-button">Неделя</a>
-    <a class="menu-button">Месяц</a>
-  </div>
-
+  <activity-menu [isNotToday]="isNotToday" (checkTodayEvent)="changeDay($event)"></activity-menu>
 
   <day-activity-card [activities]="activities$ | async"></day-activity-card>
 </div>
