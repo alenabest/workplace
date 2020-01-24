@@ -8,16 +8,19 @@
           <input matInput [matDatepicker]="activityDatePicker" formControlName="activityDate" required>
           <mat-datepicker-toggle matSuffix [for]="activityDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #activityDatePicker></mat-datepicker>
+          <mat-error><validation-error [control]="activityDate"></validation-error></mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" floatLabel="always" class="time-field">
           <mat-label>С</mat-label>
-          <input matInput formControlName="start" required>
+          <input matInput formControlName="start" required/>
+          <mat-error><validation-error [control]="start"></validation-error></mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" floatLabel="always" class="time-field">
           <mat-label>По</mat-label>
           <input matInput formControlName="end" required>
+          <mat-error><validation-error [control]="end"></validation-error></mat-error>
         </mat-form-field>
       </div>
 
@@ -25,26 +28,31 @@
         <mat-label>Описание</mat-label>
         <textarea matInput matTextareaAutosize matAutosizeMaxRows="5" matAutosizeMinRows="1"
                   formControlName="description" required></textarea>
+        <mat-error><validation-error [control]="description"></validation-error></mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Проект</mat-label>
         <mat-select formControlName="project"></mat-select>
+        <mat-error><validation-error [control]="project"></validation-error></mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Направление</mat-label>
         <mat-select formControlName="direction"></mat-select>
+        <mat-error><validation-error [control]="direction"></validation-error></mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Вид работы</mat-label>
         <mat-select formControlName="type"></mat-select>
+        <mat-error><validation-error [control]="type"></validation-error></mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>В рамках задачи</mat-label>
         <mat-select formControlName="task"></mat-select>
+        <mat-error><validation-error [control]="task"></validation-error></mat-error>
       </mat-form-field>
     </form>
   </mat-card-content>

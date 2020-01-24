@@ -6,9 +6,9 @@
     "deprecation": {
       "severity": "warning"
     },
-    "component-class-suffix": false,
+    "component-class-suffix": true,
     "contextual-lifecycle": true,
-    "directive-class-suffix": false,
+    "directive-class-suffix": true,
     "directive-selector": [
       true,
       "attribute",
@@ -86,7 +86,8 @@
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
     "no-string-literal": false,
-    "only-arrow-functions": false
+    "only-arrow-functions": false,
+    "forin": false
   },
   "rulesDirectory": [
     "codelyzer"

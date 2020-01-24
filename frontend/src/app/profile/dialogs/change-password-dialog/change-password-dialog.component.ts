@@ -1,12 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
+import { takeUntil } from 'rxjs/operators';
 
 import { FormValidationService } from '../../../core/services/form-validation';
+import { SnackBarService } from '../../../core/services/snack-bar';
 import { BaseDestroy } from '../../../common/models/base-destroy';
 import { AuthService } from '../../../core/services/auth';
-import { takeUntil } from 'rxjs/operators';
-import { SnackBarService } from '../../../core/services/snack-bar';
 
 
 @Component({
@@ -24,10 +24,6 @@ export class ChangePasswordDialogComponent extends BaseDestroy implements OnInit
 
   get newPassword() {
     return this.changePasswordForm.get('newPassword');
-  }
-
-  get repeatPassword() {
-    return this.changePasswordForm.get('repeatPassword');
   }
 
   @HostListener('window:keyup.esc') onKeyUp() {

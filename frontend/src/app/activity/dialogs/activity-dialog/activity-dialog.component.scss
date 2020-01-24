@@ -8,9 +8,9 @@
     max-height: calc(95vh - 112px);
 
     .time-field {
-      flex: 1 1 80px;
-      max-width: 80px;
-      min-width: 80px;
+      flex: 1 1 92px;
+      max-width: 92px;
+      min-width: 92px;
     }
 
     .date-field {
@@ -27,15 +27,15 @@
   @media screen and (max-width: 375px) {
     .activity-form {
       .time-field {
-        flex: 1 1 60px;
-        max-width: 60px;
-        min-width: 60px;
+        flex: 1 1 68px;
+        max-width: 68px;
+        min-width: 68px;
       }
 
       .date-field {
-        flex: 1 1 124px;
-        max-width: 124px;
-        min-width: 124px;
+        flex: 1 1 132px;
+        max-width: 132px;
+        min-width: 132px;
       }
     }
   }

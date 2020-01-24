@@ -2,12 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout';
 
 import { CoreComponentsModule } from './core/components/core-components.module';
 import { CustomHttpInterceptor } from './core/custom-http-interceptor';
 import { AppDateAdapter, MAT_DATE_FNS_DATE_FORMATS } from './app-date-adapter';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { ActivityModule } from './activity/activity.module';
 import { SettingsModule } from './settings/settings.module';
 import { environment } from '../environments/environment';
@@ -16,7 +17,6 @@ import { ProfileModule } from './profile/profile.module';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
-import { FlexModule } from '@angular/flex-layout';
 
 
 export function startupServiceFactory(startupService: StartupService) {
