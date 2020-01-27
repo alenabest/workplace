@@ -13,6 +13,10 @@ export function getRandomElement<T>(elements: T[]): T {
 }
 
 export function generateQuery(params: object): HttpParams {
+  if (!params) {
+    return null;
+  }
+
   let newParams: HttpParams = new HttpParams();
   Object.keys(params).forEach(key => newParams = newParams.append(key, params[key]));
 

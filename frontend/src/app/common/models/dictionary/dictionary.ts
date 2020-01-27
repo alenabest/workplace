@@ -14,3 +14,13 @@ export class ActivityTypeModel {
   name: string;
   direction: DirectionModel | number;
 }
+
+export class DictionaryParamModel {
+  constructor(userId: number) {
+    this.userId = userId;
+  }
+
+  userId: number;
+  directionId__in: number[];
+  projectId__in: number[];
+}

@@ -87,7 +87,8 @@
     "use-pipe-transform-interface": true,
     "no-string-literal": false,
     "only-arrow-functions": false,
-    "forin": false
+    "forin": false,
+    "variable-name": false
   },
   "rulesDirectory": [
     "codelyzer"
