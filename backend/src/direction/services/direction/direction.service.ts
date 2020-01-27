@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { DirectionDto } from '../../dto';
 import { from, Observable } from 'rxjs';
 import { DirectionModel } from '../../models';
+import { createQuery } from '../../../core/create-query';
 
 
 @Injectable()
@@ -15,6 +16,6 @@ export class DirectionService {
   }
 
   getDirections(query: DirectionDto): Observable<DirectionModel[]> {
-    return from(this.directionRepository.find({ where: query }));
+    return from(this.directionRepository.query(createQuery('direction', query)));
   }
 }

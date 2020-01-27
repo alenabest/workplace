@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { from, Observable } from 'rxjs';
 
+import { createQuery } from '../../../core/create-query';
 import { ActivityTypeModel } from '../../models';
 import { ActivityTypeDto } from '../../dto';
 import { ActivityType } from '../../db';
@@ -15,6 +16,6 @@ export class ActivityTypeService {
   }
 
   getActivityTypes(query: ActivityTypeDto): Observable<ActivityTypeModel[]> {
-    return from(this.activityTypeRepository.find({where: query}));
+    return from(this.activityTypeRepository.query(createQuery('activity_type', query)));
   }
 }
