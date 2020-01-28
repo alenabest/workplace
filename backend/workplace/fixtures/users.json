@@ -1,0 +1,19 @@
+[
+{
+  "model": "workplace.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$36000$Nnwh9JbrWM04$VQ78lVBaxEg2Kgl0QtedT5+of+ioKZ2kqxtBhu5Q2AE=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "\u0410\u043b\u0451\u043d\u0430",
+    "last_name": "\u0425\u0440\u0435\u043d\u043e\u0432\u0441\u043a\u0430\u044f",
+    "email": "admin@admin.com",
+    "date_joined": "2019-02-28T07:39:47.686Z",
+    "middle_name": "\u0410\u043d\u0434\u0440\u0435\u0435\u0432\u043d\u0430",
+    "avatar": "",
+    "birthday": "1992-10-03"
+  }
+}
+]
