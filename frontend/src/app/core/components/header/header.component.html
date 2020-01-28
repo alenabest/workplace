@@ -4,7 +4,8 @@
       <mat-icon>{{sidenav.opened ? 'clear' : 'menu' }}</mat-icon>
     </div>
 
-    <a [ngClass]="{'toolbar-button': true, 'current': isState('active')}" fxLayoutAlign="center center">
+    <a [ngClass]="{'toolbar-button': true, 'current': isState('activity/')}" fxLayoutAlign="center center"
+       routerLink="app/activity/day">
       Активность</a>
     <a [ngClass]="{'toolbar-button': true, 'current': isState('tasks')}" fxLayoutAlign="center center">
       Задачи</a>
@@ -23,7 +24,8 @@
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="over">
-    <a [ngClass]="{'toolbar-button': true, 'current': isState('active')}" fxLayoutAlign="center center">
+    <a [ngClass]="{'toolbar-button': true, 'current': isState('activity/')}" fxLayoutAlign="center center"
+       routerLink="app/activity/day">
       Активность</a>
     <a [ngClass]="{'toolbar-button': true, 'current': isState('tasks')}" fxLayoutAlign="center center">
       Задачи</a>

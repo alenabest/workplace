@@ -1,1 +1,23 @@
-<p>day-activity-page works!</p>
+<div fxLayout="column" fxLayoutGap="4px" class="component-container">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="calendar-row">
+    <button mat-icon-button color="primary" type="button" (click)="changeDay(null, -1)">
+      <mat-icon class="head-button-icon">chevron_left</mat-icon>
+    </button>
+
+    <ng-container>
+      <span (click)="currentDatepicker.open()">{{ currentDayLabel }}</span>
+      <input matInput [matDatepicker]="currentDatepicker" class="display-none" (dateChange)="changeDay($event)">
+      <mat-datepicker #currentDatepicker class="display-none"></mat-datepicker>
+    </ng-container>
+
+    <button mat-icon-button color="primary" type="button" (click)="changeDay(null, 1)">
+      <mat-icon class="head-button-icon">chevron_right</mat-icon>
+    </button>
+  </div>
+
+  <activity-menu [isNotToday]="isNotToday" (checkTodayEvent)="changeDay($event)"></activity-menu>
+
+  <day-activity-card [activities]="activities$ | async"></day-activity-card>
+</div>
+
+<add-activity [currentDate]="currentDate"></add-activity>

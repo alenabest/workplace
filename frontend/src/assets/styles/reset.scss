@@ -24,6 +24,10 @@ mat-card-title {
   padding-left: 8px !important;
   font-size: 1em !important;
   margin: 8px 0 16px 0 !important;
+
+  @media screen and (max-width: 600px){
+    margin: 0 0 8px 0 !important;
+  }
 }
 
 mat-card-actions, mat-card-content  {
@@ -54,4 +58,8 @@ mat-card-actions, mat-card-content  {
 mat-dialog-container {
   background: transparent !important;
   box-shadow: none !important;
+}
+
+.cdk-overlay-pane {
+  max-width: 95vw !important;
 }

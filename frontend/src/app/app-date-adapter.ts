@@ -1,21 +1,36 @@
-import {Injectable} from '@angular/core';
-import {DateAdapter} from '@angular/material';
-import {addDays, addMonths, addYears, format, getDate, getDaysInMonth, getMonth, getYear, parse, setDay, setMonth, toDate} from 'date-fns';
+import { Injectable } from '@angular/core';
+import { DateAdapter } from '@angular/material';
+import {
+  addDays,
+  addMonths,
+  addYears,
+  format,
+  getDate,
+  getDaysInMonth,
+  getMonth,
+  getYear,
+  parse,
+  setDay,
+  setMonth,
+  toDate
+} from 'date-fns';
 
 // CONFIG. Use environment or something for a dynamic locale and settings
 
-import {ru as locale} from 'date-fns/locale';
+import { ru } from 'date-fns/locale';
+
+
 const WEEK_STARTS_ON = 1;
 
 export const MAT_DATE_FNS_DATE_FORMATS = {
   parse: {
-    dateInput: 'dd.MM.yyyy',
+    dateInput: 'dd.MM.yyyy'
   },
   display: {
     dateInput: 'dd.MM.yyyy',
     monthYearLabel: 'LLL y',
     dateA11yLabel: 'MMMM d, y',
-    monthYearA11yLabel: 'MMMM y',
+    monthYearA11yLabel: 'MMMM y'
   }
 };
 
@@ -53,7 +68,7 @@ export class AppDateAdapter extends DateAdapter<Date> {
 
   format(date: Date, displayFormat: any): string {
     return format(date, displayFormat, {
-      locale
+      locale: ru
     });
   }
 
@@ -80,7 +95,7 @@ export class AppDateAdapter extends DateAdapter<Date> {
     const date = new Date();
 
     return range(0, 6).map(month => format(setDay(date, month), formatStr, {
-      locale
+      locale: ru
     }));
   }
 
@@ -103,7 +118,7 @@ export class AppDateAdapter extends DateAdapter<Date> {
     const date = new Date();
 
     return range(0, 11).map(month => format(setMonth(date, month), formatStr, {
-      locale
+      locale: ru
     }));
   }
 
@@ -117,7 +132,7 @@ export class AppDateAdapter extends DateAdapter<Date> {
 
   getYearName(date: Date): string {
     return format(date, 'yyyy', {
-      locale
+      locale: ru
     });
   }
 
@@ -135,7 +150,7 @@ export class AppDateAdapter extends DateAdapter<Date> {
 
   parse(value: any, parseFormat: any): Date | null {
     return parse(value, parseFormat, new Date(), {
-      locale,
+      locale: ru
     });
   }
 
