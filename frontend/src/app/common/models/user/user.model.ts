@@ -1,6 +1,6 @@
 import { Transform } from 'class-transformer';
 
-import { formatDateToClass, formatDateToPlain } from '../../../core/helpers';
+import { formatDateToClass, formatDateToPlain, formatMedia } from '../../../core/helpers';
 
 
 
@@ -14,6 +14,8 @@ export class UserModel {
   email?: string;
   mobile?: string;
   phone?: string;
+
+  @Transform(formatMedia(), { toClassOnly: true })
   avatar?: string;
 
   @Transform(formatDateToPlain(), { toPlainOnly: true })

@@ -10,7 +10,7 @@ import { OkTrueModel } from '../../../common/models/response';
 import { addLocalStorageItem } from '../../../common/utils';
 
 
-const AUTH_API = '/workplace/auth/';
+const AUTH_API = '/workplace/';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,7 @@ export class AuthService {
 
   getProfile(): Observable<UserModel> {
     return this.http
-      .get(`${AUTH_API}profile/`)
+      .get(`${AUTH_API}user/profile/`)
       .pipe(
         map(user => plainToClass(UserModel, user)),
         tap(currentUser => this.currentUser = currentUser)
@@ -50,7 +50,7 @@ export class AuthService {
 
   changePassword(changesPassword: UserPasswordModel): Observable<OkTrueModel> {
     return this.http
-      .post<OkTrueModel>(`${AUTH_API}change-password/`, changesPassword);
+      .post<OkTrueModel>(`${AUTH_API}user/change-password/`, changesPassword);
   }
 
   private redirectToUserPage() {

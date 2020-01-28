@@ -68,7 +68,7 @@ export class ProfileAvatarComponent extends BaseDestroy {
   uploadAvatar(avatar: Blob): Observable<string> {
     return this.userService.uploadAvatar(avatar, this.userId)
       .pipe(
-        map(result => result.url)
+        map(result => result.avatar)
       );
   }
 

@@ -17,6 +17,8 @@ export function generateQuery(params: object): HttpParams {
     return null;
   }
 
+  params = clearNullFields(params);
+
   let newParams: HttpParams = new HttpParams();
   Object.keys(params).forEach(key => newParams = newParams.append(key, params[key]));
 
@@ -25,4 +27,15 @@ export function generateQuery(params: object): HttpParams {
 
 export function isEmptyObject(obj) {
   return !(obj && Object.keys(obj).length > 0);
+}
+
+export function clearNullFields(clearingObject: object): object {
+  const newObject = clearingObject;
+  Object.keys(newObject).forEach(key => {
+    if (!newObject[key]) {
+      delete newObject[key];
+    }
+  });
+
+  return newObject;
 }

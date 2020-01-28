@@ -64,7 +64,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     if (authorizationToken) {
       request = request.clone({
         setHeaders: {
-          Authorization: 'Bearer ' + authorizationToken
+          Authorization: `Token  ${authorizationToken}`
         }
       });
     }

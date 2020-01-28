@@ -1,11 +1,11 @@
 {
   "/workplace/": {
-    "target": "http://localhost:3000",
+    "target": "http://localhost:8000",
     "secure": false,
-    "pathRewrite": {"^/workplace/" : ""}
+    "pathRewrite": {"^/workplace/" : "/workplace/api/"}
   },
   "/media/*": {
-    "target": "http://localhost:3000/",
+    "target": "http://localhost:8000/",
     "secure": false,
     "changeOrigin": true
   }

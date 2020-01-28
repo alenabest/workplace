@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ClassType } from 'class-transformer/ClassTransformer';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { plainToClass } from 'class-transformer';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+import { IResponse, serializeResponse } from '../../helpers';
 import { generateQuery } from '../../../common/utils';
 
 @Injectable({
@@ -13,13 +13,13 @@ import { generateQuery } from '../../../common/utils';
 export class DictionaryService {
   constructor(protected http: HttpClient) { }
 
-  getDictionary<T>(dictionaryApi: string, cls: ClassType<T>, params?: HttpParams): Observable<T[]> {
+  getDictionary<T>(dictionaryApi: string, cls: ClassType<T>, params?: HttpParams): Observable<IResponse<T>> {
     params = generateQuery(params);
 
     return this.http
-      .get<T[]>(`/workplace/${dictionaryApi}/`, { params })
+      .get<IResponse<T>>(`/workplace/${dictionaryApi}/`, { params })
       .pipe(
-        map(results => plainToClass(cls, results))
+        map(results => serializeResponse(cls, results))
       );
   }
 }

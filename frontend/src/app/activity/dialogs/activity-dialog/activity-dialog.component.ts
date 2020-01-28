@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClassType } from 'class-transformer/ClassTransformer';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { ActivityTypeModel, DictionaryParamModel, DirectionModel, ProjectModel } from '../../../common/models/dictionary';
@@ -82,14 +83,13 @@ export class ActivityDialogComponent implements OnInit {
   }
 
   filterDirections() {
-    const params = new DictionaryParamModel(this.userId);
-    params.projectId__in = [null, this.project.value];
+    const params = new DictionaryParamModel(this.userId, this.project.value);
     this.getDirections(params);
+    this.getActivityTypes(params);
   }
 
   filterActivityTypes() {
-    const params = new DictionaryParamModel(this.userId);
-    params.directionId__in = [null, this.direction.value];
+    const params = new DictionaryParamModel(this.userId, this.project.value, this.direction.value);
     this.getActivityTypes(params);
   }
 
@@ -106,7 +106,10 @@ export class ActivityDialogComponent implements OnInit {
   }
 
   getDictionary<T>(api: string, cls: ClassType<T>, params?: any): Observable<T[]> {
-    return this.dictionaryService.getDictionary<T>(api, cls, params);
+    return this.dictionaryService.getDictionary<T>(api, cls, params)
+      .pipe(
+        map(response => response.results)
+      );
   }
 
   getActivityForm(): FormGroup {

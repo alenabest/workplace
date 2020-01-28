@@ -8,6 +8,7 @@ import { ActivityService } from '../../../../core/services/activity/activity.ser
 import { ActivityDayParam, ActivityModel } from '../../../../common/models/activity';
 import { AuthService } from '../../../../core/services/auth';
 import { DateValue } from '../../../data';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -59,7 +60,10 @@ export class DayActivityPageComponent implements OnInit {
   }
 
   private _getActivity(): Observable<ActivityModel[]> {
-    return this.activityService.getDayActivity(this.generateParams());
+    return this.activityService.getDayActivity(this.generateParams())
+      .pipe(
+        map(response => response.results)
+      );
   }
 
   private generateParams(): ActivityDayParam {
