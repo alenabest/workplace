@@ -105,15 +105,15 @@ class Activity(models.Model):
     # время окончания
     end = models.TextField(null=False, blank=False)
     # высота для интерфейса
-    height = models.TextField(null=False, blank=False)
+    height = models.TextField(null=True, blank=False)
     # час начала
-    start_hour = models.IntegerField(null=False, name='startHour')
+    start_hour = models.IntegerField(null=True, name='startHour')
     # минуту начала
-    start_minute = models.IntegerField(null=False, name='startMinute')
+    start_minute = models.IntegerField(null=True, name='startMinute')
     # час окончания
-    end_hour = models.IntegerField(null=False, name='endHour')
+    end_hour = models.IntegerField(null=True, name='endHour')
     # минута окончания
-    end_minute = models.IntegerField(null=False, name='endMinute')
+    end_minute = models.IntegerField(null=True, name='endMinute')
     # дата активности
     activity_date = models.DateField(null=False, name='activityDate')
     # проект
