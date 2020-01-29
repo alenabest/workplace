@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { WeekActivityComponentsModule } from './components/components.module';
-
+import { WeekActivityComponentsModule } from './components';
 
 
 @NgModule({

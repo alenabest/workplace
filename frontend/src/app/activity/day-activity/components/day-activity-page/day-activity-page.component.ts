@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material';
+import { map, takeUntil } from 'rxjs/operators';
 import { ru as locale } from 'date-fns/locale';
 import { add, format } from 'date-fns';
 import { Observable } from 'rxjs';
 
-import { ActivityService } from '../../../../core/services/activity/activity.service';
 import { ActivityDayParam, ActivityModel } from '../../../../common/models/activity';
+import { ActivityService } from '../../../../core/services/activity';
+import { BaseDestroy } from '../../../../common/models/base-destroy';
+import { SubjectService } from '../../../../core/services/subject';
 import { AuthService } from '../../../../core/services/auth';
+import { compareDates } from '../../../../common/utils';
 import { DateValue } from '../../../data';
-import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -16,7 +19,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './day-activity-page.component.html',
   styleUrls: ['./day-activity-page.component.scss']
 })
-export class DayActivityPageComponent implements OnInit {
+export class DayActivityPageComponent extends BaseDestroy implements OnInit {
   isNotToday: boolean = false;
   currentDate: Date = new Date();
   dateFormat: string = 'dd MMMM yyyy, cccc';
@@ -25,17 +28,34 @@ export class DayActivityPageComponent implements OnInit {
   userId: number;
 
   constructor(private readonly activityService: ActivityService,
+              private readonly subjectService: SubjectService,
               private readonly authService: AuthService) {
+    super();
     this.userId = this.authService.currentUser.id;
     this.currentDayLabel = this.getCurrentDayLabel();
+    this.subscribeSubject();
+  }
+
+  subscribeSubject() {
+    this.subjectService.getActivitySubject
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe(date => this.completeSubscribe(date));
+  }
+
+  completeSubscribe(date: Date) {
+    if (date && compareDates(date, this.currentDate)) {
+      this.getActivities();
+    }
   }
 
   ngOnInit() {
-    this.getActivity();
+    this.getActivities();
   }
 
-  getActivity() {
-    this.activities$ = this._getActivity();
+  getActivities() {
+    this.activities$ = this._getActivities();
   }
 
   changeDay(event: MatDatepickerInputEvent<any> | DateValue, days?: number) {
@@ -46,7 +66,7 @@ export class DayActivityPageComponent implements OnInit {
     }
     this.isNotToday = this.checkDate();
     this.currentDayLabel = this.getCurrentDayLabel();
-    this.getActivity();
+    this.getActivities();
   }
 
   checkDate(): boolean {
@@ -59,7 +79,7 @@ export class DayActivityPageComponent implements OnInit {
     return format(this.currentDate, this.dateFormat, { locale });
   }
 
-  private _getActivity(): Observable<ActivityModel[]> {
+  private _getActivities(): Observable<ActivityModel[]> {
     return this.activityService.getDayActivity(this.generateParams())
       .pipe(
         map(response => response.results)

@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
-import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+
+import { ProfilePageComponent } from './components/profile-page';
 
 
 export const PROFILE_ROUTES: Route[] = [

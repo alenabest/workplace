@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { MonthActivityPageComponent } from './month-activity-page/month-activity-page.component';
+import { MonthActivityPageComponent } from './month-activity-page';
 import { CoreModule, MaterialModules } from '../../../core';
 
 

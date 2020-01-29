@@ -1,4 +1,5 @@
 import { HttpParams } from '@angular/common/http';
+import { format } from 'date-fns';
 
 
 export function addLocalStorageItem(key: string, value: string, reset?: boolean) {
@@ -38,4 +39,16 @@ export function clearNullFields(clearingObject: object): object {
   });
 
   return newObject;
+}
+
+export function getTimeMessage(time: string, type: string, status: string): string {
+  if (time) {
+    return `Время ${type} должно быть не ${status} ${time}.`;
+  }
+
+  return '';
+}
+
+export function compareDates(date1: Date, date2: Date): boolean {
+  return format(date1, 'yyyy-MM-dd') === format(date2, 'yyyy-MM-dd');
 }

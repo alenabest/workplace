@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-
-import { ValidationErrorComponent } from './component/validation-error.component';
-import { CoreModule } from '../../../core';
 import { MatFormFieldModule } from '@angular/material';
+
+import { ValidationErrorComponent } from './component';
+import { CoreModule } from '../../../core';
 
 
 @NgModule({

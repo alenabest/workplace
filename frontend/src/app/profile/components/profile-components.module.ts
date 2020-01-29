@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 
-import { ImageViewerDialogComponent } from '../../common/dialogs/image-viewer-dialog/component/image-viewer-dialog.component';
-import { ChangePasswordDialogComponent } from '../dialogs/change-password-dialog/change-password-dialog.component';
-import { ImageViewerDialogModule } from '../../common/dialogs/image-viewer-dialog/image-viewer-dialog.module';
-import { AvatarEditorDialogComponent } from '../dialogs/avatar-editor-dialog/avatar-editor-dialog.component';
-import { ProfileAvatarComponent } from './profile-avatar/profile-avatar.component';
-import { ProfileCardComponent } from './profile-card/profile-card.component';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ImageViewerDialogComponent } from '../../common/dialogs/image-viewer-dialog/component';
+import { ImageViewerDialogModule } from '../../common/dialogs/image-viewer-dialog';
+import { ChangePasswordDialogComponent } from '../dialogs/change-password-dialog';
 import { PhoneMaskDirectiveModule } from '../../common/directives/phone-mask';
+import { AvatarEditorDialogComponent } from '../dialogs/avatar-editor-dialog';
+import { ProfileAvatarComponent } from './profile-avatar';
 import { CoreModule, MaterialModules } from '../../core';
+import { ProfilePageComponent } from './profile-page';
+import { ProfileCardComponent } from './profile-card';
 
 
 @NgModule({

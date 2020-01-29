@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { MonthActivityComponentsModule } from './components/components.module';
+import { MonthActivityComponentsModule } from './components';
 
 
 @NgModule({

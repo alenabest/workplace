@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ProfileComponentsModule } from './components/profile-components.module';
-import { ProfileDialogsModule } from './dialogs/profile-dialogs.module';
+import { ProfileComponentsModule } from './components';
 import { PROFILE_ROUTES } from './profile.routes';
+import { ProfileDialogsModule } from './dialogs';
 
 
 const modules = [

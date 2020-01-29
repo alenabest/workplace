@@ -9,7 +9,8 @@
 
   <div fxFlex>
     <div fxLayout="column" fxLayoutAlign="flex-start center">
-      <div fxLayout="column" fxLayoutAlign="center center" *ngFor="let activity of activities" class="activity-row"
+      <div fxLayout="column" fxLayoutAlign="center center" (click)="openViewDialog(activity)"
+           *ngFor="let activity of activities" class="activity-row"
            [ngStyle]="{
            'height': activity.height,
            'margin-bottom': activity.marginBottom,

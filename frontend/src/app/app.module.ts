@@ -6,17 +6,17 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 
-import { CoreComponentsModule } from './core/components/core-components.module';
 import { CustomHttpInterceptor } from './core/custom-http-interceptor';
 import { AppDateAdapter, MAT_DATE_FNS_DATE_FORMATS } from './app-date-adapter';
-import { ActivityModule } from './activity/activity.module';
-import { SettingsModule } from './settings/settings.module';
 import { environment } from '../environments/environment';
+import { CoreComponentsModule } from './core/components';
 import { StartupService } from './core/services/startup';
-import { ProfileModule } from './profile/profile.module';
 import { AppRoutingModule } from './app-routing.module';
-import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
+import { ActivityModule } from './activity';
+import { SettingsModule } from './settings';
+import { ProfileModule } from './profile';
+import { LoginModule } from './login';
 
 
 export function startupServiceFactory(startupService: StartupService) {

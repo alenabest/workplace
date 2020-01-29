@@ -36,6 +36,5 @@ export function formatMedia() {
 
 export function prepareObject(clsObject, plain) {
   const object = plainToClass(clsObject, plain);
-
   return classToPlain(object);
 }

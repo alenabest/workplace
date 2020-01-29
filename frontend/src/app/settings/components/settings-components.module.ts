@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { CoreModule, MaterialModules } from '../../core';
+import { SettingsPageComponent } from './settings-page';
 
 
 @NgModule({

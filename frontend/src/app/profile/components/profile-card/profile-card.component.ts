@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 
-import { ChangePasswordDialogComponent } from '../../dialogs/change-password-dialog/change-password-dialog.component';
+import { ChangePasswordDialogComponent } from '../../dialogs/change-password-dialog';
 import { FormValidationService } from '../../../core/services/form-validation';
 import { SnackBarService } from '../../../core/services/snack-bar';
 import { BaseDestroy } from '../../../common/models/base-destroy';

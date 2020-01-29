@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { PhoneMaskDirective } from './directive/phone-mask.directive';
+
+import { PhoneMaskDirective } from './directive';
 
 
 @NgModule({

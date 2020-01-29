@@ -41,7 +41,7 @@
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Проект</mat-label>
-        <mat-select formControlName="project" placeholder="Выберите проект" (selectionChange)="filterDirections()">
+        <mat-select formControlName="project" placeholder="Выберите проект" (selectionChange)="selectProject()">
           <mat-option *ngFor="let item of projects$ | async" [value]="item.id">
             {{ item.name }}
           </mat-option>
@@ -53,7 +53,7 @@
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Направление</mat-label>
-        <mat-select formControlName="direction" placeholder="Выберите направление" (selectionChange)="filterActivityTypes()">
+        <mat-select formControlName="direction" placeholder="Выберите направление" (selectionChange)="selectDirection()">
           <mat-option *ngFor="let item of directions$ | async" [value]="item.id">
             {{ item.name }}
           </mat-option>
@@ -86,6 +86,6 @@
   </mat-card-content>
   <mat-card-actions fxLayout="row" fxLayoutAlign="flex-end center" fxLayoutGap="8px">
     <button mat-button color="primary" type="button" mat-dialog-close>Отмена</button>
-    <button mat-raised-button color="primary" type="button">Сохранить</button>
+    <button mat-raised-button color="primary" type="button" [disabled]="activityForm.invalid" (click)="saveActivity()">Сохранить</button>
   </mat-card-actions>
 </mat-card>
