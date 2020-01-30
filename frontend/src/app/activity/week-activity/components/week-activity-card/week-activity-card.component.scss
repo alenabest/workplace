@@ -1,0 +1,135 @@
+.activity-container {
+  overflow: hidden;
+  padding: 8px;
+
+  .activity-header {
+    width: calc(100vw - 136px);
+    padding-right: 12px;
+    padding-left: 60px;
+
+    .header-cell {
+      background-color: #c8c8c8;
+      border-left: 1px solid #e4e4e4;
+      width: calc((100% - 5px) / 7);
+      height: 40px;
+
+      .header-cell-date {
+        display: block !important;
+      }
+      .header-cell-date-mobile {
+        display: none !important;
+      }
+    }
+  }
+
+  .activity-table {
+    height: calc(100vh - 164px);
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .hour-column {
+      flex: 1 1 60px;
+      box-sizing: border-box;
+      max-width: 60px;
+      min-width: 60px;
+    }
+
+    .hour-row {
+      border-bottom: 1px solid #e4e4e4;
+      width: calc(100vw - 136px);
+      padding-right: 12px;
+      color: #002430;
+      z-index: 1;
+
+      &.desktop {
+        display: flex !important;
+      }
+
+      &.mobile {
+        display: none !important;
+      }
+
+      .hour-cell {
+        place-content: center;
+        align-items: center;
+        cursor: default;
+        height: 60px;
+        width: 60px;
+
+        &.week {
+          border-left: 1px solid #e4e4e4;
+          width: calc((100% - 72px) / 7);
+          cursor: pointer;
+        }
+      }
+    }
+
+    .activity-column {
+      width: calc(100% / 7);
+      margin-top: 7px;
+
+      .activity-row {
+        border: 1px solid white;
+        word-break: break-all;
+        border-radius: 8px;
+        cursor: pointer;
+        z-index: 2;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    .activity-header {
+      width: calc(100vw - 16px);
+      padding-left: 30px;
+      padding-right: 0;
+
+      .header-cell {
+        width: calc(100%/ 7);
+
+        .header-cell-date {
+          display: none !important;
+        }
+        .header-cell-date-mobile {
+          display: block !important;
+        }
+      }
+    }
+
+    .activity-table {
+      height: calc(100vh - 170px);
+
+      .hour-column {
+        flex: 1 1 27px;
+        box-sizing: border-box;
+        max-width: 27px;
+        min-width: 27px;
+      }
+
+      .hour-row {
+        width: calc(100vw - 16px);
+        padding: 0;
+
+        &.desktop {
+          display: none !important;
+        }
+
+        &.mobile {
+          display: flex !important;
+        }
+
+        .hour-cell {
+          place-content: center;
+          align-items: center;
+          height: 60px;
+          width: 30px;
+
+          &.week {
+            width: calc(100%/ 7);
+          }
+        }
+      }
+    }
+  }
+}
+

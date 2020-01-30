@@ -5,11 +5,10 @@ import { Observable, of } from 'rxjs';
 
 import { ViewActivityDialogComponent } from '../../../dialogs/view-activity-dialog';
 import { ActivityDialogComponent } from '../../../dialogs/activity-dialog';
-import { BaseDestroy } from '../../../../common/models/base-destroy';
+import { BaseActivity } from '../../../../common/models/base-activity';
 import { ActivityModel } from '../../../../common/models/activity';
 import { SubjectService } from '../../../../core/services/subject';
-import { BackgroundColors, HourArray } from '../../../data';
-import { getRandomElement } from '../../../../common/utils';
+import { HourArray } from '../../../data';
 
 
 @Component({
@@ -17,7 +16,7 @@ import { getRandomElement } from '../../../../common/utils';
   templateUrl: './day-activity-card.component.html',
   styleUrls: ['./day-activity-card.component.scss']
 })
-export class DayActivityCardComponent extends BaseDestroy implements OnChanges {
+export class DayActivityCardComponent extends BaseActivity implements OnChanges {
   @Input() activities: ActivityModel[];
 
   scrollTop: number = 0;
@@ -31,7 +30,7 @@ export class DayActivityCardComponent extends BaseDestroy implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.activities && changes.activities.currentValue && changes.activities.currentValue !== changes.activities.previousValue) {
-      this.activities.map((item, index) => this.prepareStyle(item, index));
+      this.activities.map((item, index) => this.prepareStyle(this.activities, item, index));
       this.scrollTop = this.calculateScrollTop();
     }
   }
@@ -72,32 +71,5 @@ export class DayActivityCardComponent extends BaseDestroy implements OnChanges {
     }
 
     return this.activities[0].startHour * 60;
-  }
-
-  prepareStyle(item: ActivityModel, index: number): ActivityModel {
-    item.backgroundColor = getRandomElement<string>(BackgroundColors);
-    return this.calculateMargin(item, index);
-  }
-
-  calculateMargin(item: ActivityModel, index: number): ActivityModel {
-    item.marginBottom = this.calculateMarginBottom(item, index);
-
-    if (index === 0) {
-      item.marginTop = item.startHour * 60 + item.startMinute + 'px';
-    }
-
-    return item;
-  }
-
-  calculateMarginBottom(item: ActivityModel, index: number): string | number {
-    if (this.activities.length === 1 || (this.activities.length - 1) === index) {
-      return 0;
-    }
-
-    const nextItem = this.activities[index + 1];
-    const hours = nextItem.startHour - item.endHour;
-    const minutes = nextItem.startMinute - item.endMinute;
-
-    return hours * 60 + minutes + 'px';
   }
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { ViewActivityDialogComponent } from '../../dialogs/view-activity-dialog';
+import { DateFormatPipeModule } from '../../../common/pipes/date-format';
 import { DayActivityPageComponent } from './day-activity-page';
 import { DayActivityCardComponent } from './day-activity-card';
 import { ActivityComponentsModule } from '../../components';
@@ -18,7 +19,8 @@ import { ActivityDialogsModule } from '../../dialogs';
     CoreModule,
     MaterialModules,
     ActivityComponentsModule,
-    ActivityDialogsModule
+    ActivityDialogsModule,
+    DateFormatPipeModule
   ],
   entryComponents: [ViewActivityDialogComponent],
   exports: [DayActivityPageComponent]

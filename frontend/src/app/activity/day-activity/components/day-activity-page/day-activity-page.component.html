@@ -5,7 +5,7 @@
     </button>
 
     <ng-container>
-      <span (click)="currentDatepicker.open()">{{ currentDayLabel }}</span>
+      <span (click)="currentDatepicker.open()">{{ currentDate | dateFormat: dayFormat }}</span>
       <input matInput [matDatepicker]="currentDatepicker" class="display-none" (dateChange)="changeDay($event)">
       <mat-datepicker #currentDatepicker class="display-none"></mat-datepicker>
     </ng-container>

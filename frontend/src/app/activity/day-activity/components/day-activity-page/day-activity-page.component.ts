@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material';
 import { map, takeUntil } from 'rxjs/operators';
-import { ru as locale } from 'date-fns/locale';
-import { add, format } from 'date-fns';
 import { Observable } from 'rxjs';
+import { add} from 'date-fns';
 
 import { ActivityDayParam, ActivityModel } from '../../../../common/models/activity';
 import { ActivityService } from '../../../../core/services/activity';
@@ -22,9 +21,8 @@ import { DateValue } from '../../../data';
 export class DayActivityPageComponent extends BaseDestroy implements OnInit {
   isNotToday: boolean = false;
   currentDate: Date = new Date();
-  dateFormat: string = 'dd MMMM yyyy, cccc';
+  dayFormat: string = 'dd MMMM yyyy, cccc';
   activities$: Observable<ActivityModel[]>;
-  currentDayLabel: string = '';
   userId: number;
 
   constructor(private readonly activityService: ActivityService,
@@ -32,7 +30,6 @@ export class DayActivityPageComponent extends BaseDestroy implements OnInit {
               private readonly authService: AuthService) {
     super();
     this.userId = this.authService.currentUser.id;
-    this.currentDayLabel = this.getCurrentDayLabel();
     this.subscribeSubject();
   }
 
@@ -64,19 +61,8 @@ export class DayActivityPageComponent extends BaseDestroy implements OnInit {
     } else {
       this.currentDate = add(this.currentDate, { days });
     }
-    this.isNotToday = this.checkDate();
-    this.currentDayLabel = this.getCurrentDayLabel();
+    this.isNotToday = !compareDates(this.currentDate, new Date());
     this.getActivities();
-  }
-
-  checkDate(): boolean {
-    const current = format(this.currentDate, 'yyyy-MM-dd');
-    const today = format(new Date(), 'yyyy-MM-dd');
-    return current !== today;
-  }
-
-  getCurrentDayLabel(): string {
-    return format(this.currentDate, this.dateFormat, { locale });
   }
 
   private _getActivities(): Observable<ActivityModel[]> {
@@ -87,10 +73,6 @@ export class DayActivityPageComponent extends BaseDestroy implements OnInit {
   }
 
   private generateParams(): ActivityDayParam {
-    const params = new ActivityDayParam();
-    params.user = this.userId;
-    params.activityDate = format(this.currentDate, 'yyyy-MM-dd');
-
-    return params;
+    return new ActivityDayParam(this.userId, this.currentDate);
   }
 }
