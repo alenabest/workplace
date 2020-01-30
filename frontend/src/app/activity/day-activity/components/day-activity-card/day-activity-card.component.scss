@@ -8,8 +8,8 @@
     border: 1px solid white;
     border-radius: 8px;
     cursor: pointer;
-    padding: 4px;
     width: 100%;
+    z-index: 2;
 
     .activity-header {
       display: block;
@@ -41,6 +41,7 @@
     cursor: pointer;
     color: #002430;
     height: 60px;
+    z-index: 1;
   }
 
   @media screen and (max-width: 1000px) {
@@ -54,7 +55,6 @@
     }
 
     .activity-row {
-      padding: 0;
 
       .activity-header {
         display: none !important;

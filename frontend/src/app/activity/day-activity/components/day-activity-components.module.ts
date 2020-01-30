@@ -1,19 +1,26 @@
 import { NgModule } from '@angular/core';
 
-import { DayActivityPageComponent } from './day-activity-page/day-activity-page.component';
-import { DayActivityCardComponent } from './day-activity-card/day-activity-card.component';
-import { ActivityComponentsModule } from '../../components/activity-components.module';
+import { ViewActivityDialogComponent } from '../../dialogs/view-activity-dialog';
+import { DayActivityPageComponent } from './day-activity-page';
+import { DayActivityCardComponent } from './day-activity-card';
+import { ActivityComponentsModule } from '../../components';
 import { CoreModule, MaterialModules } from '../../../core';
+import { ActivityDialogsModule } from '../../dialogs';
 
 
 
 @NgModule({
-  declarations: [DayActivityPageComponent, DayActivityCardComponent],
+  declarations: [
+    DayActivityPageComponent,
+    DayActivityCardComponent
+  ],
   imports: [
     CoreModule,
     MaterialModules,
-    ActivityComponentsModule
+    ActivityComponentsModule,
+    ActivityDialogsModule
   ],
+  entryComponents: [ViewActivityDialogComponent],
   exports: [DayActivityPageComponent]
 })
 export class DayActivityComponentsModule { }

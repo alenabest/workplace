@@ -3,8 +3,8 @@ import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { Observable, of } from 'rxjs';
 
-import { ImageViewerDialogComponent } from '../../../common/dialogs/image-viewer-dialog/component/image-viewer-dialog.component';
-import { AvatarEditorDialogComponent } from '../../dialogs/avatar-editor-dialog/avatar-editor-dialog.component';
+import { ImageViewerDialogComponent } from '../../../common/dialogs/image-viewer-dialog/component';
+import { AvatarEditorDialogComponent } from '../../dialogs/avatar-editor-dialog';
 import { SnackBarService } from '../../../core/services/snack-bar';
 import { BaseDestroy } from '../../../common/models/base-destroy';
 import { UserService } from '../../../core/services/user';
@@ -68,7 +68,7 @@ export class ProfileAvatarComponent extends BaseDestroy {
   uploadAvatar(avatar: Blob): Observable<string> {
     return this.userService.uploadAvatar(avatar, this.userId)
       .pipe(
-        map(result => result.url)
+        map(result => result.avatar)
       );
   }
 

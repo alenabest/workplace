@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
-import { AvatarEditorDialogComponent } from './avatar-editor-dialog/avatar-editor-dialog.component';
+import { ChangePasswordDialogComponent } from './change-password-dialog';
+import { AvatarEditorDialogComponent } from './avatar-editor-dialog';
 import { CoreModule, MaterialModules } from '../../core';
-import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 
 
 const dialogs = [

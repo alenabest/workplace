@@ -9,7 +9,8 @@
 
   <div fxFlex>
     <div fxLayout="column" fxLayoutAlign="flex-start center">
-      <div fxLayout="column" fxLayoutAlign="center center" *ngFor="let activity of activities" class="activity-row"
+      <div fxLayout="column" fxLayoutAlign="space-around center" (click)="openViewDialog(activity)"
+           *ngFor="let activity of activities" class="activity-row"
            [ngStyle]="{
            'height': activity.height,
            'margin-bottom': activity.marginBottom,
@@ -20,11 +21,11 @@
           <span class="label">Время:</span>
           <span>{{ activity.start }} - {{activity.end}}</span>
           <span class="label" *ngIf="activity.project">Проект:</span>
-          <span *ngIf="activity.project">{{ activity.project }}</span>
+          <span *ngIf="activity.project">{{ activity.project.name }}</span>
           <span class="label" *ngIf="activity.direction">Направление:</span>
-          <span *ngIf="activity.direction">{{ activity.direction }}</span>
+          <span *ngIf="activity.direction">{{ activity.direction.name }}</span>
           <span class="label" *ngIf="activity.type">Вид работы:</span>
-          <span *ngIf="activity.type">{{ activity.type }}</span>
+          <span *ngIf="activity.type">{{ activity.type.name }}</span>
         </span>
         <div class="activity-description">{{ activity.description }}</div>
       </div>

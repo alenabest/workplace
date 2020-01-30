@@ -1,7 +1,8 @@
-import { ActivityTypeModel, ProjectModel, DirectionModel } from '../dictionary';
-import { UserModel } from '../user';
 import { Transform } from 'class-transformer';
-import { formatDateToClass, formatDateToPlain } from '../../../core/helpers';
+
+import { ActivityTypeModel, ProjectModel, DirectionModel } from '../dictionary';
+import { formatDateToClass, formatDateToPlain, formatObjectToField } from '../../../core/helpers';
+import { UserModel } from '../user';
 
 
 export class ActivityModel {
@@ -10,6 +11,7 @@ export class ActivityModel {
       this.activityDate = this.currentDate;
     }
   }
+
   id: number;
   start: string;
   end: string;
@@ -27,10 +29,24 @@ export class ActivityModel {
   @Transform(formatDateToClass(), { toClassOnly: true })
   activityDate?: Date | string;
 
-  project: ProjectModel | number | string;
-  direction: DirectionModel | number | string;
-  type: ActivityTypeModel | number | string;
+  @Transform(formatObjectToField('id'), { toPlainOnly: true })
+  project: ProjectModel | number;
+
+  @Transform(formatObjectToField('id'), { toPlainOnly: true })
+  direction: DirectionModel | number;
+
+  @Transform(formatObjectToField('id'), { toPlainOnly: true })
+  type: ActivityTypeModel | number;
+
   user: UserModel | number;
+}
+
+export class ActivityValidation {
+  @Transform(formatDateToPlain(), { toPlainOnly: true })
+  activityDate: string;
+  start: string;
+  end: string;
+  ok: boolean;
 }
 
 export class ActivityDayParam {

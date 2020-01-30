@@ -1,11 +1,21 @@
 import { format } from 'date-fns';
 import { classToPlain, plainToClass } from 'class-transformer';
+import { ClassType } from 'class-transformer/ClassTransformer';
 
 
-export function serializeType<T>(object: T) {
-  return function() {
-    return object;
-  };
+export class IResponse<T> {
+  constructor(public count: number,
+              public next: string,
+              public previous: string,
+              public results: Array<T>,
+              public all?: number) {
+  }
+}
+
+export function serializeResponse<T>(cls: ClassType<T>, response: IResponse<T>): IResponse<T> {
+    response.results = plainToClass(cls, response.results);
+
+    return response;
 }
 
 export function formatDateToPlain(fullFormat?: boolean) {
@@ -20,8 +30,15 @@ export function formatDateToClass() {
   return value => value ? new Date(value) : value;
 }
 
+export function formatObjectToField(field: string) {
+  return value => value ? value[field] : value;
+}
+
+export function formatMedia() {
+  return value => value ? value.replace('media/', '') : value;
+}
+
 export function prepareObject(clsObject, plain) {
   const object = plainToClass(clsObject, plain);
-
   return classToPlain(object);
 }

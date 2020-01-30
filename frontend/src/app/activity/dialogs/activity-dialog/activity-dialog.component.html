@@ -15,7 +15,7 @@
 
         <mat-form-field appearance="outline" floatLabel="always" class="time-field">
           <mat-label>С</mat-label>
-          <input matInput formControlName="start" placeholder="ЧЧ:ММ" required>
+          <input matInput formControlName="start" placeholder="ЧЧ:ММ" timeMask required>
           <mat-error>
             <validation-error [control]="start"></validation-error>
           </mat-error>
@@ -23,7 +23,7 @@
 
         <mat-form-field appearance="outline" floatLabel="always" class="time-field">
           <mat-label>По</mat-label>
-          <input matInput formControlName="end" placeholder="ЧЧ:ММ" required>
+          <input matInput formControlName="end" placeholder="ЧЧ:ММ" timeMask required>
           <mat-error>
             <validation-error [control]="end"></validation-error>
           </mat-error>
@@ -41,8 +41,9 @@
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Проект</mat-label>
-        <mat-select formControlName="project" placeholder="Выберите проект" (selectionChange)="filterDirections()">
-          <mat-option *ngFor="let item of projects$ | async" [value]="item.id">
+        <mat-select formControlName="project" placeholder="Выберите проект" [compareWith]="defaultEqual"
+                    (selectionChange)="selectProject()">
+          <mat-option *ngFor="let item of projects$ | async" [value]="item">
             {{ item.name }}
           </mat-option>
         </mat-select>
@@ -53,8 +54,9 @@
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Направление</mat-label>
-        <mat-select formControlName="direction" placeholder="Выберите направление" (selectionChange)="filterActivityTypes()">
-          <mat-option *ngFor="let item of directions$ | async" [value]="item.id">
+        <mat-select formControlName="direction" placeholder="Выберите направление" [compareWith]="defaultEqual"
+                    (selectionChange)="selectDirection()">
+          <mat-option *ngFor="let item of directions$ | async" [value]="item">
             {{ item.name }}
           </mat-option>
         </mat-select>
@@ -65,8 +67,8 @@
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Вид работы</mat-label>
-        <mat-select formControlName="type" placeholder="Выберите вид работы">
-          <mat-option *ngFor="let item of activityTypes$ | async" [value]="item.id">
+        <mat-select formControlName="type" placeholder="Выберите вид работы" [compareWith]="defaultEqual">
+          <mat-option *ngFor="let item of activityTypes$ | async" [value]="item">
             {{ item.name }}
           </mat-option>
         </mat-select>
@@ -86,6 +88,6 @@
   </mat-card-content>
   <mat-card-actions fxLayout="row" fxLayoutAlign="flex-end center" fxLayoutGap="8px">
     <button mat-button color="primary" type="button" mat-dialog-close>Отмена</button>
-    <button mat-raised-button color="primary" type="button">Сохранить</button>
+    <button mat-raised-button color="primary" type="button" [disabled]="activityForm.invalid" (click)="saveActivity()">Сохранить</button>
   </mat-card-actions>
 </mat-card>

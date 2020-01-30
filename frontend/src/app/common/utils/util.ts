@@ -1,4 +1,5 @@
 import { HttpParams } from '@angular/common/http';
+import { format } from 'date-fns';
 
 
 export function addLocalStorageItem(key: string, value: string, reset?: boolean) {
@@ -17,6 +18,8 @@ export function generateQuery(params: object): HttpParams {
     return null;
   }
 
+  params = clearNullFields(params);
+
   let newParams: HttpParams = new HttpParams();
   Object.keys(params).forEach(key => newParams = newParams.append(key, params[key]));
 
@@ -25,4 +28,27 @@ export function generateQuery(params: object): HttpParams {
 
 export function isEmptyObject(obj) {
   return !(obj && Object.keys(obj).length > 0);
+}
+
+export function clearNullFields(clearingObject: object): object {
+  const newObject = clearingObject;
+  Object.keys(newObject).forEach(key => {
+    if (!newObject[key]) {
+      delete newObject[key];
+    }
+  });
+
+  return newObject;
+}
+
+export function getTimeMessage(time: string, type: string, status: string): string {
+  if (time) {
+    return `Время ${type} должно быть не ${status} ${time}.`;
+  }
+
+  return '';
+}
+
+export function compareDates(date1: Date, date2: Date): boolean {
+  return format(date1, 'yyyy-MM-dd') === format(date2, 'yyyy-MM-dd');
 }

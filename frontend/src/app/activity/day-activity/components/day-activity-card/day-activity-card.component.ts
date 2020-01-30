@@ -1,6 +1,13 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
+import { Observable, of } from 'rxjs';
 
+import { ViewActivityDialogComponent } from '../../../dialogs/view-activity-dialog';
+import { ActivityDialogComponent } from '../../../dialogs/activity-dialog';
+import { BaseDestroy } from '../../../../common/models/base-destroy';
 import { ActivityModel } from '../../../../common/models/activity';
+import { SubjectService } from '../../../../core/services/subject';
 import { BackgroundColors, HourArray } from '../../../data';
 import { getRandomElement } from '../../../../common/utils';
 
@@ -10,14 +17,16 @@ import { getRandomElement } from '../../../../common/utils';
   templateUrl: './day-activity-card.component.html',
   styleUrls: ['./day-activity-card.component.scss']
 })
-export class DayActivityCardComponent implements OnChanges {
+export class DayActivityCardComponent extends BaseDestroy implements OnChanges {
   @Input() activities: ActivityModel[];
 
   scrollTop: number = 0;
 
   hourArray = HourArray;
 
-  constructor() {
+  constructor(private dialog: MatDialog,
+              private readonly subjectService: SubjectService) {
+    super();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -25,6 +34,32 @@ export class DayActivityCardComponent implements OnChanges {
       this.activities.map((item, index) => this.prepareStyle(item, index));
       this.scrollTop = this.calculateScrollTop();
     }
+  }
+
+  openViewDialog(activity: ActivityModel) {
+    this.dialog.open(ViewActivityDialogComponent, {data: activity})
+      .afterClosed()
+      .pipe(
+        switchMap(result => {
+          if (result) {
+            return this.openUpdateActivityDialog(activity);
+          }
+          return of();
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((result: Date) => this.reloadActivityPage(result));
+  }
+
+  reloadActivityPage(date: Date) {
+    if (date) {
+      this.subjectService.getActivitySubject.next(date);
+    }
+  }
+
+  openUpdateActivityDialog(activity: ActivityModel): Observable<any | undefined> {
+    return this.dialog.open(ActivityDialogComponent, {disableClose: true, data: activity})
+      .afterClosed();
   }
 
   addActivity(hour: string) {

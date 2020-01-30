@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { MonthActivityModule } from './month-activity/month-activity.module';
-import { WeekActivityModule } from './week-activity/week-activity.module';
-import { DayActivityModule } from './day-activity/day-activity.module';
+import { MonthActivityModule } from './month-activity';
+import { WeekActivityModule } from './week-activity';
 import { ACTIVITY_ROUTES } from './activity.routes';
+import { DayActivityModule } from './day-activity';
 
 
 const modules = [
