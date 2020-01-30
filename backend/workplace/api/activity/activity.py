@@ -44,7 +44,8 @@ def validate_activity(request):
     activity_date = request.data.get('activityDate')
     start = request.data.get('start')
     end = request.data.get('end')
-    activities = Activity.objects.filter(user=user, activityDate=activity_date)
+    activity_id = request.data.get('id', None)
+    activities = Activity.objects.filter(user=user, activityDate=activity_date).exclude(id=activity_id)
     previous_activity = activities.filter(end__gt=start, start__lte=start).first()
     next_activity = activities.filter(start__lt=end, end__gte=end).first()
     if previous_activity or next_activity:
