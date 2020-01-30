@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 import { IResponse, serializeResponse } from '../../helpers';
 import { generateQuery } from '../../../common/utils';
+import { DictionaryParamModel } from '../../../common/models/dictionary';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ import { generateQuery } from '../../../common/utils';
 export class DictionaryService {
   constructor(protected http: HttpClient) { }
 
-  getDictionary<T>(dictionaryApi: string, cls: ClassType<T>, params?: HttpParams): Observable<IResponse<T>> {
+  getDictionary<T>(dictionaryApi: string, cls: ClassType<T>, params?: DictionaryParamModel | HttpParams): Observable<IResponse<T>> {
     params = generateQuery(params);
 
     return this.http

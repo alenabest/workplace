@@ -30,6 +30,10 @@ export function formatDateToClass() {
   return value => value ? new Date(value) : value;
 }
 
+export function formatObjectToField(field: string) {
+  return value => value ? value[field] : value;
+}
+
 export function formatMedia() {
   return value => value ? value.replace('media/', '') : value;
 }

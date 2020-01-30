@@ -78,39 +78,44 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
     }
   }
 
+  defaultEqual(dir1: any, dir2: any): boolean {
+    if (dir1 && dir2) {
+      return dir1.id === dir2.id;
+    } else {
+      return false;
+    }
+  }
+
   ngOnInit() {
     this.activityForm.patchValue(this.activity);
     this.getDictionaries();
   }
 
   getDictionaries() {
-    const params = new DictionaryParamModel(this.userId);
-    this.getProjects(params);
-    this.getDirections(params);
-    this.getActivityTypes(params);
+    this.getProjects();
+    this.getDirections();
+    this.getActivityTypes();
   }
 
   selectProject() {
-    const params = new DictionaryParamModel(this.userId, this.project.value);
-    this.getDirections(params);
-    this.getActivityTypes(params);
+    this.getDirections();
+    this.getActivityTypes();
   }
 
   selectDirection() {
-    const params = new DictionaryParamModel(this.userId, this.project.value, this.direction.value);
-    this.getActivityTypes(params);
+    this.getActivityTypes();
   }
 
-  getProjects(params: DictionaryParamModel) {
-    this.projects$ = this.getDictionary('project', ProjectModel, params);
+  getProjects() {
+    this.projects$ = this.getDictionary('project', ProjectModel);
   }
 
-  getDirections(params: DictionaryParamModel) {
-    this.directions$ = this.getDictionary('direction', DirectionModel, params);
+  getDirections() {
+    this.directions$ = this.getDictionary('direction', DirectionModel);
   }
 
-  getActivityTypes(params: DictionaryParamModel) {
-    this.activityTypes$ = this.getDictionary('activity-type', ActivityTypeModel, params);
+  getActivityTypes() {
+    this.activityTypes$ = this.getDictionary('activity-type', ActivityTypeModel);
   }
 
   saveActivity() {
@@ -157,11 +162,17 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
     return this.activityService.updateActivity(this.activity.id, this.activityForm.value);
   }
 
-  getDictionary<T>(api: string, cls: ClassType<T>, params?: any): Observable<T[]> {
-    return this.dictionaryService.getDictionary<T>(api, cls, params)
+  getDictionary<T>(api: string, cls: ClassType<T>): Observable<T[]> {
+    return this.dictionaryService.getDictionary<T>(api, cls, this.generateParams())
       .pipe(
         map(response => response.results)
       );
+  }
+
+  generateParams(): DictionaryParamModel {
+    const projects = this.project.value ? this.project.value.id : null;
+    const directions = this.direction.value ? this.direction.value.id : null;
+    return new DictionaryParamModel(this.userId, projects, directions);
   }
 
   getActivityForm(): FormGroup {
@@ -173,7 +184,8 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
       project: [null],
       direction: [null],
       type: [null],
-      task: [null]
+      task: [null],
+      id: [null]
     });
   }
 }
