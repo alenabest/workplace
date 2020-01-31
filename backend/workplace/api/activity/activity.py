@@ -19,7 +19,7 @@ class ActivityFilter(FilterSet):
 
 
 class ActivityList(generics.ListCreateAPIView):
-    queryset = Activity.objects.all()
+    queryset = Activity.objects.all().order_by('activityDate', 'start')
     serializer_class = ActivitySerializer
     filter_class = ActivityFilter
 
@@ -53,7 +53,7 @@ def get_week_activity(request):
 def get_week_activity_list(activities, date_list):
     week_activity_list = list()
     for date_item in date_list:
-        day_activities = activities.filter(activityDate=date_item).all()
+        day_activities = activities.filter(activityDate=date_item).all().order_by('start')
         week_activity_list.append({
             'day': date_list.index(date_item),
             'activities': ActivitySerializer(day_activities, many=True).data
