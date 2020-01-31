@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material';
-import { add, endOfWeek, startOfWeek } from 'date-fns';
 import { map, takeUntil } from 'rxjs/operators';
-import { ru as locale } from 'date-fns/locale';
 import { Observable } from 'rxjs';
+import { add} from 'date-fns';
 
 import { WeekActivityModel } from '../../../../common/models/activity';
 import { WeekLabelModel } from '../../../../common/models/dictionary';
 import { WeekActivityParam } from '../../../../common/models/params';
 import { ActivityService } from '../../../../core/services/activity';
-import { BaseDestroy } from '../../../../common/models/base-destroy';
 import { SubjectService } from '../../../../core/services/subject';
+import { BaseWeekActivity } from '../../../../common/models/base';
 import { AuthService } from '../../../../core/services/auth';
-import { DateValue, WeekArray } from '../../../data';
+import { DateValue } from '../../../data';
 
 
 @Component({
@@ -21,7 +20,7 @@ import { DateValue, WeekArray } from '../../../data';
   styleUrls: ['./week-activity-page.component.scss']
 })
 
-export class WeekActivityPageComponent extends BaseDestroy implements OnInit {
+export class WeekActivityPageComponent extends BaseWeekActivity implements OnInit {
   weekFormat: string = 'dd MMMM yyyy';
   currentDate: Date = new Date();
   weekArray: WeekLabelModel[];
@@ -56,23 +55,9 @@ export class WeekActivityPageComponent extends BaseDestroy implements OnInit {
     this.weekActivities$ = this._getWeekActivity();
   }
 
-  getMondaySunday(): Date[] {
-    const sunday = endOfWeek(this.currentDate, { locale });
-    const monday = startOfWeek(this.currentDate, { locale });
-
-    return [monday, sunday];
-  }
-
-  getWeekArray(): WeekLabelModel[] {
-    const weekArray = WeekArray;
-    weekArray.map((item, index) => item.date = add(this.monday, { days: index }));
-
-    return weekArray;
-  }
-
   prepareWeekData() {
-    [this.monday, this.sunday] = this.getMondaySunday();
-    this.weekArray = this.getWeekArray();
+    [this.monday, this.sunday] = this.getMondaySunday(this.currentDate);
+    this.weekArray = this.getWeekArray(this.monday);
   }
 
   changeWeek(event: MatDatepickerInputEvent<any> | DateValue, days?: number) {

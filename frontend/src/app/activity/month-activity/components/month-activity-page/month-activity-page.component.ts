@@ -21,10 +21,10 @@ export class MonthActivityPageComponent extends BaseMonthActivity implements OnI
 
   constructor() {
     super();
-    this.prepareMonthDate();
+    this.prepareMonthData();
   }
 
-  prepareMonthDate() {
+  prepareMonthData() {
     [this.start, this.end] = this.getStartAndEndDate(this.currentDate);
     this.weekList = this.getWeekList(this.start, this.end);
   }
@@ -35,7 +35,7 @@ export class MonthActivityPageComponent extends BaseMonthActivity implements OnI
     } else {
       this.currentDate = addMonths(this.currentDate, count);
     }
-    this.prepareMonthDate();
+    this.prepareMonthData();
   }
 
   ngOnInit() {

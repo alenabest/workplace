@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { ActivityModel } from '../../../../common/models/activity';
@@ -10,7 +10,8 @@ import { HourArray } from '../../../data';
 @Component({
   selector: 'day-activity-card',
   templateUrl: './day-activity-card.component.html',
-  styleUrls: ['./day-activity-card.component.scss']
+  styleUrls: ['./day-activity-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DayActivityCardComponent extends BaseActivity implements OnChanges {
   @Input() activities: ActivityModel[];
