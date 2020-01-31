@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDatepickerInputEvent } from '@angular/material';
 import { ru as locale } from 'date-fns/locale';
 import { add, lastDayOfWeek } from 'date-fns';
+import { Observable } from 'rxjs';
 
+import { WeekActivityModel } from '../../../../common/models/activity';
+import { WeekLabelModel } from '../../../../common/models/dictionary';
+import { WeekActivityParam } from '../../../../common/models/params';
 import { ActivityService } from '../../../../core/services/activity';
 import { SubjectService } from '../../../../core/services/subject';
 import { AuthService } from '../../../../core/services/auth';
-import { MatDatepickerInputEvent } from '@angular/material';
 import { DateValue, WeekArray } from '../../../data';
-import { Observable } from 'rxjs';
-import { ActivityWeekModel } from '../../../../common/models/activity';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -16,21 +19,22 @@ import { ActivityWeekModel } from '../../../../common/models/activity';
   templateUrl: './week-activity-page.component.html',
   styleUrls: ['./week-activity-page.component.scss']
 })
+
 export class WeekActivityPageComponent implements OnInit {
   weekFormat: string = 'dd MMMM yyyy';
   currentDate: Date = new Date();
-  weekArray = WeekArray;
+  weekArray: WeekLabelModel[];
+  userId: number;
   monday: Date;
   sunday: Date;
-  userId: number;
 
-  weekActivities$: Observable<ActivityWeekModel[]>;
+  weekActivities$: Observable<WeekActivityModel[]>;
 
   constructor(private readonly activityService: ActivityService,
               private readonly subjectService: SubjectService,
               private readonly authService: AuthService) {
     this.userId = this.authService.currentUser.id;
-    this.getWeeks();
+    this.prepareWeekData();
   }
 
   ngOnInit() {
@@ -38,12 +42,26 @@ export class WeekActivityPageComponent implements OnInit {
   }
 
   getWeekActivity() {
+    this.weekActivities$ = this._getWeekActivity();
   }
 
-  getWeeks() {
-    this.sunday = lastDayOfWeek(this.currentDate, { locale });
-    this.monday = add(this.sunday, { days: -6 });
-    this.weekArray.map((item, index) => item.date = add(this.monday, {days: index}));
+  getMondaySunday(): Date[] {
+    const sunday = lastDayOfWeek(this.currentDate, { locale });
+    const monday = add(sunday, { days: -6 });
+
+    return [monday, sunday];
+  }
+
+  getWeekArray(): WeekLabelModel[] {
+    const weekArray = WeekArray;
+    weekArray.map((item, index) => item.date = add(this.monday, { days: index }));
+
+    return weekArray;
+  }
+
+  prepareWeekData() {
+    [this.monday, this.sunday] = this.getMondaySunday();
+    this.weekArray = this.getWeekArray();
   }
 
   changeWeek(event: MatDatepickerInputEvent<any> | DateValue, days?: number) {
@@ -52,6 +70,14 @@ export class WeekActivityPageComponent implements OnInit {
     } else {
       this.currentDate = add(this.currentDate, { days });
     }
-    this.getWeeks();
+    this.prepareWeekData();
+    this.getWeekActivity();
+  }
+
+  _getWeekActivity(): Observable<WeekActivityModel[]> {
+    return this.activityService.getWeekActivity(new WeekActivityParam(this.userId, this.monday, this.sunday))
+      .pipe(
+        map(response => response.results)
+      );
   }
 }

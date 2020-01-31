@@ -4,10 +4,11 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { add} from 'date-fns';
 
-import { ActivityDayParam, ActivityModel } from '../../../../common/models/activity';
 import { ActivityService } from '../../../../core/services/activity';
 import { BaseDestroy } from '../../../../common/models/base-destroy';
+import { DayActivityParam } from '../../../../common/models/params';
 import { SubjectService } from '../../../../core/services/subject';
+import { ActivityModel } from '../../../../common/models/activity';
 import { AuthService } from '../../../../core/services/auth';
 import { compareDates } from '../../../../common/utils';
 import { DateValue } from '../../../data';
@@ -72,7 +73,7 @@ export class DayActivityPageComponent extends BaseDestroy implements OnInit {
       );
   }
 
-  private generateParams(): ActivityDayParam {
-    return new ActivityDayParam(this.userId, this.currentDate);
+  private generateParams(): DayActivityParam {
+    return new DayActivityParam(this.userId, this.currentDate);
   }
 }

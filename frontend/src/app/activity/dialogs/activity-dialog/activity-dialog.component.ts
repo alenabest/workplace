@@ -5,10 +5,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
-import { ActivityTypeModel, DictionaryParamModel, DirectionModel, ProjectModel } from '../../../common/models/dictionary';
+import { ActivityTypeModel, DirectionModel, ProjectModel } from '../../../common/models/dictionary';
 import { CustomValidators } from '../../../core/services/form-validation/custom-validators';
 import { ActivityModel, ActivityValidation } from '../../../common/models/activity';
 import { DictionaryService } from '../../../core/services/dictionary';
+import { DictionaryParamModel } from '../../../common/models/params';
 import { SnackBarService } from '../../../core/services/snack-bar';
 import { BaseDestroy } from '../../../common/models/base-destroy';
 import { ActivityService } from '../../../core/services/activity';

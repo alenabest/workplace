@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { BaseActivity } from '../../../../common/models/base-activity';
-import { ActivityWeekModel } from '../../../../common/models/activity';
+import { WeekActivityModel } from '../../../../common/models/activity';
 import { HourArray, HourArrayMobile } from '../../../data';
 import { isOnChange } from '../../../../common/utils';
 
@@ -12,8 +12,9 @@ import { isOnChange } from '../../../../common/utils';
   styleUrls: ['./week-activity-card.component.scss']
 })
 export class WeekActivityCardComponent extends BaseActivity implements OnChanges {
-  @Input() weekActivities: ActivityWeekModel[];
+  @Input() weekActivities: WeekActivityModel[];
   @Input() weekArray: { label: string, date: Date }[];
+
   weekFormat = 'dd.MM.yy';
   weekFormatMobile = 'dd';
   scrollTop: number = 0;

@@ -18,13 +18,7 @@ export class ActivityTypeModel {
   user: number;
 }
 
-export class DictionaryParamModel {
-  constructor(userId: number, projects?: number, directions?: number) {
-    this.user = userId;
-    this.projects = projects;
-    this.directions = directions;
-  }
-  user: number;
-  projects: number;
-  directions: number;
+export class WeekLabelModel {
+  label: string;
+  date: Date;
 }
