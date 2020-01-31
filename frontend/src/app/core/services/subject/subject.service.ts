@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class SubjectService {
-  getActivitySubject: Subject<Date> = new Subject<Date>();
+  getActivitySubject: Subject<boolean> = new Subject<boolean>();
 
   constructor() { }
 }

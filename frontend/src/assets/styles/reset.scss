@@ -63,3 +63,7 @@ mat-dialog-container {
 .cdk-overlay-pane {
   max-width: 95vw !important;
 }
+
+textarea.mat-input-element {
+  min-height: 20px;
+}

@@ -9,7 +9,7 @@ export class TimeMaskDirective implements OnDestroy {
 
   maskInputController;
 
-  constructor(private element: ElementRef) {
+  constructor(private element?: ElementRef) {
     this.maskInputController = textMask.maskInput({
       inputElement: this.element.nativeElement,
       mask: this.timeMask,

@@ -1,7 +1,7 @@
-import { Transform } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 
-import { ActivityTypeModel, ProjectModel, DirectionModel } from '../dictionary';
 import { formatDateToClass, formatDateToPlain, formatObjectToField } from '../../../core/helpers';
+import { ActivityTypeModel, DirectionModel, ProjectModel } from '../dictionary';
 import { UserModel } from '../user';
 
 
@@ -41,6 +41,13 @@ export class ActivityModel {
   user: UserModel | number;
 }
 
+export class WeekActivityModel {
+  day: number;
+
+  @Type(() => ActivityModel)
+  activities: ActivityModel[];
+}
+
 export class ActivityValidation {
   @Transform(formatDateToPlain(), { toPlainOnly: true })
   activityDate: string;
@@ -49,7 +56,3 @@ export class ActivityValidation {
   ok: boolean;
 }
 
-export class ActivityDayParam {
-  user: number;
-  activityDate: string;
-}

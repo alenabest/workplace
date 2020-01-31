@@ -4,7 +4,8 @@ import { plainToClass } from 'class-transformer';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { ActivityDayParam, ActivityModel, ActivityValidation } from '../../../common/models/activity';
+import { ActivityModel, ActivityValidation, WeekActivityModel } from '../../../common/models/activity';
+import { DayActivityParam, WeekActivityParam } from '../../../common/models/params';
 import { IResponse, prepareObject, serializeResponse } from '../../helpers';
 import { generateQuery } from '../../../common/utils';
 
@@ -18,13 +19,21 @@ export class ActivityService {
   constructor(protected http: HttpClient) {
   }
 
-  getDayActivity(params: ActivityDayParam | HttpParams): Observable<IResponse<ActivityModel>> {
+  getDayActivity(params: DayActivityParam | HttpParams): Observable<IResponse<ActivityModel>> {
     params = generateQuery(params);
 
     return this.http
       .get<IResponse<ActivityModel>>(`${ACTIVITY_API}`, { params })
       .pipe(
         map(results => serializeResponse(ActivityModel, results))
+      );
+  }
+
+  getWeekActivity(params: WeekActivityParam): Observable<IResponse<WeekActivityModel>> {
+    return this.http
+      .post<IResponse<WeekActivityModel>>(`${ACTIVITY_API}week/`, params)
+      .pipe(
+        map(results => serializeResponse(WeekActivityModel, results))
       );
   }
 

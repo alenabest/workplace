@@ -25,12 +25,12 @@ export class AddActivityComponent extends BaseDestroy {
       .pipe(
         takeUntil(this.destroy$)
       )
-      .subscribe((result: Date) => this.reloadActivityPage(result));
+      .subscribe((result) => this.reloadActivityPage(result));
   }
 
-  reloadActivityPage(date: Date) {
-    if (date) {
-      this.subjectService.getActivitySubject.next(date);
+  reloadActivityPage(result) {
+    if (result) {
+      this.subjectService.getActivitySubject.next(result);
     }
   }
 }

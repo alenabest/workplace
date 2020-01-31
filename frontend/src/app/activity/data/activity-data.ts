@@ -4,6 +4,22 @@ export const HourArray: string[] = [
   '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
 ];
 
+export const HourArrayMobile: string[] = [
+  '00', '01', '02', '03', '04', '05', '06', '07',
+  '08', '09', '10', '11', '12', '13', '14', '15',
+  '16', '17', '18', '19', '20', '21', '22', '23'
+];
+
+export const WeekArray: { label: string, date: Date }[] = [
+  { label: 'ПН', date: null },
+  { label: 'ВТ', date: null },
+  { label: 'СР', date: null },
+  { label: 'ЧТ', date: null },
+  { label: 'ПТ', date: null },
+  { label: 'СБ', date: null },
+  { label: 'Вс', date: null }
+];
+
 export const BackgroundColors: string[] = [
   '#f9a98d',
   '#ffd8a1',

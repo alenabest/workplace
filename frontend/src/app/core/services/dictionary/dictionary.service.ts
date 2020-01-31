@@ -4,9 +4,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+import { DictionaryParamModel } from '../../../common/models/params';
 import { IResponse, serializeResponse } from '../../helpers';
 import { generateQuery } from '../../../common/utils';
-import { DictionaryParamModel } from '../../../common/models/dictionary';
 
 @Injectable({
   providedIn: 'root'

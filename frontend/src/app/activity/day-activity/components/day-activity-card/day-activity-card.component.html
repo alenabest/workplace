@@ -1,4 +1,4 @@
-<div fxLayout="row" class="activity-container" [scrollTop]="scrollTop">
+<div fxLayout="row" class="activity-container" [scrollTop]="scrollTop" *ngIf="activities">
   <div fxFlex="64px">
     <div fxLayout="column">
       <div fxLayoutAlign="flex-start center" *ngFor="let hour of hourArray" class="hour-row" (click)="addActivity(hour)">
@@ -9,7 +9,7 @@
 
   <div fxFlex>
     <div fxLayout="column" fxLayoutAlign="flex-start center">
-      <div fxLayout="column" fxLayoutAlign="space-around center" (click)="openViewDialog(activity)"
+      <div fxLayout="column" fxLayoutAlign="center center" (click)="openViewDialog(activity)"
            *ngFor="let activity of activities" class="activity-row"
            [ngStyle]="{
            'height': activity.height,
@@ -32,3 +32,7 @@
     </div>
   </div>
 </div>
+<div fxLayout="row" class="activity-container" fxLayoutAlign="center center" *ngIf="!activities">
+  <mat-spinner color="primary" [diameter]="80" [strokeWidth]="2"></mat-spinner>
+</div>
+
