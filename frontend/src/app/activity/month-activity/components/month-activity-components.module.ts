@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { MonthActivityPageComponent } from './month-activity-page';
 import { CoreModule, MaterialModules } from '../../../core';
+import { DateFormatPipeModule } from '../../../common/pipes/date-format';
+import { ActivityComponentsModule } from '../../components';
 
 
 
@@ -9,7 +11,9 @@ import { CoreModule, MaterialModules } from '../../../core';
   declarations: [MonthActivityPageComponent],
   imports: [
     CoreModule,
-    MaterialModules
+    MaterialModules,
+    DateFormatPipeModule,
+    ActivityComponentsModule
   ],
   exports: [MonthActivityPageComponent]
 })

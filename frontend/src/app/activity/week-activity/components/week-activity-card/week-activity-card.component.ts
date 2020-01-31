@@ -1,9 +1,9 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { BaseActivity } from '../../../../common/models/base-activity';
 import { WeekActivityModel } from '../../../../common/models/activity';
 import { SubjectService } from '../../../../core/services/subject';
+import { BaseActivity } from '../../../../common/models/base';
 import { HourArray, HourArrayMobile } from '../../../data';
 import { isOnChange } from '../../../../common/utils';
 

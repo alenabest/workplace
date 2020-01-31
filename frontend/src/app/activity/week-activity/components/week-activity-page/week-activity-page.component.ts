@@ -5,11 +5,11 @@ import { map, takeUntil } from 'rxjs/operators';
 import { ru as locale } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 
-import { BaseDestroy } from '../../../../common/models/base-destroy';
 import { WeekActivityModel } from '../../../../common/models/activity';
 import { WeekLabelModel } from '../../../../common/models/dictionary';
 import { WeekActivityParam } from '../../../../common/models/params';
 import { ActivityService } from '../../../../core/services/activity';
+import { BaseDestroy } from '../../../../common/models/base-destroy';
 import { SubjectService } from '../../../../core/services/subject';
 import { AuthService } from '../../../../core/services/auth';
 import { DateValue, WeekArray } from '../../../data';
