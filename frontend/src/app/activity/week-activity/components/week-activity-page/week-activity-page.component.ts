@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material';
+import { add, endOfWeek, startOfWeek } from 'date-fns';
 import { map, takeUntil } from 'rxjs/operators';
 import { ru as locale } from 'date-fns/locale';
-import { add, lastDayOfWeek } from 'date-fns';
 import { Observable } from 'rxjs';
 
 import { BaseDestroy } from '../../../../common/models/base-destroy';
@@ -57,8 +57,8 @@ export class WeekActivityPageComponent extends BaseDestroy implements OnInit {
   }
 
   getMondaySunday(): Date[] {
-    const sunday = lastDayOfWeek(this.currentDate, { locale });
-    const monday = add(sunday, { days: -6 });
+    const sunday = endOfWeek(this.currentDate, { locale });
+    const monday = startOfWeek(this.currentDate, { locale });
 
     return [monday, sunday];
   }
