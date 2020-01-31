@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db.models import Q
+from datetime import timedelta, datetime
+
 from django.http import JsonResponse
 from django_filters.rest_framework import FilterSet
 from rest_framework import generics
@@ -36,6 +37,36 @@ class ActivityDetail(generics.RetrieveUpdateDestroyAPIView):
         data = dict()
         data.update(calculate_params(self.request.data))
         serializer.save(**data)
+
+
+@api_view(['POST'])
+def get_week_activity(request):
+    user = request.data.get('user')
+    monday = request.data.get('monday')
+    sunday = request.data.get('sunday')
+    activities = Activity.objects.filter(user=user, activityDate__gte=monday, activityDate__lte=sunday)
+    date_list = get_date_list(monday)
+    week_activity_list = get_week_activity_list(activities, date_list)
+    return JsonResponse({'results': week_activity_list})
+
+
+def get_week_activity_list(activities, date_list):
+    week_activity_list = list()
+    for date_item in date_list:
+        day_activities = activities.filter(activityDate=date_item).all()
+        week_activity_list.append({
+            'day': date_list.index(date_item),
+            'activities': ActivitySerializer(day_activities, many=True).data
+        })
+    return week_activity_list
+
+
+def get_date_list(monday):
+    date_list = list()
+    for index in range(7):
+        new_date = datetime.strptime(monday, '%Y-%m-%d') + timedelta(days=index)
+        date_list.append(new_date.date())
+    return date_list
 
 
 @api_view(['POST'])
