@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material';
+import { map, takeUntil } from 'rxjs/operators';
 import { ru as locale } from 'date-fns/locale';
 import { add, lastDayOfWeek } from 'date-fns';
-import { map, takeUntil } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { BaseDestroy } from '../../../../common/models/base-destroy';
