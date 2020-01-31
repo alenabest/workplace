@@ -1,10 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { switchMap, takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
-import { Observable, of } from 'rxjs';
 
-import { ViewActivityDialogComponent } from '../../../dialogs/view-activity-dialog';
-import { ActivityDialogComponent } from '../../../dialogs/activity-dialog';
 import { BaseActivity } from '../../../../common/models/base-activity';
 import { ActivityModel } from '../../../../common/models/activity';
 import { SubjectService } from '../../../../core/services/subject';
@@ -23,9 +19,9 @@ export class DayActivityCardComponent extends BaseActivity implements OnChanges 
 
   hourArray = HourArray;
 
-  constructor(private dialog: MatDialog,
-              private readonly subjectService: SubjectService) {
-    super();
+  constructor(public dialog: MatDialog,
+              public readonly subjectService: SubjectService) {
+    super(dialog, subjectService);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -33,32 +29,6 @@ export class DayActivityCardComponent extends BaseActivity implements OnChanges 
       this.activities.map((item, index) => this.prepareStyle(this.activities, item, index));
       this.scrollTop = this.calculateScrollTop();
     }
-  }
-
-  openViewDialog(activity: ActivityModel) {
-    this.dialog.open(ViewActivityDialogComponent, {data: activity})
-      .afterClosed()
-      .pipe(
-        switchMap(result => {
-          if (result) {
-            return this.openUpdateActivityDialog(activity);
-          }
-          return of();
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe((result: Date) => this.reloadActivityPage(result));
-  }
-
-  reloadActivityPage(date: Date) {
-    if (date) {
-      this.subjectService.getActivitySubject.next(date);
-    }
-  }
-
-  openUpdateActivityDialog(activity: ActivityModel): Observable<any | undefined> {
-    return this.dialog.open(ActivityDialogComponent, {disableClose: true, data: activity})
-      .afterClosed();
   }
 
   addActivity(hour: string) {

@@ -23,15 +23,15 @@
     <div fxFlex>
       <div fxLayout="row">
         <div fxLayout="column" class="activity-column" *ngFor="let day of weekActivities">
-          <div fxLayout="column" fxLayoutAlign="center center" class="activity-row"
+          <div fxLayout="column" fxLayoutAlign="center center" class="activity-row" (click)="openViewDialog(activity)"
                *ngFor="let activity of day.activities"
                [ngStyle]="{
-           'height': activity.height,
-           'margin-bottom': activity.marginBottom,
-           'margin-top': activity.marginTop,
-           'background-color': activity.backgroundColor
-           }">
-            {{activity.description}}
+               'height': activity.height,
+               'margin-bottom': activity.marginBottom,
+               'margin-top': activity.marginTop,
+               'background-color': activity.backgroundColor
+                }">
+            <div>{{activity.description}}</div>
           </div>
         </div>
       </div>

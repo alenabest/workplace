@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material';
 import { ru as locale } from 'date-fns/locale';
 import { add, lastDayOfWeek } from 'date-fns';
+import { map, takeUntil } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+import { BaseDestroy } from '../../../../common/models/base-destroy';
 import { WeekActivityModel } from '../../../../common/models/activity';
 import { WeekLabelModel } from '../../../../common/models/dictionary';
 import { WeekActivityParam } from '../../../../common/models/params';
@@ -11,7 +13,6 @@ import { ActivityService } from '../../../../core/services/activity';
 import { SubjectService } from '../../../../core/services/subject';
 import { AuthService } from '../../../../core/services/auth';
 import { DateValue, WeekArray } from '../../../data';
-import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -20,7 +21,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./week-activity-page.component.scss']
 })
 
-export class WeekActivityPageComponent implements OnInit {
+export class WeekActivityPageComponent extends BaseDestroy implements OnInit {
   weekFormat: string = 'dd MMMM yyyy';
   currentDate: Date = new Date();
   weekArray: WeekLabelModel[];
@@ -33,8 +34,18 @@ export class WeekActivityPageComponent implements OnInit {
   constructor(private readonly activityService: ActivityService,
               private readonly subjectService: SubjectService,
               private readonly authService: AuthService) {
+    super();
     this.userId = this.authService.currentUser.id;
+    this.subscribeSubject();
     this.prepareWeekData();
+  }
+
+  subscribeSubject() {
+    this.subjectService.getActivitySubject
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => this.getWeekActivity());
   }
 
   ngOnInit() {

@@ -1,7 +1,9 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 import { BaseActivity } from '../../../../common/models/base-activity';
 import { WeekActivityModel } from '../../../../common/models/activity';
+import { SubjectService } from '../../../../core/services/subject';
 import { HourArray, HourArrayMobile } from '../../../data';
 import { isOnChange } from '../../../../common/utils';
 
@@ -21,8 +23,9 @@ export class WeekActivityCardComponent extends BaseActivity implements OnChanges
   hourArray = HourArray;
   hourArrayMobile = HourArrayMobile;
 
-  constructor() {
-    super();
+  constructor(public dialog: MatDialog,
+              public readonly subjectService: SubjectService) {
+    super(dialog, subjectService);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -38,8 +41,11 @@ export class WeekActivityCardComponent extends BaseActivity implements OnChanges
 
   calculateScrollTop(): number {
     const firstActivity = this.getFirstActivity();
+    if (firstActivity) {
+      return firstActivity.startHour * 60;
+    }
 
-    return firstActivity.startHour * 60;
+    return 0;
   }
 
   getFirstActivity() {

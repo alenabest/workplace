@@ -54,6 +54,11 @@ export function compareDates(date1: Date, date2: Date): boolean {
   return format(date1, 'yyyy-MM-dd') === format(date2, 'yyyy-MM-dd');
 }
 
+export function dateInDiapason(date: Date, start: Date, end: Date): boolean {
+  const currentDate = format(date, 'yyyy-MM-dd');
+  return currentDate >= format(start, 'yyyy-MM-dd') && currentDate <= format(end, 'yyyy-MM-dd');
+}
+
 export function isOnChange(change: SimpleChange): boolean {
   return change && change.currentValue && change.currentValue !== change.previousValue;
 }

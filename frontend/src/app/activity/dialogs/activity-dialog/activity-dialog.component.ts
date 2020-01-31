@@ -135,7 +135,7 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
   }
 
   completeSave() {
-    this.dialogRef.close(this.activityDate.value);
+    this.dialogRef.close(true);
   }
 
   openSnackBar(result: ActivityValidation) {

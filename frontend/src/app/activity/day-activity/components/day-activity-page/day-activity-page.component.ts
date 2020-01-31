@@ -39,13 +39,7 @@ export class DayActivityPageComponent extends BaseDestroy implements OnInit {
       .pipe(
         takeUntil(this.destroy$)
       )
-      .subscribe(date => this.completeSubscribe(date));
-  }
-
-  completeSubscribe(date: Date) {
-    if (date && compareDates(date, this.currentDate)) {
-      this.getActivities();
-    }
+      .subscribe(() => this.getActivities());
   }
 
   ngOnInit() {
