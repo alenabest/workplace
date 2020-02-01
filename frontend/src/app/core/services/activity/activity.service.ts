@@ -4,8 +4,8 @@ import { plainToClass } from 'class-transformer';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { ActivityModel, ActivityValidation, WeekActivityModel } from '../../../common/models/activity';
-import { DayActivityParam, WeekActivityParam } from '../../../common/models/params';
+import { ActivityModel, ActivityValidation, MonthActivityModel, WeekActivityModel } from '../../../common/models/activity';
+import { DayActivityParam, MonthActivityParam, WeekActivityParam } from '../../../common/models/params';
 import { IResponse, prepareObject, serializeResponse } from '../../helpers';
 import { generateQuery } from '../../../common/utils';
 
@@ -34,6 +34,14 @@ export class ActivityService {
       .post<IResponse<WeekActivityModel>>(`${ACTIVITY_API}week/`, params)
       .pipe(
         map(results => serializeResponse(WeekActivityModel, results))
+      );
+  }
+
+  getMonthActivity(params: MonthActivityParam): Observable<IResponse<MonthActivityModel>> {
+    return this.http
+      .post<IResponse<MonthActivityModel>>(`${ACTIVITY_API}month/`, params)
+      .pipe(
+        map(results => serializeResponse(MonthActivityModel, results))
       );
   }
 

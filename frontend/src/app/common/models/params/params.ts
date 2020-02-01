@@ -1,4 +1,5 @@
-import { format } from 'date-fns';
+import { formatDateToBacked } from '../../../core/helpers';
+import { WeekListModel } from '../dictionary';
 
 
 class ActivityParam {
@@ -12,7 +13,7 @@ class ActivityParam {
 export class DayActivityParam extends ActivityParam {
   constructor(user: number, activityDate) {
     super(user);
-    this.activityDate = format(activityDate, 'yyyy-MM-dd');
+    this.activityDate = formatDateToBacked(activityDate);
   }
 
   activityDate: string;
@@ -21,12 +22,29 @@ export class DayActivityParam extends ActivityParam {
 export class WeekActivityParam extends ActivityParam {
   constructor(user: number, monday: Date, sunday: Date) {
     super(user);
-    this.monday = format(monday, 'yyyy-MM-dd');
-    this.sunday = format(sunday, 'yyyy-MM-dd');
+    this.monday = formatDateToBacked(monday);
+    this.sunday = formatDateToBacked(sunday);
   }
 
   monday: string;
   sunday: string;
+}
+
+export class MonthActivityParam extends ActivityParam {
+  constructor(user: number, start: Date, end: Date, weekList: WeekListModel[]) {
+    super(user);
+    this.weekList = this.getWeekList(weekList);
+    this.start = formatDateToBacked(start);
+    this.end = formatDateToBacked(end);
+  }
+
+  start: string;
+  end: string;
+  weekList: string[][];
+
+  private getWeekList(weekList: WeekListModel[]): string[][] {
+    return weekList.map(week => week.days.map(day => formatDateToBacked(day)));
+  }
 }
 
 export class DictionaryParamModel {
@@ -35,6 +53,7 @@ export class DictionaryParamModel {
     this.projects = projects;
     this.directions = directions;
   }
+
   user: number;
   projects: number;
   directions: number;

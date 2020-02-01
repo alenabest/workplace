@@ -66,7 +66,7 @@
     }
 
     .activity-column {
-      width: calc(100% / 7);
+      width: calc((100% - 2px) / 7);
       margin-top: 8px;
 
       .activity-row {

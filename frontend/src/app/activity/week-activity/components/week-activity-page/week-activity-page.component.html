@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutGap="4px" class="component-container">
   <div fxLayout="row" fxLayoutAlign="space-between center" class="calendar-row">
-    <button mat-icon-button color="primary" type="button" (click)="changeWeek(null, -7)">
+    <button mat-icon-button color="primary" type="button" (click)="changeWeek(null, -1)">
       <mat-icon class="head-button-icon">chevron_left</mat-icon>
     </button>
 
@@ -10,7 +10,7 @@
       <mat-datepicker #currentDatepicker class="display-none"></mat-datepicker>
     </ng-container>
 
-    <button mat-icon-button color="primary" type="button" (click)="changeWeek(null, 7)">
+    <button mat-icon-button color="primary" type="button" (click)="changeWeek(null, 1)">
       <mat-icon class="head-button-icon">chevron_right</mat-icon>
     </button>
   </div>

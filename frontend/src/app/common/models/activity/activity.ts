@@ -48,6 +48,13 @@ export class WeekActivityModel {
   activities: ActivityModel[];
 }
 
+export class MonthActivityModel {
+  week: number;
+
+  @Type(() => WeekActivityModel)
+  days: WeekActivityModel[];
+}
+
 export class ActivityValidation {
   @Transform(formatDateToPlain(), { toPlainOnly: true })
   activityDate: string;

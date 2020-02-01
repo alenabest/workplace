@@ -18,6 +18,30 @@ class ActivityFilter(FilterSet):
         exclude = ()
 
 
+def get_hour_and_minutes(time_string):
+    return list(map(int, time_string.split(':')))
+
+
+def get_height(start_hour, end_hour, start_minutes, end_minutes):
+    hours = end_hour - start_hour
+    minutes = end_minutes - start_minutes
+    return '%spx' % (hours * 60 + minutes)
+
+
+def calculate_params(request_data):
+    data = dict()
+    start = request_data.get('start', None)
+    end = request_data.get('end', None)
+    [start_hour, start_minutes] = get_hour_and_minutes(start)
+    [end_hour, end_minutes] = get_hour_and_minutes(end)
+    height = get_height(start_hour, end_hour, start_minutes, end_minutes)
+    data.update(dict(
+        startHour=start_hour, startMinute=start_minutes, endHour=end_hour, endMinute=end_minutes, height=height
+    ))
+
+    return data
+
+
 class ActivityList(generics.ListCreateAPIView):
     queryset = Activity.objects.all().order_by('activityDate', 'start')
     serializer_class = ActivitySerializer
@@ -37,17 +61,6 @@ class ActivityDetail(generics.RetrieveUpdateDestroyAPIView):
         data = dict()
         data.update(calculate_params(self.request.data))
         serializer.save(**data)
-
-
-@api_view(['POST'])
-def get_week_activity(request):
-    user = request.data.get('user')
-    monday = request.data.get('monday')
-    sunday = request.data.get('sunday')
-    activities = Activity.objects.filter(user=user, activityDate__gte=monday, activityDate__lte=sunday)
-    date_list = get_date_list(monday)
-    week_activity_list = get_week_activity_list(activities, date_list)
-    return JsonResponse({'results': week_activity_list})
 
 
 def get_week_activity_list(activities, date_list):
@@ -70,6 +83,41 @@ def get_date_list(monday):
 
 
 @api_view(['POST'])
+def get_week_activity(request):
+    user = request.data.get('user')
+    monday = request.data.get('monday')
+    sunday = request.data.get('sunday')
+    activities = Activity.objects.filter(user=user, activityDate__gte=monday, activityDate__lte=sunday)
+    date_list = get_date_list(monday)
+    week_activity_list = get_week_activity_list(activities, date_list)
+    return JsonResponse({'results': week_activity_list})
+
+
+@api_view(['POST'])
+def get_month_activity(request):
+    month_activity_list = list()
+    user = request.data.get('user')
+    start = request.data.get('start')
+    end = request.data.get('end')
+    week_list = request.data.get('weekList')
+    activities = Activity.objects.filter(user=user, activityDate__gte=start, activityDate__lte=end)
+    for week in week_list:
+        month_activity_list.append({
+            'week': week_list.index(week),
+            'days': get_week_activity_list(activities, week)
+        })
+
+    return JsonResponse({'results': month_activity_list})
+
+
+def get_response(previous_activity, next_activity):
+    return {
+        'start': previous_activity.end if previous_activity else None,
+        'end': next_activity.start if next_activity else None
+    }
+
+
+@api_view(['POST'])
 def validate_activity(request):
     user = request.user
     activity_date = request.data.get('activityDate')
@@ -84,34 +132,3 @@ def validate_activity(request):
     else:
         response = {"ok": True}
     return JsonResponse(response)
-
-
-def get_response(previous_activity, next_activity):
-    return {
-        'start': previous_activity.end if previous_activity else None,
-        'end': next_activity.start if next_activity else None
-    }
-
-
-def calculate_params(request_data):
-    data = dict()
-    start = request_data.get('start', None)
-    end = request_data.get('end', None)
-    [start_hour, start_minutes] = get_hour_and_minutes(start)
-    [end_hour, end_minutes] = get_hour_and_minutes(end)
-    height = get_height(start_hour, end_hour, start_minutes, end_minutes)
-    data.update(dict(
-        startHour=start_hour, startMinute=start_minutes, endHour=end_hour, endMinute=end_minutes, height=height
-    ))
-
-    return data
-
-
-def get_height(start_hour, end_hour, start_minutes, end_minutes):
-    hours = end_hour - start_hour
-    minutes = end_minutes - start_minutes
-    return '%spx' % (hours * 60 + minutes)
-
-
-def get_hour_and_minutes(time_string):
-    return list(map(int, time_string.split(':')))

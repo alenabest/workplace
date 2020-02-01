@@ -42,3 +42,7 @@ export function prepareObject(clsObject, plain) {
   const object = plainToClass(clsObject, plain);
   return classToPlain(object);
 }
+
+export function formatDateToBacked(value: Date) {
+  return format(value, 'yyyy-MM-dd');
+}

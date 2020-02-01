@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material';
 import { map, takeUntil } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { add} from 'date-fns';
+import { addWeeks} from 'date-fns';
 
 import { WeekActivityModel } from '../../../../common/models/activity';
 import { WeekLabelModel } from '../../../../common/models/dictionary';
@@ -20,7 +20,7 @@ import { DateValue } from '../../../data';
   styleUrls: ['./week-activity-page.component.scss']
 })
 
-export class WeekActivityPageComponent extends BaseWeekActivity implements OnInit {
+export class WeekActivityPageComponent extends BaseWeekActivity {
   weekFormat: string = 'dd MMMM yyyy';
   currentDate: Date = new Date();
   weekArray: WeekLabelModel[];
@@ -47,10 +47,6 @@ export class WeekActivityPageComponent extends BaseWeekActivity implements OnIni
       .subscribe(() => this.getWeekActivity());
   }
 
-  ngOnInit() {
-    this.getWeekActivity();
-  }
-
   getWeekActivity() {
     this.weekActivities$ = this._getWeekActivity();
   }
@@ -58,22 +54,26 @@ export class WeekActivityPageComponent extends BaseWeekActivity implements OnIni
   prepareWeekData() {
     [this.monday, this.sunday] = this.getMondaySunday(this.currentDate);
     this.weekArray = this.getWeekArray(this.monday);
-  }
-
-  changeWeek(event: MatDatepickerInputEvent<any> | DateValue, days?: number) {
-    if (event) {
-      this.currentDate = event.value;
-    } else {
-      this.currentDate = add(this.currentDate, { days });
-    }
-    this.prepareWeekData();
     this.getWeekActivity();
   }
 
+  changeWeek(event: MatDatepickerInputEvent<any> | DateValue, week?: number) {
+    if (event) {
+      this.currentDate = event.value;
+    } else {
+      this.currentDate = addWeeks(this.currentDate, week);
+    }
+    this.prepareWeekData();
+  }
+
   _getWeekActivity(): Observable<WeekActivityModel[]> {
-    return this.activityService.getWeekActivity(new WeekActivityParam(this.userId, this.monday, this.sunday))
+    return this.activityService.getWeekActivity(this.getParams())
       .pipe(
         map(response => response.results)
       );
+  }
+
+  getParams(): WeekActivityParam {
+    return new WeekActivityParam(this.userId, this.monday, this.sunday);
   }
 }
