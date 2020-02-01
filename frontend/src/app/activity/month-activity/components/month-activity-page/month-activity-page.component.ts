@@ -5,13 +5,13 @@ import { addMonths } from 'date-fns';
 import { Observable } from 'rxjs';
 
 import { MonthActivityModel } from '../../../../common/models/activity';
+import { MonthActivityParam } from '../../../../common/models/params';
 import { WeekListModel } from '../../../../common/models/dictionary';
 import { ActivityService } from '../../../../core/services/activity';
 import { SubjectService } from '../../../../core/services/subject';
 import { BaseMonthActivity } from '../../../../common/models/base';
 import { AuthService } from '../../../../core/services/auth';
 import { DateValue } from '../../../data';
-import { MonthActivityParam } from '../../../../common/models/params';
 
 
 @Component({

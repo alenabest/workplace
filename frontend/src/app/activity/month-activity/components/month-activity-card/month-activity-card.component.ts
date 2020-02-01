@@ -25,9 +25,6 @@ export class MonthActivityCardComponent implements OnChanges {
     if (isOnChange(changes.weekList)) {
       this.weekRowLength = (100 / this.weekList.length) + '%';
     }
-    if (isOnChange(changes.monthActivities)) {
-      console.log(this.monthActivities);
-    }
   }
 
   addActivity(day: Date) {

@@ -16,22 +16,18 @@
         </div>
       </div>
     </div>
-<!--    <div fxFlex>-->
-<!--      <div fxLayout="row">-->
-<!--        <div fxLayout="column" class="activity-column" *ngFor="let day of weekActivities">-->
-<!--          <div fxLayout="column" fxLayoutAlign="center center" class="activity-row" (click)="openViewDialog(activity)"-->
-<!--               *ngFor="let activity of day.activities"-->
-<!--               [ngStyle]="{-->
-<!--               'height': activity.height,-->
-<!--               'margin-bottom': activity.marginBottom,-->
-<!--               'margin-top': activity.marginTop,-->
-<!--               'background-color': activity.backgroundColor-->
-<!--                }">-->
-<!--            <div>{{activity.description}}</div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <div fxFlex>
+      <div fxLayout="column" fxFlex>
+        <div fxLayout="row" *ngFor="let week of monthActivities" class="activity-row"
+             [ngStyle]="{'height': weekRowLength}">
+          <div class="activity-cell" *ngFor="let day of week.days">
+          <div fxLayout="column" fxLayoutAlign="flex-start">
+            <span class="cell-{{day.day}}" *ngFor="let activity of day.activities">{{activity.description}}</span>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

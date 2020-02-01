@@ -1,6 +1,8 @@
 import { format } from 'date-fns';
 import { classToPlain, plainToClass } from 'class-transformer';
 import { ClassType } from 'class-transformer/ClassTransformer';
+import { getRandomElement } from '../../common/utils';
+import { BackgroundColors } from '../../activity/data';
 
 
 export class IResponse<T> {
@@ -32,6 +34,10 @@ export function formatDateToClass() {
 
 export function formatObjectToField(field: string) {
   return value => value ? value[field] : value;
+}
+
+export function randomBackgroundColor() {
+  return () => getRandomElement<string>(BackgroundColors);
 }
 
 export function formatMedia() {
