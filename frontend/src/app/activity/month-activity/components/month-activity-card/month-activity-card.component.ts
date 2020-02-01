@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { WeekLabelModel, WeekListModel } from '../../../../common/models/dictionary';
+import { isOnChange } from '../../../../common/utils';
 import { WeekArray } from '../../../data';
 
 @Component({
@@ -8,12 +9,20 @@ import { WeekArray } from '../../../data';
   templateUrl: './month-activity-card.component.html',
   styleUrls: ['./month-activity-card.component.scss']
 })
-export class MonthActivityCardComponent implements OnInit {
+export class MonthActivityCardComponent implements OnChanges {
   @Input() weekList: WeekListModel[];
   weekLabels: WeekLabelModel[] = WeekArray;
+  dayFormat = 'dd';
+  weekRowLength: string = '0';
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (isOnChange(changes.weekList)) {
+      this.weekRowLength = (100 / this.weekList.length) + '%';
+    }
   }
 
+  addActivity(day: Date) {
+    console.log(day);
+  }
 }

@@ -1,4 +1,4 @@
-import { add, endOfMonth, endOfWeek, format, getWeek, startOfMonth, startOfWeek } from 'date-fns';
+import { add, endOfMonth, endOfWeek, getWeek, startOfMonth, startOfWeek } from 'date-fns';
 import { ru as locale } from 'date-fns/locale';
 
 import { BaseDestroy } from '../base-destroy';
@@ -16,13 +16,12 @@ export class BaseMonthActivity extends BaseDestroy {
     const weekList = [];
     let date = start;
     while (dateInDiapason(date, start, end)) {
-      const day = format(date, 'dd');
       const weekLabel = getWeek(date, { locale });
       const week = weekList.find(item => item.label === weekLabel);
       if (week) {
-        weekList.find(item => item.label === weekLabel).days.push(day);
+        weekList.find(item => item.label === weekLabel).days.push(date);
       } else {
-        weekList.push({ label: weekLabel, days: [day] });
+        weekList.push({ label: weekLabel, days: [date] });
       }
       date = add(date, { days: 1 });
     }

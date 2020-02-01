@@ -6,11 +6,12 @@
   </div>
   <div fxLayout="row" class="activity-table">
     <div fxFlex="30px">
-      <div fxLayout="column">
-        <div fxLayout="row" *ngFor="let week of weekList" class="week-row">
+      <div fxLayout="column" fxFlex>
+        <div fxLayout="row" *ngFor="let week of weekList" class="week-row" [ngStyle]="{'height': weekRowLength}">
           <div fxLayoutAlign="center center" class="week-cell">{{ week.label }}</div>
-          <div class="week-cell day" *ngFor="let day of week.days">
-
+          <div fxLayoutAlign="center flex-start" class="week-cell day" *ngFor="let day of week.days"
+               (click)="addActivity(day)">
+            <span class="day-label">{{day | dateFormat: dayFormat}}</span>
           </div>
         </div>
       </div>

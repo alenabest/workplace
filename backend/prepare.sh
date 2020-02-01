@@ -6,8 +6,9 @@ sudo -u postgres psql -c "GRANT ALL ON DATABASE workplace TO workplace;"
 
 SETTINGS="--settings backend.settings.development"
 
-python manage.py migrate "$SETTINGS"
-
+# shellcheck disable=SC2086
+python manage.py migrate $SETTINGS
+# shellcheck disable=SC2086
 python manage.py loaddata                   \
     workplace/fixtures/users                 \
-    "$SETTINGS"
+    $SETTINGS

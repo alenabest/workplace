@@ -9,7 +9,9 @@
     .header-cell {
       background-color: #c8c8c8;
       border-left: 1px solid #e4e4e4;
-      width: calc(100% / 7);
+      width: calc((100% - 7px) / 7);
+      font-size: 1.2em;
+      font-weight: 500;
       height: 28px;
     }
   }
@@ -34,17 +36,22 @@
       }
 
       .week-cell {
-        place-content: center;
-        align-items: center;
+        background-color: #f0f0f0;
         cursor: default;
         width: 30px;
 
         &.day {
-          width: calc((100% - 38px) / 7);
+          background-color: transparent;
+          width: calc((100% - 37px) / 7);
           border-left: 1px solid #e4e4e4;
-          place-content: flex-start;
-          align-items: center;
           cursor: pointer;
+
+          .day-label {
+            background-color: #ebebeb;
+            border-radius: 50%;
+            padding: 4px;
+            font-size: 1.1em;
+          }
         }
       }
     }
@@ -73,6 +80,15 @@
   @media screen and (max-width: 1000px) {
     .activity-header {
       margin-right: 0;
+
+      .header-cell {
+        background-color: #c8c8c8;
+        border-left: 1px solid #e4e4e4;
+        width: calc(100% / 7);
+        font-size: 1.2em;
+        font-weight: 500;
+        height: 28px;
+      }
     }
 
     .activity-table {
@@ -91,7 +107,7 @@
         }
 
         .week-cell.day {
-          width: calc((100% - 8px) / 7);
+          width: calc((100% - 7px) / 7);
         }
       }
     }

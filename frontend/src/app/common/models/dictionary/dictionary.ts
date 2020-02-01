@@ -25,5 +25,5 @@ export class WeekLabelModel {
 
 export class WeekListModel {
   label: number;
-  days: string[];
+  days: Date[];
 }
