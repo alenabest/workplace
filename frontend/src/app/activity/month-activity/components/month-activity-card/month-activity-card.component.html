@@ -1,4 +1,4 @@
-<div class="activity-container" *ngIf="true">
+<div class="activity-container" *ngIf="monthActivities">
   <div class="activity-header" fxLayout="row">
     <div fxLayout="column" fxLayoutAlign="center center" *ngFor="let week of weekLabels" class="header-cell">
       <span>{{week.label}}</span>
@@ -22,7 +22,9 @@
              [ngStyle]="{'height': weekRowLength}">
           <div class="activity-cell" *ngFor="let day of week.days">
           <div fxLayout="column" fxLayoutAlign="flex-start">
-            <span class="cell-{{day.day}}" *ngFor="let activity of day.activities">{{activity.description}}</span>
+            <span class="cell-{{day.day}}" *ngFor="let activity of day.activities" (click)="openViewDialog(activity)">
+              {{activity.description}}
+            </span>
           </div>
           </div>
         </div>
@@ -31,7 +33,7 @@
   </div>
 </div>
 
-<div fxLayout="row" class="activity-container" fxLayoutAlign="center center" *ngIf="false">
+<div fxLayout="column" class="no-data" fxLayoutAlign="center center" *ngIf="!monthActivities">
   <mat-spinner color="primary" [diameter]="80" [strokeWidth]="2"></mat-spinner>
 </div>
 

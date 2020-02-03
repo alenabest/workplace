@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material';
 import { WeekActivityModel } from '../../../../common/models/activity';
 import { WeekLabelModel } from '../../../../common/models/dictionary';
 import { SubjectService } from '../../../../core/services/subject';
-import { BaseActivity } from '../../../../common/models/base';
+import { BaseDayActivity } from '../../../../common/models/base';
 import { HourArray, HourArrayMobile } from '../../../data';
 import { isOnChange } from '../../../../common/utils';
 
@@ -14,7 +14,7 @@ import { isOnChange } from '../../../../common/utils';
   templateUrl: './week-activity-card.component.html',
   styleUrls: ['./week-activity-card.component.scss']
 })
-export class WeekActivityCardComponent extends BaseActivity implements OnChanges {
+export class WeekActivityCardComponent extends BaseDayActivity implements OnChanges {
   @Input() weekActivities: WeekActivityModel[];
   @Input() weekDayArray: WeekLabelModel[];
 

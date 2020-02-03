@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 
 import { ActivityModel } from '../../../../common/models/activity';
 import { SubjectService } from '../../../../core/services/subject';
-import { BaseActivity } from '../../../../common/models/base';
+import { BaseDayActivity } from '../../../../common/models/base';
 import { HourArray } from '../../../data';
 
 
@@ -13,7 +13,7 @@ import { HourArray } from '../../../data';
   styleUrls: ['./day-activity-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DayActivityCardComponent extends BaseActivity implements OnChanges {
+export class DayActivityCardComponent extends BaseDayActivity implements OnChanges {
   @Input() activities: ActivityModel[];
 
   scrollTop: number = 0;
