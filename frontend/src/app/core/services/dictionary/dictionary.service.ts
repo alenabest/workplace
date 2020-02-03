@@ -23,4 +23,14 @@ export class DictionaryService {
         map(results => serializeResponse(cls, results))
       );
   }
+
+  createDictionary<T>(dictionaryApi: string, dictionary: T): Observable<T> {
+    return this.http
+      .post<T>(`/workplace/${dictionaryApi}/`, dictionary);
+  }
+
+  updateDictionary<T>(dictionaryApi: string, dictionaryId: number, dictionary: T): Observable<T> {
+    return this.http
+      .patch<T>(`/workplace/${dictionaryApi}/${dictionaryId}/`, dictionary);
+  }
 }

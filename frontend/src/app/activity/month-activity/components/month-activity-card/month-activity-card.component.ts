@@ -32,8 +32,4 @@ export class MonthActivityCardComponent extends BaseActivity implements OnChange
       this.weekRowLength = (100 / this.weekList.length) + '%';
     }
   }
-
-  addActivity(day: Date) {
-    console.log(day);
-  }
 }

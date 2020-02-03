@@ -36,10 +36,6 @@ export class WeekActivityCardComponent extends BaseDayActivity implements OnChan
     }
   }
 
-  addActivity(hour: string, day: Date) {
-    console.log(hour, day);
-  }
-
   calculateScrollTop(): number {
     const firstActivity = this.getFirstActivity();
     if (firstActivity) {

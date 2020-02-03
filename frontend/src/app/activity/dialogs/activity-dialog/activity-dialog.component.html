@@ -43,9 +43,21 @@
         <mat-label>Проект</mat-label>
         <mat-select formControlName="project" placeholder="Выберите проект" [compareWith]="defaultEqual"
                     (selectionChange)="selectProject()">
-          <mat-option *ngFor="let item of projects$ | async" [value]="item">
-            {{ item.name }}
-          </mat-option>
+          <div fxLayout="column" class="custom-options-component">
+            <div fxLayout="row" fxLayoutAlign="flex-end center">
+              <button mat-button type="button" color="primary" [editOption]="null" editOptionApi="project">Добавить</button>
+            </div>
+            <div fxLayout="column" class="options-container">
+              <div fxLayout="row" fxLayoutAlign="flex-start center" *ngFor="let item of projects$ | async">
+                <mat-option fxFlex [value]="item">
+                  {{item.name}}
+                </mat-option>
+                <button mat-icon-button color="primary" type="button" [editOption]="item" editOptionApi="project">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
         </mat-select>
         <mat-error>
           <validation-error [control]="project"></validation-error>

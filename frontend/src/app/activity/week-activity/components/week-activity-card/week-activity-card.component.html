@@ -11,12 +11,12 @@
       <div fxLayout="column">
         <div fxLayout="row" *ngFor="let hour of hourArray" class="hour-row desktop">
           <div fxLayoutAlign="center center" class="hour-cell">{{ hour }}</div>
-          <div class="hour-cell week" *ngFor="let day of weekDayArray" (click)="addActivity(hour, day.date)"></div>
+          <div class="hour-cell week" *ngFor="let day of weekDayArray" (click)="addActivity(day.date, hour)"></div>
         </div>
 
         <div fxLayout="row" *ngFor="let hour of hourArrayMobile" class="hour-row mobile">
           <div fxLayoutAlign="center center" class="hour-cell">{{ hour }}</div>
-          <div class="hour-cell week" *ngFor="let day of weekDayArray" (click)="addActivity(hour, day.date)"></div>
+          <div class="hour-cell week" *ngFor="let day of weekDayArray" (click)="addActivity(day.date, hour)"></div>
         </div>
       </div>
     </div>

@@ -15,6 +15,7 @@ import { BaseDestroy } from '../../../common/models/base-destroy';
 import { ActivityService } from '../../../core/services/activity';
 import { AuthService } from '../../../core/services/auth';
 import { getTimeMessage } from '../../../common/utils';
+import { SubjectService } from '../../../core/services/subject';
 
 
 @Component({
@@ -70,12 +71,36 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
               private readonly dictionaryService: DictionaryService,
               private readonly snackBarService: SnackBarService,
               private readonly activityService: ActivityService,
+              private readonly subjectService: SubjectService,
               private readonly authService: AuthService,
               private formBuilder: FormBuilder) {
     super();
     this.userId = this.authService.currentUser.id;
     if (this.activity.id) {
       this.title = 'Редактирование';
+    }
+    this.subscribeToSubject();
+  }
+
+  subscribeToSubject() {
+    this.subjectService.getDictionarySubject
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe(result => this.subjectAction(result));
+  }
+
+  subjectAction(result: string) {
+    switch (result) {
+      case 'project':
+        this.getProjects();
+        break;
+      case 'direction':
+        this.getDirections();
+        break;
+      case 'activity-type':
+        this.getActivityTypes();
+        break;
     }
   }
 

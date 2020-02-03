@@ -1,4 +1,7 @@
 export class ProjectModel {
+  constructor(user: number) {
+    this.user = user;
+  }
   id: number;
   name: string;
   user: number;

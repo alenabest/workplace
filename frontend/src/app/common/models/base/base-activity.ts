@@ -40,4 +40,13 @@ export class BaseActivity extends BaseDestroy {
     return this.dialog.open(ActivityDialogComponent, { disableClose: true, data: activity })
       .afterClosed();
   }
+
+  addActivity(day: Date, hour?: string) {
+    const newActivity =  new ActivityModel(day, hour);
+    this.openUpdateActivityDialog(newActivity)
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe((result) => this.reloadActivityPage(result));
+  }
 }

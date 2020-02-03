@@ -6,10 +6,9 @@ import { UserModel } from '../user';
 
 
 export class ActivityModel {
-  constructor(public currentDate?: Date) {
-    if (this.currentDate) {
-      this.activityDate = this.currentDate;
-    }
+  constructor(private currentDate?: Date, private startTime?: string) {
+    this.activityDate = currentDate;
+    this.start = startTime;
   }
 
   id: number;

@@ -15,6 +15,7 @@ import { HourArray } from '../../../data';
 })
 export class DayActivityCardComponent extends BaseDayActivity implements OnChanges {
   @Input() activities: ActivityModel[];
+  @Input() currentDate: Date;
 
   scrollTop: number = 0;
 
@@ -30,10 +31,6 @@ export class DayActivityCardComponent extends BaseDayActivity implements OnChang
       this.activities.map((item, index) => this.prepareStyle(this.activities, item, index));
       this.scrollTop = this.calculateScrollTop();
     }
-  }
-
-  addActivity(hour: string) {
-    console.log(hour);
   }
 
   calculateScrollTop(): number {

@@ -1,4 +1,5 @@
 .common-theme {
+
   .mat-form-field-appearance-outline .mat-form-field-outline {
     color: rgba(0, 159, 208, 0.31);
   }
@@ -118,4 +119,16 @@
 
 .display-none {
   display: none;
+}
+
+.custom-options-component {
+  overflow: hidden;
+  max-height: 256px;
+  padding: 5px;
+
+  .options-container {
+    max-height: 200px;
+    overflow: auto;
+    padding: 5px 0;
+  }
 }
