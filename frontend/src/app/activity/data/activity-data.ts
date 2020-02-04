@@ -17,7 +17,7 @@ export const WeekArray: { label: string, date: Date }[] = [
   { label: 'ЧТ', date: null },
   { label: 'ПТ', date: null },
   { label: 'СБ', date: null },
-  { label: 'Вс', date: null }
+  { label: 'ВС', date: null }
 ];
 
 export const BackgroundColors: string[] = [

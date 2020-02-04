@@ -39,55 +39,17 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Проект</mat-label>
-        <mat-select formControlName="project" placeholder="Выберите проект" [compareWith]="defaultEqual"
-                    (selectionChange)="selectProject()">
-          <div fxLayout="column" class="custom-options-component">
-            <div fxLayout="row" fxLayoutAlign="flex-end center">
-              <button mat-button type="button" color="primary" [editOption]="null" editOptionApi="project">Добавить</button>
-            </div>
-            <div fxLayout="column" class="options-container">
-              <div fxLayout="row" fxLayoutAlign="flex-start center" *ngFor="let item of projects$ | async">
-                <mat-option fxFlex [value]="item">
-                  {{item.name}}
-                </mat-option>
-                <button mat-icon-button color="primary" type="button" [editOption]="item" editOptionApi="project">
-                  <mat-icon>edit</mat-icon>
-                </button>
-              </div>
-            </div>
-          </div>
-        </mat-select>
-        <mat-error>
-          <validation-error [control]="project"></validation-error>
-        </mat-error>
-      </mat-form-field>
+      <dictionary-select (selectionChange)="selectProject()" (searchChange)="getProjects($event)"
+                         [dictionary]="projects$ | async" [control]="project"
+                         label="проект" api="project" field="name"></dictionary-select>
 
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Направление</mat-label>
-        <mat-select formControlName="direction" placeholder="Выберите направление" [compareWith]="defaultEqual"
-                    (selectionChange)="selectDirection()">
-          <mat-option *ngFor="let item of directions$ | async" [value]="item">
-            {{ item.name }}
-          </mat-option>
-        </mat-select>
-        <mat-error>
-          <validation-error [control]="direction"></validation-error>
-        </mat-error>
-      </mat-form-field>
+      <dictionary-select (selectionChange)="selectDirection()" (searchChange)="getDirections($event)"
+                         [dictionary]="directions$ | async" [control]="direction"
+                         label="направление" api="direction" field="name"></dictionary-select>
 
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Вид работы</mat-label>
-        <mat-select formControlName="type" placeholder="Выберите вид работы" [compareWith]="defaultEqual">
-          <mat-option *ngFor="let item of activityTypes$ | async" [value]="item">
-            {{ item.name }}
-          </mat-option>
-        </mat-select>
-        <mat-error>
-          <validation-error [control]="type"></validation-error>
-        </mat-error>
-      </mat-form-field>
+      <dictionary-select (searchChange)="getActivityTypes($event)"
+                         [dictionary]="activityTypes$ | async" [control]="type"
+                         label="вид работы" api="activity-type" field="name"></dictionary-select>
 
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>В рамках задачи</mat-label>
@@ -100,6 +62,8 @@
   </mat-card-content>
   <mat-card-actions fxLayout="row" fxLayoutAlign="flex-end center" fxLayoutGap="8px">
     <button mat-button color="primary" type="button" mat-dialog-close>Отмена</button>
-    <button mat-raised-button color="primary" type="button" [disabled]="activityForm.invalid" (click)="saveActivity()">Сохранить</button>
+    <button mat-raised-button color="primary" type="button" [disabled]="activityForm.invalid" (click)="saveActivity()">
+      Сохранить
+    </button>
   </mat-card-actions>
 </mat-card>

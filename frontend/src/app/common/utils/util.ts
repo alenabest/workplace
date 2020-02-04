@@ -62,3 +62,11 @@ export function dateInDiapason(date: Date, start: Date, end: Date): boolean {
 export function isOnChange(change: SimpleChange): boolean {
   return change && change.currentValue && change.currentValue !== change.previousValue;
 }
+
+export function prepareFilteredArray<T>(filteredArray: T[], uniqParams: string, selectedValue: T): T[] {
+  if (selectedValue && selectedValue[uniqParams] && !filteredArray.find(item => item[uniqParams] === selectedValue[uniqParams])) {
+    filteredArray = [selectedValue].concat(filteredArray);
+  }
+
+  return filteredArray;
+}

@@ -1,0 +1,41 @@
+<mat-form-field appearance="outline" floatLabel="always">
+  <mat-label>{{label | firstUppercase }}</mat-label>
+  <mat-select placeholder="Выберите {{ label }}" [formControl]="control" (selectionChange)="changeSelect()"
+              [compareWith]="defaultEqual" [required]="required">
+    <div fxLayout="column" class="custom-options-component">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <button matPrefix mat-icon-button color="primary" type="button">
+          <mat-icon>search</mat-icon>
+        </button>
+        <input matInput fxFlex [formControl]="filterBySearch" placeholder="Поиск..."
+               (keydown.space)="$event.stopPropagation()">
+        <button matSuffix mat-icon-button color="primary" type="button" *ngIf="filterBySearch.value"
+                (click)="changeSearch(true)">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button mat-button type="button" color="primary" [editOption]="null" [editOptionApi]="api">Добавить</button>
+      </div>
+      <div fxLayout="column" class="options-container">
+        <mat-option disabled *ngIf="dictionary?.length === 0">Нет вариантов</mat-option>
+        <div fxLayout="row" fxLayoutAlign="flex-start center" *ngFor="let item of dictionary; trackBy: trackByFn">
+          <mat-option fxFlex [value]="param ? item[param] : item">
+            {{ field ? item[field] : item}}
+          </mat-option>
+          <button mat-icon-button color="primary" type="button" [editOption]="item" [editOptionApi]="api">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </mat-select>
+  <button matSuffix mat-icon-button color="primary" type="button" *ngIf="control.value"
+          (click)="control.setValue(null)">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <mat-error>
+    <validation-error [control]="control"></validation-error>
+  </mat-error>
+
+</mat-form-field>

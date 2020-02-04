@@ -1,13 +1,13 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
+import { DictionaryService } from '../../../../core/services/dictionary';
 import { AuthService } from '../../../../core/services/auth';
 import { ProjectModel } from '../../../models/dictionary';
 import { BaseDestroy } from '../../../models/base-destroy';
-import { takeUntil } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { DictionaryService } from '../../../../core/services/dictionary';
 
 
 @Component({
@@ -43,8 +43,7 @@ export class ProjectDialogComponent extends BaseDestroy {
 
   getProjectForm(): FormGroup {
     return this.formBuilder.group({
-      name: ['', Validators.required],
-      user: [null]
+      name: ['', Validators.required]
     });
   }
 

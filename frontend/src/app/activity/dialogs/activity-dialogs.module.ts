@@ -8,6 +8,7 @@ import { ProjectDialogModule } from '../../common/dialogs/project-dialog';
 import { ViewActivityDialogComponent } from './view-activity-dialog';
 import { ActivityDialogComponent } from './activity-dialog';
 import { CoreModule, MaterialModules } from '../../core';
+import { DictionarySelectModule } from '../../common/components/dictionary-select';
 
 
 const dialogs = [
@@ -23,7 +24,8 @@ const dialogs = [
     ProjectDialogModule,
     EditOptionModule,
     MaterialModules,
-    CoreModule
+    CoreModule,
+    DictionarySelectModule
   ],
   entryComponents: [ProjectDialogComponent],
   exports: [dialogs]

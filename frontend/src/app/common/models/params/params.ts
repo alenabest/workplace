@@ -48,13 +48,15 @@ export class MonthActivityParam extends ActivityParam {
 }
 
 export class DictionaryParamModel {
-  constructor(userId: number, projects?: number, directions?: number) {
+  constructor(userId: number, projects?: number, directions?: number, search?: string) {
     this.user = userId;
     this.projects = projects;
     this.directions = directions;
+    this.search = search;
   }
 
   user: number;
   projects: number;
   directions: number;
+  search: string;
 }
