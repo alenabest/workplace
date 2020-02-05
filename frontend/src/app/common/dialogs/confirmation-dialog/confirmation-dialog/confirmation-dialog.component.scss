@@ -1,0 +1,12 @@
+.confirmation-container {
+  max-width: 500px;
+
+  .confirmation-content {
+    font-size: 1.5em;
+    padding: 8px;
+  }
+
+  @media screen and (max-width: 600px){
+    width: 90vw;
+  }
+}

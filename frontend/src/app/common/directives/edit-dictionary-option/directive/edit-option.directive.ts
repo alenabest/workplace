@@ -26,9 +26,9 @@ export class EditOptionDirective extends BaseDestroy {
       .subscribe(result => this.completeClose(result));
   }
 
-  constructor(private readonly dictionaryService: DictionaryService,
-              private readonly subjectService: SubjectService,
-              private dialog: MatDialog) {
+  constructor(private readonly dictionaryService?: DictionaryService,
+              private readonly subjectService?: SubjectService,
+              private dialog?: MatDialog) {
     super();
   }
 

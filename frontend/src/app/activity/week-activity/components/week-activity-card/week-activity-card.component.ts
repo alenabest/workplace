@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 
 import { WeekActivityModel } from '../../../../common/models/activity';
 import { WeekLabelModel } from '../../../../common/models/dictionary';
+import { ActivityService } from '../../../../core/services/activity';
 import { SubjectService } from '../../../../core/services/subject';
 import { BaseDayActivity } from '../../../../common/models/base';
 import { HourArray, HourArrayMobile } from '../../../data';
@@ -25,8 +26,9 @@ export class WeekActivityCardComponent extends BaseDayActivity implements OnChan
   hourArrayMobile = HourArrayMobile;
 
   constructor(public dialog: MatDialog,
-              public readonly subjectService: SubjectService) {
-    super(dialog, subjectService);
+              public readonly subjectService: SubjectService,
+              public readonly activityService: ActivityService) {
+    super(activityService, subjectService, dialog);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

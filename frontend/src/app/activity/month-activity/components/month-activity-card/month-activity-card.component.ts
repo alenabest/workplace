@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 
 import { WeekLabelModel, WeekListModel } from '../../../../common/models/dictionary';
 import { MonthActivityModel } from '../../../../common/models/activity';
+import { ActivityService } from '../../../../core/services/activity';
 import { SubjectService } from '../../../../core/services/subject';
 import { BaseActivity } from '../../../../common/models/base';
 import { isOnChange } from '../../../../common/utils';
@@ -23,8 +24,9 @@ export class MonthActivityCardComponent extends BaseActivity implements OnChange
   weekRowLength: string = '0';
 
   constructor(public dialog: MatDialog,
-              public readonly subjectService: SubjectService) {
-    super(dialog, subjectService);
+              public readonly subjectService: SubjectService,
+              public readonly activityService: ActivityService) {
+    super(activityService, subjectService, dialog);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

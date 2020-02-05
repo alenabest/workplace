@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
+import { ActivityService } from '../../../../core/services/activity';
 import { ActivityModel } from '../../../../common/models/activity';
 import { SubjectService } from '../../../../core/services/subject';
 import { BaseDayActivity } from '../../../../common/models/base';
@@ -21,9 +22,10 @@ export class DayActivityCardComponent extends BaseDayActivity implements OnChang
 
   hourArray = HourArray;
 
-  constructor(public dialog: MatDialog,
-              public readonly subjectService: SubjectService) {
-    super(dialog, subjectService);
+  constructor(public readonly activityService: ActivityService,
+              public readonly subjectService: SubjectService,
+              public dialog: MatDialog) {
+    super(activityService, subjectService, dialog);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

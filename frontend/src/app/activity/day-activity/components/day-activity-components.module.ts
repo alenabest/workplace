@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 
+import { ConfirmationDialogComponent } from '../../../common/dialogs/confirmation-dialog/confirmation-dialog';
+import { ConfirmationDialogModule } from '../../../common/dialogs/confirmation-dialog';
 import { ViewActivityDialogComponent } from '../../dialogs/view-activity-dialog';
 import { DateFormatPipeModule } from '../../../common/pipes/date-format';
 import { DayActivityPageComponent } from './day-activity-page';
@@ -9,6 +11,10 @@ import { CoreModule, MaterialModules } from '../../../core';
 import { ActivityDialogsModule } from '../../dialogs';
 
 
+const entryComponents = [
+  ViewActivityDialogComponent,
+  ConfirmationDialogComponent
+];
 
 @NgModule({
   declarations: [
@@ -16,13 +22,15 @@ import { ActivityDialogsModule } from '../../dialogs';
     DayActivityCardComponent
   ],
   imports: [
-    CoreModule,
-    MaterialModules,
+    ConfirmationDialogModule,
     ActivityComponentsModule,
     ActivityDialogsModule,
-    DateFormatPipeModule
+    DateFormatPipeModule,
+    MaterialModules,
+    CoreModule
   ],
-  entryComponents: [ViewActivityDialogComponent],
+  entryComponents: [entryComponents],
   exports: [DayActivityPageComponent]
 })
-export class DayActivityComponentsModule { }
+export class DayActivityComponentsModule {
+}

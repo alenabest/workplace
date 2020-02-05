@@ -5,12 +5,14 @@ import { BackgroundColors } from '../../../activity/data';
 import { BaseActivity } from './base-activity';
 import { getRandomElement } from '../../utils';
 import { ActivityModel } from '../activity';
+import { ActivityService } from '../../../core/services/activity';
 
 
 export class BaseDayActivity extends BaseActivity {
-  constructor(public dialog: MatDialog,
-              public readonly subjectService: SubjectService) {
-    super(dialog, subjectService);
+  constructor(public readonly activityService: ActivityService,
+              public readonly subjectService: SubjectService,
+              public dialog: MatDialog) {
+    super(activityService, subjectService, dialog);
   }
 
   prepareStyle(activities: ActivityModel[], item: ActivityModel, index: number): ActivityModel {
