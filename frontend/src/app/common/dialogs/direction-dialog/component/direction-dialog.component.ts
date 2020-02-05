@@ -44,7 +44,6 @@ export class DirectionDialogComponent extends BaseDestroy implements OnInit {
     } else {
       this.direction = new DirectionModel(this.userId);
     }
-    console.log(this.direction);
   }
 
   ngOnInit(): void {
