@@ -18,6 +18,9 @@ export class DirectionModel {
 }
 
 export class ActivityTypeModel {
+  constructor(user: number) {
+    this.user = user;
+  }
   id: number;
   name: string;
   direction: DirectionModel | number;

@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 
+import { ActivityTypeDialogComponent } from '../../common/dialogs/activity-type-dialog/component';
 import { DirectionDialogComponent } from '../../common/dialogs/direction-dialog/component';
 import { ValidationErrorComponentModule } from '../../common/components/validation-error';
 import { ProjectDialogComponent } from '../../common/dialogs/project-dialog/component';
+import { ActivityTypeDialogModule } from '../../common/dialogs/activity-type-dialog';
 import { DictionarySelectModule } from '../../common/components/dictionary-select';
 import { EditOptionModule } from '../../common/directives/edit-dictionary-option';
 import { DirectionDialogModule } from '../../common/dialogs/direction-dialog';
@@ -19,8 +21,9 @@ const dialogs = [
 ];
 
 const entryComponents = [
-  ProjectDialogComponent,
-  DirectionDialogComponent
+  ActivityTypeDialogComponent,
+  DirectionDialogComponent,
+  ProjectDialogComponent
 ];
 
 @NgModule({
@@ -28,6 +31,7 @@ const entryComponents = [
   imports: [
     ValidationErrorComponentModule,
     BaseDialogMaterialModules,
+    ActivityTypeDialogModule,
     TimeMaskDirectiveModule,
     DictionarySelectModule,
     DirectionDialogModule,
