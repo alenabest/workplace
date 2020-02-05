@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-
-import { ConfirmationDialogComponent } from './confirmation-dialog';
-import { CoreModule } from '../../../core';
 import { MatButtonModule, MatCardModule, MatDialogModule } from '@angular/material';
+
+import { ConfirmationDialogComponent } from './component';
+import { CoreModule } from '../../../core';
 
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { ConfirmationDialogComponent } from '../../../common/dialogs/confirmation-dialog/confirmation-dialog';
+import { ConfirmationDialogComponent } from '../../../common/dialogs/confirmation-dialog/component';
 import { ConfirmationDialogModule } from '../../../common/dialogs/confirmation-dialog';
 import { ViewActivityDialogComponent } from '../../dialogs/view-activity-dialog';
 import { DateFormatPipeModule } from '../../../common/pipes/date-format';

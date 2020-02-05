@@ -8,7 +8,7 @@ import { SubjectService } from '../../../core/services/subject';
 import { BaseDestroy } from '../base-destroy';
 import { ActivityModel } from '../activity';
 import { ActivityService } from '../../../core/services/activity';
-import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog';
+import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/component';
 
 
 export class BaseActivity extends BaseDestroy {
