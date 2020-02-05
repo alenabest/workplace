@@ -70,3 +70,13 @@ export const MaterialModules = [
   MatRippleModule,
   MatFormFieldModule
 ];
+
+export const BaseDialogMaterialModules = [
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatDialogModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatInputModule,
+  MatCardModule
+];

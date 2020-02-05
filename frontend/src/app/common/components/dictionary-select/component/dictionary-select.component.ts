@@ -41,7 +41,6 @@ export class DictionarySelectComponent extends BaseDestroy {
     }
   }
 
-
   subscribeFormControl() {
     this.filterBySearch.valueChanges
       .pipe(takeUntil(this.destroy$))
@@ -51,6 +50,11 @@ export class DictionarySelectComponent extends BaseDestroy {
   changeSelect() {
     this.selectionChange.emit();
     this.filterBySearch.setValue(null);
+  }
+
+  cancelSelect() {
+    this.control.setValue(null);
+    this.selectionChange.emit();
   }
 
   changeSearch(close?: boolean) {
