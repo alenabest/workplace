@@ -59,4 +59,5 @@ export class DictionaryParamModel {
   projects: number;
   directions: number;
   search: string;
+  ordering: string = 'name';
 }

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+import { DirectionDialogComponent } from '../../../dialogs/direction-dialog/component';
 import { ProjectDialogComponent } from '../../../dialogs/project-dialog/component';
 import { DictionaryService } from '../../../../core/services/dictionary';
 import { SubjectService } from '../../../../core/services/subject';
@@ -42,7 +43,7 @@ export class EditOptionDirective extends BaseDestroy {
         return this.dialog.open(ProjectDialogComponent, {data: this.editOption, disableClose: false})
           .afterClosed();
       case 'direction':
-        return this.dialog.open(ProjectDialogComponent, {data: this.editOption, disableClose: false})
+        return this.dialog.open(DirectionDialogComponent, {data: this.editOption, disableClose: false})
           .afterClosed();
       case 'activity-type':
         return this.dialog.open(ProjectDialogComponent, {data: this.editOption, disableClose: false})

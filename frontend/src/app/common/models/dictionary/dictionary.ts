@@ -8,6 +8,9 @@ export class ProjectModel {
 }
 
 export class DirectionModel {
+  constructor(user: number) {
+    this.user = user;
+  }
   id: number;
   name: string;
   project: ProjectModel | number;

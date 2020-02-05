@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 
 import { ValidationErrorComponentModule } from '../../components/validation-error';
+import { DictionarySelectModule } from '../../components/dictionary-select';
 import { BaseDialogMaterialModules, CoreModule } from '../../../core';
-import { ProjectDialogComponent } from './component';
+import { DirectionDialogComponent } from './component';
 
 
 
 @NgModule({
-  declarations: [ProjectDialogComponent],
+  declarations: [DirectionDialogComponent],
   imports: [
     ValidationErrorComponentModule,
     BaseDialogMaterialModules,
-    CoreModule
+    DictionarySelectModule,
+    CoreModule,
   ],
-  exports: [ProjectDialogComponent]
+  exports: [DirectionDialogComponent]
 })
-export class ProjectDialogModule { }
+export class DirectionDialogModule { }
