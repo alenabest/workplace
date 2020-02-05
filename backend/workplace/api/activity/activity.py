@@ -22,10 +22,10 @@ def get_hour_and_minutes(time_string):
     return list(map(int, time_string.split(':')))
 
 
-def get_height(start_hour, end_hour, start_minutes, end_minutes):
+def get_duration(start_hour, end_hour, start_minutes, end_minutes):
     hours = end_hour - start_hour
     minutes = end_minutes - start_minutes
-    return '%spx' % (hours * 60 + minutes)
+    return hours * 60 + minutes
 
 
 def calculate_params(request_data):
@@ -34,9 +34,11 @@ def calculate_params(request_data):
     end = request_data.get('end', None)
     [start_hour, start_minutes] = get_hour_and_minutes(start)
     [end_hour, end_minutes] = get_hour_and_minutes(end)
-    height = get_height(start_hour, end_hour, start_minutes, end_minutes)
+    duration = get_duration(start_hour, end_hour, start_minutes, end_minutes)
+    height = '%spx' % duration
     data.update(dict(
-        startHour=start_hour, startMinute=start_minutes, endHour=end_hour, endMinute=end_minutes, height=height
+        startHour=start_hour, startMinute=start_minutes, duration=duration,
+        endHour=end_hour, endMinute=end_minutes, height=height
     ))
 
     return data

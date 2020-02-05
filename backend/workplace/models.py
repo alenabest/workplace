@@ -106,6 +106,8 @@ class Activity(models.Model):
     end = models.TextField(null=False, blank=False)
     # высота для интерфейса
     height = models.TextField(null=True, blank=False)
+    # длительность в минутах
+    duration = models.IntegerField(null=True, blank=False)
     # час начала
     start_hour = models.IntegerField(null=True, name='startHour')
     # минуту начала
