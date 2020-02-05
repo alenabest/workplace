@@ -1,5 +1,24 @@
 .common-theme {
 
+  .mat-expansion-panel-header {
+    &:hover, &:focus {
+      background: rgba(0, 159, 208, 0.1) !important;
+      -webkit-box-shadow: 0 0 4px 0 rgba(50, 50, 50, 0.3);
+      -moz-box-shadow: 0 0 4px 0 rgba(50, 50, 50, 0.3);
+      box-shadow: 0 0 4px 0 rgba(50, 50, 50, 0.3);
+    }
+  }
+
+  .mat-expansion-panel-body {
+    padding: 16px !important;
+  }
+
+  .mat-expansion-panel {
+    -webkit-box-shadow: 0 0 4px 0 rgba(50, 50, 50, 0.3);
+    -moz-box-shadow: 0 0 4px 0 rgba(50, 50, 50, 0.3);
+    box-shadow: 0 0 4px 0 rgba(50, 50, 50, 0.3);
+  }
+
   .mat-form-field-appearance-outline .mat-form-field-outline {
     color: rgba(0, 159, 208, 0.31);
   }

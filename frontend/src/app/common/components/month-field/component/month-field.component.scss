@@ -1,0 +1,16 @@
+
+::ng-deep .common-theme .mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+::ng-deep .mat-form-field-label-wrapper {
+  top: 0 !important;
+  padding-top: 0 !important;
+}
+mat-form-field {
+  width: 180px;
+
+  @media screen and(max-width: 600px) {
+    width: 160px;
+  }
+}
