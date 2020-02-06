@@ -1,6 +1,7 @@
 image: node:11.14.0
 
 before_script:
+  - npm install -g angular-cli
   - npm install --silent
 
 cache:
