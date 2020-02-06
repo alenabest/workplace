@@ -12,3 +12,5 @@ python manage.py migrate $SETTINGS
 python manage.py loaddata                   \
     workplace/fixtures/users                 \
     $SETTINGS
+
+celery -A workplace worker --loglevel=info
