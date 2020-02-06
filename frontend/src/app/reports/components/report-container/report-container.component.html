@@ -1,8 +1,8 @@
 <span fxLayout="row" fxLayoutAlign="flex-start center" class="report-container">
   <span fxFlex class="description-container">
     <ng-content></ng-content>
-    <span *ngIf="reportLink">
-      Последний отчет сформирован за <b>{{ reportDate | dateFormat: reportDateFormat }}</b>.
+    <span *ngIf="report?.link">
+      Последний отчет сформирован за <b>{{ report?.generated | dateFormat: reportDateFormat }}</b>.
       При формировании нового отчёта, ссылка на последний отчёт больше не будет доступна.
     </span>
   </span>
@@ -10,11 +10,12 @@
     <month-field [dateControl]="dateControl"></month-field>
   </span>
   <span fxLayout="row" fxLayoutGap="4px" class="button-container">
-  <button mat-raised-button color="primary" (click)="getReportByMonth()">Сформировать</button>
-  <button mat-raised-button color="primary" [disabled]="!reportLink">
+  <button mat-raised-button color="primary" [disabled]="report?.state === 0"
+          (click)="generateReport()">Сформировать</button>
+  <button mat-raised-button color="primary" [disabled]="!report?.link">
     <span fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="4px">
       <mat-spinner color="primary" [diameter]="16" [strokeWidth]="1"
-                   *ngIf="reportInProcess"></mat-spinner>
+                   *ngIf="report?.state === 0"></mat-spinner>
       <span>Скачать</span>
     </span>
   </button>

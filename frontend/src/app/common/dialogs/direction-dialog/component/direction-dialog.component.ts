@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { DirectionModel, ProjectModel } from '../../../models/dictionary';
 import { DictionaryService } from '../../../../core/services/dictionary';
-import { DictionaryParamModel } from '../../../models/params';
+import { DictionaryParam } from '../../../models/params';
 import { AuthService } from '../../../../core/services/auth';
 import { BaseDestroy } from '../../../models/base-destroy';
 import { prepareFilteredArray } from '../../../utils';
@@ -86,7 +86,7 @@ export class DirectionDialogComponent extends BaseDestroy implements OnInit {
       );
   }
 
-  generateParams(search: string): DictionaryParamModel {
-    return new DictionaryParamModel(this.userId, null, null, search);
+  generateParams(search: string): DictionaryParam {
+    return new DictionaryParam(this.userId, null, null, search);
   }
 }

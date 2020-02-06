@@ -7,7 +7,7 @@
             Отчёт ежедневной активности за текущий месяц
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <report-container>
+        <report-container [report]="reportByCurrentMonth" type="current-month">
           <span>Отчет в формате <b>.xls</b>, содержащий активность по дням и итоговую сводку за текущий месяц.</span>
         </report-container>
       </mat-expansion-panel>
@@ -18,7 +18,7 @@
             Итоговый отчет по часам за текущий месяц
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <report-container>
+        <report-container [report]="finalReportByCurrentMonth" type="final-current-month">
           <span>Отчет в формате <b>.docx</b>, содержащий итоговую сводку за текущий месяц по отработанным часам.</span>
         </report-container>
       </mat-expansion-panel>
@@ -29,7 +29,7 @@
             Отчёт ежедневной активности за месяц (на выбор)
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <report-container [withDate]="true">
+        <report-container [withDate]="true" [report]="reportByMonth" type="month">
           <span>Отчет в формате <b>.xls</b>, содержащий активность по дням и итоговую сводку за выбранный месяц.</span>
         </report-container>
       </mat-expansion-panel>
@@ -40,7 +40,7 @@
             Итоговый отчет по часам за месяц (на выбор)
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <report-container [withDate]="true">
+        <report-container [withDate]="true" [report]="finalReportByMonth" type="final-month">
           <span>Отчет в формате <b>.docx</b>, содержащий итоговую сводку за выбранный месяц по отработанным часам.</span>
         </report-container>
       </mat-expansion-panel>

@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 export class SubjectService {
   getActivitySubject: Subject<boolean> = new Subject<boolean>();
   getDictionarySubject: Subject<string> = new Subject<string>();
+  getReportsSubject: Subject<boolean> = new Subject<boolean>();
 
   constructor() { }
 }

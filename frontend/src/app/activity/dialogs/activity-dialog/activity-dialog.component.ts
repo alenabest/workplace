@@ -10,7 +10,7 @@ import { CustomValidators } from '../../../core/services/form-validation/custom-
 import { ActivityModel, ActivityValidation } from '../../../common/models/activity';
 import { getTimeMessage, prepareFilteredArray } from '../../../common/utils';
 import { DictionaryService } from '../../../core/services/dictionary';
-import { DictionaryParamModel } from '../../../common/models/params';
+import { DictionaryParam } from '../../../common/models/params';
 import { SnackBarService } from '../../../core/services/snack-bar';
 import { BaseDestroy } from '../../../common/models/base-destroy';
 import { ActivityService } from '../../../core/services/activity';
@@ -199,10 +199,10 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
     }
   }
 
-  generateParams(search: string): DictionaryParamModel {
+  generateParams(search: string): DictionaryParam {
     const projects = this.project.value ? this.project.value.id : null;
     const directions = this.direction.value ? this.direction.value.id : null;
-    return new DictionaryParamModel(this.userId, projects, directions, search);
+    return new DictionaryParam(this.userId, projects, directions, search);
   }
 
   getActivityForm(): FormGroup {

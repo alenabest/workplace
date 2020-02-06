@@ -2,7 +2,7 @@ import { formatDateToBacked } from '../../../core/helpers';
 import { WeekListModel } from '../dictionary';
 
 
-class ActivityParam {
+export class ByUserParam {
   constructor(user: number) {
     this.user = user;
   }
@@ -10,7 +10,7 @@ class ActivityParam {
   user: number;
 }
 
-export class DayActivityParam extends ActivityParam {
+export class DayActivityParam extends ByUserParam {
   constructor(user: number, activityDate) {
     super(user);
     this.activityDate = formatDateToBacked(activityDate);
@@ -19,7 +19,7 @@ export class DayActivityParam extends ActivityParam {
   activityDate: string;
 }
 
-export class WeekActivityParam extends ActivityParam {
+export class WeekActivityParam extends ByUserParam {
   constructor(user: number, monday: Date, sunday: Date) {
     super(user);
     this.monday = formatDateToBacked(monday);
@@ -30,7 +30,7 @@ export class WeekActivityParam extends ActivityParam {
   sunday: string;
 }
 
-export class MonthActivityParam extends ActivityParam {
+export class MonthActivityParam extends ByUserParam {
   constructor(user: number, start: Date, end: Date, weekList: WeekListModel[]) {
     super(user);
     this.weekList = this.getWeekList(weekList);
@@ -47,7 +47,7 @@ export class MonthActivityParam extends ActivityParam {
   }
 }
 
-export class DictionaryParamModel {
+export class DictionaryParam {
   constructor(userId: number, projects?: number, directions?: number, search?: string) {
     this.user = userId;
     this.projects = projects;
@@ -60,4 +60,16 @@ export class DictionaryParamModel {
   directions: number;
   search: string;
   ordering: string = 'name';
+}
+
+export class ReportParam {
+  constructor(type: number, startDate: Date, endDate: Date) {
+    this.type = type;
+    this.start = formatDateToBacked(startDate);
+    this.end = formatDateToBacked(endDate);
+  }
+
+  type: number;
+  start: string;
+  end: string;
 }
