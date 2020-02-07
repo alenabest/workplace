@@ -23,6 +23,7 @@ export class ActivityModel {
   startMinute: number;
   endHour: number;
   endMinute: number;
+  duration: number;
 
   @Transform(formatDateToPlain(), { toPlainOnly: true })
   @Transform(formatDateToClass(), { toClassOnly: true })
