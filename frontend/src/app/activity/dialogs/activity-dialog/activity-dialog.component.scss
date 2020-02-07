@@ -5,6 +5,7 @@
 
   .activity-form {
     overflow: auto;
+    height: auto;
     max-height: calc(95vh - 112px);
 
     .time-field {
