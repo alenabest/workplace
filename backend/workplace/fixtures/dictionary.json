@@ -8,6 +8,14 @@
     }
   },
   {
+    "model": "workplace.project",
+    "pk": 2,
+    "fields": {
+      "name": "\u041a\u0418\u0410\u0421",
+      "user": 1
+    }
+  },
+  {
     "model": "workplace.direction",
     "pk": 1,
     "fields": {
@@ -17,10 +25,19 @@
     }
   },
   {
+    "model": "workplace.direction",
+    "pk": 2,
+    "fields": {
+      "name": "\u0421\u0438\u0441\u0442\u0435\u043c\u0430 1",
+      "project": 2,
+      "user": 1
+    }
+  },
+  {
     "model": "workplace.activitytype",
     "pk": 1,
     "fields": {
-      "name": "Front-end. \u041f\u0440\u0430\u043a\u0442\u0438\u043a\u0430",
+      "name": "Front-end",
       "direction": null,
       "user": 1
     }
@@ -29,7 +46,7 @@
     "model": "workplace.activitytype",
     "pk": 2,
     "fields": {
-      "name": "Back-end. \u041f\u0440\u0430\u043a\u0442\u0438\u043a\u0430",
+      "name": "Back-end",
       "direction": null,
       "user": 1
     }

@@ -16,9 +16,5 @@ python manage.py loaddata                   \
 python manage.py loaddata                   \
     workplace/fixtures/dictionary            \
     $SETTINGS
-# shellcheck disable=SC2086
-python manage.py loaddata                   \
-    workplace/fixtures/activity              \
-    $SETTINGS
 
 celery -A workplace worker --loglevel=info

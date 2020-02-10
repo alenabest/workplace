@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
+import locale
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -112,6 +112,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
 
 
 # Static files (CSS, JavaScript, Images)
