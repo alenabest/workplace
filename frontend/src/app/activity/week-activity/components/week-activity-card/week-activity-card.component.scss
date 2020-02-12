@@ -54,7 +54,7 @@
         place-content: center;
         align-items: center;
         cursor: default;
-        height: 60px;
+        height: 59px;
         width: 60px;
 
         &.week {
@@ -67,7 +67,6 @@
 
     .activity-column {
       width: calc((100% - 2px) / 7);
-      margin-top: 8px;
 
       .activity-row {
         border: 1px solid white;
@@ -76,7 +75,7 @@
         z-index: 2;
 
         div {
-          word-break: break-all;
+          word-break: break-word;
           text-align: center;
           max-height: 100%;
           overflow: auto;

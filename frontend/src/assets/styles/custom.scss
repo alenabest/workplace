@@ -50,6 +50,10 @@
     margin-top: 0.35em;
   }
 
+  .mat-select-arrow-wrapper {
+    vertical-align: inherit;
+  }
+
   @media screen and (max-width: 600px) {
     .mat-form-field-appearance-outline .mat-form-field-infix {
       font-size: 1em;
@@ -149,5 +153,11 @@
     max-height: 200px;
     overflow: auto;
     padding: 5px 0;
+  }
+}
+
+.month-field {
+  .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
   }
 }

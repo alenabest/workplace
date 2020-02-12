@@ -38,6 +38,15 @@ export class WeekActivityCardComponent extends BaseDayActivity implements OnChan
     }
   }
 
+  checkTime(day: Date, hour: string, idx: number) {
+    const existActivity = this.weekActivities[idx].activities
+      .find(item => item.endHour === parseInt(hour.split(':')[0], 10));
+    if (existActivity) {
+      hour = existActivity.end;
+    }
+    this.addActivity(day, hour);
+  }
+
   calculateScrollTop(): number {
     const firstActivity = this.getFirstActivity();
     if (firstActivity) {

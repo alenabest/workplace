@@ -35,6 +35,14 @@ export class DayActivityCardComponent extends BaseDayActivity implements OnChang
     }
   }
 
+  checkTime(day: Date, hour: string) {
+    const existActivity = this.activities.find(item => item.endHour === parseInt(hour.split(':')[0], 10));
+    if (existActivity) {
+      hour = existActivity.end;
+    }
+    this.addActivity(day, hour);
+  }
+
   calculateScrollTop(): number {
     if (!this.activities || this.activities.length === 0) {
       return 0;

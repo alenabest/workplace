@@ -2,7 +2,7 @@
   <div fxFlex="64px">
     <div fxLayout="column">
       <div fxLayoutAlign="flex-start center" *ngFor="let hour of hourArray" class="hour-row"
-           (click)="addActivity(currentDate, hour)">
+           (click)="checkTime(currentDate, hour)">
         {{ hour }}
       </div>
     </div>
