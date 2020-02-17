@@ -12,7 +12,7 @@
   <span fxLayout="row" fxLayoutGap="4px" class="button-container">
   <button mat-raised-button color="primary" [disabled]="report?.state === 0"
           (click)="generateReport()">Сформировать</button>
-  <button mat-raised-button color="primary" [disabled]="!report?.link">
+  <button mat-raised-button color="primary" [disabled]="!report?.link" (click)="downloadReport()">
     <span fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="4px">
       <mat-spinner color="primary" [diameter]="16" [strokeWidth]="1"
                    *ngIf="report?.state === 0"></mat-spinner>

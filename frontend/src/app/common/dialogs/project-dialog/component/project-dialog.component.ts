@@ -19,7 +19,7 @@ export class ProjectDialogComponent extends BaseDestroy {
   title: string = 'Создание';
   userId: number;
 
-  projectForm: FormGroup = this.getProjectForm();
+  projectForm: FormGroup;
 
   get name() {
     return this.projectForm.get('name');
@@ -37,7 +37,7 @@ export class ProjectDialogComponent extends BaseDestroy {
     } else {
       this.project = new ProjectModel(this.userId);
     }
-
+    this.projectForm = this.getProjectForm();
     this.projectForm.patchValue(this.project);
   }
 

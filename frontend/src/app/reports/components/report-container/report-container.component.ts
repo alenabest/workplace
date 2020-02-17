@@ -7,7 +7,8 @@ import { BaseDestroy } from '../../../common/models/base-destroy';
 import { SubjectService } from '../../../core/services/subject';
 import { ReportService } from '../../../core/services/report';
 import { ReportParam } from '../../../common/models/params';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
+import { SnackBarService } from '../../../core/services/snack-bar';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class ReportContainerComponent extends BaseDestroy {
   reportDateFormat: string = 'LLLL yyyy';
 
   constructor(private readonly reportService: ReportService,
-              private readonly subjectService: SubjectService) {
+              private readonly subjectService: SubjectService,
+              private readonly snackBarService: SnackBarService) {
     super();
   }
 
@@ -40,5 +42,14 @@ export class ReportContainerComponent extends BaseDestroy {
     const startDate: Date = startOfMonth(this.dateControl.value);
     const endDate: Date = endOfMonth(this.dateControl.value);
     return new ReportParam(type, startDate, endDate);
+  }
+
+  downloadReport(): void {
+    this.reportService.downloadReports(this.report.id)
+      .pipe(
+        tap(() => this.snackBarService.success('Отчёт загружен')),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 }

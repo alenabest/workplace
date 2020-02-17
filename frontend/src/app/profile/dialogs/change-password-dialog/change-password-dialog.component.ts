@@ -63,7 +63,7 @@ export class ChangePasswordDialogComponent extends BaseDestroy implements OnInit
   }
 
   completeChanges() {
-    this.snackBarService.openSnackBar('Пароль изменён');
+    this.snackBarService.success('Пароль изменён');
     this.dialogRef.close();
   }
 

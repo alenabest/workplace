@@ -158,7 +158,7 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
   openSnackBar(result: ActivityValidation) {
     const startMessage: string = getTimeMessage(result.start, 'начала', 'раньше');
     const endMessage: string = getTimeMessage(result.end, 'окончания', 'позже');
-    this.snackBarService.openSnackBar(`${startMessage} ${endMessage}`, '-warning');
+    this.snackBarService.warning(`${startMessage} ${endMessage}`);
   }
 
   validateActivity(): Observable<ActivityValidation> {

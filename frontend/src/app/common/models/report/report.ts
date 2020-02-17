@@ -10,6 +10,8 @@ export const ReportTypeMap = new Map([
 ]);
 
 export class ReportModel {
+  id: number;
+
   @Transform(formatDateToPlain(), { toPlainOnly: true })
   @Transform(formatDateToClass(), { toClassOnly: true })
   generated?: Date;

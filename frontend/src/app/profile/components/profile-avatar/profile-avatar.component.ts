@@ -79,6 +79,6 @@ export class ProfileAvatarComponent extends BaseDestroy {
   completeActions(url: string, avatarUrl: string, message: string) {
     this.userAvatar = avatarUrl;
     this.authService.currentUser.avatar = url;
-    this.snackBarService.openSnackBar(message);
+    this.snackBarService.success(message);
   }
 }
