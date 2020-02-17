@@ -1,0 +1,1041 @@
+[
+{
+  "model": "workplace.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$MGzJ6tDMGtwM$0gNL2ChZXAucj7Bg3H+eI0acvQqXs1g5jYArlX8DlvY=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "\u0410\u043b\u0451\u043d\u0430",
+    "last_name": "\u0425\u0440\u0435\u043d\u043e\u0432\u0441\u043a\u0430\u044f",
+    "email": "admin@admin.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-02-28T07:39:47.686Z",
+    "middle_name": "\u0410\u043d\u0434\u0440\u0435\u0435\u0432\u043d\u0430",
+    "birthday": "1992-10-03",
+    "mobile": "",
+    "phone": "",
+    "avatar": "media/workplace/avatars/1/blob_ptTvtw6",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "workplace.project",
+  "pk": 1,
+  "fields": {
+    "name": "WORKPLACE",
+    "user": 1
+  }
+},
+{
+  "model": "workplace.project",
+  "pk": 2,
+  "fields": {
+    "name": "\u041a\u0418\u0410\u0421",
+    "user": 1
+  }
+},
+{
+  "model": "workplace.direction",
+  "pk": 1,
+  "fields": {
+    "name": "\u0412 \u0440\u0430\u043c\u043a\u0430\u0445 \u043e\u0431\u0443\u0447\u0435\u043d\u0438\u044f",
+    "project": null,
+    "user": 1
+  }
+},
+{
+  "model": "workplace.direction",
+  "pk": 2,
+  "fields": {
+    "name": "\u0421\u0438\u0441\u0442\u0435\u043c\u0430 1",
+    "project": 2,
+    "user": 1
+  }
+},
+{
+  "model": "workplace.direction",
+  "pk": 3,
+  "fields": {
+    "name": "\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u044f",
+    "project": null,
+    "user": 1
+  }
+},
+{
+  "model": "workplace.activitytype",
+  "pk": 1,
+  "fields": {
+    "name": "Front-end",
+    "direction": null,
+    "user": 1
+  }
+},
+{
+  "model": "workplace.activitytype",
+  "pk": 2,
+  "fields": {
+    "name": "Back-end",
+    "direction": null,
+    "user": 1
+  }
+},
+{
+  "model": "workplace.activitytype",
+  "pk": 3,
+  "fields": {
+    "name": "Dev-ops",
+    "direction": null,
+    "user": 1
+  }
+},
+{
+  "model": "workplace.activitytype",
+  "pk": 4,
+  "fields": {
+    "name": "\u0423\u0447\u0451\u0442 \u0440\u0430\u0431\u043e\u0447\u0435\u0433\u043e \u0432\u0440\u0435\u043c\u0435\u043d\u0438",
+    "direction": 3,
+    "user": 1
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 1,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0438 10-15, 18",
+    "start": "08:00",
+    "end": "09:30",
+    "height": "90px",
+    "duration": 90,
+    "startHour": 8,
+    "startMinute": 0,
+    "endHour": 9,
+    "endMinute": 30,
+    "activityDate": "2020-02-10",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-10T12:41:26.730Z",
+    "updated": "2020-02-12T12:36:57.766Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 2,
+  "fields": {
+    "description": "\u0424\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u043e\u0442\u0447\u0435\u0442\u0430 \u0432 \u0415\u043a\u0441\u0435\u043b\u044c",
+    "start": "09:30",
+    "end": "12:00",
+    "height": "150px",
+    "duration": 150,
+    "startHour": 9,
+    "startMinute": 30,
+    "endHour": 12,
+    "endMinute": 0,
+    "activityDate": "2020-02-10",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-10T12:41:49.210Z",
+    "updated": "2020-02-12T12:37:00.245Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 3,
+  "fields": {
+    "description": "\u0424\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0444\u0430\u0439\u043b\u0430 \u043e\u0442\u0447\u0435\u0442\u0430",
+    "start": "13:00",
+    "end": "15:40",
+    "height": "160px",
+    "duration": 160,
+    "startHour": 13,
+    "startMinute": 0,
+    "endHour": 15,
+    "endMinute": 40,
+    "activityDate": "2020-02-10",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-11T10:36:40.102Z",
+    "updated": "2020-02-12T12:37:20.886Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 4,
+  "fields": {
+    "description": "\u0437\u0430\u0434\u0430\u0447\u0438 16 \u0438 19",
+    "start": "15:40",
+    "end": "17:00",
+    "height": "80px",
+    "duration": 80,
+    "startHour": 15,
+    "startMinute": 40,
+    "endHour": 17,
+    "endMinute": 0,
+    "activityDate": "2020-02-10",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-11T10:37:45.295Z",
+    "updated": "2020-02-12T12:37:17.825Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 5,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0438 20 - 33",
+    "start": "08:00",
+    "end": "12:00",
+    "height": "240px",
+    "duration": 240,
+    "startHour": 8,
+    "startMinute": 0,
+    "endHour": 12,
+    "endMinute": 0,
+    "activityDate": "2020-02-11",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-11T10:38:48.284Z",
+    "updated": "2020-02-12T12:37:02.729Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 6,
+  "fields": {
+    "description": "\u041f\u0435\u0440\u0435\u0441\u043c\u043e\u0442\u0440 \u0441\u0442\u0438\u043b\u0435\u0439 \u0443 \u0434\u0438\u0430\u043b\u043e\u0433\u0430 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u0438",
+    "start": "13:00",
+    "end": "13:40",
+    "height": "40px",
+    "duration": 40,
+    "startHour": 13,
+    "startMinute": 0,
+    "endHour": 13,
+    "endMinute": 40,
+    "activityDate": "2020-02-11",
+    "project": 1,
+    "direction": 1,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-11T10:41:21.586Z",
+    "updated": "2020-02-12T12:37:12.011Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 7,
+  "fields": {
+    "description": "\u0424\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0444\u0430\u0439\u043b\u0430 \u043e\u0442\u0447\u0435\u0442\u0430 (\u0438\u0442\u043e\u0433\u043e\u0432\u0430\u044f \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430)",
+    "start": "13:40",
+    "end": "17:00",
+    "height": "200px",
+    "duration": 200,
+    "startHour": 13,
+    "startMinute": 40,
+    "endHour": 17,
+    "endMinute": 0,
+    "activityDate": "2020-02-11",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-12T05:54:58.359Z",
+    "updated": "2020-02-12T12:37:15.144Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 10,
+  "fields": {
+    "description": "\u0424\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0444\u0430\u0439\u043b\u0430 \u043e\u0442\u0447\u0435\u0442\u0430 \u043f\u043e \u0434\u043d\u044f\u043c",
+    "start": "08:00",
+    "end": "12:00",
+    "height": "240px",
+    "duration": 240,
+    "startHour": 8,
+    "startMinute": 0,
+    "endHour": 12,
+    "endMinute": 0,
+    "activityDate": "2020-02-12",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-12T12:25:41.969Z",
+    "updated": "2020-02-12T12:37:24.301Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 11,
+  "fields": {
+    "description": "\u0424\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0435\u0436\u0435\u043c\u0435\u0441\u044f\u0447\u043d\u043e\u0433\u043e \u043e\u0442\u0447\u0435\u0442\u0430 - \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u0435 \u0444\u0430\u0439\u043b\u0430",
+    "start": "13:00",
+    "end": "15:00",
+    "height": "120px",
+    "duration": 120,
+    "startHour": 13,
+    "startMinute": 0,
+    "endHour": 15,
+    "endMinute": 0,
+    "activityDate": "2020-02-12",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-12T13:00:57.955Z",
+    "updated": "2020-02-12T13:08:54.853Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 12,
+  "fields": {
+    "description": "\u0420\u0435\u0448\u0435\u043d\u0438\u0435 \u043f\u0440\u043e\u0431\u043b\u0435\u043c\u044b \u0441 \u0441\u0435\u0442\u043a\u043e\u0439 \u043d\u0435\u0434\u0435\u043b\u044c\u043d\u043e\u0439 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u0438",
+    "start": "15:00",
+    "end": "17:00",
+    "height": "120px",
+    "duration": 120,
+    "startHour": 15,
+    "startMinute": 0,
+    "endHour": 17,
+    "endMinute": 0,
+    "activityDate": "2020-02-12",
+    "project": 1,
+    "direction": 1,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-12T13:08:31.707Z",
+    "updated": "2020-02-17T08:50:54.209Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 13,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0438 1-5",
+    "start": "08:00",
+    "end": "10:00",
+    "height": "120px",
+    "duration": 120,
+    "startHour": 8,
+    "startMinute": 0,
+    "endHour": 10,
+    "endMinute": 0,
+    "activityDate": "2020-02-03",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:38:02.434Z",
+    "updated": "2020-02-17T08:38:02.434Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 14,
+  "fields": {
+    "description": "\u0421\u0435\u043b\u0435\u043a\u0442 \u0441 \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u0438\u0435\u043c \u0438 \u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c",
+    "start": "10:00",
+    "end": "12:00",
+    "height": "120px",
+    "duration": 120,
+    "startHour": 10,
+    "startMinute": 0,
+    "endHour": 12,
+    "endMinute": 0,
+    "activityDate": "2020-02-03",
+    "project": 1,
+    "direction": 1,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:38:59.166Z",
+    "updated": "2020-02-17T08:38:59.166Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 15,
+  "fields": {
+    "description": "\u0421\u0435\u043b\u0435\u043a\u0442 \u0441 \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u0438\u0435\u043c \u0438 \u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c",
+    "start": "13:00",
+    "end": "17:00",
+    "height": "240px",
+    "duration": 240,
+    "startHour": 13,
+    "startMinute": 0,
+    "endHour": 17,
+    "endMinute": 0,
+    "activityDate": "2020-02-03",
+    "project": 1,
+    "direction": 1,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:39:11.708Z",
+    "updated": "2020-02-17T08:39:11.708Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 16,
+  "fields": {
+    "description": "\u041a\u0430\u0441\u0442\u043e\u043c\u043d\u044b\u0439 \u0441\u0435\u043b\u0435\u043a\u0442 \u0441 \u043f\u043e\u0438\u0441\u043a\u043e\u043c, \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u0438\u0435\u043c \u0438 \u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u043e\u0432",
+    "start": "08:00",
+    "end": "12:00",
+    "height": "240px",
+    "duration": 240,
+    "startHour": 8,
+    "startMinute": 0,
+    "endHour": 12,
+    "endMinute": 0,
+    "activityDate": "2020-02-04",
+    "project": 1,
+    "direction": 1,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:39:46.850Z",
+    "updated": "2020-02-17T08:39:46.850Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 17,
+  "fields": {
+    "description": "search \u0434\u043b\u044f activityType, project, direction",
+    "start": "13:00",
+    "end": "14:00",
+    "height": "60px",
+    "duration": 60,
+    "startHour": 13,
+    "startMinute": 0,
+    "endHour": 14,
+    "endMinute": 0,
+    "activityDate": "2020-02-04",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-17T08:40:24.989Z",
+    "updated": "2020-02-17T08:40:24.989Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 18,
+  "fields": {
+    "description": "\u0414\u0438\u0430\u043b\u043e\u0433\u0438 \u0434\u043b\u044f \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u043d\u043e\u0432\u043e\u0433\u043e \u0432\u0438\u0434\u0430 \u0440\u0430\u0431\u043e\u0442\u044b, \u043d\u0430\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f, \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+    "start": "14:00",
+    "end": "17:00",
+    "height": "180px",
+    "duration": 180,
+    "startHour": 14,
+    "startMinute": 0,
+    "endHour": 17,
+    "endMinute": 0,
+    "activityDate": "2020-02-04",
+    "project": 1,
+    "direction": 1,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:40:51.748Z",
+    "updated": "2020-02-17T08:42:24.285Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 19,
+  "fields": {
+    "description": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u0441\u043f\u0438\u0441\u043a\u043e\u0432 \u043f\u0440\u0438 \u0441\u0431\u0440\u043e\u0441\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0439 \u0432 \u0441\u0435\u043b\u0435\u043a\u0442\u0435. \u041c\u0430\u0442\u0435\u0440\u0438\u0430\u043b-\u043c\u043e\u0434\u0443\u043b\u0438 \u0432\u044b\u043d\u0435\u0441\u0435\u043d\u044b \u0432 \u0443\u043f\u0440\u043e\u0449\u0435\u043d\u043d\u044b\u0435 \u0434\u043b\u044f \u0434\u0438\u0430\u043b\u043e\u0433\u043e\u0432",
+    "start": "08:00",
+    "end": "10:00",
+    "height": "120px",
+    "duration": 120,
+    "startHour": 8,
+    "startMinute": 0,
+    "endHour": 10,
+    "endMinute": 0,
+    "activityDate": "2020-02-05",
+    "project": 1,
+    "direction": 1,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:42:50.633Z",
+    "updated": "2020-02-17T08:42:50.633Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 20,
+  "fields": {
+    "description": "\u043f\u043e\u043b\u0435 \u0434\u043b\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c + \u0440\u0430\u0441\u0441\u0447\u0435\u0442",
+    "start": "10:00",
+    "end": "10:50",
+    "height": "50px",
+    "duration": 50,
+    "startHour": 10,
+    "startMinute": 0,
+    "endHour": 10,
+    "endMinute": 50,
+    "activityDate": "2020-02-05",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-17T08:43:32.074Z",
+    "updated": "2020-02-17T08:43:32.074Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 21,
+  "fields": {
+    "description": "\u041a\u043e\u043c\u043f\u043e\u043d\u0435\u043d\u0442 \u0434\u043b\u044f \u0434\u0435\u0439\u0442\u043f\u0438\u043a\u0435\u0440\u0430 \u0441 \u0432\u044b\u0431\u043e\u0440\u043e\u043c \u043c\u0435\u0441\u044f\u0446\u0430",
+    "start": "10:50",
+    "end": "12:00",
+    "height": "70px",
+    "duration": 70,
+    "startHour": 10,
+    "startMinute": 50,
+    "endHour": 12,
+    "endMinute": 0,
+    "activityDate": "2020-02-05",
+    "project": 1,
+    "direction": 1,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:44:23.383Z",
+    "updated": "2020-02-17T08:44:23.383Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 22,
+  "fields": {
+    "description": "\u041c\u043e\u0434\u0443\u043b\u044c \u043e\u0442\u0447\u0435\u0442\u044b",
+    "start": "13:00",
+    "end": "17:00",
+    "height": "240px",
+    "duration": 240,
+    "startHour": 13,
+    "startMinute": 0,
+    "endHour": 17,
+    "endMinute": 0,
+    "activityDate": "2020-02-05",
+    "project": 1,
+    "direction": 1,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:44:38.496Z",
+    "updated": "2020-02-17T08:44:38.496Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 23,
+  "fields": {
+    "description": "\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430 CI \u0434\u043b\u044f \u0442\u0435\u0441\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f",
+    "start": "08:00",
+    "end": "09:30",
+    "height": "90px",
+    "duration": 90,
+    "startHour": 8,
+    "startMinute": 0,
+    "endHour": 9,
+    "endMinute": 30,
+    "activityDate": "2020-02-06",
+    "project": 1,
+    "direction": 1,
+    "type": 3,
+    "user": 1,
+    "created": "2020-02-17T08:45:51.749Z",
+    "updated": "2020-02-17T08:45:51.749Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 24,
+  "fields": {
+    "description": "celery, redis, nginx, configs, bin",
+    "start": "09:30",
+    "end": "10:10",
+    "height": "40px",
+    "duration": 40,
+    "startHour": 9,
+    "startMinute": 30,
+    "endHour": 10,
+    "endMinute": 10,
+    "activityDate": "2020-02-06",
+    "project": 1,
+    "direction": 1,
+    "type": 3,
+    "user": 1,
+    "created": "2020-02-17T08:46:17.766Z",
+    "updated": "2020-02-17T08:46:17.766Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 25,
+  "fields": {
+    "description": "\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438 \u0434\u043b\u044f Celery + \u043c\u043e\u0434\u0435\u043b\u044c \u041e\u0442\u0447\u0435\u0442\u043e\u0432",
+    "start": "10:10",
+    "end": "12:00",
+    "height": "110px",
+    "duration": 110,
+    "startHour": 10,
+    "startMinute": 10,
+    "endHour": 12,
+    "endMinute": 0,
+    "activityDate": "2020-02-06",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-17T08:46:40.265Z",
+    "updated": "2020-02-17T08:46:40.265Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 26,
+  "fields": {
+    "description": "\u041c\u043e\u0434\u0443\u043b\u044c \u041e\u0442\u0447\u0435\u0442\u044b - \u0441\u0432\u044f\u0437\u044c \u0441 \u0431\u044d\u043a\u0435\u043d\u0434\u043e\u043c",
+    "start": "13:00",
+    "end": "17:00",
+    "height": "240px",
+    "duration": 240,
+    "startHour": 13,
+    "startMinute": 0,
+    "endHour": 17,
+    "endMinute": 0,
+    "activityDate": "2020-02-06",
+    "project": 1,
+    "direction": 1,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:47:01.857Z",
+    "updated": "2020-02-17T08:47:01.857Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 27,
+  "fields": {
+    "description": "\u0413\u0440\u0443\u043f\u043f\u0438\u0440\u043e\u0432\u043a\u0430 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u0435\u0439 \u0434\u043b\u044f \u043e\u0442\u0447\u0435\u0442\u043e\u0432",
+    "start": "08:00",
+    "end": "09:30",
+    "height": "90px",
+    "duration": 90,
+    "startHour": 8,
+    "startMinute": 0,
+    "endHour": 9,
+    "endMinute": 30,
+    "activityDate": "2020-02-07",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-17T08:47:43.953Z",
+    "updated": "2020-02-17T08:47:43.953Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 28,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0430 10",
+    "start": "09:30",
+    "end": "12:00",
+    "height": "150px",
+    "duration": 150,
+    "startHour": 9,
+    "startMinute": 30,
+    "endHour": 12,
+    "endMinute": 0,
+    "activityDate": "2020-02-07",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:48:20.790Z",
+    "updated": "2020-02-17T08:48:20.790Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 29,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0430 10",
+    "start": "12:30",
+    "end": "14:30",
+    "height": "120px",
+    "duration": 120,
+    "startHour": 12,
+    "startMinute": 30,
+    "endHour": 14,
+    "endMinute": 30,
+    "activityDate": "2020-02-07",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:48:59.291Z",
+    "updated": "2020-02-17T08:48:59.291Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 30,
+  "fields": {
+    "description": "\u0424\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0434\u0430\u043d\u043d\u044b\u0445 \u0434\u043b\u044f \u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044f \u0441\u0435\u0442\u043a\u0438 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u0438",
+    "start": "14:30",
+    "end": "16:30",
+    "height": "120px",
+    "duration": 120,
+    "startHour": 14,
+    "startMinute": 30,
+    "endHour": 16,
+    "endMinute": 30,
+    "activityDate": "2020-02-07",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-17T08:49:41.174Z",
+    "updated": "2020-02-17T08:49:41.174Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 31,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0430 34",
+    "start": "08:00",
+    "end": "12:00",
+    "height": "240px",
+    "duration": 240,
+    "startHour": 8,
+    "startMinute": 0,
+    "endHour": 12,
+    "endMinute": 0,
+    "activityDate": "2020-02-13",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:51:39.732Z",
+    "updated": "2020-02-17T08:51:39.732Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 32,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0430 35",
+    "start": "13:00",
+    "end": "16:20",
+    "height": "200px",
+    "duration": 200,
+    "startHour": 13,
+    "startMinute": 0,
+    "endHour": 16,
+    "endMinute": 20,
+    "activityDate": "2020-02-13",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:51:58.328Z",
+    "updated": "2020-02-17T08:51:58.328Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 33,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0430 36",
+    "start": "16:20",
+    "end": "17:00",
+    "height": "40px",
+    "duration": 40,
+    "startHour": 16,
+    "startMinute": 20,
+    "endHour": 17,
+    "endMinute": 0,
+    "activityDate": "2020-02-13",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:52:13.731Z",
+    "updated": "2020-02-17T08:52:27.446Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 34,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0430 37",
+    "start": "08:00",
+    "end": "09:30",
+    "height": "90px",
+    "duration": 90,
+    "startHour": 8,
+    "startMinute": 0,
+    "endHour": 9,
+    "endMinute": 30,
+    "activityDate": "2020-02-14",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:53:29.092Z",
+    "updated": "2020-02-17T08:53:34.186Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 35,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0430 38-40",
+    "start": "09:30",
+    "end": "12:00",
+    "height": "150px",
+    "duration": 150,
+    "startHour": 9,
+    "startMinute": 30,
+    "endHour": 12,
+    "endMinute": 0,
+    "activityDate": "2020-02-14",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:54:02.045Z",
+    "updated": "2020-02-17T08:54:02.045Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 36,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0438 41-43",
+    "start": "12:30",
+    "end": "16:30",
+    "height": "240px",
+    "duration": 240,
+    "startHour": 12,
+    "startMinute": 30,
+    "endHour": 16,
+    "endMinute": 30,
+    "activityDate": "2020-02-14",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:54:26.396Z",
+    "updated": "2020-02-17T08:54:26.396Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 37,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0438 46, 47",
+    "start": "08:00",
+    "end": "08:40",
+    "height": "40px",
+    "duration": 40,
+    "startHour": 8,
+    "startMinute": 0,
+    "endHour": 8,
+    "endMinute": 40,
+    "activityDate": "2020-02-17",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:55:38.524Z",
+    "updated": "2020-02-17T08:55:38.524Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 38,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0438 48, 49",
+    "start": "08:40",
+    "end": "09:00",
+    "height": "20px",
+    "duration": 20,
+    "startHour": 8,
+    "startMinute": 40,
+    "endHour": 9,
+    "endMinute": 0,
+    "activityDate": "2020-02-17",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:56:16.285Z",
+    "updated": "2020-02-17T08:56:16.285Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 39,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0438 51-53",
+    "start": "09:00",
+    "end": "09:40",
+    "height": "40px",
+    "duration": 40,
+    "startHour": 9,
+    "startMinute": 0,
+    "endHour": 9,
+    "endMinute": 40,
+    "activityDate": "2020-02-17",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:57:08.067Z",
+    "updated": "2020-02-17T08:57:08.067Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 40,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0430 4",
+    "start": "09:40",
+    "end": "10:10",
+    "height": "30px",
+    "duration": 30,
+    "startHour": 9,
+    "startMinute": 40,
+    "endHour": 10,
+    "endMinute": 10,
+    "activityDate": "2020-02-17",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:57:36.415Z",
+    "updated": "2020-02-17T08:57:36.415Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 41,
+  "fields": {
+    "description": "\u0417\u0430\u0434\u0430\u0447\u0438 17, 33",
+    "start": "10:10",
+    "end": "11:30",
+    "height": "80px",
+    "duration": 80,
+    "startHour": 10,
+    "startMinute": 10,
+    "endHour": 11,
+    "endMinute": 30,
+    "activityDate": "2020-02-17",
+    "project": 2,
+    "direction": 2,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T08:58:08.844Z",
+    "updated": "2020-02-17T10:18:49.963Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 42,
+  "fields": {
+    "description": "\u0417\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u0435 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u0438 \u0437\u0430 \u043c\u0435\u0441\u044f\u0446",
+    "start": "11:30",
+    "end": "12:00",
+    "height": "30px",
+    "duration": 30,
+    "startHour": 11,
+    "startMinute": 30,
+    "endHour": 12,
+    "endMinute": 0,
+    "activityDate": "2020-02-17",
+    "project": null,
+    "direction": 3,
+    "type": 4,
+    "user": 1,
+    "created": "2020-02-17T09:01:16.899Z",
+    "updated": "2020-02-17T09:01:16.899Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 43,
+  "fields": {
+    "description": "\u0421\u043a\u0430\u0447\u0438\u0432\u0430\u043d\u0438\u0435 \u0444\u0430\u0439\u043b\u0430 \u043e\u0442\u0447\u0451\u0442\u0430",
+    "start": "13:00",
+    "end": "15:00",
+    "height": "120px",
+    "duration": 120,
+    "startHour": 13,
+    "startMinute": 0,
+    "endHour": 15,
+    "endMinute": 0,
+    "activityDate": "2020-02-17",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-17T13:47:34.260Z",
+    "updated": "2020-02-17T13:47:34.260Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 44,
+  "fields": {
+    "description": "\u0421\u043a\u0430\u0447\u0438\u0432\u0430\u043d\u0438\u0435 \u0444\u0430\u0439\u043b\u0430 \u043e\u0442\u0447\u0451\u0442\u0430",
+    "start": "15:00",
+    "end": "17:00",
+    "height": "120px",
+    "duration": 120,
+    "startHour": 15,
+    "startMinute": 0,
+    "endHour": 17,
+    "endMinute": 0,
+    "activityDate": "2020-02-17",
+    "project": 1,
+    "direction": 1,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-17T13:47:48.603Z",
+    "updated": "2020-02-17T13:47:48.603Z"
+  }
+},
+{
+  "model": "workplace.report",
+  "pk": 1,
+  "fields": {
+    "type": 0,
+    "state": 1,
+    "link": "media/workplace/reports/1/\u0425\u0440\u0435\u043d\u043e\u0432\u0441\u043a\u0430\u044f \u0410\u043b\u0451\u043d\u0430 - \u043e\u0442\u0447\u0435\u0442 \u0437\u0430 \u0424\u0435\u0432\u0440\u0430\u043b\u044c 2020.xlsx",
+    "user": 1,
+    "generated": "2020-02-01",
+    "created": "2020-02-10T12:41:58.424Z",
+    "updated": "2020-02-17T10:58:34.218Z"
+  }
+}
+]
