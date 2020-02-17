@@ -1,4 +1,8 @@
+import os
+import unicodedata
 from datetime import datetime, timedelta
+
+from django.utils.http import urlquote
 
 
 def get_string_month_year(date):
@@ -32,3 +36,19 @@ def convert_minutes_to_hour(duration):
         return f"{hours:.1f}"
     else:
         return 0
+
+
+def rfc5987_content_disposition(file_name):
+    ascii_name = unicodedata.normalize('NFKD', file_name).encode('ascii', 'ignore').decode()
+    header = 'attachment; filename="{}"'.format(ascii_name)
+    if ascii_name != file_name:
+        quoted_name = urlquote(file_name)
+        header += '; filename*=UTF-8\'\'{}'.format(quoted_name)
+
+    return header
+
+
+def get_name_file_field(field):
+    if field and field.path:
+        return os.path.basename(field.path)
+    return 'Без имени'

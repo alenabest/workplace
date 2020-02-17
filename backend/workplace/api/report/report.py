@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import os
-
 from django.db.models import Sum
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django_filters.rest_framework import FilterSet
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from workplace.api.report.create_excel_month_report import create_excel_month_report
-from workplace.common.utils import get_date_list, convert_minutes_to_hour
+from workplace.common.utils import get_date_list, convert_minutes_to_hour, rfc5987_content_disposition, \
+    get_name_file_field
 from workplace.models import Report, Activity
 from workplace.celery import app as celery_app
 from workplace.serializers.report import ReportSerializer
@@ -33,15 +33,28 @@ class ReportDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ReportSerializer
 
 
+@api_view(['GET'])
+def download(request, pk):
+    report = Report.objects.filter(pk=pk).first()
+    if not report:
+        return Response(data={'messages': ['Объекта с данным первичным ключом не существует']},
+                        status=status.HTTP_404_NOT_FOUND)
+    response = HttpResponse(report.link, content_type='application/octet-stream')
+    response['Content-Disposition'] = rfc5987_content_disposition(get_name_file_field(report.link))
+    return response
+
+
 def get_days(types, start, end, activity_type):
     day_list = get_date_list(start, end)
     items = []
     for day in day_list:
-        duration = types.filter(activityDate=day.get('date'), type=activity_type).aggregate(Sum('duration'))
+        minutes = 0
+        if types.filter(activityDate=day.get('date'), type=activity_type).first():
+            minutes = types.filter(activityDate=day.get('date'), type=activity_type).first().get('minutes')
         item = {
             'day': day.get('day'),
             'weekend': day.get('weekend'),
-            'duration': convert_minutes_to_hour(duration.get('duration__sum'))
+            'duration': convert_minutes_to_hour(minutes)
         }
         items.append(item)
     return items
