@@ -8,13 +8,16 @@ SETTINGS="--settings backend.settings.development"
 
 # shellcheck disable=SC2086
 python manage.py migrate $SETTINGS
+
 # shellcheck disable=SC2086
-python manage.py loaddata                   \
-    workplace/fixtures/users                 \
-    $SETTINGS
+python manage.py loaddata workplace/fixtures/workplace $SETTINGS
 # shellcheck disable=SC2086
-python manage.py loaddata                   \
-    workplace/fixtures/dictionary            \
-    $SETTINGS
+#python manage.py loaddata                   \
+#    workplace/fixtures/users                 \
+#    $SETTINGS
+# shellcheck disable=SC2086
+#python manage.py loaddata                   \
+#    workplace/fixtures/dictionary            \
+#    $SETTINGS
 
 celery -A workplace worker --loglevel=info
