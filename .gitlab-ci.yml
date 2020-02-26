@@ -10,6 +10,14 @@ stages:
   - review
   - preprod
 
+variables:
+  CI_ENVIRONMENT_DOMAIN: wp.env.gitlab.rmc-rostov.ru
+  DATABASE_HOST: 10.0.3.10
+  DATABASE_PORT: 5432
+  DATABASE_USER: postgres
+  CONTAINER_TEST_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
+  CONTAINER_RELEASE_IMAGE: ${CI_REGISTRY_IMAGE}:latest
+
 LINT:
   stage: test
   script:
