@@ -1,0 +1,20 @@
+<mat-card class="common-theme project-container">
+  <mat-card-title>Проект. {{ title }}</mat-card-title>
+  <mat-card-content>
+    <form role="form" [formGroup]="projectForm" fxLayout="column">
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Наименование</mat-label>
+        <input matInput formControlName="name" placeholder="Введите наименование проекта" required>
+        <mat-error>
+          <validation-error [control]="name"></validation-error>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions fxLayout="row" fxLayoutAlign="flex-end center" fxLayoutGap="8px">
+    <button mat-button color="primary" type="button" mat-dialog-close>Отмена</button>
+    <button mat-raised-button color="primary" type="button" [disabled]="projectForm.invalid" (click)="saveProject()">
+      Сохранить
+    </button>
+  </mat-card-actions>
+</mat-card>

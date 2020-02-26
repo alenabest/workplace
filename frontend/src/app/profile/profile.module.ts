@@ -1,16 +1,24 @@
 import { NgModule } from '@angular/core';
-
-import { ProfileComponentsModule } from './components/profile-components.module';
 import { RouterModule } from '@angular/router';
-import { PROFILE_ROUTES } from './profile.routes';
 
+import { ProfileComponentsModule } from './components';
+import { PROFILE_ROUTES } from './profile.routes';
+import { ProfileDialogsModule } from './dialogs';
+
+
+const modules = [
+  ProfileComponentsModule,
+  ProfileDialogsModule
+];
 
 @NgModule({
   imports: [
-    ProfileComponentsModule,
-    RouterModule.forRoot(PROFILE_ROUTES)
+    modules,
+    RouterModule.forChild(PROFILE_ROUTES)
   ],
-  exports: [ProfileComponentsModule]
+  exports: [
+    modules
+  ]
 })
 export class ProfileModule {
 }

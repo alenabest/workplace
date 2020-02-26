@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CoreModule } from '../core.module';
+
 import { MaterialModules } from '../material.modules';
-import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { SidebarComponent } from './sidebar';
+import { CoreModule } from '../core.module';
+import { HeaderComponent } from './header';
 
 
 const components = [

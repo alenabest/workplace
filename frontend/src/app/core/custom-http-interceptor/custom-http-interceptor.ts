@@ -39,13 +39,14 @@ export class CustomHttpInterceptor implements HttpInterceptor {
       this._redirectToLoginPage();
     } else if (status === 403) {
       this.snackBarService
-        .openSnackBar('У вас недостаточно прав, чтобы выполнить данное действие', '-warning');
-    } else if (status === 503) {
+        .warning('У вас недостаточно прав, чтобы выполнить данное действие');
+    } else if (status === 503 || status === 504) {
+      this._redirectToLoginPage();
       this.snackBarService
-        .openSnackBar('На сервере ведутся технические работы. Попробуйте позднее.');
+        .success('На сервере ведутся технические работы. Попробуйте позднее.');
     } else if (status >= 400) {
       this.snackBarService
-        .openSnackBar(this._prepareMessage(error), '-warning');
+        .warning(this._prepareMessage(error));
     }
   }
 
@@ -64,7 +65,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     if (authorizationToken) {
       request = request.clone({
         setHeaders: {
-          Authorization: 'Bearer ' + authorizationToken
+          Authorization: `Token  ${authorizationToken}`
         }
       });
     }

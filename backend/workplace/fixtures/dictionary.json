@@ -1,0 +1,55 @@
+[
+  {
+    "model": "workplace.project",
+    "pk": 1,
+    "fields": {
+      "name": "WORKPLACE",
+      "user": 1
+    }
+  },
+  {
+    "model": "workplace.project",
+    "pk": 2,
+    "fields": {
+      "name": "\u041a\u0418\u0410\u0421",
+      "user": 1
+    }
+  },
+  {
+    "model": "workplace.direction",
+    "pk": 1,
+    "fields": {
+      "name": "\u0412 \u0440\u0430\u043c\u043a\u0430\u0445 \u043e\u0431\u0443\u0447\u0435\u043d\u0438\u044f",
+      "project": null,
+      "user": 1
+    }
+  },
+  {
+    "model": "workplace.direction",
+    "pk": 2,
+    "fields": {
+      "name": "\u0421\u0438\u0441\u0442\u0435\u043c\u0430 1",
+      "project": 2,
+      "user": 1
+    }
+  },
+  {
+    "model": "workplace.activitytype",
+    "pk": 1,
+    "fields": {
+      "name": "Front-end",
+      "direction": null,
+      "user": 1
+    }
+  },
+  {
+    "model": "workplace.activitytype",
+    "pk": 2,
+    "fields": {
+      "name": "Back-end",
+      "direction": null,
+      "user": 1
+    }
+  }
+]
+

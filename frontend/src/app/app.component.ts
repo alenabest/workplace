@@ -7,6 +7,7 @@ const WITHOUT_SIDEBAR_HEADER_URL: string[] = [
 ];
 
 const WITHOUT_SIDEBAR_URL: string[] = [
+  '/reports'
 ];
 
 @Component({
