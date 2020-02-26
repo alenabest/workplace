@@ -2,9 +2,10 @@ import os
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from model_utils import Choices
 
 
-def upload_path(self, filename):
+def upload_avatar_path(self, filename):
     return os.path.join('media', 'workplace', 'avatars', str(self.id), filename)
 
 
@@ -37,7 +38,7 @@ class User(AbstractUser):
     # Рабочий телефон
     phone = models.TextField(null=True, blank=True, default='')
     # Путь к изображению для аватара пользователя
-    avatar = models.ImageField(upload_to=upload_path, null=True, max_length=1024)
+    avatar = models.ImageField(upload_to=upload_avatar_path, null=True, max_length=1024)
 
 
 class Project(models.Model):
@@ -106,6 +107,8 @@ class Activity(models.Model):
     end = models.TextField(null=False, blank=False)
     # высота для интерфейса
     height = models.TextField(null=True, blank=False)
+    # длительность в минутах
+    duration = models.IntegerField(null=True, blank=False)
     # час начала
     start_hour = models.IntegerField(null=True, name='startHour')
     # минуту начала
@@ -124,6 +127,56 @@ class Activity(models.Model):
     type = models.ForeignKey(ActivityType, null=True, on_delete=models.SET_NULL)
     # пользователь
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+
+    created = models.DateTimeField(auto_now_add=True, null=True)
+    updated = models.DateTimeField(auto_now=True, null=True)
+
+
+def upload_report_path(self, filename):
+    return os.path.join('media', 'workplace', 'reports', str(self.id), filename)
+
+
+class Report(models.Model):
+    """
+    Отчёты
+    """
+
+    class Meta:
+        verbose_name = 'Отчёт'
+        verbose_name_plural = 'Отчёт'
+
+    CURRENT_MONTH = 0
+    FINAL_CURRENT_MONTH = 1
+    MONTH = 2
+    FINAL_MONTH = 3
+
+    TYPE_CHOICES = Choices(
+        (CURRENT_MONTH, 'xls'),
+        (FINAL_CURRENT_MONTH, 'doc'),
+        (MONTH, 'xls'),
+        (FINAL_MONTH, 'doc')
+    )
+
+    IN_PROCESS = 0
+    COMPLETE = 1
+    ERROR = 2
+
+    STATE_CHOICES = Choices(
+        (IN_PROCESS, 'В процессе'),
+        (COMPLETE, 'Завершен'),
+        (ERROR, 'Ошибка')
+    )
+
+    # вид отчёта
+    type = models.IntegerField(choices=TYPE_CHOICES, null=True, blank=False)
+    # состояние отчёта
+    state = models.IntegerField(choices=STATE_CHOICES, default=IN_PROCESS, null=True, blank=False)
+    # ссылка на отчёт
+    link = models.FileField(upload_to=upload_report_path, null=True, max_length=1024)
+    # пользователь
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    # дата формирования
+    generated = models.DateField(null=True)
 
     created = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)

@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('birthday', models.DateField(null=True)),
                 ('mobile', models.TextField(blank=True, default='', null=True)),
                 ('phone', models.TextField(blank=True, default='', null=True)),
-                ('avatar', models.ImageField(max_length=1024, null=True, upload_to=workplace.models.upload_path)),
+                ('avatar', models.ImageField(max_length=1024, null=True, upload_to=workplace.models.upload_avatar_path)),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.Group', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions')),
             ],

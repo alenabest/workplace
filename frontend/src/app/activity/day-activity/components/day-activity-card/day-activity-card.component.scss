@@ -31,6 +31,13 @@
     .activity-description {
       max-height: 100%;
       overflow: auto;
+      display: block !important;
+    }
+
+    .activity-description-mobile {
+      max-height: 100%;
+      overflow: auto;
+      display: none !important;
     }
   }
 
@@ -58,6 +65,15 @@
 
       .activity-header {
         display: none !important;
+      }
+
+      .activity-description {
+        display: none !important;
+      }
+
+      .activity-description-mobile {
+        font-size: 0.9em;
+        display: block !important;
       }
     }
   }

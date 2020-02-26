@@ -6,10 +6,9 @@ import { UserModel } from '../user';
 
 
 export class ActivityModel {
-  constructor(public currentDate?: Date) {
-    if (this.currentDate) {
-      this.activityDate = this.currentDate;
-    }
+  constructor(private currentDate?: Date, private startTime?: string) {
+    this.activityDate = currentDate;
+    this.start = startTime;
   }
 
   id: number;
@@ -24,6 +23,7 @@ export class ActivityModel {
   startMinute: number;
   endHour: number;
   endMinute: number;
+  duration: number;
 
   @Transform(formatDateToPlain(), { toPlainOnly: true })
   @Transform(formatDateToClass(), { toClassOnly: true })
@@ -46,6 +46,13 @@ export class WeekActivityModel {
 
   @Type(() => ActivityModel)
   activities: ActivityModel[];
+}
+
+export class MonthActivityModel {
+  week: number;
+
+  @Type(() => WeekActivityModel)
+  days: WeekActivityModel[];
 }
 
 export class ActivityValidation {

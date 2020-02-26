@@ -9,7 +9,8 @@
       Активность</a>
     <a [ngClass]="{'toolbar-button': true, 'current': isState('tasks')}" fxLayoutAlign="center center">
       Задачи</a>
-    <a [ngClass]="{'toolbar-button': true, 'current': isState('order')}" fxLayoutAlign="center center">
+    <a [ngClass]="{'toolbar-button': true, 'current': isState('reports')}" fxLayoutAlign="center center"
+       routerLink="app/reports">
       Отчеты</a>
   </div>
   <span class="header-login"> {{ greetingWords }} {{ userFirstName }} </span>
@@ -29,7 +30,8 @@
       Активность</a>
     <a [ngClass]="{'toolbar-button': true, 'current': isState('tasks')}" fxLayoutAlign="center center">
       Задачи</a>
-    <a [ngClass]="{'toolbar-button': true, 'current': isState('order')}" fxLayoutAlign="center center">
+    <a [ngClass]="{'toolbar-button': true, 'current': isState('reports')}" fxLayoutAlign="center center"
+       routerLink="app/reports">
       Отчеты</a>
   </mat-sidenav>
 </mat-sidenav-container>

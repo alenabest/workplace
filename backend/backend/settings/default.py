@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
+import locale
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [
@@ -66,6 +66,10 @@ TEMPLATES = [
         },
     },
 ]
+
+CELERY_TASK_ROUTES = {
+    'workplace.api.report.report.create_report': {'queue': 'report'},
+}
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
@@ -108,6 +112,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
 
 
 # Static files (CSS, JavaScript, Images)

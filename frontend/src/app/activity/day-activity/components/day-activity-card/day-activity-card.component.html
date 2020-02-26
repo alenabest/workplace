@@ -1,7 +1,8 @@
 <div fxLayout="row" class="activity-container" [scrollTop]="scrollTop" *ngIf="activities">
   <div fxFlex="64px">
     <div fxLayout="column">
-      <div fxLayoutAlign="flex-start center" *ngFor="let hour of hourArray" class="hour-row" (click)="addActivity(hour)">
+      <div fxLayoutAlign="flex-start center" *ngFor="let hour of hourArray" class="hour-row"
+           (click)="checkTime(currentDate, hour)">
         {{ hour }}
       </div>
     </div>
@@ -27,7 +28,8 @@
           <span class="label" *ngIf="activity.type">Вид работы:</span>
           <span *ngIf="activity.type">{{ activity.type.name }}</span>
         </span>
-        <div class="activity-description">{{ activity.description }}</div>
+        <div class="activity-description" *ngIf="activity.duration >= 40">{{ activity.description }}</div>
+        <div class="activity-description-mobile">{{ activity.description }}</div>
       </div>
     </div>
   </div>

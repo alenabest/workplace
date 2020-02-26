@@ -26,6 +26,7 @@
   </mat-card-content>
   <mat-card-actions fxLayout="row" fxLayoutAlign="flex-end center" fxLayoutGap="8px">
     <button mat-button color="primary" type="button" mat-dialog-close>Отмена</button>
-    <button mat-raised-button color="primary" type="button" [mat-dialog-close]="true">Редактировать</button>
+    <button mat-raised-button color="accent" type="button" [mat-dialog-close]="{delete: true}">Удалить</button>
+    <button mat-raised-button color="primary" type="button" [mat-dialog-close]="{open: true}">Редактировать</button>
   </mat-card-actions>
 </mat-card>

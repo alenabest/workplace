@@ -59,7 +59,7 @@ export class ProfileCardComponent extends BaseDestroy implements OnInit {
   }
 
   completeActions(message: string, user: UserModel) {
-    this.snackBarService.openSnackBar(message);
+    this.snackBarService.success(message);
     this.currentUser = user;
   }
 
@@ -68,7 +68,7 @@ export class ProfileCardComponent extends BaseDestroy implements OnInit {
       this.updateUser();
     } else {
       this.formValidationService.validateAllFormFields(this.profileForm);
-      this.snackBarService.openSnackBar('Обязательные поля не заполнены', '-warning');
+      this.snackBarService.warning('Обязательные поля не заполнены');
     }
   }
 

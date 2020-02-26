@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { ActivityModule } from './activity';
 import { SettingsModule } from './settings';
 import { ProfileModule } from './profile';
+import { ReportsModule } from './reports';
 import { LoginModule } from './login';
 
 
@@ -29,7 +30,8 @@ const modules = [
   LoginModule,
   ProfileModule,
   SettingsModule,
-  ActivityModule
+  ActivityModule,
+  ReportsModule
 ];
 
 @NgModule({

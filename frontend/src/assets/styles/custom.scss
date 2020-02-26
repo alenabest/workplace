@@ -1,4 +1,24 @@
 .common-theme {
+
+  .mat-expansion-panel-header {
+    &:hover, &:focus {
+      background: rgba(0, 159, 208, 0.1) !important;
+      -webkit-box-shadow: 0 0 4px 0 rgba(50, 50, 50, 0.3);
+      -moz-box-shadow: 0 0 4px 0 rgba(50, 50, 50, 0.3);
+      box-shadow: 0 0 4px 0 rgba(50, 50, 50, 0.3);
+    }
+  }
+
+  .mat-expansion-panel-body {
+    padding: 16px !important;
+  }
+
+  .mat-expansion-panel {
+    -webkit-box-shadow: 0 0 4px 0 rgba(50, 50, 50, 0.3);
+    -moz-box-shadow: 0 0 4px 0 rgba(50, 50, 50, 0.3);
+    box-shadow: 0 0 4px 0 rgba(50, 50, 50, 0.3);
+  }
+
   .mat-form-field-appearance-outline .mat-form-field-outline {
     color: rgba(0, 159, 208, 0.31);
   }
@@ -28,6 +48,10 @@
   .mat-form-field-subscript-wrapper {
     padding: 0 !important;
     margin-top: 0.35em;
+  }
+
+  .mat-select-arrow-wrapper {
+    vertical-align: inherit;
   }
 
   @media screen and (max-width: 600px) {
@@ -118,4 +142,22 @@
 
 .display-none {
   display: none;
+}
+
+.custom-options-component {
+  overflow: hidden;
+  max-height: 256px;
+  padding: 5px;
+
+  .options-container {
+    max-height: 200px;
+    overflow: auto;
+    padding: 5px 0;
+  }
+}
+
+.month-field {
+  .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+  }
 }

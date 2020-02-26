@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
+import { MatIconModule, MatTooltipModule } from '@angular/material';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { ChangePasswordDialogComponent } from './change-password-dialog';
 import { AvatarEditorDialogComponent } from './avatar-editor-dialog';
-import { CoreModule, MaterialModules } from '../../core';
+import { BaseDialogMaterialModules, CoreModule } from '../../core';
 
 
 const dialogs = [
@@ -14,9 +15,11 @@ const dialogs = [
 @NgModule({
   declarations: [dialogs],
   imports: [
-    CoreModule,
-    MaterialModules,
-    ImageCropperModule
+    BaseDialogMaterialModules,
+    ImageCropperModule,
+    MatTooltipModule,
+    MatIconModule,
+    CoreModule
   ],
   exports: [dialogs]
 })

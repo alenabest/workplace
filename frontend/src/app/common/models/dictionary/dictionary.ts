@@ -1,10 +1,16 @@
 export class ProjectModel {
+  constructor(user: number) {
+    this.user = user;
+  }
   id: number;
   name: string;
   user: number;
 }
 
 export class DirectionModel {
+  constructor(user: number) {
+    this.user = user;
+  }
   id: number;
   name: string;
   project: ProjectModel | number;
@@ -12,6 +18,9 @@ export class DirectionModel {
 }
 
 export class ActivityTypeModel {
+  constructor(user: number) {
+    this.user = user;
+  }
   id: number;
   name: string;
   direction: DirectionModel | number;
@@ -21,4 +30,9 @@ export class ActivityTypeModel {
 export class WeekLabelModel {
   label: string;
   date: Date;
+}
+
+export class WeekListModel {
+  label: number;
+  days: Date[];
 }

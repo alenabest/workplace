@@ -5,12 +5,16 @@ import { MatSnackBar } from '@angular/material';
   providedIn: 'root'
 })
 export class SnackBarService {
-  snackBarStyle = 'custom-snack-bar';
+  private successStyle = 'custom-snack-bar';
+  private warningStyle = 'custom-snack-bar-warning';
 
   constructor(private snackBar: MatSnackBar) { }
 
-  openSnackBar(message: string, style: string = '') {
-    style = this.snackBarStyle + style;
-    this.snackBar.open('', message, {duration: 10000, panelClass: style, horizontalPosition: 'center'});
+  success(message: string) {
+    this.snackBar.open('', message, {duration: 10000, panelClass: this.successStyle, horizontalPosition: 'center'});
+  }
+
+  warning(message: string) {
+    this.snackBar.open('', message, {duration: 10000, panelClass: this.warningStyle, horizontalPosition: 'center'});
   }
 }

@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { DictionaryParamModel } from '../../../common/models/params';
+import { DictionaryParam } from '../../../common/models/params';
 import { IResponse, serializeResponse } from '../../helpers';
 import { generateQuery } from '../../../common/utils';
 
@@ -14,7 +14,7 @@ import { generateQuery } from '../../../common/utils';
 export class DictionaryService {
   constructor(protected http: HttpClient) { }
 
-  getDictionary<T>(dictionaryApi: string, cls: ClassType<T>, params?: DictionaryParamModel | HttpParams): Observable<IResponse<T>> {
+  getDictionary<T>(dictionaryApi: string, cls: ClassType<T>, params?: DictionaryParam | HttpParams): Observable<IResponse<T>> {
     params = generateQuery(params);
 
     return this.http
@@ -22,5 +22,15 @@ export class DictionaryService {
       .pipe(
         map(results => serializeResponse(cls, results))
       );
+  }
+
+  createDictionary<T>(dictionaryApi: string, dictionary: T): Observable<T> {
+    return this.http
+      .post<T>(`/workplace/${dictionaryApi}/`, dictionary);
+  }
+
+  updateDictionary<T>(dictionaryApi: string, dictionaryId: number, dictionary: T): Observable<T> {
+    return this.http
+      .patch<T>(`/workplace/${dictionaryApi}/${dictionaryId}/`, dictionary);
   }
 }

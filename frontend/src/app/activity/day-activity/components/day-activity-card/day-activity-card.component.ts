@@ -1,27 +1,31 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { BaseActivity } from '../../../../common/models/base-activity';
+import { ActivityService } from '../../../../core/services/activity';
 import { ActivityModel } from '../../../../common/models/activity';
 import { SubjectService } from '../../../../core/services/subject';
+import { BaseDayActivity } from '../../../../common/models/base';
 import { HourArray } from '../../../data';
 
 
 @Component({
   selector: 'day-activity-card',
   templateUrl: './day-activity-card.component.html',
-  styleUrls: ['./day-activity-card.component.scss']
+  styleUrls: ['./day-activity-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DayActivityCardComponent extends BaseActivity implements OnChanges {
+export class DayActivityCardComponent extends BaseDayActivity implements OnChanges {
   @Input() activities: ActivityModel[];
+  @Input() currentDate: Date;
 
   scrollTop: number = 0;
 
   hourArray = HourArray;
 
-  constructor(public dialog: MatDialog,
-              public readonly subjectService: SubjectService) {
-    super(dialog, subjectService);
+  constructor(public readonly activityService: ActivityService,
+              public readonly subjectService: SubjectService,
+              public dialog: MatDialog) {
+    super(activityService, subjectService, dialog);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -31,8 +35,12 @@ export class DayActivityCardComponent extends BaseActivity implements OnChanges 
     }
   }
 
-  addActivity(hour: string) {
-    console.log(hour);
+  checkTime(day: Date, hour: string) {
+    const existActivity = this.activities.find(item => item.endHour === parseInt(hour.split(':')[0], 10));
+    if (existActivity) {
+      hour = existActivity.end;
+    }
+    this.addActivity(day, hour);
   }
 
   calculateScrollTop(): number {

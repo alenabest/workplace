@@ -1,6 +1,8 @@
 import { format } from 'date-fns';
 import { classToPlain, plainToClass } from 'class-transformer';
 import { ClassType } from 'class-transformer/ClassTransformer';
+import { getRandomElement } from '../../common/utils';
+import { BackgroundColors } from '../../activity/data';
 
 
 export class IResponse<T> {
@@ -34,6 +36,10 @@ export function formatObjectToField(field: string) {
   return value => value ? value[field] : value;
 }
 
+export function randomBackgroundColor() {
+  return () => getRandomElement<string>(BackgroundColors);
+}
+
 export function formatMedia() {
   return value => value ? value.replace('media/', '') : value;
 }
@@ -41,4 +47,31 @@ export function formatMedia() {
 export function prepareObject(clsObject, plain) {
   const object = plainToClass(clsObject, plain);
   return classToPlain(object);
+}
+
+export function formatDateToBacked(value: Date) {
+  return format(value, 'yyyy-MM-dd');
+}
+
+export function prepareAndDownloadFile(response: any, type: string, filenameRegex: RegExp = /"(.*?)"/): Blob {
+  const contentDispositionHeader = decodeURIComponent(response.headers.get('content-disposition'));
+  const splitContentDispositionHeader = contentDispositionHeader.split('; ');
+
+  let filename = '';
+  if (splitContentDispositionHeader.length === 2) {
+    filename = filenameRegex.exec(splitContentDispositionHeader[1])[1];
+  } else {
+    filename = splitContentDispositionHeader[2].slice(17, );
+  }
+
+  const fileURL = URL.createObjectURL(response.body);
+  const anchor = document.createElement('a');
+  document.body.appendChild(anchor);
+  anchor.download = filename;
+  anchor.href = fileURL;
+  anchor.target = '_self';
+  anchor.click();
+  anchor.remove();
+
+  return new Blob([response.body], {type});
 }

@@ -8,13 +8,14 @@ import { Observable, of } from 'rxjs';
 import { ActivityTypeModel, DirectionModel, ProjectModel } from '../../../common/models/dictionary';
 import { CustomValidators } from '../../../core/services/form-validation/custom-validators';
 import { ActivityModel, ActivityValidation } from '../../../common/models/activity';
+import { getTimeMessage, prepareFilteredArray } from '../../../common/utils';
 import { DictionaryService } from '../../../core/services/dictionary';
-import { DictionaryParamModel } from '../../../common/models/params';
+import { DictionaryParam } from '../../../common/models/params';
 import { SnackBarService } from '../../../core/services/snack-bar';
 import { BaseDestroy } from '../../../common/models/base-destroy';
 import { ActivityService } from '../../../core/services/activity';
+import { SubjectService } from '../../../core/services/subject';
 import { AuthService } from '../../../core/services/auth';
-import { getTimeMessage } from '../../../common/utils';
 
 
 @Component({
@@ -70,6 +71,7 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
               private readonly dictionaryService: DictionaryService,
               private readonly snackBarService: SnackBarService,
               private readonly activityService: ActivityService,
+              private readonly subjectService: SubjectService,
               private readonly authService: AuthService,
               private formBuilder: FormBuilder) {
     super();
@@ -77,13 +79,28 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
     if (this.activity.id) {
       this.title = 'Редактирование';
     }
+    this.subscribeToSubject();
   }
 
-  defaultEqual(dir1: any, dir2: any): boolean {
-    if (dir1 && dir2) {
-      return dir1.id === dir2.id;
-    } else {
-      return false;
+  subscribeToSubject() {
+    this.subjectService.getDictionarySubject
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe(result => this.subjectAction(result));
+  }
+
+  subjectAction(result: string) {
+    switch (result) {
+      case 'project':
+        this.getProjects();
+        break;
+      case 'direction':
+        this.getDirections();
+        break;
+      case 'activity-type':
+        this.getActivityTypes();
+        break;
     }
   }
 
@@ -107,16 +124,16 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
     this.getActivityTypes();
   }
 
-  getProjects() {
-    this.projects$ = this.getDictionary('project', ProjectModel);
+  getProjects(search?: string) {
+    this.projects$ = this.getDictionary('project', ProjectModel, search);
   }
 
-  getDirections() {
-    this.directions$ = this.getDictionary('direction', DirectionModel);
+  getDirections(search?: string) {
+    this.directions$ = this.getDictionary('direction', DirectionModel, search);
   }
 
-  getActivityTypes() {
-    this.activityTypes$ = this.getDictionary('activity-type', ActivityTypeModel);
+  getActivityTypes(search?: string) {
+    this.activityTypes$ = this.getDictionary('activity-type', ActivityTypeModel, search);
   }
 
   saveActivity() {
@@ -141,7 +158,7 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
   openSnackBar(result: ActivityValidation) {
     const startMessage: string = getTimeMessage(result.start, 'начала', 'раньше');
     const endMessage: string = getTimeMessage(result.end, 'окончания', 'позже');
-    this.snackBarService.openSnackBar(`${startMessage} ${endMessage}`, '-warning');
+    this.snackBarService.warning(`${startMessage} ${endMessage}`);
   }
 
   validateActivity(): Observable<ActivityValidation> {
@@ -163,17 +180,29 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
     return this.activityService.updateActivity(this.activity.id, this.activityForm.value);
   }
 
-  getDictionary<T>(api: string, cls: ClassType<T>): Observable<T[]> {
-    return this.dictionaryService.getDictionary<T>(api, cls, this.generateParams())
+  getDictionary<T>(api: string, cls: ClassType<T>, search: string): Observable<T[]> {
+    return this.dictionaryService.getDictionary<T>(api, cls, this.generateParams(search))
       .pipe(
-        map(response => response.results)
+        map(response => response.results),
+        map(results => this.prepareDictionary(results, api))
       );
   }
 
-  generateParams(): DictionaryParamModel {
+  prepareDictionary<T>(results: T[], api: string): T[] {
+    switch (api) {
+      case 'project':
+        return prepareFilteredArray(results, 'id', this.project.value);
+      case 'direction':
+        return prepareFilteredArray(results, 'id', this.direction.value);
+      case 'activity-type':
+        return prepareFilteredArray(results, 'id', this.type.value);
+    }
+  }
+
+  generateParams(search: string): DictionaryParam {
     const projects = this.project.value ? this.project.value.id : null;
     const directions = this.direction.value ? this.direction.value.id : null;
-    return new DictionaryParamModel(this.userId, projects, directions);
+    return new DictionaryParam(this.userId, projects, directions, search);
   }
 
   getActivityForm(): FormGroup {

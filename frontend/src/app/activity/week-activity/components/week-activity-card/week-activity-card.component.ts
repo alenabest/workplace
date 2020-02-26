@@ -1,9 +1,11 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { BaseActivity } from '../../../../common/models/base-activity';
 import { WeekActivityModel } from '../../../../common/models/activity';
+import { WeekLabelModel } from '../../../../common/models/dictionary';
+import { ActivityService } from '../../../../core/services/activity';
 import { SubjectService } from '../../../../core/services/subject';
+import { BaseDayActivity } from '../../../../common/models/base';
 import { HourArray, HourArrayMobile } from '../../../data';
 import { isOnChange } from '../../../../common/utils';
 
@@ -13,9 +15,9 @@ import { isOnChange } from '../../../../common/utils';
   templateUrl: './week-activity-card.component.html',
   styleUrls: ['./week-activity-card.component.scss']
 })
-export class WeekActivityCardComponent extends BaseActivity implements OnChanges {
+export class WeekActivityCardComponent extends BaseDayActivity implements OnChanges {
   @Input() weekActivities: WeekActivityModel[];
-  @Input() weekArray: { label: string, date: Date }[];
+  @Input() weekDayArray: WeekLabelModel[];
 
   weekFormat = 'dd.MM.yy';
   weekFormatMobile = 'dd';
@@ -24,8 +26,9 @@ export class WeekActivityCardComponent extends BaseActivity implements OnChanges
   hourArrayMobile = HourArrayMobile;
 
   constructor(public dialog: MatDialog,
-              public readonly subjectService: SubjectService) {
-    super(dialog, subjectService);
+              public readonly subjectService: SubjectService,
+              public readonly activityService: ActivityService) {
+    super(activityService, subjectService, dialog);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -35,8 +38,13 @@ export class WeekActivityCardComponent extends BaseActivity implements OnChanges
     }
   }
 
-  addActivity(hour: string, day: Date) {
-    console.log(hour, day);
+  checkTime(day: Date, hour: string, idx: number) {
+    const existActivity = this.weekActivities[idx].activities
+      .find(item => item.endHour === parseInt(hour.split(':')[0], 10));
+    if (existActivity) {
+      hour = existActivity.end;
+    }
+    this.addActivity(day, hour);
   }
 
   calculateScrollTop(): number {

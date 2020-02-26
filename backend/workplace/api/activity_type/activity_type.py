@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.db.models import Q
 from django_filters.rest_framework import FilterSet, CharFilter, DjangoFilterBackend
 from rest_framework import generics
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import OrderingFilter, SearchFilter
 
 from workplace.models import ActivityType
 from workplace.serializers.activity_type import ActivityTypeSerializer
@@ -30,11 +30,10 @@ class ActivityTypeFilter(FilterSet):
 class ActivityTypeList(generics.ListCreateAPIView):
     queryset = ActivityType.objects.all()
     serializer_class = ActivityTypeSerializer
-    filter_backends = (OrderingFilter, DjangoFilterBackend)
+    filter_backends = (OrderingFilter, DjangoFilterBackend, SearchFilter)
     filter_class = ActivityTypeFilter
-    ordering_fields = {
-        'name': 'name'
-    }
+    search_fields = ('name', )
+    ordering_fields = {'name': 'name'}
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
