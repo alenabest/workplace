@@ -1,11 +1,6 @@
-image: node:11.14.0
-
-cache:
-  paths:
-    - node_modules/
+# Gitlab CI development version
 
 stages:
-  - test
   - build
   - review
   - preprod
@@ -18,15 +13,16 @@ variables:
   CONTAINER_TEST_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
   CONTAINER_RELEASE_IMAGE: ${CI_REGISTRY_IMAGE}:latest
 
-LINT:
-  stage: test
-  script:
-    - cd frontend/
-    - npm install --silent
-    - npm run lint
+#LINT:
+#  stage: test
+#  script:
+#    - cd frontend/
+#    - npm install --silent
+#    - npm run lint
 
 BUILD:
   stage: build
+  tags: [build]
   only:
     - tags
     - /^feature_.*$/
@@ -39,6 +35,7 @@ BUILD:
 
 REVIEW:START:
   stage: review
+  tags: [review]
   only:
     - tags
     - /^feature_.*$/
@@ -68,6 +65,7 @@ REVIEW:START:
 
 REVIEW:STOP:
   stage: review
+  tags: [review]
   when: manual
   only:
     - tags
@@ -92,6 +90,7 @@ REVIEW:STOP:
 
 DEMO:CE:START:
   stage: preprod
+  tags: [preprod]
   when: manual
   only:
     - tags
@@ -120,6 +119,7 @@ DEMO:CE:START:
 
 DEMO:CE:STOP:
   stage: preprod
+  tags: [preprod]
   when: manual
   only:
     - tags
