@@ -6,7 +6,6 @@ RUN mkdir -p /app/frontend
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
 RUN npm ci && cp -R ./node_modules /app/frontend
-RUN npm i --global sw-precache
 WORKDIR /app/frontend
 COPY frontend/ /app/frontend
 RUN node --max_old_space_size=16384 node_modules/@angular/cli/bin/ng build --prod --base-href='/' --deploy-url='/static/' && sw-precache --root=dist --config=precache-config.js
