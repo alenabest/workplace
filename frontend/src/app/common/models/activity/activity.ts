@@ -15,8 +15,8 @@ export class ActivityModel {
   start: string;
   end: string;
   description: string;
-  marginBottom: string | number;
-  marginTop: string | number;
+  marginBottom: string;
+  marginTop: string;
   backgroundColor: string;
   height: string;
   startHour: number;
@@ -30,15 +30,15 @@ export class ActivityModel {
   activityDate?: Date | string;
 
   @Transform(formatObjectToField('id'), { toPlainOnly: true })
-  project: ProjectModel | number;
+  project: ProjectModel;
 
   @Transform(formatObjectToField('id'), { toPlainOnly: true })
-  direction: DirectionModel | number;
+  direction: DirectionModel;
 
   @Transform(formatObjectToField('id'), { toPlainOnly: true })
-  type: ActivityTypeModel | number;
+  type: ActivityTypeModel;
 
-  user: UserModel | number;
+  user: UserModel;
 }
 
 export class WeekActivityModel {

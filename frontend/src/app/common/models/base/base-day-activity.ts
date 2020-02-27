@@ -30,9 +30,9 @@ export class BaseDayActivity extends BaseActivity {
     return item;
   }
 
-  calculateMarginBottom(activities: ActivityModel[], item: ActivityModel, index: number): string | number {
+  calculateMarginBottom(activities: ActivityModel[], item: ActivityModel, index: number): string {
     if (activities.length === 1 || (activities.length - 1) === index) {
-      return 0;
+      return '0';
     }
 
     const nextItem = activities[index + 1];
