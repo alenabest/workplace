@@ -1,10 +1,14 @@
 .content-container {
-  height: calc(100vh - 64px);
+  height: calc(100vh - 56px);
   overflow: hidden;
-  margin-top: 64px;
+  width: 100%;
 
-  &.with-sidebar{
-    margin-left: 60px;
+  @media screen and (max-width: 1000px) {
+    height: calc(100vh - 44px);
+
+    &.with-sidebar{
+      margin-right: 0;
+    }
   }
 }
 

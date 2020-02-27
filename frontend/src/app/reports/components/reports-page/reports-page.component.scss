@@ -1,0 +1,45 @@
+.reports-container {
+  width: calc(100vw - 300px);
+  height: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+
+  .reports-label {
+    cursor: default;
+    font-size: 1.6em;
+    color: #333333;
+    height: 44px;
+  }
+
+  .reports-description {
+    background-color: #fff6ac;
+    border: 1px solid #ffca22;
+    border-radius: 4px;
+    font-size: 1.2em;
+    font-weight: 300;
+    margin-top: 12px;
+    color: #bf6802;
+    padding: 8px;
+
+    a {
+      color: #bf6802 !important;
+      font-weight: 400;
+      cursor: pointer;
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    width: 100vw;
+
+    .reports-label {
+      margin-bottom: 4px;
+      font-size: 1.2em;
+      height: 36px;
+    }
+
+    .reports-description {
+      font-size: 0.9em;
+      padding: 4px;
+    }
+  }
+}

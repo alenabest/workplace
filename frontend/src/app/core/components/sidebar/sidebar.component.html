@@ -1,0 +1,31 @@
+<div fxLayout="column" [ngClass]="{'sidebar-container': true, 'hide': isState('activity/')}">
+  <ng-container *ngIf="isState('profile') || isState('settings')">
+    <a [ngClass]="{'sidebar-button': true, 'current': isState('profile')}" routerLink="app/profile"
+       fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="16px">
+      <mat-icon>account_circle</mat-icon>
+      <p>Профиль</p>
+    </a>
+    <a [ngClass]="{'sidebar-button': true, 'current': isState('settings')}" routerLink="app/settings"
+       fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="16px">
+      <mat-icon>settings</mat-icon>
+      <p>Настройки</p>
+    </a>
+  </ng-container>
+  <ng-container *ngIf="isState('activity/')">
+    <a [ngClass]="{'sidebar-button': true, 'current': isState('day')}" routerLink="app/activity/day"
+       fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="16px">
+      <mat-icon>view_day</mat-icon>
+      <p>День</p>
+    </a>
+    <a [ngClass]="{'sidebar-button': true, 'current': isState('week')}" routerLink="app/activity/week"
+       fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="16px">
+      <mat-icon>view_week</mat-icon>
+      <p>Неделя</p>
+    </a>
+    <a [ngClass]="{'sidebar-button': true, 'current': isState('month')}" routerLink="app/activity/month"
+       fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="16px">
+      <mat-icon>view_comfy</mat-icon>
+      <p>Месяц</p>
+    </a>
+  </ng-container>
+</div>

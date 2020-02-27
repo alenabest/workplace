@@ -1,0 +1,17 @@
+<div fxLayout="column" class="reports-container">
+  <div fxLayout="row" fxLayoutAlign="center center" class="reports-label">
+    <p>Отчеты</p>
+  </div>
+<!--  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="isHint">-->
+<!--    <div fxLayout="column" class="reports-description">-->
+<!--      <span>Чтобы сформировать отчет, необходимо открыть нужный пункт.</span>-->
+<!--      <span>Если требуется, ввести запрашиваемые данные и нажать "Сформировать".</span>-->
+<!--      <span>После этих действий файл с отчетом будет доступен для скачивания.</span>-->
+<!--      <span fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="4px">-->
+<!--      <a href="#" (click)="isHint = false">Закрыть</a>-->
+<!--      <a href="#" (click)="isHint = false">Больше не показывать</a>-->
+<!--    </span>-->
+<!--    </div>-->
+<!--  </div>-->
+  <reports-card [reports]="reports$ | async"></reports-card>
+</div>
