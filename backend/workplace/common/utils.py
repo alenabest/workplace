@@ -4,6 +4,8 @@ from datetime import datetime, timedelta
 
 from django.utils.http import urlquote
 
+from workplace.models import User
+
 
 def get_string_month_year(date):
     months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
@@ -33,7 +35,7 @@ def convert_minutes_to_hour(duration):
     if duration:
         duration = int(duration)
         hours = float(duration / 60)
-        return f"{hours:.1f}"
+        return hours
     else:
         return 0
 
@@ -52,3 +54,11 @@ def get_name_file_field(field):
     if field and field.path:
         return os.path.basename(field.path)
     return 'Без имени'
+
+
+def get_document_path_and_name(user_id, report_id, string_date):
+    user = User.objects.get(id=user_id)
+    [last_name, first_name] = [user.last_name, user.first_name]
+    document_name = '%s %s - отчет за %s.xlsx' % (last_name, first_name, string_date)
+    document_path = os.path.join('media', 'workplace', 'reports', str(report_id))
+    return [document_path, document_name]

@@ -3,15 +3,12 @@ import os
 import xlsxwriter
 from django.db.models import Sum
 
-from workplace.common.utils import get_string_month_year, get_date_list, convert_minutes_to_hour, get_string_date
-from workplace.models import User
+from workplace.common.utils import get_string_month_year, get_date_list, convert_minutes_to_hour, get_string_date, \
+    get_document_path_and_name
 
 
 def get_workbook(user_id, string_date, report_id):
-    user = User.objects.get(id=user_id)
-    [last_name, first_name] = [user.last_name, user.first_name]
-    document_name = '%s %s - отчет за %s.xlsx' % (last_name, first_name, string_date)
-    document_path = os.path.join('media', 'workplace', 'reports', str(report_id))
+    [document_path, document_name] = get_document_path_and_name(user_id, report_id, string_date)
     if not os.path.isdir(document_path):
         os.makedirs(document_path)
     full_path = os.path.join(document_path, document_name)
@@ -119,8 +116,8 @@ def fill_month_report_worksheet(workbook, cell_format, string_date, date_list, i
                         month_duration += duration
                         total = total_day_duration[activity_index]
                         total.update(total=(total.get('total') + duration))
-                        worksheet.write(type_start_row, day_index, duration, day_format)
-                worksheet.write(type_start_row, len(activity_days) + 4, month_duration, total_cell_format)
+                        worksheet.write(type_start_row, day_index,  round(duration, 1), day_format)
+                worksheet.write(type_start_row, len(activity_days) + 4, round(month_duration, 1), total_cell_format)
                 type_start_row += 1
             dir_start_row += dir_rows + 1
         start_row += rows + 1
@@ -131,12 +128,12 @@ def fill_month_report_worksheet(workbook, cell_format, string_date, date_list, i
             total = 0
 
         if date_item.get('weekend'):
-            worksheet.write(start_row, day_index + 4, total, weekend_total_cell_format)
+            worksheet.write(start_row, day_index + 4,  round(total, 1), weekend_total_cell_format)
         else:
-            worksheet.write(start_row, day_index + 4, total, total_cell_format)
+            worksheet.write(start_row, day_index + 4,  round(total, 1), total_cell_format)
     # заполняем сводку по всему месяцу
     worksheet.merge_range(start_row, 0, start_row, 3, 'Итого:', total_cell_format)
-    worksheet.write(start_row, day_count + 4, total_duration, total_cell_format)
+    worksheet.write(start_row, day_count + 4, round(total_duration, 1), total_cell_format)
     # заполняем сводку по переработке за месяц
     over_duration = float(0)
     weekend_over_duration = float(0)
@@ -148,15 +145,15 @@ def fill_month_report_worksheet(workbook, cell_format, string_date, date_list, i
             over_duration += total.get('total') - float(8)
 
     worksheet.merge_range(start_row, 0, start_row, 3, 'Переработка в рабочие дни:', total_cell_format)
-    worksheet.write(start_row, 4, over_duration, total_cell_format)
+    worksheet.merge_range(start_row, 4, start_row, 5, round(over_duration, 1), total_cell_format)
     start_row += 1
 
     worksheet.merge_range(start_row, 0, start_row, 3, 'Переработка в выходные дни:', total_cell_format)
-    worksheet.write(start_row, 4, weekend_over_duration, total_cell_format)
+    worksheet.merge_range(start_row, 4, start_row, 5, round(weekend_over_duration, 1), total_cell_format)
     start_row += 1
-
+    work_duration = total_duration - over_duration - weekend_over_duration
     worksheet.merge_range(start_row, 0, start_row, 3, 'Рабочие часы без учёта переработки:', total_cell_format)
-    worksheet.write(start_row, 4, float(total_duration) - over_duration - weekend_over_duration, total_cell_format)
+    worksheet.merge_range(start_row, 4, start_row, 5, round(work_duration, 1), total_cell_format)
 
 
 def get_dictionary_name(dictionary, label):
@@ -206,7 +203,7 @@ def fill_day_report_worksheet(workbook, cell_format, activities, date):
         row_index += 1
     duration = convert_minutes_to_hour(activities.aggregate(Sum('duration')).get('duration__sum'))
     worksheet.merge_range(row_index, 0, row_index, 2, 'Итого:', total_cell_format)
-    worksheet.write(row_index, 3, duration, total_cell_format)
+    worksheet.write(row_index, 3, round(duration, 1), total_cell_format)
 
 
 def create_excel_month_report(activities, items, start, end, user_id, report_id):
