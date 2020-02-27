@@ -111,6 +111,15 @@
   }
 },
 {
+  "model": "workplace.activitytype",
+  "pk": 6,
+  "fields": {
+    "name": "\u0427\u0442\u0435\u043d\u0438\u0435 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u0438",
+    "direction": 1,
+    "user": 1
+  }
+},
+{
   "model": "workplace.activity",
   "pk": 1,
   "fields": {
@@ -1414,20 +1423,152 @@
   "fields": {
     "description": "docker, gitlab-ci",
     "start": "12:30",
-    "end": "15:00",
-    "height": "150px",
-    "duration": 150,
+    "end": "13:30",
+    "height": "60px",
+    "duration": 60,
     "startHour": 12,
     "startMinute": 30,
-    "endHour": 15,
-    "endMinute": 0,
+    "endHour": 13,
+    "endMinute": 30,
     "activityDate": "2020-02-26",
     "project": 1,
     "direction": 1,
     "type": 3,
     "user": 1,
     "created": "2020-02-26T09:43:46.927Z",
-    "updated": "2020-02-26T09:45:04.386Z"
+    "updated": "2020-02-26T13:49:09.934Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 63,
+  "fields": {
+    "description": "docker",
+    "start": "13:30",
+    "end": "15:00",
+    "height": "90px",
+    "duration": 90,
+    "startHour": 13,
+    "startMinute": 30,
+    "endHour": 15,
+    "endMinute": 0,
+    "activityDate": "2020-02-26",
+    "project": null,
+    "direction": 1,
+    "type": 6,
+    "user": 1,
+    "created": "2020-02-26T13:49:59.845Z",
+    "updated": "2020-02-26T13:49:59.845Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 64,
+  "fields": {
+    "description": "\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430 CI/CD \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+    "start": "07:00",
+    "end": "08:30",
+    "height": "90px",
+    "duration": 90,
+    "startHour": 7,
+    "startMinute": 0,
+    "endHour": 8,
+    "endMinute": 30,
+    "activityDate": "2020-02-27",
+    "project": 1,
+    "direction": 1,
+    "type": 3,
+    "user": 1,
+    "created": "2020-02-27T05:31:23.451Z",
+    "updated": "2020-02-27T06:42:57.167Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 66,
+  "fields": {
+    "description": "\u0418\u0437\u043c\u0435\u043d\u0435\u043d \u0430\u043b\u0433\u043e\u0440\u0438\u0442\u043c \u043d\u0430\u0445\u043e\u0436\u0434\u0435\u043d\u0438\u044f \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0435\u0439 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u0438 (\u0438\u0445 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u0432 \u0447\u0430\u0441)",
+    "start": "08:30",
+    "end": "09:00",
+    "height": "30px",
+    "duration": 30,
+    "startHour": 8,
+    "startMinute": 30,
+    "endHour": 9,
+    "endMinute": 0,
+    "activityDate": "2020-02-27",
+    "project": 1,
+    "direction": 1,
+    "type": 1,
+    "user": 1,
+    "created": "2020-02-27T07:14:49.984Z",
+    "updated": "2020-02-27T07:14:49.984Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 67,
+  "fields": {
+    "description": "\u0414\u043e\u0440\u0430\u0431\u043e\u0442\u0430\u043d\u043e \u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044f \u043e\u0442\u0447\u0435\u0442\u0430 \u0437\u0430 \u043c\u0435\u0441\u044f\u0446 \u0432 Excel + \u043d\u0430\u0447\u0430\u043b\u043e \u0434\u043b\u044f Word \u043e\u0442\u0447\u0435\u0442\u0430",
+    "start": "09:00",
+    "end": "10:00",
+    "height": "60px",
+    "duration": 60,
+    "startHour": 9,
+    "startMinute": 0,
+    "endHour": 10,
+    "endMinute": 0,
+    "activityDate": "2020-02-27",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-27T07:15:13.039Z",
+    "updated": "2020-02-27T07:15:13.039Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 68,
+  "fields": {
+    "description": "\u0413\u0435\u043d\u0435\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u043e\u0442\u0447\u0435\u0442\u0430 \u0434\u043b\u044f word",
+    "start": "10:00",
+    "end": "11:00",
+    "height": "60px",
+    "duration": 60,
+    "startHour": 10,
+    "startMinute": 0,
+    "endHour": 11,
+    "endMinute": 0,
+    "activityDate": "2020-02-27",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-27T07:51:26.030Z",
+    "updated": "2020-02-27T07:51:26.030Z"
+  }
+},
+{
+  "model": "workplace.activity",
+  "pk": 69,
+  "fields": {
+    "description": "\u0413\u0435\u043d\u0435\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u043e\u0442\u0447\u0435\u0442\u0430 \u0434\u043b\u044f word",
+    "start": "12:00",
+    "end": "16:00",
+    "height": "240px",
+    "duration": 240,
+    "startHour": 12,
+    "startMinute": 0,
+    "endHour": 16,
+    "endMinute": 0,
+    "activityDate": "2020-02-27",
+    "project": 1,
+    "direction": 1,
+    "type": 2,
+    "user": 1,
+    "created": "2020-02-27T09:14:25.881Z",
+    "updated": "2020-02-27T09:14:25.881Z"
   }
 },
 {
@@ -1440,7 +1581,20 @@
     "user": 1,
     "generated": "2020-02-01",
     "created": "2020-02-10T12:41:58.424Z",
-    "updated": "2020-02-26T09:45:21.093Z"
+    "updated": "2020-02-27T13:12:50.789Z"
+  }
+},
+{
+  "model": "workplace.report",
+  "pk": 2,
+  "fields": {
+    "type": 1,
+    "state": 1,
+    "link": "media/workplace/reports/2/\u0425\u0440\u0435\u043d\u043e\u0432\u0441\u043a\u0430\u044f \u0410\u043b\u0451\u043d\u0430 - \u043e\u0442\u0447\u0435\u0442 \u0437\u0430 \u0424\u0435\u0432\u0440\u0430\u043b\u044c 2020.docx",
+    "user": 1,
+    "generated": "2020-02-01",
+    "created": "2020-02-27T05:57:26.781Z",
+    "updated": "2020-02-27T13:11:50.249Z"
   }
 }
 ]
