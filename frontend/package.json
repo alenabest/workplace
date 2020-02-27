@@ -38,7 +38,6 @@
     "reflect-metadata": "^0.1.13",
     "roboto-fontface": "^0.10.0",
     "rxjs": "~6.4.0",
-    "sw-precache-webpack-plugin": "^0.11.5",
     "tslib": "^1.9.0",
     "vanilla-text-mask": "^5.1.1",
     "zone.js": "~0.9.1"
@@ -61,6 +60,7 @@
     "karma-jasmine-html-reporter": "^1.5.1",
     "protractor": "^5.4.3",
     "sw-precache": "^5.2.1",
+    "sw-precache-webpack-plugin": "^0.11.5",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
