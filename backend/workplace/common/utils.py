@@ -56,9 +56,12 @@ def get_name_file_field(field):
     return 'Без имени'
 
 
-def get_document_path_and_name(user_id, report_id, string_date):
+def get_report_full_path(user_id, report_id, string_date, file_format):
     user = User.objects.get(id=user_id)
     [last_name, first_name] = [user.last_name, user.first_name]
-    document_name = '%s %s - отчет за %s.xlsx' % (last_name, first_name, string_date)
+    document_name = '%s %s - отчет за %s.%s' % (last_name, first_name, string_date, file_format)
     document_path = os.path.join('media', 'workplace', 'reports', str(report_id))
-    return [document_path, document_name]
+    if not os.path.isdir(document_path):
+        os.makedirs(document_path)
+    full_path = os.path.join(document_path, document_name)
+    return full_path

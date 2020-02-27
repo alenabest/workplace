@@ -8,6 +8,7 @@ from rest_framework import generics, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from workplace.api.report.create_doc_month_report import create_docx_month_report
 from workplace.api.report.create_excel_month_report import create_excel_month_report
 from workplace.common.utils import get_date_list, convert_minutes_to_hour, rfc5987_content_disposition, \
     get_name_file_field
@@ -88,6 +89,9 @@ def get_directions(directions, start, end, is_excel):
             'types': get_types(types, start, end, is_excel),
             'rows': types.count()
         }
+        if not is_excel:
+            item.update(duration=direction.get('minutes'))
+
         if item.get('direction') is None:
             item.update(direction='Без направления')
         items.append(item)
@@ -127,12 +131,9 @@ def create_excel_report(activities, start, end, user_id, report_id):
     return create_excel_month_report(activities, items, start, end, user_id, report_id)
 
 
-def create_doc_report(activities, start, end):
+def create_doc_report(activities, start, end, user_id, report_id):
     items = get_items_for_report(activities, start, end, False)
-    for item in items:
-        print(item)
-
-    return 'Ссылка на файл'
+    return create_docx_month_report(items, start, user_id, report_id)
 
 
 @celery_app.task
@@ -144,7 +145,7 @@ def create_report(user_id, report_id, report_type, start, end):
         if report_type == 0 or report_type == 2:
             link = create_excel_report(activities, start, end, user_id, report_id)
         else:
-            link = create_doc_report(activities, start, end)
+            link = create_doc_report(activities, start, end, user_id, report_id)
         report.state = 1
         report.link = link
         report.generated = start

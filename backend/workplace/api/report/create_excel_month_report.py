@@ -4,14 +4,11 @@ import xlsxwriter
 from django.db.models import Sum
 
 from workplace.common.utils import get_string_month_year, get_date_list, convert_minutes_to_hour, get_string_date, \
-    get_document_path_and_name
+    get_report_full_path
 
 
 def get_workbook(user_id, string_date, report_id):
-    [document_path, document_name] = get_document_path_and_name(user_id, report_id, string_date)
-    if not os.path.isdir(document_path):
-        os.makedirs(document_path)
-    full_path = os.path.join(document_path, document_name)
+    full_path = get_report_full_path(user_id, report_id, string_date, 'xlsx')
     return xlsxwriter.Workbook(full_path)
 
 
@@ -117,7 +114,7 @@ def fill_month_report_worksheet(workbook, cell_format, string_date, date_list, i
                         total = total_day_duration[activity_index]
                         total.update(total=(total.get('total') + duration))
                         worksheet.write(type_start_row, day_index,  round(duration, 1), day_format)
-                worksheet.write(type_start_row, len(activity_days) + 4, round(month_duration, 1), total_cell_format)
+                worksheet.write(type_start_row, len(activity_days) + 4, round(month_duration, 2), total_cell_format)
                 type_start_row += 1
             dir_start_row += dir_rows + 1
         start_row += rows + 1
@@ -133,7 +130,7 @@ def fill_month_report_worksheet(workbook, cell_format, string_date, date_list, i
             worksheet.write(start_row, day_index + 4,  round(total, 1), total_cell_format)
     # заполняем сводку по всему месяцу
     worksheet.merge_range(start_row, 0, start_row, 3, 'Итого:', total_cell_format)
-    worksheet.write(start_row, day_count + 4, round(total_duration, 1), total_cell_format)
+    worksheet.write(start_row, day_count + 4, round(total_duration, 2), total_cell_format)
     # заполняем сводку по переработке за месяц
     over_duration = float(0)
     weekend_over_duration = float(0)
@@ -145,15 +142,15 @@ def fill_month_report_worksheet(workbook, cell_format, string_date, date_list, i
             over_duration += total.get('total') - float(8)
 
     worksheet.merge_range(start_row, 0, start_row, 3, 'Переработка в рабочие дни:', total_cell_format)
-    worksheet.merge_range(start_row, 4, start_row, 5, round(over_duration, 1), total_cell_format)
+    worksheet.merge_range(start_row, 4, start_row, 5, round(over_duration, 2), total_cell_format)
     start_row += 1
 
     worksheet.merge_range(start_row, 0, start_row, 3, 'Переработка в выходные дни:', total_cell_format)
-    worksheet.merge_range(start_row, 4, start_row, 5, round(weekend_over_duration, 1), total_cell_format)
+    worksheet.merge_range(start_row, 4, start_row, 5, round(weekend_over_duration, 2), total_cell_format)
     start_row += 1
     work_duration = total_duration - over_duration - weekend_over_duration
     worksheet.merge_range(start_row, 0, start_row, 3, 'Рабочие часы без учёта переработки:', total_cell_format)
-    worksheet.merge_range(start_row, 4, start_row, 5, round(work_duration, 1), total_cell_format)
+    worksheet.merge_range(start_row, 4, start_row, 5, round(work_duration, 2), total_cell_format)
 
 
 def get_dictionary_name(dictionary, label):
