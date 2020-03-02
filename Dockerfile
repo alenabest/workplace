@@ -88,16 +88,17 @@ COPY configs/uwsgi_params /app/configs/uwsgi_params
 COPY --from=builder /app/frontend/dist/frontend/index.html /app/backend/templates/index.html
 COPY --from=builder /app/frontend/dist/frontend/ /app/backend/static/
 
+
 RUN echo 'daemon off;' >> /etc/nginx/nginx.conf
 COPY configs/nginx-app.conf /etc/nginx/sites-available/default
 COPY configs/supervisor-app.conf /etc/supervisor/conf.d/supervisor-app.conf
 
-WORKDIR /app/backend
-COPY backend/ /app/backend
-
 RUN pip3 install virtualenv
 RUN virtualenv -p python3 venv
 RUN . venv/bin/activate && pip3 install -r /app/backend/requirements.txt
+
+WORKDIR /app/backend
+COPY backend/ /app/backend
 
 RUN chown -R www-data:www-data .
 
