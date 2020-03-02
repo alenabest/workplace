@@ -39,10 +39,9 @@ export class WeekActivityCardComponent extends BaseDayActivity implements OnChan
   }
 
   checkTime(day: Date, hour: string, idx: number) {
-    const existActivity = this.weekActivities[idx].activities
-      .find(item => item.endHour === parseInt(hour.split(':')[0], 10));
-    if (existActivity) {
-      hour = existActivity.end;
+    const existActivities = this.findExistActivity(this.weekActivities[idx].activities, hour);
+    if (existActivities.length > 0) {
+      hour = this.getLastEndTime(existActivities);
     }
     this.addActivity(day, hour);
   }

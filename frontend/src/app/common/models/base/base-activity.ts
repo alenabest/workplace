@@ -58,6 +58,10 @@ export class BaseActivity extends BaseDestroy {
       );
   }
 
+  findExistActivity(activities: ActivityModel[], hour: string): ActivityModel[] {
+    return activities.filter(item => item.endHour === parseInt(hour.split(':')[0], 10));
+  }
+
   openUpdateActivityDialog(activity: ActivityModel): Observable<any | undefined> {
     return this.dialog.open(ActivityDialogComponent, { disableClose: true, data: activity })
       .afterClosed();
@@ -70,5 +74,9 @@ export class BaseActivity extends BaseDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe((result) => this.reloadActivityPage(result));
+  }
+
+  getLastEndTime(activities: ActivityModel[]): string {
+    return activities[activities.length - 1].end;
   }
 }

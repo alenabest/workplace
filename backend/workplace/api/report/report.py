@@ -8,6 +8,7 @@ from rest_framework import generics, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from workplace.api.report.create_doc_month_report import create_docx_month_report
 from workplace.api.report.create_excel_month_report import create_excel_month_report
 from workplace.common.utils import get_date_list, convert_minutes_to_hour, rfc5987_content_disposition, \
     get_name_file_field
@@ -60,29 +61,37 @@ def get_days(types, start, end, activity_type):
     return items
 
 
-def get_types(types, start, end):
+def get_types(types, start, end, is_excel):
     items = []
     for activity_type in types:
         item = {
-            'type': activity_type.get('type__name'),
-            'days': get_days(types, start, end, activity_type.get('type', None))
+            'type': activity_type.get('type__name')
         }
+
+        if is_excel:
+            item.update(days=get_days(types, start, end, activity_type.get('type', None)))
+        else:
+            item.update(duration=convert_minutes_to_hour(activity_type.get('minutes')))
+
         if item.get('type') is None:
             item.update(type='Без вида работы')
         items.append(item)
     return items
 
 
-def get_directions(directions, start, end):
+def get_directions(directions, start, end, is_excel):
     items = []
     for direction in directions:
         types = directions.filter(direction=direction.get('direction', None)) \
             .values('type', 'type__name').annotate(minutes=Sum('duration')).order_by('type__name')
         item = {
             'direction': direction.get('direction__name'),
-            'types': get_types(types, start, end),
+            'types': get_types(types, start, end, is_excel),
             'rows': types.count()
         }
+        if not is_excel:
+            item.update(duration=direction.get('minutes'))
+
         if item.get('direction') is None:
             item.update(direction='Без направления')
         items.append(item)
@@ -98,7 +107,7 @@ def get_rows_for_project(directions):
     return rows
 
 
-def get_items_for_report(activities, start, end):
+def get_items_for_report(activities, start, end, is_excel):
     projects = activities \
         .values('project', 'project__name').annotate(minutes=Sum('duration'))
     items = []
@@ -107,7 +116,7 @@ def get_items_for_report(activities, start, end):
             .values('direction', 'direction__name').annotate(minutes=Sum('duration')).order_by('direction__name')
         item = {
             'project': project.get('project__name'),
-            'directions': get_directions(directions, start, end),
+            'directions': get_directions(directions, start, end, is_excel),
             'rows': 1
         }
         item.update(rows=get_rows_for_project(item.get('directions', [])))
@@ -118,16 +127,13 @@ def get_items_for_report(activities, start, end):
 
 
 def create_excel_report(activities, start, end, user_id, report_id):
-    items = get_items_for_report(activities, start, end)
+    items = get_items_for_report(activities, start, end, True)
     return create_excel_month_report(activities, items, start, end, user_id, report_id)
 
 
-def create_doc_report(activities):
-    groups = activities.values('project__name', 'direction__name', 'activityDate').annotate(minutes=Sum('duration'))
-    for group in groups:
-        print(group)
-
-    return 'Ссылка на файл'
+def create_doc_report(activities, start, end, user_id, report_id):
+    items = get_items_for_report(activities, start, end, False)
+    return create_docx_month_report(items, start, user_id, report_id)
 
 
 @celery_app.task
@@ -139,7 +145,7 @@ def create_report(user_id, report_id, report_type, start, end):
         if report_type == 0 or report_type == 2:
             link = create_excel_report(activities, start, end, user_id, report_id)
         else:
-            link = create_doc_report(activities)
+            link = create_doc_report(activities, start, end, user_id, report_id)
         report.state = 1
         report.link = link
         report.generated = start

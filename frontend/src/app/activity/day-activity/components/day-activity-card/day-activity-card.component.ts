@@ -36,9 +36,9 @@ export class DayActivityCardComponent extends BaseDayActivity implements OnChang
   }
 
   checkTime(day: Date, hour: string) {
-    const existActivity = this.activities.find(item => item.endHour === parseInt(hour.split(':')[0], 10));
-    if (existActivity) {
-      hour = existActivity.end;
+    const existActivities = this.findExistActivity(this.activities, hour);
+    if (existActivities.length > 0) {
+      hour = this.getLastEndTime(existActivities);
     }
     this.addActivity(day, hour);
   }
