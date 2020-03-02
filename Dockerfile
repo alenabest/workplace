@@ -42,7 +42,7 @@ RUN apt-get update && \
 	supervisor \
 	sqlite3 \
 	software-properties-common \
-	openjdk-8-jre \
+	default-jre \
 	locales \
 	nano \
 	mc
