@@ -105,8 +105,6 @@ RUN pip install -r /app/backend/requirements.txt
 WORKDIR /app/backend
 COPY backend/ /app/backend
 
-RUN python -c "import nltk; nltk.download('popular')"
-
 RUN chown -R www-data:www-data .
 
 VOLUME '/app/backend'
