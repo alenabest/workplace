@@ -102,7 +102,9 @@ RUN echo 'daemon off;' >> /etc/nginx/nginx.conf
 COPY configs/nginx-app.conf /etc/nginx/sites-available/default
 COPY configs/supervisor-app.conf /etc/supervisor/conf.d/supervisor-app.conf
 
-RUN pip3 install -r /app/backend/requirements.txt
+RUN ln /usr/bin/python3 /usr/bin/python
+RUN ln /usr/bin/pip3 /usr/bin/pip
+RUN pip install -r /app/backend/requirements.txt
 
 WORKDIR /app/backend
 COPY backend/ /app/backend
