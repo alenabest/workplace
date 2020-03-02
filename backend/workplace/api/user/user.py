@@ -8,7 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from workplace.models import User
-from workplace.serializers.user import UserSerializer
+from workplace.serializers.user import UserSerializer, UserListSerializer
 
 
 class UserFilter(FilterSet):
@@ -19,7 +19,7 @@ class UserFilter(FilterSet):
 
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserListSerializer
     filter_class = UserFilter
 
 

@@ -7,6 +7,23 @@ from workplace.common.serializers import BaseRelatedSerializer
 from workplace.models import User
 
 
+class UserListSerializer(serializers.ModelSerializer):
+    firstName = serializers.CharField(source='first_name')
+    lastName = serializers.CharField(source='last_name')
+    middleName = serializers.CharField(source='middle_name')
+    lastLogin = serializers.CharField(source='last_login')
+
+    class Meta:
+        model = User
+        fields = ('id', 'firstName', 'lastName', 'middleName', 'email', 'lastLogin', 'online')
+
+
+class UserListRelatedSerializer(BaseRelatedSerializer):
+    class Meta:
+        model_class = User
+        model_serializer_class = UserListSerializer
+
+
 class UserSerializer(serializers.ModelSerializer):
     firstName = serializers.CharField(source='first_name')
     lastName = serializers.CharField(source='last_name')
