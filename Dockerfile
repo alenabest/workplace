@@ -33,8 +33,8 @@ RUN apt-get update && \
     apt-get install -y \
     postgresql-client-10 \
 	git \
-	python \
-	python-dev \
+	python3 \
+	python3-dev \
 	python-setuptools \
 	nginx \
 	supervisor \
@@ -61,8 +61,6 @@ RUN tar -zxvf LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz && \
     dpkg -i LibreOffice_6.0.7.3_Linux_x86-64_deb/DEBS/*.deb && \
     ln -sf /opt/libreoffice6.0/program/soffice /usr/bin/libreoffice && \
     ln -sf /opt/libreoffice6.0/program/soffice /usr/bin/soffice
-
-RUN pip3 install virtualenv
 
 RUN	pip3 install setuptools && \
 	rm -rf /var/lib/apt/lists/* && \
@@ -101,6 +99,8 @@ RUN echo 'daemon off;' >> /etc/nginx/nginx.conf
 COPY configs/nginx-app.conf /etc/nginx/sites-available/default
 COPY configs/supervisor-app.conf /etc/supervisor/conf.d/supervisor-app.conf
 
+RUN pip3 install virtualenv
+RUN virtualenv --no-site-packages venv
 RUN . venv/bin/activate && pip3 install -r /app/requirements.txt
 
 WORKDIR /app/backend
