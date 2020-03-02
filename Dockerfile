@@ -36,7 +36,7 @@ RUN apt-get update && \
 	python \
 	python-dev \
 	python-setuptools \
-	python-pip \
+	python3-pip \
 	nginx \
 	supervisor \
 	sqlite3 \
@@ -63,9 +63,11 @@ RUN tar -zxvf LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz && \
     ln -sf /opt/libreoffice6.0/program/soffice /usr/bin/libreoffice && \
     ln -sf /opt/libreoffice6.0/program/soffice /usr/bin/soffice
 
-RUN	pip install setuptools && \
+RUN pip3 install virtualenv
+
+RUN	pip3 install setuptools && \
 	rm -rf /var/lib/apt/lists/* && \
-	pip install uwsgi
+	pip3 install uwsgi
 
 ARG DJANGO_SETTINGS_MODULE='workplace.settings.production'
 ARG DATABASE_NAME='workplace'
