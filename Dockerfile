@@ -15,10 +15,10 @@ RUN node --max_old_space_size=16384 node_modules/@angular/cli/bin/ng build --pro
 
 
 ### STAGE 2: WEB ###
-FROM debian:9 AS web
+FROM debian AS web
 MAINTAINER Alena Hrenovskaya <yourally69@gmail.com>
 
-RUN apt-get update
+RUN apt-get update -y && apt-get install python3-pip -y && pip3 install pip --upgrade && apt-get clean
 # RUN apt-get install -y software-properties-common
 # RUN add-apt-repository ppa:libreoffice/ppa
 # RUN apt-get update
