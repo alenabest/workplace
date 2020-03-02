@@ -95,7 +95,7 @@ COPY configs/supervisor-app.conf /etc/supervisor/conf.d/supervisor-app.conf
 
 RUN pip3 install virtualenv
 RUN virtualenv -p python3 venv
-RUN . venv/bin/activate && pip3 install -r requirements.txt
+RUN . venv/bin/activate && pip3 install -r /app/backend/requirements.txt
 
 WORKDIR /app/backend
 COPY backend/ /app/backend
