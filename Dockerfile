@@ -9,9 +9,6 @@ RUN npm ci && cp -R ./node_modules /app/frontend
 WORKDIR /app/frontend
 COPY frontend/ /app/frontend
 RUN node --max_old_space_size=16384 node_modules/@angular/cli/bin/ng build --prod --base-href='/' --deploy-url='/static/'
-# RUN $(npm bin)/ng build --base-href='/' --deploy-url='/static/'
-# RUN $(npm bin)/ng build --aot=false --prod --base-href='/' --deploy-url='/static/'
-# VOLUME ['/app/frontend']
 
 
 ### STAGE 2: WEB ###
@@ -19,9 +16,7 @@ FROM debian AS web
 MAINTAINER Alena Hrenovskaya <yourally69@gmail.com>
 
 RUN apt-get update -y && apt-get install python3-pip -y && pip3 install pip --upgrade && apt-get clean
-# RUN apt-get install -y software-properties-common
-# RUN add-apt-repository ppa:libreoffice/ppa
-# RUN apt-get update
+
 RUN apt-get install -y wget
 RUN wget http://downloadarchive.documentfoundation.org/libreoffice/old/6.0.7.3/deb/x86_64/LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz
 
@@ -56,7 +51,6 @@ RUN sed -i -e 's/# ru_RU.UTF-8 UTF-8/ru_RU.UTF-8 UTF-8/' /etc/locale.gen && \
     echo "LANGUAGE=ru_RU.UTF-8" >> /etc/default/locale && \
     echo "LC_ALL=ru_RU.UTF-8" >> /etc/default/locale
 
-# RUN apt-get install -y libreoffice --no-install-recommends
 RUN tar -zxvf LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz && \
     dpkg -i LibreOffice_6.0.7.3_Linux_x86-64_deb/DEBS/*.deb && \
     ln -sf /opt/libreoffice6.0/program/soffice /usr/bin/libreoffice && \
