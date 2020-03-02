@@ -16,7 +16,7 @@ services:
       #target: web
     command: ["wait-for-postgres.sh", "database", "supervisord", "-n"]
     environment:
-      - PYTHONPATH=/app/backend/venv/bin/activate
+      - PYTHONPATH=/app/backend
       - DJANGO_SETTINGS_MODULE=backend.settings.production
       - DATABASE_NAME=workplace
       - DATABASE_USER=postgres

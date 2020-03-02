@@ -18,6 +18,7 @@ import { SettingsModule } from './settings';
 import { ProfileModule } from './profile';
 import { ReportsModule } from './reports';
 import { LoginModule } from './login';
+import { UsersModule } from './users';
 
 
 export function startupServiceFactory(startupService: StartupService) {
@@ -31,7 +32,8 @@ const modules = [
   ProfileModule,
   SettingsModule,
   ActivityModule,
-  ReportsModule
+  ReportsModule,
+  UsersModule
 ];
 
 @NgModule({
