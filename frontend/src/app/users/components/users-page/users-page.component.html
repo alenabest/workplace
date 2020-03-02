@@ -1,1 +1,23 @@
-<p>users-page works!</p>
+<div class="users-container" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="flex-end center" class="users-search">
+    <mat-form-field floatLabel="never" [fxFlex]="inputFlex">
+      <button matPrefix type="submit" mat-icon-button color="primary">
+        <mat-icon>search</mat-icon>
+      </button>
+      <input matInput placeholder="Найти" (focusin)="inputFlex = 'auto'" (blur)="inputFlex = '160px'">
+      <button matSuffix type="button" mat-icon-button color="primary">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+    <ng-container *ngIf="isAdmin">
+      <button mat-raised-button color="primary" type="button" class="users-add-button">
+        Добавить
+      </button>
+      <button mat-icon-button color="primary" type="button" class="users-add-button-mobile">
+        <mat-icon>person_add</mat-icon>
+      </button>
+    </ng-container>
+  </div>
+
+  <users-list [users]="users$ | async"></users-list>
+</div>

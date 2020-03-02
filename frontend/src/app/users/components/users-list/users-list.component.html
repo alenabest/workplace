@@ -1,0 +1,12 @@
+<div class="user-list-container" fxLayout="column">
+  <div fxLayout="column" *ngFor="let user of users" fxLayoutGap="8px" class="user-list-card">
+    <div fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="8px" class="user-list-card-title">
+      <span>{{ user.lastName }}</span>
+      <span>{{ user.firstName }}</span>
+      <span *ngIf="user?.middleName">{{ user.middleName }}</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="8px" class="user-list-card-status">
+      <span>В сети</span>
+    </div>
+  </div>
+</div>

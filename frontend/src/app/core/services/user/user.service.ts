@@ -4,8 +4,10 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+import { UserParam } from '../../../common/models/params';
 import { UserModel } from '../../../common/models/user';
-import { prepareObject } from '../../helpers';
+import { generateQuery } from '../../../common/utils';
+import { IResponse, prepareObject, serializeResponse } from '../../helpers';
 
 
 const USER_API = '/workplace/user/';
@@ -16,6 +18,16 @@ const USER_API = '/workplace/user/';
 export class UserService {
 
   constructor(protected http: HttpClient) {
+  }
+
+  getUsers(query?: UserParam): Observable<IResponse<UserModel>> {
+    const params = generateQuery(query);
+
+    return this.http
+      .get<IResponse<UserModel>>(`${USER_API}`, { params })
+      .pipe(
+        map(response => serializeResponse(UserModel, response))
+      );
   }
 
   updateUser(userId: number, user: UserModel): Observable<UserModel> {
@@ -31,7 +43,7 @@ export class UserService {
     formData.append('file', blob);
 
     return this.http
-      .post<{url: string}>(`${USER_API}${userId}/upload-avatar/`, formData)
+      .post<{ url: string }>(`${USER_API}${userId}/upload-avatar/`, formData)
       .pipe(
         map(result => plainToClass(UserModel, result))
       );

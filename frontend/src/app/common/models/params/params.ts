@@ -10,6 +10,20 @@ export class ByUserParam {
   user: number;
 }
 
+export class ByQueryParam {
+  constructor(query?: string) {
+    this.query = query;
+  }
+  query: string;
+}
+
+export class UserParam extends ByQueryParam {
+  constructor(query?: string) {
+    super(query);
+  }
+  role: string;
+}
+
 export class DayActivityParam extends ByUserParam {
   constructor(user: number, activityDate) {
     super(user);

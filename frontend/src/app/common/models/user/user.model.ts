@@ -14,6 +14,7 @@ export class UserModel {
   email?: string;
   mobile?: string;
   phone?: string;
+  role?: string;
 
   @Transform(formatMedia(), { toClassOnly: true })
   avatar?: string;

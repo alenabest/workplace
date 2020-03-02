@@ -1,0 +1,17 @@
+.user-list-container {
+  border-top: 1px solid #e5e5e5;
+  height: calc(100vh - 140px);
+  overflow: auto;
+
+  .user-list-card {
+    border-bottom: 1px solid #e5e5e5;
+    cursor: default;
+    padding: 8px;
+
+    .user-list-card-title {
+      font-size: 1.2em;
+      color: #002e41;
+      font-weight: 600;
+    }
+  }
+}
