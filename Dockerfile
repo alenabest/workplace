@@ -101,7 +101,7 @@ RUN echo 'daemon off;' >> /etc/nginx/nginx.conf
 COPY configs/nginx-app.conf /etc/nginx/sites-available/default
 COPY configs/supervisor-app.conf /etc/supervisor/conf.d/supervisor-app.conf
 
-RUN pip3 install -r /app/backend/requirements.txt
+RUN . venv/bin/activate && pip3 install -r /app/requirements.txt
 
 WORKDIR /app/backend
 COPY backend/ /app/backend
