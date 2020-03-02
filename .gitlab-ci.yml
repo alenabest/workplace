@@ -50,7 +50,7 @@ REVIEW:START:
   before_script:
     - apk add curl postgresql-client --no-cache
     - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
-    - source /app/backend/venv/bin/activate
+    - source /app/venv/bin/activate
   script:
     - createdb -h ${DATABASE_HOST} -U ${DATABASE_USER} ${DATABASE_NAME} 2>/dev/null || dropdb -h ${DATABASE_HOST} -U ${DATABASE_USER} ${DATABASE_NAME}
     - createdb -h ${DATABASE_HOST} -U ${DATABASE_USER} ${DATABASE_NAME} 2>/dev/null || echo "Database already exist."
