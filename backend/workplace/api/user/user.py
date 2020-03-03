@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django_filters.rest_framework import FilterSet, DjangoFilterBackend
 from rest_framework import generics, status
 from rest_framework.decorators import api_view
-from rest_framework.filters import SearchFilter
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
 
 from workplace.models import User
@@ -22,8 +22,9 @@ class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserListSerializer
     filter_class = UserFilter
-    filter_backends = (DjangoFilterBackend, SearchFilter)
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     search_fields = ('last_name', 'first_name', 'middle_name')
+    ordering_fields = ('last_name',)
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
