@@ -4,13 +4,14 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { UserParam } from '../../../common/models/params';
-import { UserModel } from '../../../common/models/user';
-import { generateQuery } from '../../../common/utils';
 import { IResponse, prepareObject, serializeResponse } from '../../helpers';
+import { RoleModel, UserModel } from '../../../common/models/user';
+import { UserParam } from '../../../common/models/params';
+import { generateQuery } from '../../../common/utils';
 
 
 const USER_API = '/workplace/user/';
+const ROLE_API = '/workplace/role/';
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +31,27 @@ export class UserService {
       );
   }
 
+  createUser(user: object): Observable<UserModel> {
+    return this.http
+      .post(`${USER_API}`, prepareObject(UserModel, user))
+      .pipe(
+        map(result => plainToClass(UserModel, result))
+      );
+  }
+
   updateUser(userId: number, user: UserModel): Observable<UserModel> {
     return this.http
       .patch(`${USER_API}${userId}/`, prepareObject(UserModel, user))
       .pipe(
         map(result => plainToClass(UserModel, result))
+      );
+  }
+
+  deleteUser(userId: number): Observable<boolean> {
+    return this.http
+      .delete(`${USER_API}${userId}/`)
+      .pipe(
+        map(() => true)
       );
   }
 
@@ -46,6 +63,14 @@ export class UserService {
       .post<{ url: string }>(`${USER_API}${userId}/upload-avatar/`, formData)
       .pipe(
         map(result => plainToClass(UserModel, result))
+      );
+  }
+
+  getRoles(): Observable<IResponse<RoleModel>> {
+    return this.http
+      .get<IResponse<RoleModel>>(`${ROLE_API}` )
+      .pipe(
+        map(response => serializeResponse(RoleModel, response))
       );
   }
 }

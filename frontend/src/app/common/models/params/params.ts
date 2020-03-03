@@ -11,17 +11,17 @@ export class ByUserParam {
 }
 
 export class ByQueryParam {
-  constructor(query?: string) {
-    this.query = query;
+  constructor(search?: string) {
+    this.search = search;
   }
-  query: string;
+  search: string;
 }
 
 export class UserParam extends ByQueryParam {
-  constructor(query?: string) {
-    super(query);
+  constructor(search?: string) {
+    super(search);
   }
-  role: string;
+  role?: string;
 }
 
 export class DayActivityParam extends ByUserParam {

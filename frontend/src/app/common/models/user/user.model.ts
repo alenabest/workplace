@@ -15,6 +15,7 @@ export class UserModel {
   mobile?: string;
   phone?: string;
   role?: string;
+  online?: boolean;
 
   @Transform(formatMedia(), { toClassOnly: true })
   avatar?: string;
@@ -22,6 +23,15 @@ export class UserModel {
   @Transform(formatDateToPlain(), { toPlainOnly: true })
   @Transform(formatDateToClass(), { toClassOnly: true })
   birthday?: Date | string;
+
+  @Transform(formatDateToPlain(), { toPlainOnly: true })
+  @Transform(formatDateToClass(), { toClassOnly: true })
+  lastLogin?: Date | string;
+}
+
+export class RoleModel {
+  name: string;
+  label: string;
 }
 
 export class UserPasswordModel {

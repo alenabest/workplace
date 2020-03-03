@@ -1,9 +1,13 @@
 .confirmation-container {
-  max-width: 500px;
+  max-width: 600px;
 
   .confirmation-content {
-    font-size: 1.5em;
+    font-size: 1.2em;
     padding: 8px;
+  }
+
+  mat-card-actions {
+    padding-left: 8px;
   }
 
   @media screen and (max-width: 600px){
