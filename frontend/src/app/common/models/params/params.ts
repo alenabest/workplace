@@ -22,6 +22,7 @@ export class UserParam extends ByQueryParam {
     super(search);
   }
   role?: string;
+  ordering?: string;
 }
 
 export class DayActivityParam extends ByUserParam {

@@ -99,7 +99,7 @@ export class UsersPageComponent extends BaseDestroy implements OnInit {
   }
 
   _getUsers(): Observable<UserModel[]> {
-    return this.userService.getUsers({search: this.search})
+    return this.userService.getUsers({search: this.search, ordering: 'last_name'})
       .pipe(
         map(response => response.results)
       );
