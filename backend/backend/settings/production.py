@@ -5,6 +5,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*', ]
 
+ROOT_URLCONF = 'backend.prod_urls'
+
 INSTALLED_APPS += [
     'django_filters',
     'rest_framework',
