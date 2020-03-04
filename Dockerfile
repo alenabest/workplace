@@ -22,13 +22,13 @@ ARG DATABASE_PASSWORD=''
 ARG DATABASE_HOST='localhost'
 ARG DATABASE_PORT=5432
 
-#ENV PYTHONUNBUFFERED 1
-ENV POSTGRES_HOST=$POSTGRES_HOST
-ENV POSTGRES_PORT=$POSTGRES_PORT
-ENV POSTGRES_DATABASE=$POSTGRES_DATABASE
-ENV POSTGRES_USER=$POSTGRES_USER
-ENV POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-ENV DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+ENV PYTHONUNBUFFERED 1
+ENV DJANGO_SETTINGS_MODULE 'backend.settings.production'
+ENV DATABASE_NAME 'workplace'
+ENV DATABASE_USER 'postgres'
+ENV DATABASE_PASSWORD ''
+ENV DATABASE_HOST 'localhost'
+ENV DATABASE_PORT 5432
 
 ENV LANG ru_RU.UTF-8
 ENV LC_ALL ru_RU.UTF-8
@@ -36,8 +36,7 @@ ENV LANGUAGE ru_RU.UTF-8
 
 RUN apt-get update
 
-RUN apt-get install -y wget git python3 python3-dev python3-pip nginx supervisor sqlite3 locales default-jre \
-    postgresql-client-10 software-properties-common nano mc
+RUN apt-get install -y wget git python3 python3-dev python3-pip nginx supervisor sqlite3 locales default-jre postgresql-client-10 software-properties-common nano mc
 RUN pip3 install -U pip setuptools && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN wget http://downloadarchive.documentfoundation.org/libreoffice/old/6.0.7.3/deb/x86_64/LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz
@@ -90,12 +89,12 @@ COPY . .
 RUN chown -R www-data:www-data .
 RUN python manage.py collectstatic --noinput
 
+VOLUME /app/backend
+VOLUME /app/bin
+VOLUME /app/configs
 VOLUME /app/backend/logs
 VOLUME /app/backend/media
 
-#VOLUME '/app/backend'
-#VOLUME '/app/bin'
-#VOLUME '/app/configs'
 
 EXPOSE 80
 
