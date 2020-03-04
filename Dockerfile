@@ -50,8 +50,8 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-k
 RUN tar -zxvf LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz && \
     dpkg -i LibreOffice_6.0.7.3_Linux_x86-64_deb/DEBS/*.deb && \
     ln -sf /opt/libreoffice6.0/program/soffice /usr/bin/libreoffice && \
-    ln -sf /opt/libreoffice6.0/program/soffice /usr/bin/soffice
-    rm -rf LibreOffice_6.3.2_Linux_x86-64_deb.tar.gz
+    ln -sf /opt/libreoffice6.0/program/soffice /usr/bin/soffice && \
+    rm -rf LibreOffice_6.3.2_Linux_x86-64_deb.tar.gz && \
     rm -rf LibreOffice_6.3.2.2_Linux_x86-64_deb
 
 RUN sed -i -e 's/# ru_RU.UTF-8 UTF-8/ru_RU.UTF-8 UTF-8/' /etc/locale.gen && \
