@@ -67,7 +67,6 @@ ARG DATABASE_PASSWORD=''
 ARG DATABASE_HOST='localhost'
 ARG DATABASE_PORT=5432
 
-ENV PYTHONUNBUFFERED 1
 ENV DJANGO_SETTINGS_MODULE 'backend.settings.production'
 ENV DATABASE_NAME 'workplace'
 ENV DATABASE_USER 'postgres'
@@ -81,7 +80,6 @@ RUN mkdir -p /app/backend
 RUN mkdir -p /app/bin
 
 COPY bin/wait-for-postgres.sh /usr/bin/wait-for-postgres.sh
-COPY backend/requirements.txt /app/backend/requirements.txt
 COPY configs/uwsgi-app.ini /app/configs/uwsgi-app.ini
 COPY configs/uwsgi_params /app/configs/uwsgi_params
 
@@ -93,10 +91,16 @@ RUN echo 'daemon off;' >> /etc/nginx/nginx.conf
 COPY configs/nginx-app.conf /etc/nginx/sites-available/default
 COPY configs/supervisor-app.conf /etc/supervisor/conf.d/supervisor-app.conf
 
-RUN pip3 install -r /app/backend/requirements.txt
+FROM python:3.6
+
+ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app/backend
 COPY backend/ /app/backend
+
+RUN apt-get update
+
+RUN pip3 install -r /app/backend/requirements.txt
 
 RUN chown -R www-data:www-data .
 
