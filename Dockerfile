@@ -35,7 +35,7 @@ ENV LC_ALL ru_RU.UTF-8
 ENV LANGUAGE ru_RU.UTF-8
 
 RUN apt-get update
-
+RUN apt-get install -y wget git python3
 RUN wget http://downloadarchive.documentfoundation.org/libreoffice/old/6.0.7.3/deb/x86_64/LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz
 
 RUN apt-get -y dist-upgrade
@@ -43,7 +43,7 @@ RUN apt-get install -y wget gnupg p7zip-full
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' >  /etc/apt/sources.list.d/pgdg.list
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
-RUN apt-get install -y wget git python3 python3-dev python3-pip nginx supervisor sqlite3 locales default-jre postgresql-client-10 software-properties-common nano mc
+RUN apt-get install -y python3-dev python3-pip nginx supervisor sqlite3 locales default-jre postgresql-client-10 software-properties-common nano mc
 RUN pip3 install -U pip setuptools && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN tar -zxvf LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz && \
