@@ -18,6 +18,8 @@ export class FormValidationService {
       minLength: '',
       matDatepickerMin: '',
       matDatepickerMax: '',
+      minTime: '',
+      maxTime: '',
       min: '',
       max: ''
     };
@@ -48,6 +50,14 @@ export class FormValidationService {
       return config.min;
     } else if (field.hasError('max')) {
       config.max = `Максимальное значение - ${field.errors.max.max}`;
+
+      return config.max;
+    } else if (field.hasError('minTime')) {
+      config.min = `Не раньше ${field.errors.minTime}`;
+
+      return config.min;
+    } else if (field.hasError('maxTime')) {
+      config.max = `Не позже ${field.errors.maxTime}`;
 
       return config.max;
     }

@@ -9,7 +9,7 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
 
 from workplace.models import User
-from workplace.serializers.user import UserSerializer, UserListSerializer
+from workplace.serializers.user import UserSerializer
 
 
 class UserFilter(FilterSet):
@@ -20,16 +20,30 @@ class UserFilter(FilterSet):
 
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
-    serializer_class = UserListSerializer
+    serializer_class = UserSerializer
     filter_class = UserFilter
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     search_fields = ('last_name', 'first_name', 'middle_name')
     ordering_fields = ('last_name',)
 
+    def perform_create(self, serializer):
+        user = serializer.save()
+        user.set_password(self.request.data.get('password', ''))
+        user.save()
+
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def perform_update(self, serializer):
+        user = serializer.save()
+
+        password = self.request.data.get('password')
+        # Даём возможность менять пароли только админу
+        if password:
+            user.set_password(password)
+            user.save()
 
 
 @api_view(['GET'])

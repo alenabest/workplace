@@ -115,8 +115,8 @@ class Activity(models.Model):
     """
 
     class Meta:
-        verbose_name = 'Активность'
-        verbose_name_plural = 'Активность'
+        verbose_name = '[Activity] Активность'
+        verbose_name_plural = '[Activity] Активность'
 
     # описание
     description = models.TextField(null=False, blank=False)
@@ -199,3 +199,16 @@ class Report(models.Model):
 
     created = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
+
+
+class ActivityTimer(models.Model):
+    """
+    Таймер активности
+    """
+
+    class Meta:
+        verbose_name = '[ActivityTimer] Таймер активности'
+        verbose_name_plural = '[ActivityTimer] Таймер активности'
+
+    # описание
+    description = models.TextField(null=False, blank=False)

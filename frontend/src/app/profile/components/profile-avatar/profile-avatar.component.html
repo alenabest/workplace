@@ -15,7 +15,8 @@
               matTooltip="Прикрепить фото" matTooltipClass="custom-tooltip">
         <mat-icon>camera_alt</mat-icon>
       </button>
-      <input type="file" (change)="openAvatarEditorDialog($event)" #avatarInput style="display: none;"/>
+      <input type="file" accept="image/*"
+             (change)="openAvatarEditorDialog($event)" #avatarInput style="display: none;"/>
     </ng-container>
   </div>
 </div>
