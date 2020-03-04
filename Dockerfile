@@ -34,11 +34,11 @@ ENV LANG ru_RU.UTF-8
 ENV LC_ALL ru_RU.UTF-8
 ENV LANGUAGE ru_RU.UTF-8
 
-RUN apt-get update &&
-    apt-get install -y wget git python3 python3-dev python3-pip nginx supervisor sqlite3 locales default-jre && \
-    apt-get install -y postgresql-client-10 software-properties-common nano mc && \
-    pip3 install -U pip setuptools && apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+
+RUN apt-get install -y wget git python3 python3-dev python3-pip nginx supervisor sqlite3 locales default-jre \
+    postgresql-client-10 software-properties-common nano mc
+RUN pip3 install -U pip setuptools && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN wget http://downloadarchive.documentfoundation.org/libreoffice/old/6.0.7.3/deb/x86_64/LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz
 
