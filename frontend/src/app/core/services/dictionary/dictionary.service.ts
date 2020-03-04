@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ClassType } from 'class-transformer/ClassTransformer';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -14,8 +14,8 @@ import { generateQuery } from '../../../common/utils';
 export class DictionaryService {
   constructor(protected http: HttpClient) { }
 
-  getDictionary<T>(dictionaryApi: string, cls: ClassType<T>, params?: DictionaryParam | HttpParams): Observable<IResponse<T>> {
-    params = generateQuery(params);
+  getDictionary<T>(dictionaryApi: string, cls: ClassType<T>, query?: DictionaryParam): Observable<IResponse<T>> {
+    const params = generateQuery(query);
 
     return this.http
       .get<IResponse<T>>(`/workplace/${dictionaryApi}/`, { params })

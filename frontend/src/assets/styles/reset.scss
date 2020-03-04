@@ -67,3 +67,21 @@ mat-dialog-container {
 textarea.mat-input-element {
   min-height: 20px;
 }
+
+input[type="time"]::-webkit-outer-spin-button,
+input[type="time"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input[type="time"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  appearance: none;
+}
+
+.mat-input-element[type=time]::after {
+  content: none !important;
+}

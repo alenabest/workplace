@@ -2,7 +2,7 @@
   <mat-card-title>{{ title }}</mat-card-title>
   <mat-card-content>
     <form role="form" [formGroup]="activityForm" fxLayout="column" fxLayoutGap="8px" class="activity-form">
-      <div fxLayout="row" fxLayoutGap="8px">
+      <div fxLayout="row" fxLayoutGap="8px" class="date-time-row">
         <mat-form-field appearance="outline" floatLabel="always" class="date-field">
           <mat-label>Дата</mat-label>
           <input matInput [matDatepicker]="activityDatePicker" formControlName="activityDate" required>
@@ -12,22 +12,25 @@
             <validation-error [control]="activityDate"></validation-error>
           </mat-error>
         </mat-form-field>
+        <div fxLayout="row" fxLayoutGap="8px">
+          <mat-form-field appearance="outline" floatLabel="always" class="time-field">
+            <mat-label>С</mat-label>
+            <input type="time" matInput formControlName="start" placeholder="ЧЧ:ММ" required
+            (change)="checkTimes()">
+            <mat-error>
+              <validation-error [control]="start"></validation-error>
+            </mat-error>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" floatLabel="always" class="time-field">
-          <mat-label>С</mat-label>
-          <input matInput formControlName="start" placeholder="ЧЧ:ММ" timeMask required>
-          <mat-error>
-            <validation-error [control]="start"></validation-error>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" floatLabel="always" class="time-field">
-          <mat-label>По</mat-label>
-          <input matInput formControlName="end" placeholder="ЧЧ:ММ" timeMask required>
-          <mat-error>
-            <validation-error [control]="end"></validation-error>
-          </mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="outline" floatLabel="always" class="time-field">
+            <mat-label>По</mat-label>
+            <input type="time" matInput formControlName="end" placeholder="ЧЧ:ММ" required
+                   (change)="checkTimes()">
+            <mat-error>
+              <validation-error [control]="end"></validation-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
       </div>
 
       <mat-form-field appearance="outline" floatLabel="always">

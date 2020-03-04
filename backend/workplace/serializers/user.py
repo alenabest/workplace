@@ -10,8 +10,8 @@ from workplace.models import User
 class UserSerializer(serializers.ModelSerializer):
     firstName = serializers.CharField(source='first_name')
     lastName = serializers.CharField(source='last_name')
-    middleName = serializers.CharField(source='middle_name')
-    lastLogin = serializers.CharField(source='last_login')
+    middleName = serializers.CharField(source='middle_name', required=False, allow_null=True)
+    lastLogin = serializers.CharField(source='last_login', required=False, allow_null=True)
 
     class Meta:
         model = User

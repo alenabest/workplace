@@ -5,6 +5,21 @@ from django.db import models
 from model_utils import Choices
 
 
+class Role(models.Model):
+    """
+    Роль пользователя
+    """
+
+    class Meta:
+        verbose_name = '[Role] Роль'
+        verbose_name_plural = '[Role] Роль'
+
+    # Название роли
+    name = models.TextField(null=False, primary_key=True)
+    # Лэйбл
+    label = models.TextField(null=False, blank=True, default='')
+
+
 def upload_avatar_path(self, filename):
     return os.path.join('media', 'workplace', 'avatars', str(self.id), filename)
 
@@ -39,6 +54,10 @@ class User(AbstractUser):
     phone = models.TextField(null=True, blank=True, default='')
     # Путь к изображению для аватара пользователя
     avatar = models.ImageField(upload_to=upload_avatar_path, null=True, max_length=1024)
+    # Роль пользователя
+    role = models.ForeignKey(Role, null=True, on_delete=models.SET_NULL)
+    # Роль пользователя
+    online = models.BooleanField(null=True, default=False)
 
 
 class Project(models.Model):
@@ -96,8 +115,8 @@ class Activity(models.Model):
     """
 
     class Meta:
-        verbose_name = 'Активность'
-        verbose_name_plural = 'Активность'
+        verbose_name = '[Activity] Активность'
+        verbose_name_plural = '[Activity] Активность'
 
     # описание
     description = models.TextField(null=False, blank=False)
@@ -180,3 +199,16 @@ class Report(models.Model):
 
     created = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
+
+
+class ActivityTimer(models.Model):
+    """
+    Таймер активности
+    """
+
+    class Meta:
+        verbose_name = '[ActivityTimer] Таймер активности'
+        verbose_name_plural = '[ActivityTimer] Таймер активности'
+
+    # описание
+    description = models.TextField(null=False, blank=False)

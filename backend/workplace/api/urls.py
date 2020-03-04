@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^direction/', include(('workplace.api.direction.urls', 'workplace'), namespace='direction')),
     url(r'^project/', include(('workplace.api.project.urls', 'workplace'), namespace='project')),
     url(r'^report/', include(('workplace.api.report.urls', 'workplace'), namespace='report')),
+    url(r'^role/', include(('workplace.api.role.urls', 'workplace'), namespace='role')),
     url(r'^user/', include(('workplace.api.user.urls', 'workplace'), namespace='user')),
 ]

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClassType } from 'class-transformer/ClassTransformer';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
@@ -16,6 +16,7 @@ import { BaseDestroy } from '../../../common/models/base-destroy';
 import { ActivityService } from '../../../core/services/activity';
 import { SubjectService } from '../../../core/services/subject';
 import { AuthService } from '../../../core/services/auth';
+import { format } from 'date-fns';
 
 
 @Component({
@@ -107,6 +108,17 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
   ngOnInit() {
     this.activityForm.patchValue(this.activity);
     this.getDictionaries();
+  }
+
+  checkTimes() {
+    if (this.start.value && this.end.value) {
+      if (this.start.value > this.end.value) {
+        this.start.setErrors({maxTime: this.end.value});
+      } else if (this.end.value < this.start.value) {
+        this.end.setErrors({minTime: this.start.value});
+      }
+      console.log(new Date(this.start.value));
+    }
   }
 
   getDictionaries() {

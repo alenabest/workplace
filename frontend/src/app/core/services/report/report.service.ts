@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+import { IResponse, prepareAndDownloadFile, serializeResponse } from '../../helpers';
 import { ByUserParam, ReportParam } from '../../../common/models/params';
 import { OkTrueModel } from '../../../common/models/response';
-import { IResponse, prepareAndDownloadFile, serializeResponse } from '../../helpers';
 import { ReportModel } from '../../../common/models/report';
 import { generateQuery } from '../../../common/utils';
 
@@ -21,8 +21,8 @@ export class ReportService {
   constructor(protected http: HttpClient) {
   }
 
-  getReports(params: ByUserParam | HttpParams): Observable<IResponse<ReportModel>> {
-    params = generateQuery(params);
+  getReports(query: ByUserParam): Observable<IResponse<ReportModel>> {
+    const params = generateQuery(query);
 
     return this.http
       .get<IResponse<ReportModel>>(`${REPORT_API}`, {params})

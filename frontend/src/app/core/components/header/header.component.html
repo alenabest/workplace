@@ -12,6 +12,9 @@
     <a [ngClass]="{'toolbar-button': true, 'current': isState('reports')}" fxLayoutAlign="center center"
        routerLink="app/reports">
       Отчеты</a>
+    <a [ngClass]="{'toolbar-button': true, 'current': isState('users')}" fxLayoutAlign="center center"
+       routerLink="app/users">
+      Пользователи</a>
   </div>
   <span class="header-login"> {{ greetingWords }} {{ userFirstName }} </span>
   <a [ngClass]="{'toolbar-icon-button': true, 'current': isState('profile')}" fxLayoutAlign="center center"
@@ -33,5 +36,8 @@
     <a [ngClass]="{'toolbar-button': true, 'current': isState('reports')}" fxLayoutAlign="center center"
        routerLink="app/reports">
       Отчеты</a>
+    <a [ngClass]="{'toolbar-button': true, 'current': isState('users')}" fxLayoutAlign="center center"
+       routerLink="app/users">
+      Пользователи</a>
   </mat-sidenav>
 </mat-sidenav-container>

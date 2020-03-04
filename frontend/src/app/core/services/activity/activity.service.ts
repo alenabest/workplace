@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { plainToClass } from 'class-transformer';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -19,8 +19,8 @@ export class ActivityService {
   constructor(protected http: HttpClient) {
   }
 
-  getDayActivity(params: DayActivityParam | HttpParams): Observable<IResponse<ActivityModel>> {
-    params = generateQuery(params);
+  getDayActivity(query: DayActivityParam): Observable<IResponse<ActivityModel>> {
+    const params = generateQuery(query);
 
     return this.http
       .get<IResponse<ActivityModel>>(`${ACTIVITY_API}`, { params })
