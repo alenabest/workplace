@@ -15,11 +15,10 @@ RUN node --max_old_space_size=16384 node_modules/@angular/cli/bin/ng build --pro
 FROM debian AS web
 MAINTAINER Alena Hrenovskaya <yourally69@gmail.com>
 
-RUN apt-get remove python2.7
 RUN apt-get update -y && apt-get install python3-pip -y && apt-get clean
 
 RUN apt-get install -y wget
-RUN wget http://downloadarchive.documentfoundation.org/libreoffice/old/6.0.7.3/deb/x86_64/LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz
+#RUN wget http://downloadarchive.documentfoundation.org/libreoffice/old/6.0.7.3/deb/x86_64/LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz
 
 RUN apt-get -y dist-upgrade
 RUN apt-get install -y wget gnupg p7zip-full
@@ -52,10 +51,10 @@ RUN sed -i -e 's/# ru_RU.UTF-8 UTF-8/ru_RU.UTF-8 UTF-8/' /etc/locale.gen && \
     echo "LANGUAGE=ru_RU.UTF-8" >> /etc/default/locale && \
     echo "LC_ALL=ru_RU.UTF-8" >> /etc/default/locale
 
-RUN tar -zxvf LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz && \
-    dpkg -i LibreOffice_6.0.7.3_Linux_x86-64_deb/DEBS/*.deb && \
-    ln -sf /opt/libreoffice6.0/program/soffice /usr/bin/libreoffice && \
-    ln -sf /opt/libreoffice6.0/program/soffice /usr/bin/soffice
+#RUN tar -zxvf LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz && \
+#    dpkg -i LibreOffice_6.0.7.3_Linux_x86-64_deb/DEBS/*.deb && \
+#    ln -sf /opt/libreoffice6.0/program/soffice /usr/bin/libreoffice && \
+#    ln -sf /opt/libreoffice6.0/program/soffice /usr/bin/soffice
 
 RUN	pip3 install setuptools && \
 	rm -rf /var/lib/apt/lists/* && \
