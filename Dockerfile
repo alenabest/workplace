@@ -40,7 +40,7 @@ RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' >  /et
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
 RUN apt-get update && \
-    apt-get install -y python3-dev python3-pip nginx supervisor sqlite3 locales default-jre \
+    apt-get install -y python3-dev python3-pip python3-setuptools nginx supervisor sqlite3 locales default-jre \
     postgresql-client-10 software-properties-common nano mc
 RUN pip3 install -U pip setuptools && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -82,11 +82,10 @@ COPY --from=builder /app/frontend/dist/frontend/ /app/backend/static/
 COPY configs/nginx-app.conf /etc/nginx/sites-available/default
 COPY configs/supervisor-app.conf /etc/supervisor/conf.d/
 
-COPY requirements.txt /app/backend/
-RUN pip install -r /app/backend/requirements.txt
+RUN pip3 install -r /app/backend/requirements.txt
 
-WORKDIR /app/backend/
-COPY . .
+WORKDIR /app/backend
+COPY backend/ /app/backend
 
 RUN chown -R www-data:www-data .
 RUN python manage.py collectstatic --noinput
