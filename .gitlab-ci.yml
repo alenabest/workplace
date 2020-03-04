@@ -58,9 +58,9 @@ REVIEW:START:
     - docker pull ${CONTAINER_TEST_IMAGE}
     - docker create --restart=always --name ${CI_CONTAINER_NAME_SLUG} -e VIRTUAL_HOST=${CI_COMMIT_REF_SLUG}.${CI_ENVIRONMENT_DOMAIN} -e DATABASE_HOST=${DATABASE_HOST} -e DATABASE_USER=${DATABASE_USER} -e DATABASE_NAME=${DATABASE_NAME} -e DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE} -t ${CONTAINER_TEST_IMAGE}
     - docker start ${CI_CONTAINER_NAME_SLUG}
-    - docker exec ${CI_CONTAINER_NAME_SLUG} python manage.py collectstatic --noinput
-    - docker exec ${CI_CONTAINER_NAME_SLUG} python manage.py migrate --noinput
-    - docker exec ${CI_CONTAINER_NAME_SLUG} python manage.py loaddata workplace/fixtures/workplace
+    - docker exec ${CI_CONTAINER_NAME_SLUG} python3 manage.py collectstatic --noinput
+    - docker exec ${CI_CONTAINER_NAME_SLUG} python3 manage.py migrate --noinput
+    - docker exec ${CI_CONTAINER_NAME_SLUG} python3 manage.py loaddata workplace/fixtures/workplace
 
 
 REVIEW:STOP:
@@ -113,9 +113,9 @@ DEMO:CE:START:
     - docker pull ${CONTAINER_TEST_IMAGE}
     - docker create --restart=always --name ${CI_CONTAINER_NAME_SLUG} -e VIRTUAL_HOST=demo.${CI_ENVIRONMENT_DOMAIN} -v $HOST_MEDIA_DIR:/app/backend/media -v $HOST_LOGS_DIR:/app/backend/logs -e DATABASE_HOST=${DATABASE_HOST} -e DATABASE_USER=${DATABASE_USER} -e DATABASE_NAME=${DATABASE_NAME} -e DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE} -e CI_COMMIT_TAG=${CI_COMMIT_TAG} -t ${CONTAINER_TEST_IMAGE}
     - docker start ${CI_CONTAINER_NAME_SLUG}
-    - docker exec ${CI_CONTAINER_NAME_SLUG} python manage.py collectstatic --noinput
-    - docker exec ${CI_CONTAINER_NAME_SLUG} python manage.py migrate --noinput
-    - docker exec ${CI_CONTAINER_NAME_SLUG} python manage.py loaddata workplace/fixtures/workplace
+    - docker exec ${CI_CONTAINER_NAME_SLUG} python3 manage.py collectstatic --noinput
+    - docker exec ${CI_CONTAINER_NAME_SLUG} python3 manage.py migrate --noinput
+    - docker exec ${CI_CONTAINER_NAME_SLUG} python3 manage.py loaddata workplace/fixtures/workplace
 
 DEMO:CE:STOP:
   stage: preprod
