@@ -2,13 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 
 import { CustomHttpInterceptor } from './core/custom-http-interceptor';
 import { AppDateAdapter, MAT_DATE_FNS_DATE_FORMATS } from './app-date-adapter';
-import { environment } from '../environments/environment';
 import { CoreComponentsModule } from './core/components';
 import { StartupService } from './core/services/startup';
 import { AppRoutingModule } from './app-routing.module';
@@ -51,7 +49,6 @@ const modules = [
       headerName: 'x-csrftoken'
     }),
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     FlexModule
   ],
   providers: [
