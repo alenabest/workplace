@@ -91,12 +91,13 @@ RUN echo 'daemon off;' >> /etc/nginx/nginx.conf
 COPY configs/nginx-app.conf /etc/nginx/sites-available/default
 COPY configs/supervisor-app.conf /etc/supervisor/conf.d/supervisor-app.conf
 
-FROM python:3.6
-
-ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app/backend
 COPY backend/ /app/backend
+
+FROM python:3.6
+
+ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update
 
