@@ -15,7 +15,8 @@ RUN node --max_old_space_size=16384 node_modules/@angular/cli/bin/ng build --pro
 FROM debian AS web
 MAINTAINER Alena Hrenovskaya <yourally69@gmail.com>
 
-RUN apt-get update -y && apt-get install python3-pip -y && pip3 install pip --upgrade && apt-get clean
+RUN apt-get remove python2.7
+RUN apt-get update -y && apt-get install python3-pip -y && apt-get clean
 
 RUN apt-get install -y wget
 RUN wget http://downloadarchive.documentfoundation.org/libreoffice/old/6.0.7.3/deb/x86_64/LibreOffice_6.0.7.3_Linux_x86-64_deb.tar.gz
@@ -30,7 +31,7 @@ RUN apt-get update && \
 	git \
 	python3 \
 	python3-dev \
-	python-setuptools \
+	python3-setuptools \
 	nginx \
 	supervisor \
 	sqlite3 \
@@ -60,7 +61,7 @@ RUN	pip3 install setuptools && \
 	rm -rf /var/lib/apt/lists/* && \
 	pip3 install uwsgi
 
-ARG DJANGO_SETTINGS_MODULE='workplace.settings.production'
+ARG DJANGO_SETTINGS_MODULE='backend.settings.production'
 ARG DATABASE_NAME='workplace'
 ARG DATABASE_USER='postgres'
 ARG DATABASE_PASSWORD=''
@@ -93,9 +94,7 @@ RUN echo 'daemon off;' >> /etc/nginx/nginx.conf
 COPY configs/nginx-app.conf /etc/nginx/sites-available/default
 COPY configs/supervisor-app.conf /etc/supervisor/conf.d/supervisor-app.conf
 
-RUN pip3 install virtualenv
-RUN virtualenv -p python3 venv
-RUN . venv/bin/activate && pip3 install -r /app/backend/requirements.txt
+RUN pip3 install -r /app/backend/requirements.txt
 
 WORKDIR /app/backend
 COPY backend/ /app/backend
