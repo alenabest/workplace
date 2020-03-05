@@ -17,8 +17,6 @@ import { ProfileModule } from './profile';
 import { ReportsModule } from './reports';
 import { LoginModule } from './login';
 import { UsersModule } from './users';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 
 
 export function startupServiceFactory(startupService: StartupService) {
@@ -51,8 +49,7 @@ const modules = [
       headerName: 'x-csrftoken'
     }),
     BrowserAnimationsModule,
-    FlexModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    FlexModule
   ],
   providers: [
     StartupService,

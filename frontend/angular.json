@@ -25,8 +25,7 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
+              "src/assets"
             ],
             "styles": [
               "src/app-loading.scss",
@@ -58,9 +57,7 @@
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
                 }
-              ],
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
+              ]
             }
           }
         },
@@ -91,7 +88,6 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/app-loading.scss",
@@ -127,7 +123,6 @@
           }
         }
       }
-    }
-  },
+    }},
   "defaultProject": "frontend"
 }
