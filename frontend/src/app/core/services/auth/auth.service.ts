@@ -10,7 +10,7 @@ import { OkTrueModel } from '../../../common/models/response';
 import { addLocalStorageItem } from '../../../common/utils';
 
 
-const AUTH_API = '/workplace/';
+const AUTH_API = '/workplace/api/';
 
 @Injectable({
   providedIn: 'root'

@@ -57,7 +57,7 @@ export function prepareAndDownloadFile(response: any, type: string, filenameRege
   const contentDispositionHeader = decodeURIComponent(response.headers.get('content-disposition'));
   const splitContentDispositionHeader = contentDispositionHeader.split('; ');
 
-  let filename = '';
+  let filename: string;
   if (splitContentDispositionHeader.length === 2) {
     filename = filenameRegex.exec(splitContentDispositionHeader[1])[1];
   } else {
