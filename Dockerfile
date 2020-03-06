@@ -1,5 +1,5 @@
 ### STAGE 1: Build ###
-FROM node:10-alpine as builder
+FROM node as builder
 MAINTAINER Alena Hrenovskaya <yourally69@gmail.com>
 
 RUN mkdir -p /app/frontend
