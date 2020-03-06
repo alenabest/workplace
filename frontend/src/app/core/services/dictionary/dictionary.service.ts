@@ -18,7 +18,7 @@ export class DictionaryService {
     const params = generateQuery(query);
 
     return this.http
-      .get<IResponse<T>>(`/workplace/${dictionaryApi}/`, { params })
+      .get<IResponse<T>>(`/workplace/api/${dictionaryApi}/`, { params })
       .pipe(
         map(results => serializeResponse(cls, results))
       );
@@ -26,11 +26,11 @@ export class DictionaryService {
 
   createDictionary<T>(dictionaryApi: string, dictionary: T): Observable<T> {
     return this.http
-      .post<T>(`/workplace/${dictionaryApi}/`, dictionary);
+      .post<T>(`/workplace/api/${dictionaryApi}/`, dictionary);
   }
 
   updateDictionary<T>(dictionaryApi: string, dictionaryId: number, dictionary: T): Observable<T> {
     return this.http
-      .patch<T>(`/workplace/${dictionaryApi}/${dictionaryId}/`, dictionary);
+      .patch<T>(`/workplace/api/${dictionaryApi}/${dictionaryId}/`, dictionary);
   }
 }

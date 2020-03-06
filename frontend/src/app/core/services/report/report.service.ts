@@ -10,7 +10,7 @@ import { ReportModel } from '../../../common/models/report';
 import { generateQuery } from '../../../common/utils';
 
 
-const REPORT_API = '/workplace/report/';
+const REPORT_API = '/workplace/api/report/';
 
 @Injectable({
   providedIn: 'root'
