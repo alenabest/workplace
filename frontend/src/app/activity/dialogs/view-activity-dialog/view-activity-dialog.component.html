@@ -1,0 +1,32 @@
+<mat-card class="common-theme activity-card">
+  <mat-card-title>Просмотр</mat-card-title>
+  <mat-card-content>
+    <div fxLayout="column" fxLayoutGap="8px" class="activity-content">
+      <div fxLayout="row" fxLayoutGap="8px">
+        <span class="label">Время:</span>
+        <span>{{ activity.start }} - {{activity.end}}</span>
+      </div>
+      <div fxLayout="row" fxLayoutGap="8px" *ngIf="activity.project">
+        <span class="label">Проект:</span>
+        <span>{{ activity.project.name }}</span>
+      </div>
+      <div fxLayout="row" fxLayoutGap="8px" *ngIf="activity.direction">
+        <span class="label">Направление:</span>
+        <span>{{ activity.direction.name }}</span>
+      </div>
+      <div fxLayout="row" fxLayoutGap="8px"  *ngIf="activity.type">
+        <span class="label">Вид работы:</span>
+        <span>{{ activity.type.name }}</span>
+      </div>
+      <div fxLayout="row" fxLayoutGap="8px">
+        <span class="label">Описание:</span>
+        <span>{{ activity.description }}</span>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions fxLayout="row" fxLayoutAlign="flex-end center" fxLayoutGap="8px">
+    <button mat-button color="primary" type="button" mat-dialog-close>Отмена</button>
+    <button mat-raised-button color="accent" type="button" [mat-dialog-close]="{delete: true}">Удалить</button>
+    <button mat-raised-button color="primary" type="button" [mat-dialog-close]="{open: true}">Редактировать</button>
+  </mat-card-actions>
+</mat-card>

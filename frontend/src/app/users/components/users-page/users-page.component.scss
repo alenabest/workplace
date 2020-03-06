@@ -1,0 +1,38 @@
+.users-container {
+  width: calc(100vw - 300px);
+  padding-bottom: 16px;
+  overflow: hidden;
+  margin: 0 auto;
+  height: 100%;
+
+  .users-add-button {
+    margin-left: 16px;
+    display: inline-block;
+  }
+
+  .users-add-button-mobile {
+    margin-left: 8px;
+    display: none;
+  }
+
+  .users-search {
+    margin-top: 0;
+  }
+
+  @media screen and (max-width: 1000px) {
+    width: 100vw;
+    padding: 0 8px 8px;
+
+    .users-add-button {
+      display: none;
+    }
+
+    .users-add-button-mobile {
+      display: inline-block;
+    }
+
+    .users-search {
+      margin-top: -8px;
+    }
+  }
+}

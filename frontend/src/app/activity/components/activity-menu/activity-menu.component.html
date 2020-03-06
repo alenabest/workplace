@@ -1,0 +1,9 @@
+<div fxLayout="row" fxLayoutAlign="space-around center" class="menu-row">
+  <a class="menu-button" *ngIf="isNotToday" (click)="checkToday()">Сегодня</a>
+  <a [ngClass]="{'menu-button': true, 'current': state === 'day'}"
+     (click)="navigateTo('day')">День</a>
+  <a [ngClass]="{'menu-button': true, 'current': state === 'week'}"
+     (click)="navigateTo('week')">Неделя</a>
+  <a [ngClass]="{'menu-button': true, 'current': state === 'month'}"
+     (click)="navigateTo('month')">Месяц</a>
+</div>

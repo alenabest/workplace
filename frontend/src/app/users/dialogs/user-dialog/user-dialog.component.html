@@ -1,0 +1,67 @@
+<mat-card class="common-theme user-card">
+  <mat-card-title>{{user?.id ? 'Редактирование' : 'Создание'}} пользователя</mat-card-title>
+  <mat-card-content>
+    <form role="form" [formGroup]="userForm" fxLayout="column" fxLayoutGap="8px" class="user-form">
+      <div fxLayout="row" fxLayoutGap="8px" class="user-row">
+        <mat-form-field appearance="outline" floatLabel="always" class="user-field">
+          <mat-label>Логин</mat-label>
+          <input matInput formControlName="username" placeholder="Введите логин" required>
+          <mat-error *ngIf="username.invalid">
+            <validation-error [control]="username"></validation-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always" class="user-field">
+          <mat-label>Пароль</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Введите пароль" [required]="!user?.id">
+          <mat-error *ngIf="password.invalid">
+            <validation-error [control]="password"></validation-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="8px" class="user-row">
+        <mat-form-field appearance="outline" floatLabel="always" class="user-field">
+          <mat-label>Фамилия</mat-label>
+          <input matInput formControlName="lastName" placeholder="Введите фамилию" required>
+          <mat-error *ngIf="lastName.invalid">
+            <validation-error [control]="lastName"></validation-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always" class="user-field">
+          <mat-label>Имя</mat-label>
+          <input matInput formControlName="firstName" placeholder="Введите имя" required>
+          <mat-error *ngIf="firstName.invalid">
+            <validation-error [control]="firstName"></validation-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="8px" class="user-row">
+        <mat-form-field appearance="outline" floatLabel="always" class="user-field">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="Введите email" required>
+          <mat-error *ngIf="email.invalid">
+            <validation-error [control]="email"></validation-error>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always" class="user-field">
+          <mat-label>Роль</mat-label>
+          <mat-select formControlName="role" placeholder="Выберите роль" required>
+            <mat-option [value]="role.name" *ngFor="let role of roles$ | async">{{role.label}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="role.invalid">
+            <validation-error [control]="role"></validation-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions fxLayout="row" fxLayoutAlign="flex-end center">
+    <button mat-button type="button" color="primary" mat-dialog-close>Отмена</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="userForm.invalid"
+            [mat-dialog-close]="userForm.getRawValue()">
+      Сохранить
+    </button>
+  </mat-card-actions>
+</mat-card>

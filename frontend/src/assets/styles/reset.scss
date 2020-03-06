@@ -1,0 +1,87 @@
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.mat-raised-button, .mat-button {
+  padding: 0 12px !important;
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+mat-error {
+  font-size: 1.3em !important;
+}
+
+mat-card {
+  background: whitesmoke !important;
+  padding: 12px !important;
+}
+
+mat-card-title {
+  padding-left: 8px !important;
+  font-size: 1em !important;
+  margin: 8px 0 16px 0 !important;
+
+  @media screen and (max-width: 600px){
+    margin: 0 0 8px 0 !important;
+  }
+}
+
+mat-card-actions, mat-card-content  {
+  margin-bottom: 0 !important;
+}
+
+.mat-mini-fab {
+  height: 36px !important;
+  width: 36px !important;
+  line-height: 32px !important;
+
+  .mat-button-wrapper {
+    padding: 0 !important;
+  }
+
+  @media screen and (max-width: 1000px) {
+    height: 2.5em !important;
+    width: 2.5em !important;
+    line-height: 2em !important;
+
+    mat-icon {
+      margin-top: 0.2em;
+      font-size: 1.416em !important;
+    }
+  }
+}
+
+mat-dialog-container {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.cdk-overlay-pane {
+  max-width: 95vw !important;
+}
+
+textarea.mat-input-element {
+  min-height: 20px;
+}
+
+input[type="time"]::-webkit-outer-spin-button,
+input[type="time"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input[type="time"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  appearance: none;
+}
+
+.mat-input-element[type=time]::after {
+  content: none !important;
+}
