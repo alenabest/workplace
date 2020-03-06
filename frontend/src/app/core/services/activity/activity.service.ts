@@ -16,7 +16,7 @@ const ACTIVITY_API = '/workplace/api/activity/';
   providedIn: 'root'
 })
 export class ActivityService {
-  constructor(protected http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   getDayActivity(query: DayActivityParam): Observable<IResponse<ActivityModel>> {
