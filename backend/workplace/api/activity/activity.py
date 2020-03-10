@@ -35,7 +35,10 @@ def calculate_params(request_data):
     [start_hour, start_minutes] = get_hour_and_minutes(start)
     [end_hour, end_minutes] = get_hour_and_minutes(end)
     duration = get_duration(start_hour, end_hour, start_minutes, end_minutes)
-    height = '%spx' % duration
+    if duration >= 20:
+        height = '%spx' % duration
+    else:
+        height = '20px'
     data.update(dict(
         startHour=start_hour, startMinute=start_minutes, duration=duration,
         endHour=end_hour, endMinute=end_minutes, height=height

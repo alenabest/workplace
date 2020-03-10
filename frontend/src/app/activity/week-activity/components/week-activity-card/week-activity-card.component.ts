@@ -6,8 +6,8 @@ import { WeekLabelModel } from '../../../../common/models/dictionary';
 import { ActivityService } from '../../../../core/services/activity';
 import { SubjectService } from '../../../../core/services/subject';
 import { BaseDayActivity } from '../../../../common/models/base';
-import { HourArray, HourArrayMobile } from '../../../data';
 import { isOnChange } from '../../../../common/utils';
+import { TimeModel } from '../../../data';
 
 
 @Component({
@@ -18,12 +18,11 @@ import { isOnChange } from '../../../../common/utils';
 export class WeekActivityCardComponent extends BaseDayActivity implements OnChanges {
   @Input() weekActivities: WeekActivityModel[];
   @Input() weekDayArray: WeekLabelModel[];
+  @Input() timeArray: TimeModel[];
 
   weekFormat = 'dd.MM.yy';
   weekFormatMobile = 'dd';
   scrollTop: number = 0;
-  hourArray = HourArray;
-  hourArrayMobile = HourArrayMobile;
 
   constructor(public dialog: MatDialog,
               public readonly subjectService: SubjectService,

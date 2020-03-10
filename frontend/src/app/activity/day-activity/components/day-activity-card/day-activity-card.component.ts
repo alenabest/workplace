@@ -5,7 +5,7 @@ import { ActivityService } from '../../../../core/services/activity';
 import { ActivityModel } from '../../../../common/models/activity';
 import { SubjectService } from '../../../../core/services/subject';
 import { BaseDayActivity } from '../../../../common/models/base';
-import { HourArray } from '../../../data';
+import { TimeModel } from '../../../data';
 
 
 @Component({
@@ -17,10 +17,9 @@ import { HourArray } from '../../../data';
 export class DayActivityCardComponent extends BaseDayActivity implements OnChanges {
   @Input() activities: ActivityModel[];
   @Input() currentDate: Date;
+  @Input() timeArray: TimeModel[];
 
   scrollTop: number = 0;
-
-  hourArray = HourArray;
 
   constructor(public readonly activityService: ActivityService,
               public readonly subjectService: SubjectService,
