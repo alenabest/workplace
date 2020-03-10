@@ -4,11 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o --poll 2000 --proxy-config proxy_local.conf.json",
-    "start_aot": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng serve --prod -o --poll 2000 --proxy=proxy_local.conf.js",
-    "start_public": "ng serve -o --poll 2000 --host 0.0.0.0 --proxy=proxy_local.conf.js --disable-host-check",
-    "build": "node --max_old_space_size=16384 node_modules/@angular/cli/bin/ng build --prod --base-href='/' --deploy-url='/static/'",
-    "test": "ng test --watch=false",
-    "test-ci": "ng test --no-watch --no-progress --browsers=ChromeHeadlessNoSandbox",
+    "build": "ng build",
+    "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -25,7 +22,6 @@
     "@angular/platform-browser": "~8.1.0",
     "@angular/platform-browser-dynamic": "~8.1.0",
     "@angular/router": "~8.1.0",
-    "@angular/service-worker": "~8.1.0",
     "@types/hammerjs": "^2.0.36",
     "@types/mousetrap": "^1.6.3",
     "class-transformer": "^0.2.3",
@@ -42,7 +38,7 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.801.0",
+    "@angular-devkit/build-angular": "^0.803.24",
     "@angular/cli": "~8.1.0",
     "@angular/compiler-cli": "~8.1.0",
     "@angular/language-service": "~8.1.0",

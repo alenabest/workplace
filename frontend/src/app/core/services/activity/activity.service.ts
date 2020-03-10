@@ -10,13 +10,13 @@ import { IResponse, prepareObject, serializeResponse } from '../../helpers';
 import { generateQuery } from '../../../common/utils';
 
 
-const ACTIVITY_API = '/workplace/activity/';
+const ACTIVITY_API = '/workplace/api/activity/';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActivityService {
-  constructor(protected http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   getDayActivity(query: DayActivityParam): Observable<IResponse<ActivityModel>> {

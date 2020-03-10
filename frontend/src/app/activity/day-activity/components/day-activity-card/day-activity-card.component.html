@@ -1,9 +1,10 @@
 <div fxLayout="row" class="activity-container" [scrollTop]="scrollTop" *ngIf="activities">
   <div fxFlex="64px">
     <div fxLayout="column">
-      <div fxLayoutAlign="flex-start center" *ngFor="let hour of hourArray" class="hour-row"
-           (click)="checkTime(currentDate, hour)">
-        {{ hour }}
+      <div fxLayoutAlign="flex-start center" *ngFor="let time of timeArray" class="hour-row"
+           [ngStyle]="{'height': time.height + 'px'}"
+           (click)="checkTime(currentDate, time.start)">
+        {{ time.start }}
       </div>
     </div>
   </div>

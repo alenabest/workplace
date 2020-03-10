@@ -17,7 +17,8 @@
 
   <activity-menu [isNotToday]="isNotToday" (checkTodayEvent)="changeDay($event)"></activity-menu>
 
-  <day-activity-card [currentDate]="currentDate" [activities]="activities$ | async"></day-activity-card>
+  <day-activity-card [currentDate]="currentDate" [timeArray]="timeArray"
+                     [activities]="activities$ | async"></day-activity-card>
 </div>
 
 <add-activity [currentDate]="currentDate"></add-activity>

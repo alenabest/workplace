@@ -10,15 +10,15 @@ import { UserParam } from '../../../common/models/params';
 import { generateQuery } from '../../../common/utils';
 
 
-const USER_API = '/workplace/user/';
-const ROLE_API = '/workplace/role/';
+const USER_API = '/workplace/api/user/';
+const ROLE_API = '/workplace/api/role/';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(protected http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   getUsers(query?: UserParam): Observable<IResponse<UserModel>> {

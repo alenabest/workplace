@@ -1,5 +1,5 @@
 ### STAGE 1: Build ###
-FROM node:10-alpine as builder
+FROM node as builder
 MAINTAINER Alena Hrenovskaya <yourally69@gmail.com>
 
 RUN mkdir -p /app/frontend
@@ -8,11 +8,11 @@ RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
 RUN npm ci && cp -R ./node_modules /app/frontend
 WORKDIR /app/frontend
 COPY frontend/ /app/frontend
-RUN node --max_old_space_size=16384 node_modules/@angular/cli/bin/ng build --prod --base-href='/' --deploy-url='/static/'
+RUN node --max_old_space_size=16384 node_modules/@angular/cli/bin/ng build --aot=true --prod --base-href='/' --deploy-url='/static/'
 
 
 ### STAGE 2: WEB ###
-FROM debian:9 AS web
+FROM debian AS web
 MAINTAINER Alena Hrenovskaya <yourally69@gmail.com>
 
 RUN apt-get update -y && apt-get install python3-pip -y && apt-get clean

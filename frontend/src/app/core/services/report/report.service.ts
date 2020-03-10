@@ -10,7 +10,7 @@ import { ReportModel } from '../../../common/models/report';
 import { generateQuery } from '../../../common/utils';
 
 
-const REPORT_API = '/workplace/report/';
+const REPORT_API = '/workplace/api/report/';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ const REPORT_API = '/workplace/report/';
 
 export class ReportService {
 
-  constructor(protected http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   getReports(query: ByUserParam): Observable<IResponse<ReportModel>> {

@@ -10,7 +10,7 @@ import { OkTrueModel } from '../../../common/models/response';
 import { addLocalStorageItem } from '../../../common/utils';
 
 
-const AUTH_API = '/workplace/';
+const AUTH_API = '/workplace/api/';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class AuthService {
 
   currentUser: UserModel;
 
-  constructor(protected http: HttpClient,
+  constructor(private http: HttpClient,
               private router: Router) {
   }
 
