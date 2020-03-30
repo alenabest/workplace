@@ -104,6 +104,14 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
     }
   }
 
+  defaultEqual(dir1: any, dir2: any): boolean {
+    if (dir1 && dir2) {
+      return dir1.id === dir2.id;
+    } else {
+      return false;
+    }
+  }
+
   ngOnInit() {
     this.activityForm.patchValue(this.activity);
     this.getDictionaries();

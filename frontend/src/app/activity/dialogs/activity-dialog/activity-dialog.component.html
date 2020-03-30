@@ -43,14 +43,14 @@
       </mat-form-field>
 
       <dictionary-select (selectionChange)="selectProject()" (searchChange)="getProjects($event)"
-                         [dictionary]="projects$ | async" [control]="project"
+                         [dictionary]="projects$ | async" [control]="project" [defaultEqual]="defaultEqual"
                          label="проект" api="project" field="name"></dictionary-select>
 
       <dictionary-select (selectionChange)="selectDirection()" (searchChange)="getDirections($event)"
-                         [dictionary]="directions$ | async" [control]="direction"
+                         [dictionary]="directions$ | async" [control]="direction" [defaultEqual]="defaultEqual"
                          label="направление" api="direction" field="name"></dictionary-select>
 
-      <dictionary-select (searchChange)="getActivityTypes($event)"
+      <dictionary-select (searchChange)="getActivityTypes($event)" [defaultEqual]="defaultEqual"
                          [dictionary]="activityTypes$ | async" [control]="type"
                          label="вид работы" api="activity-type" field="name"></dictionary-select>
 
