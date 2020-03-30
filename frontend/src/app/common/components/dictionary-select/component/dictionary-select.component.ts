@@ -12,6 +12,7 @@ import { BaseDestroy } from '../../../models/base-destroy';
 })
 export class DictionarySelectComponent extends BaseDestroy {
   @Input() control: FormControl | AbstractControl;
+  @Input() defaultEqual: (o1?: any, o2?: any) => boolean;
   @Input() required: boolean = false;
   @Input() dictionary: object[];
   @Input() separator: string = ' ';
@@ -31,14 +32,6 @@ export class DictionarySelectComponent extends BaseDestroy {
 
   trackByFn(index, item) {
     return item.id;
-  }
-
-  defaultEqual(dir1: any, dir2: any): boolean {
-    if (dir1 && dir2) {
-      return dir1.id === dir2.id;
-    } else {
-      return false;
-    }
   }
 
   subscribeFormControl() {
