@@ -18,7 +18,7 @@ const REPORT_API = '/workplace/api/report/';
 
 export class ReportService {
 
-  constructor(protected http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   getReports(query: ByUserParam): Observable<IResponse<ReportModel>> {

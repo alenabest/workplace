@@ -16,7 +16,8 @@
   </div>
 
   <activity-menu (checkTodayEvent)="changeWeek($event)"></activity-menu>
-  <week-activity-card [weekDayArray]="weekArray" [weekActivities]="weekActivities$ | async"></week-activity-card>
+  <week-activity-card [weekDayArray]="weekArray" [timeArray]="timeArray"
+                      [weekActivities]="weekActivities$ | async"></week-activity-card>
 </div>
 
 <add-activity [currentDate]="currentDate"></add-activity>

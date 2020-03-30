@@ -12,7 +12,7 @@ import { generateQuery } from '../../../common/utils';
   providedIn: 'root'
 })
 export class DictionaryService {
-  constructor(protected http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getDictionary<T>(dictionaryApi: string, cls: ClassType<T>, query?: DictionaryParam): Observable<IResponse<T>> {
     const params = generateQuery(query);

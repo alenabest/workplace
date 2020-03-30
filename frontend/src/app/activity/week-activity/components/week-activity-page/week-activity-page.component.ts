@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material';
-import { map, takeUntil } from 'rxjs/operators';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { addWeeks} from 'date-fns';
 
-import { WeekActivityModel } from '../../../../common/models/activity';
+import { ActivityModel, WeekActivityModel } from '../../../../common/models/activity';
 import { WeekLabelModel } from '../../../../common/models/dictionary';
 import { WeekActivityParam } from '../../../../common/models/params';
 import { ActivityService } from '../../../../core/services/activity';
 import { SubjectService } from '../../../../core/services/subject';
 import { BaseWeekActivity } from '../../../../common/models/base';
+import { DateValue, TimeArray, TimeModel } from '../../../data';
 import { AuthService } from '../../../../core/services/auth';
-import { DateValue } from '../../../data';
+import { cloneDeep } from '../../../../common/utils';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class WeekActivityPageComponent extends BaseWeekActivity {
   userId: number;
   monday: Date;
   sunday: Date;
+
+  timeArray = cloneDeep(TimeArray);
 
   weekActivities$: Observable<WeekActivityModel[]>;
 
@@ -66,10 +69,35 @@ export class WeekActivityPageComponent extends BaseWeekActivity {
     this.prepareWeekData();
   }
 
+  calculateTimeItem(item: TimeModel, activities: ActivityModel[]): TimeModel {
+    let duration = 0;
+    activities.forEach(activity => {
+      if (item.hour === activity.startHour) {
+        duration += 20 - activity.duration;
+      }
+    });
+    if (duration > item.extra || !item.extra) {
+      item.extra = duration;
+      item.height = 59 + duration;
+    }
+
+    return item;
+  }
+
+  calculateTimeArray(results: WeekActivityModel[]): TimeModel[] {
+    const timeArray = cloneDeep(TimeArray);
+    results.forEach(item => {
+      const activities = item.activities.filter(activity => activity.duration < 20);
+      timeArray.map(item => this.calculateTimeItem(item, activities));
+    });
+    return timeArray;
+  }
+
   _getWeekActivity(): Observable<WeekActivityModel[]> {
     return this.activityService.getWeekActivity(this.getParams())
       .pipe(
-        map(response => response.results)
+        map(response => response.results),
+        tap(results => this.timeArray = this.calculateTimeArray(results))
       );
   }
 

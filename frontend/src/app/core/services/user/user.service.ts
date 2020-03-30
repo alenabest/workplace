@@ -18,7 +18,7 @@ const ROLE_API = '/workplace/api/role/';
 })
 export class UserService {
 
-  constructor(protected http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   getUsers(query?: UserParam): Observable<IResponse<UserModel>> {

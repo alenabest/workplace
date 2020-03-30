@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private router: Router) {
-    if (this.authService.currentUser && this.authService.currentUser.firstName) {
+    if (this.authService.currentUser.firstName) {
       this.userFirstName = this.authService.currentUser.firstName;
     }
   }

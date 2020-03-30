@@ -115,8 +115,10 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
         this.start.setErrors({maxTime: this.end.value});
       } else if (this.end.value < this.start.value) {
         this.end.setErrors({minTime: this.start.value});
+      } else {
+        this.end.updateValueAndValidity();
+        this.start.updateValueAndValidity();
       }
-      console.log(new Date(this.start.value));
     }
   }
 

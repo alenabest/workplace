@@ -9,14 +9,18 @@
   <div fxLayout="row" class="activity-table" [scrollTop]="scrollTop">
     <div class="hour-column">
       <div fxLayout="column">
-        <div fxLayout="row" *ngFor="let hour of hourArray" class="hour-row desktop">
-          <div fxLayoutAlign="center center" class="hour-cell">{{ hour }}</div>
-          <div class="hour-cell week" *ngFor="let day of weekDayArray; let idx = index" (click)="checkTime(day.date, hour, idx)"></div>
+        <div fxLayout="row" *ngFor="let time of timeArray" class="hour-row desktop">
+          <div fxLayoutAlign="center center" class="hour-cell" [ngStyle]="{'height': time.height + 'px'}">
+            {{ time.start }}
+          </div>
+          <div class="hour-cell week" *ngFor="let day of weekDayArray; let idx = index" (click)="checkTime(day.date, time.start, idx)"></div>
         </div>
 
-        <div fxLayout="row" *ngFor="let hour of hourArrayMobile" class="hour-row mobile">
-          <div fxLayoutAlign="center center" class="hour-cell">{{ hour }}</div>
-          <div class="hour-cell week" *ngFor="let day of weekDayArray; let idx = index" (click)="checkTime(day.date, hour, idx)"></div>
+        <div fxLayout="row" *ngFor="let time of timeArray" class="hour-row mobile">
+          <div fxLayoutAlign="center center" class="hour-cell" [ngStyle]="{'height': time.height + 'px'}">
+            {{ time.start.substr(0, 2) }}
+          </div>
+          <div class="hour-cell week" *ngFor="let day of weekDayArray; let idx = index" (click)="checkTime(day.date, time.start, idx)"></div>
         </div>
       </div>
     </div>

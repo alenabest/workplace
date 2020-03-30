@@ -19,7 +19,7 @@ export class AuthService {
 
   currentUser: UserModel;
 
-  constructor(protected http: HttpClient,
+  constructor(private http: HttpClient,
               private router: Router) {
   }
 
