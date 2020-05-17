@@ -115,7 +115,8 @@ DEMO:CE:START:
     - docker start ${CI_CONTAINER_NAME_SLUG}
     - docker exec ${CI_CONTAINER_NAME_SLUG} python3 manage.py collectstatic --noinput
     - docker exec ${CI_CONTAINER_NAME_SLUG} python3 manage.py migrate --noinput
-    - docker exec ${CI_CONTAINER_NAME_SLUG} python3 manage.py loaddata workplace/fixtures/workplace
+    # Убрала заполнение фикстур, чтобы не перезаполнить уже имеющиеся данные
+    # - docker exec ${CI_CONTAINER_NAME_SLUG} python3 manage.py loaddata workplace/fixtures/workplace
 
 DEMO:CE:STOP:
   stage: preprod
