@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf.urls import url
+from rest_framework.routers import DefaultRouter
 
-from workplace.api.project.project import *
+from workplace.api.project.views import *
 
 
-urlpatterns = [
-    url(r'(?P<pk>[0-9]+)/$', ProjectDetail.as_view()),
-    url(r'$', ProjectList.as_view()),
-]
+router = DefaultRouter()
+router.register(r'project', ProjectViewSet)
+urlpatterns = router.urls

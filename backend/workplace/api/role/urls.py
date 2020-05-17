@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf.urls import url
+from rest_framework.routers import DefaultRouter
 
-from workplace.api.role.role import *
+from workplace.api.role.views import *
 
 
-urlpatterns = [
-    url(r'(?P<pk>[0-9]+)/$', RoleDetail.as_view()),
-    url(r'$', RoleList.as_view()),
-]
+router = DefaultRouter()
+router.register(r'activity-type', RoleViewSet)
+urlpatterns = router.urls
