@@ -2,26 +2,21 @@
 from __future__ import unicode_literals
 
 from django.http import JsonResponse
-from django_filters.rest_framework import FilterSet, DjangoFilterBackend
-from rest_framework import generics, status
-from rest_framework.decorators import api_view
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets, status
+from rest_framework.decorators import api_view, action
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
 
+from workplace.api.user.filters import UserFilterSet
+from workplace.api.user.serializers import UserSerializer
 from workplace.models import User
-from workplace.serializers.user import UserSerializer
 
 
-class UserFilter(FilterSet):
-    class Meta:
-        model = User
-        exclude = ('password', 'avatar')
-
-
-class UserList(generics.ListCreateAPIView):
+class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    filter_class = UserFilter
+    filter_class = UserFilterSet
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     search_fields = ('last_name', 'first_name', 'middle_name')
     ordering_fields = ('last_name',)
@@ -30,11 +25,6 @@ class UserList(generics.ListCreateAPIView):
         user = serializer.save()
         user.set_password(self.request.data.get('password', ''))
         user.save()
-
-
-class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
     def perform_update(self, serializer):
         user = serializer.save()
@@ -45,45 +35,41 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
             user.set_password(password)
             user.save()
 
+    @action(methods=['GET'], url_path='profile', detail=False)
+    def get_user_profile(self, request):
+        user = User.objects.filter(id=request.user.id).first()
+        return JsonResponse(UserSerializer(user).data)
 
-@api_view(['GET'])
-def get_user_profile(request):
-    user = User.objects.filter(id=request.user.id).first()
-    return JsonResponse(UserSerializer(user).data)
+    @action(methods=['POST'], url_path='change-password', detail=False)
+    def change_password(self, request):
+        user = request.user
+        old_password = request.data.get('oldPassword', '')
+        new_password = request.data.get('newPassword', '')
 
+        if user.check_password(old_password):
+            user.set_password(new_password)
+            user.save()
+        else:
+            return Response({'messages': ['Неверный пароль']}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
-@api_view(['POST'])
-def change_password(request):
-    user = request.user
-    old_password = request.data.get('oldPassword', '')
-    new_password = request.data.get('newPassword', '')
+        return JsonResponse({"ok": True})
 
-    if user.check_password(old_password):
-        user.set_password(new_password)
+    @action(methods=['POST'], url_path='upload-avatar', detail=True)
+    def upload_avatar(self, request, pk):
+        attachment = request.FILES.get('file')
+        messages = []
+        if not attachment:
+            messages += ['Файл не задан']
+
+        if messages:
+            return Response(data={'messages': messages}, status=status.HTTP_400_BAD_REQUEST)
+
+        user = User.objects.filter(pk=pk).first()
+        if not user:
+            return Response(data={'messages': ['Пользователь с заданным pk не найден в базе']},
+                            status=status.HTTP_404_NOT_FOUND)
+
+        user.avatar = attachment
         user.save()
-    else:
-        return Response({'messages': ['Неверный пароль']}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
-    return JsonResponse({"ok": True})
-
-
-@api_view(['POST'])
-def upload_avatar(request, pk):
-    attachment = request.FILES.get('file')
-
-    messages = []
-    if not attachment:
-        messages += ['Файл не задан']
-
-    if messages:
-        return Response(data={'messages': messages}, status=status.HTTP_400_BAD_REQUEST)
-
-    user = User.objects.filter(pk=pk).first()
-    if not user:
-        return Response(data={'messages': ['Пользователь с заданным pk не найден в базе']},
-                        status=status.HTTP_404_NOT_FOUND)
-
-    user.avatar = attachment
-    user.save()
-
-    return JsonResponse({"avatar": user.avatar.url})
+        return JsonResponse({"avatar": user.avatar.url})

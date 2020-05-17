@@ -3,46 +3,18 @@ from __future__ import unicode_literals
 
 from django.db.models import Sum
 from django.http import JsonResponse, HttpResponse
-from django_filters.rest_framework import FilterSet
-from rest_framework import generics, status
-from rest_framework.decorators import api_view
+from rest_framework import viewsets, status
+from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 
 from workplace.api.report.create_doc_month_report import create_docx_month_report
 from workplace.api.report.create_excel_month_report import create_excel_month_report
+from workplace.api.report.filters import ReportFilterSet
+from workplace.api.report.serializers import ReportSerializer
 from workplace.common.utils import get_date_list, convert_minutes_to_hour, rfc5987_content_disposition, \
     get_name_file_field
 from workplace.models import Report, Activity
 from workplace.celery import app as celery_app
-from workplace.serializers.report import ReportSerializer
-
-
-class ReportFilter(FilterSet):
-    class Meta:
-        model = Report
-        exclude = ('link',)
-
-
-class ReportList(generics.ListCreateAPIView):
-    queryset = Report.objects.all()
-    serializer_class = ReportSerializer
-    filter_class = ReportFilter
-
-
-class ReportDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Report.objects.all()
-    serializer_class = ReportSerializer
-
-
-@api_view(['GET'])
-def download(request, pk):
-    report = Report.objects.filter(pk=pk).first()
-    if not report:
-        return Response(data={'messages': ['Объекта с данным первичным ключом не существует']},
-                        status=status.HTTP_404_NOT_FOUND)
-    response = HttpResponse(report.link, content_type='application/octet-stream')
-    response['Content-Disposition'] = rfc5987_content_disposition(get_name_file_field(report.link))
-    return response
 
 
 def get_days(types, start, end, activity_type):
@@ -156,19 +128,34 @@ def create_report(user_id, report_id, report_type, start, end):
         print(e)
 
 
-@api_view(['POST'])
-def generate_report(request):
-    user_id = request.user.id
-    report_type = request.data.get('type')
-    start = request.data.get('start')
-    end = request.data.get('end')
-    report = Report.objects.get_or_create(user_id=user_id, type=report_type)[0]
-    if report:
-        Report.objects.get(id=report.id)
-        report.state = 0
-        report.link = ''
-        report.save()
+class ReportViewSet(viewsets.ModelViewSet):
+    queryset = Report.objects.all()
+    serializer_class = ReportSerializer
+    filter_class = ReportFilterSet
 
-    create_report.delay(user_id, report.id, report_type, start, end)
+    @action(methods=['GET'], url_path='download', detail=True)
+    def download(self, request, pk):
+        report = Report.objects.filter(pk=pk).first()
+        if not report:
+            return Response(data={'messages': ['Объекта с данным первичным ключом не существует']},
+                            status=status.HTTP_404_NOT_FOUND)
+        response = HttpResponse(report.link, content_type='application/octet-stream')
+        response['Content-Disposition'] = rfc5987_content_disposition(get_name_file_field(report.link))
+        return response
 
-    return JsonResponse({'ok': True})
+    @action(methods=['POST'], url_path='generate', detail=False)
+    def generate_report(self, request):
+        user_id = request.user.id
+        report_type = request.data.get('type')
+        start = request.data.get('start')
+        end = request.data.get('end')
+        report = Report.objects.get_or_create(user_id=user_id, type=report_type)[0]
+        if report:
+            Report.objects.get(id=report.id)
+            report.state = 0
+            report.link = ''
+            report.save()
+
+        create_report.delay(user_id, report.id, report_type, start, end)
+
+        return JsonResponse({'ok': True})

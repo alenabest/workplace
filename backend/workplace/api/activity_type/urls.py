@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf.urls import url
+from rest_framework.routers import DefaultRouter
 
-from workplace.api.activity_type.activity_type import *
+from workplace.api.activity_type.views import *
 
-
-urlpatterns = [
-    url(r'(?P<pk>[0-9]+)/$', ActivityTypeDetail.as_view()),
-    url(r'$', ActivityTypeList.as_view()),
-]
+router = DefaultRouter()
+router.register(r'activity-type', ActivityTypeViewSet)
+urlpatterns = router.urls

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { plainToClass } from 'class-transformer';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -20,7 +20,7 @@ export class ActivityService {
   }
 
   getDayActivity(query: DayActivityParam): Observable<IResponse<ActivityModel>> {
-    const params = generateQuery(query);
+    const params: HttpParams = generateQuery(query);
 
     return this.http
       .get<IResponse<ActivityModel>>(`${ACTIVITY_API}`, { params })
@@ -29,17 +29,19 @@ export class ActivityService {
       );
   }
 
-  getWeekActivity(params: WeekActivityParam): Observable<IResponse<WeekActivityModel>> {
+  getWeekActivity(query: WeekActivityParam): Observable<IResponse<WeekActivityModel>> {
+    const params: HttpParams = generateQuery(query);
+
     return this.http
-      .post<IResponse<WeekActivityModel>>(`${ACTIVITY_API}week/`, params)
+      .get<IResponse<WeekActivityModel>>(`${ACTIVITY_API}week/`, {params})
       .pipe(
         map(results => serializeResponse(WeekActivityModel, results))
       );
   }
 
-  getMonthActivity(params: MonthActivityParam): Observable<IResponse<MonthActivityModel>> {
+  getMonthActivity(query: MonthActivityParam): Observable<IResponse<MonthActivityModel>> {
     return this.http
-      .post<IResponse<MonthActivityModel>>(`${ACTIVITY_API}month/`, params)
+      .post<IResponse<MonthActivityModel>>(`${ACTIVITY_API}month/`, query)
       .pipe(
         map(results => serializeResponse(MonthActivityModel, results))
       );
@@ -60,6 +62,7 @@ export class ActivityService {
         map(result => plainToClass(ActivityModel, result))
       );
   }
+
   validateActivity(activityValidation: ActivityValidation): Observable<ActivityValidation> {
     return this.http
       .post(`${ACTIVITY_API}validate/`, prepareObject(ActivityValidation, activityValidation))

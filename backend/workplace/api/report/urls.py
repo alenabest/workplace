@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf.urls import url
+from rest_framework.routers import DefaultRouter
 
-from workplace.api.report.report import *
+from workplace.api.report.views import *
 
 
-urlpatterns = [
-    url(r'(?P<pk>[0-9]+)/download/$', download),
-    url(r'(?P<pk>[0-9]+)/$', ReportDetail.as_view()),
-    url(r'generate/$', generate_report),
-    url(r'$', ReportList.as_view()),
-]
+router = DefaultRouter()
+router.register(r'report', ReportViewSet)
+urlpatterns = router.urls
