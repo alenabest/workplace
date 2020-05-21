@@ -82,6 +82,11 @@ input[type="time"] {
   appearance: none;
 }
 
-.mat-input-element[type=time]::after {
+.mat-input-element[type="time"]::after {
   content: none !important;
+}
+
+.mat-input-element[type="time"] {
+  width: auto !important;
+  max-width: none !important;
 }
