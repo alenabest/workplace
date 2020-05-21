@@ -12,7 +12,12 @@
       <div fxLayout="row" class="field-row">
         <mat-form-field floatLabel="always" class="login-field" fxFlex>
           <mat-label>Пароль</mat-label>
-          <input matInput placeholder="Введите пароль" formControlName="password" type="password" required>
+          <input matInput placeholder="Введите пароль" formControlName="password" required
+                 [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
           <mat-error *ngIf="password.invalid">{{ getValidatorErrorMessage(password) }}</mat-error>
         </mat-form-field>
       </div>

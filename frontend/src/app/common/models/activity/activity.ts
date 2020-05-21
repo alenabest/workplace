@@ -29,13 +29,13 @@ export class ActivityModel {
   @Transform(formatDateToClass(), { toClassOnly: true })
   activityDate?: Date | string;
 
-  @Transform(formatObjectToField('id'), { toPlainOnly: true })
+  @Transform(formatObjectToField<ProjectModel, 'id'>('id'), { toPlainOnly: true })
   project: ProjectModel;
 
-  @Transform(formatObjectToField('id'), { toPlainOnly: true })
+  @Transform(formatObjectToField<DirectionModel, 'id'>('id'), { toPlainOnly: true })
   direction: DirectionModel;
 
-  @Transform(formatObjectToField('id'), { toPlainOnly: true })
+  @Transform(formatObjectToField<ActivityModel, 'id'>('id'), { toPlainOnly: true })
   type: ActivityTypeModel;
 
   user: UserModel;

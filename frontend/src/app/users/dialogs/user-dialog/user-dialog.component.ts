@@ -18,6 +18,8 @@ export class UserDialogComponent implements OnInit {
 
   userForm: FormGroup;
 
+  passwordHide: boolean = true;
+
   get username() {
     return this.userForm.get('username');
   }

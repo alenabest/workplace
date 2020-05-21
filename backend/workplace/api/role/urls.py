@@ -7,5 +7,5 @@ from workplace.api.role.views import *
 
 
 router = DefaultRouter()
-router.register(r'activity-type', RoleViewSet)
+router.register(r'role', RoleViewSet)
 urlpatterns = router.urls
