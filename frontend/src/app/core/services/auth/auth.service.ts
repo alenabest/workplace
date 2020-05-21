@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { UserModel, UserPasswordModel } from '../../../common/models/user';
 import { OkTrueModel } from '../../../common/models/response';
 import { addLocalStorageItem } from '../../../common/utils';
+import {prepareObject} from '../../helpers';
 
 
 const AUTH_API = '/workplace/api/';
@@ -50,7 +51,7 @@ export class AuthService {
 
   changePassword(changesPassword: UserPasswordModel): Observable<OkTrueModel> {
     return this.http
-      .post<OkTrueModel>(`${AUTH_API}user/change-password/`, changesPassword);
+      .post<OkTrueModel>(`${AUTH_API}user/change-password/`, prepareObject(UserPasswordModel, changesPassword));
   }
 
   private redirectToUserPage() {

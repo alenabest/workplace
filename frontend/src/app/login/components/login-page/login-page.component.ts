@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, OnDestroy} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {untilDestroyed} from 'ngx-take-until-destroy';
+import {Observable, of} from 'rxjs';
 
-import { FormValidationService } from '../../../core/services/form-validation/';
-import { AuthService } from '../../../core/services/auth';
+import {FormValidationService} from '../../../core/services/form-validation/';
+import {AuthService} from '../../../core/services/auth';
+import {UserModel} from '../../../common/models/user';
 
 
 @Component({
@@ -10,8 +13,9 @@ import { AuthService } from '../../../core/services/auth';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent implements OnInit {
-  loginForm: FormGroup;
+export class LoginPageComponent implements OnDestroy {
+  loginForm: FormGroup = this.initForm();
+  hide: boolean = true;
 
   get username(): AbstractControl {
     return this.loginForm.get('username');
@@ -27,25 +31,32 @@ export class LoginPageComponent implements OnInit {
     localStorage.clear();
   }
 
+  ngOnDestroy(): void {
+  }
+
   getValidatorErrorMessage(field: AbstractControl): string {
     return this.formValidationService.getValidatorErrorMessage(field);
   }
 
-  ngOnInit() {
-    this.initForm();
-  }
-
   login() {
-    if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value)
-        .subscribe();
-    } else {
-      this.formValidationService.validateAllFormFields(this.loginForm);
-    }
+    this.checkFormAndLogin()
+      .pipe(
+        untilDestroyed(this)
+      )
+      .subscribe();
   }
 
-  initForm() {
-    this.loginForm = this.formBuilder.group({
+  checkFormAndLogin(): Observable<UserModel> {
+    if (this.loginForm.invalid) {
+      this.formValidationService.validateAllFormFields(this.loginForm);
+
+      return of();
+    }
+    return this.authService.login(this.loginForm.value);
+  }
+
+  initForm(): FormGroup {
+    return this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });

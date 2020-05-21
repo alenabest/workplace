@@ -1,12 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material';
-import { takeUntil } from 'rxjs/operators';
+import {Component, HostListener, OnDestroy} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {untilDestroyed} from 'ngx-take-until-destroy';
+import {MatDialogRef} from '@angular/material';
 
-import { FormValidationService } from '../../../core/services/form-validation';
-import { SnackBarService } from '../../../core/services/snack-bar';
-import { BaseDestroy } from '../../../common/models/base-destroy';
-import { AuthService } from '../../../core/services/auth';
+import {FormValidationService} from '../../../core/services/form-validation';
+import {SnackBarService} from '../../../core/services/snack-bar';
+import {AuthService} from '../../../core/services/auth';
 
 
 @Component({
@@ -14,16 +13,23 @@ import { AuthService } from '../../../core/services/auth';
   templateUrl: './change-password-dialog.component.html',
   styleUrls: ['./change-password-dialog.component.scss']
 })
-export class ChangePasswordDialogComponent extends BaseDestroy implements OnInit {
+export class ChangePasswordDialogComponent implements OnDestroy {
 
-  changePasswordForm: FormGroup;
+  changePasswordForm: FormGroup = this.getChangePasswordForm();
+  oldPasswordHide: boolean = true;
+  newPasswordHide: boolean = true;
+  repeatPasswordHide: boolean = true;
 
   get oldPassword() {
     return this.changePasswordForm.get('oldPassword');
   }
 
   get newPassword() {
-    return this.changePasswordForm.get('newPassword');
+    return this.changePasswordForm ? this.changePasswordForm.get('newPassword') : null;
+  }
+
+  get repeatPassword() {
+    return this.changePasswordForm.get('repeatPassword');
   }
 
   @HostListener('window:keyup.esc') onKeyUp() {
@@ -35,15 +41,13 @@ export class ChangePasswordDialogComponent extends BaseDestroy implements OnInit
               private snackBarService: SnackBarService,
               private authService: AuthService,
               private formBuilder: FormBuilder) {
-    super();
+  }
+
+  ngOnDestroy(): void {
   }
 
   getValidationMessage(control: AbstractControl): string {
     return this.formValidationService.getValidatorErrorMessage(control);
-  }
-
-  ngOnInit() {
-    this.changePasswordForm = this.getChangePasswordForm();
   }
 
   checkFormAndChangePassword() {
@@ -57,7 +61,7 @@ export class ChangePasswordDialogComponent extends BaseDestroy implements OnInit
   changePassword() {
     this.authService.changePassword(this.changePasswordForm.value)
       .pipe(
-        takeUntil(this.destroy$)
+        untilDestroyed(this)
       )
       .subscribe(() => this.completeChanges());
   }
@@ -70,7 +74,8 @@ export class ChangePasswordDialogComponent extends BaseDestroy implements OnInit
   getChangePasswordForm(): FormGroup {
     return this.formBuilder.group({
       oldPassword: ['', [Validators.required, Validators.minLength(6)]],
-      newPassword: ['', [Validators.required, Validators.minLength(6)]]
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      repeatPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 }

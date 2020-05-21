@@ -1,8 +1,6 @@
-import { format } from 'date-fns';
-import { classToPlain, plainToClass } from 'class-transformer';
-import { ClassType } from 'class-transformer/ClassTransformer';
-import { getRandomElement } from '../../common/utils';
-import { BackgroundColors } from '../../activity/data';
+import {format} from 'date-fns';
+import {classToPlain, plainToClass} from 'class-transformer';
+import {ClassType} from 'class-transformer/ClassTransformer';
 
 
 export class IResponse<T> {
@@ -32,19 +30,15 @@ export function formatDateToClass() {
   return value => value ? new Date(value) : value;
 }
 
-export function formatObjectToField(field: string) {
+export function formatObjectToField<T, K extends keyof T>(field: K) {
   return value => value ? value[field] : value;
-}
-
-export function randomBackgroundColor() {
-  return () => getRandomElement<string>(BackgroundColors);
 }
 
 export function formatMedia() {
   return value => value ? value.replace('media/', '') : value;
 }
 
-export function prepareObject(clsObject, plain) {
+export function prepareObject<T>(clsObject: ClassType<T>, plain) {
   const object = plainToClass(clsObject, plain);
   return classToPlain(object);
 }

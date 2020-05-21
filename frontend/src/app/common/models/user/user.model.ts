@@ -1,4 +1,4 @@
-import { Transform } from 'class-transformer';
+import {Exclude, Transform} from 'class-transformer';
 
 import { formatDateToClass, formatDateToPlain, formatMedia } from '../../../core/helpers';
 
@@ -37,4 +37,6 @@ export class RoleModel {
 export class UserPasswordModel {
   newPassword: string;
   oldPassword: string;
+  @Exclude()
+  repeatPassword: string;
 }
