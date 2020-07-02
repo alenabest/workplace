@@ -1,22 +1,23 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { SnackBarService } from '../../../core/services/snack-bar';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { endOfMonth, startOfMonth } from 'date-fns';
 import { FormControl } from '@angular/forms';
+import { tap } from 'rxjs/operators';
 
 import { ReportModel, ReportTypeMap } from '../../../common/models/report';
-import { BaseDestroy } from '../../../common/models/base-destroy';
 import { SubjectService } from '../../../core/services/subject';
 import { ReportService } from '../../../core/services/report';
 import { ReportParam } from '../../../common/models/params';
-import { takeUntil, tap } from 'rxjs/operators';
-import { SnackBarService } from '../../../core/services/snack-bar';
 
 
+@UntilDestroy()
 @Component({
   selector: 'report-container',
   templateUrl: './report-container.component.html',
   styleUrls: ['./report-container.component.scss']
 })
-export class ReportContainerComponent extends BaseDestroy {
+export class ReportContainerComponent implements OnDestroy{
   @Input() withDate: boolean = false;
   @Input() report: ReportModel;
   @Input() type: string;
@@ -28,12 +29,14 @@ export class ReportContainerComponent extends BaseDestroy {
   constructor(private readonly reportService: ReportService,
               private readonly subjectService: SubjectService,
               private readonly snackBarService: SnackBarService) {
-    super();
+  }
+
+  ngOnDestroy() {
   }
 
   generateReport() {
     this.reportService.generateReports(this.getReportParam())
-      .pipe(takeUntil(this.destroy$))
+      .pipe(untilDestroyed(this))
       .subscribe(() => this.subjectService.getReportsSubject.next(true));
   }
 
@@ -48,7 +51,7 @@ export class ReportContainerComponent extends BaseDestroy {
     this.reportService.downloadReports(this.report.id)
       .pipe(
         tap(() => this.snackBarService.success('Отчёт загружен')),
-        takeUntil(this.destroy$)
+        untilDestroyed(this)
       )
       .subscribe();
   }

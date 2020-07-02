@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {untilDestroyed} from 'ngx-take-until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {Observable, of} from 'rxjs';
 
 import {FormValidationService} from '../../../core/services/form-validation/';
@@ -8,6 +8,7 @@ import {AuthService} from '../../../core/services/auth';
 import {UserModel} from '../../../common/models/user';
 
 
+@UntilDestroy()
 @Component({
   selector: 'login-page',
   templateUrl: './login-page.component.html',

@@ -1,30 +1,31 @@
-import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { takeUntil } from 'rxjs/operators';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ActivityDialogComponent } from '../../dialogs/activity-dialog';
-import { BaseDestroy } from '../../../common/models/base-destroy';
 import { ActivityModel } from '../../../common/models/activity';
 import { SubjectService } from '../../../core/services/subject';
 
+
+@UntilDestroy()
 @Component({
   selector: 'add-activity',
   templateUrl: './add-activity.component.html',
   styleUrls: ['./add-activity.component.scss']
 })
-export class AddActivityComponent extends BaseDestroy {
+export class AddActivityComponent implements OnDestroy {
   @Input() currentDate: Date;
   constructor(private dialog: MatDialog,
               private readonly subjectService: SubjectService) {
-    super();
+  }
+
+  ngOnDestroy() {
   }
 
   openActivityDialog() {
     this.dialog.open(ActivityDialogComponent, {disableClose: true, data: new ActivityModel(this.currentDate)})
       .afterClosed()
-      .pipe(
-        takeUntil(this.destroy$)
-      )
+      .pipe(untilDestroyed(this))
       .subscribe((result) => this.reloadActivityPage(result));
   }
 

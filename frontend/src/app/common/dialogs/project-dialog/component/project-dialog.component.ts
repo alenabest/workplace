@@ -1,21 +1,21 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Component, Inject, OnDestroy } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 
 import { DictionaryService } from '../../../../core/services/dictionary';
 import { AuthService } from '../../../../core/services/auth';
 import { ProjectModel } from '../../../models/dictionary';
-import { BaseDestroy } from '../../../models/base-destroy';
 
 
+@UntilDestroy()
 @Component({
   selector: 'project-dialog',
   templateUrl: './project-dialog.component.html',
   styleUrls: ['./project-dialog.component.scss']
 })
-export class ProjectDialogComponent extends BaseDestroy {
+export class ProjectDialogComponent implements OnDestroy{
   title: string = 'Создание';
   userId: number;
 
@@ -30,7 +30,6 @@ export class ProjectDialogComponent extends BaseDestroy {
               private readonly dictionaryService: DictionaryService,
               private readonly authService: AuthService,
               private formBuilder: FormBuilder) {
-    super();
     this.userId = this.authService.currentUser.id;
     if (this.project) {
       this.title = 'Редактирование';
@@ -41,6 +40,9 @@ export class ProjectDialogComponent extends BaseDestroy {
     this.projectForm.patchValue(this.project);
   }
 
+  ngOnDestroy() {
+  }
+
   getProjectForm(): FormGroup {
     return this.formBuilder.group({
       name: ['', Validators.required]
@@ -49,9 +51,7 @@ export class ProjectDialogComponent extends BaseDestroy {
 
   saveProject() {
     this.createOrUpdateProject()
-      .pipe(
-        takeUntil(this.destroy$)
-      )
+      .pipe(untilDestroyed(this))
       .subscribe(() => this.dialogRef.close(true));
   }
 

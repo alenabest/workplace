@@ -108,7 +108,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
         return JsonResponse({'results': month_activity_list})
 
     @action(methods=['POST'], url_path='validate', detail=False)
-    def get_month_activity(self, request):
+    def validate_activity(self, request):
         user = request.user
         activity_date = request.data.get('activityDate')
         start = request.data.get('start')

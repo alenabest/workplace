@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { MatDatepickerInputEvent } from '@angular/material';
-import { map, takeUntil } from 'rxjs/operators';
+import { Component, OnDestroy } from '@angular/core';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { addMonths } from 'date-fns';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { MonthActivityModel } from '../../../../common/models/activity';
@@ -9,45 +10,44 @@ import { MonthActivityParam } from '../../../../common/models/params';
 import { WeekListModel } from '../../../../common/models/dictionary';
 import { ActivityService } from '../../../../core/services/activity';
 import { SubjectService } from '../../../../core/services/subject';
-import { BaseMonthActivity } from '../../../../common/models/base';
 import { AuthService } from '../../../../core/services/auth';
 import { DateValue } from '../../../data';
 
 
+@UntilDestroy()
 @Component({
   selector: 'month-activity-page',
   templateUrl: './month-activity-page.component.html',
   styleUrls: ['./month-activity-page.component.scss']
 })
-export class MonthActivityPageComponent extends BaseMonthActivity {
+export class MonthActivityPageComponent implements OnDestroy {
   monthActivities$: Observable<MonthActivityModel[]>;
   monthFormat: string = 'LLLL yyyy';
   currentDate: Date = new Date();
   weekList: WeekListModel[] = [];
-  userId: number;
+  userId: number = this.authService.currentUser.id;
   start: Date;
   end: Date;
 
-  constructor(private readonly activityService: ActivityService,
-              private readonly subjectService: SubjectService,
-              private readonly authService: AuthService) {
-    super();
-    this.userId = this.authService.currentUser.id;
+  constructor(private activityService: ActivityService,
+              private subjectService: SubjectService,
+              private authService: AuthService) {
     this.subscribeSubject();
     this.prepareMonthData();
   }
 
+  ngOnDestroy() {
+  }
+
   subscribeSubject() {
     this.subjectService.getActivitySubject
-      .pipe(
-        takeUntil(this.destroy$)
-      )
+      .pipe(untilDestroyed(this))
       .subscribe(() => this.getMonthActivity());
   }
 
   prepareMonthData() {
-    [this.start, this.end] = this.getStartAndEndDate(this.currentDate);
-    this.weekList = this.getWeekList(this.start, this.end);
+    [this.start, this.end] = this.activityService.getStartAndEndDate(this.currentDate);
+    this.weekList = this.activityService.getWeekList(this.start, this.end);
     this.getMonthActivity();
   }
 
@@ -66,12 +66,11 @@ export class MonthActivityPageComponent extends BaseMonthActivity {
 
   _getMonthActivity(): Observable<MonthActivityModel[]> {
     return this.activityService.getMonthActivity(this.getParams())
-      .pipe(
-        map(response => response.results)
-      );
+      .pipe(map(response => response.results));
   }
 
   getParams(): MonthActivityParam {
     return new MonthActivityParam(this.userId, this.start, this.end, this.weekList);
   }
+
 }

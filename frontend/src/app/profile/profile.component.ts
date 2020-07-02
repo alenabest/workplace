@@ -1,34 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { switchMap, takeUntil } from 'rxjs/operators';
-import { MatDialog } from '@angular/material';
+import { untilDestroyed } from '@ngneat/until-destroy';
+import { MatDialog } from '@angular/material/dialog';
+import { switchMap } from 'rxjs/operators';
 
-import { ChangePasswordDialogComponent } from '../../dialogs/change-password-dialog';
-import { FormValidationService } from '../../../core/services/form-validation';
-import { SnackBarService } from '../../../core/services/snack-bar';
-import { BaseDestroy } from '../../../common/models/base-destroy';
-import { AuthService } from '../../../core/services/auth';
-import { UserService } from '../../../core/services/user';
-import { UserModel } from '../../../common/models/user';
+import { ChangePasswordDialogComponent } from './change-password-dialog';
+import { FormValidationService } from '../core/services/form-validation';
+import { SnackBarService } from '../core/services/snack-bar';
+import { AuthService } from '../core/services/auth';
+import { UserService } from '../core/services/user';
+import { UserModel } from '../common/models/user';
 
 
 @Component({
-  selector: 'profile-card',
-  templateUrl: './profile-card.component.html',
-  styleUrls: ['./profile-card.component.scss']
+  selector: 'profile-page',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class ProfileCardComponent extends BaseDestroy implements OnInit {
-  profileForm: FormGroup;
-  currentUser: UserModel;
-
-  get username() { return this.profileForm.get('username'); }
-  get firstName() { return this.profileForm.get('firstName'); }
-  get middleName() { return this.profileForm.get('middleName'); }
-  get lastName() { return this.profileForm.get('lastName'); }
-  get birthday() { return this.profileForm.get('birthday'); }
-  get email() { return this.profileForm.get('email'); }
-  get mobile() { return this.profileForm.get('mobile'); }
-  get phone() { return this.profileForm.get('phone'); }
+export class ProfileComponent implements OnDestroy {
+  profileForm: FormGroup = this.initForm();
+  currentUser: UserModel = this.authService.currentUser;
 
   constructor(private formValidationService: FormValidationService,
               private snackBarService: SnackBarService,
@@ -36,14 +27,14 @@ export class ProfileCardComponent extends BaseDestroy implements OnInit {
               private authService: AuthService,
               private userService: UserService,
               private dialog: MatDialog) {
-    super();
-
-    this.currentUser = this.authService.currentUser;
+    this.profileForm.patchValue(this.currentUser);
   }
 
-  ngOnInit() {
-    this.profileForm = this.initForm();
-    this.profileForm.patchValue(this.currentUser);
+  ngOnDestroy() {
+  }
+
+  getControl(field: string): AbstractControl {
+    return this.profileForm.get(field);
   }
 
   getValidationMessage(field: AbstractControl) {
@@ -76,7 +67,7 @@ export class ProfileCardComponent extends BaseDestroy implements OnInit {
     this.userService.updateUser(this.currentUser.id, this.profileForm.value)
       .pipe(
         switchMap(() => this.authService.getProfile()),
-        takeUntil(this.destroy$)
+        untilDestroyed(this)
       )
       .subscribe((user) => this.completeActions('Изменения сохранены', user));
   }
