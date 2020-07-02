@@ -11,8 +11,8 @@ import { WeekActivityParam } from '../../../../common/models/params';
 import { ActivityService } from '../../../../core/services/activity';
 import { SubjectService } from '../../../../core/services/subject';
 import { DateValue, TimeArray, TimeModel } from '../../../data';
-import { AuthService } from '../../../../core/services/auth';
 import { cloneDeep } from '../../../../common/utils';
+import { LoginService } from '../../../../login';
 
 
 @UntilDestroy()
@@ -36,8 +36,8 @@ export class WeekActivityPageComponent implements OnDestroy{
 
   constructor(private readonly activityService: ActivityService,
               private readonly subjectService: SubjectService,
-              private readonly authService: AuthService) {
-    this.userId = this.authService.currentUser.id;
+              private readonly loginService: LoginService) {
+    this.userId = this.loginService.currentUser.id;
     this.subscribeSubject();
     this.prepareWeekData();
   }

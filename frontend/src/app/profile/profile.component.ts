@@ -7,9 +7,9 @@ import { switchMap } from 'rxjs/operators';
 import { ChangePasswordDialogComponent } from './change-password-dialog';
 import { FormValidationService } from '../core/services/form-validation';
 import { SnackBarService } from '../core/services/snack-bar';
-import { AuthService } from '../core/services/auth';
 import { UserService } from '../core/services/user';
 import { UserModel } from '../common/models/user';
+import { LoginService } from '../login';
 
 
 @Component({
@@ -19,12 +19,12 @@ import { UserModel } from '../common/models/user';
 })
 export class ProfileComponent implements OnDestroy {
   profileForm: FormGroup = this.initForm();
-  currentUser: UserModel = this.authService.currentUser;
+  currentUser: UserModel = this.loginService.currentUser;
 
   constructor(private formValidationService: FormValidationService,
               private snackBarService: SnackBarService,
               private formBuilder: FormBuilder,
-              private authService: AuthService,
+              private loginService: LoginService,
               private userService: UserService,
               private dialog: MatDialog) {
     this.profileForm.patchValue(this.currentUser);
@@ -66,7 +66,7 @@ export class ProfileComponent implements OnDestroy {
   updateUser() {
     this.userService.updateUser(this.currentUser.id, this.profileForm.value)
       .pipe(
-        switchMap(() => this.authService.getProfile()),
+        switchMap(() => this.loginService.getProfile()),
         untilDestroyed(this)
       )
       .subscribe((user) => this.completeActions('Изменения сохранены', user));

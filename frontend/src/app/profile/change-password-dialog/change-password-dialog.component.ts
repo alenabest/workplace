@@ -5,7 +5,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import {FormValidationService} from '../../core/services/form-validation';
 import {SnackBarService} from '../../core/services/snack-bar';
-import {AuthService} from '../../core/services/auth';
+import { LoginService } from '../../login';
 
 
 @UntilDestroy()
@@ -40,7 +40,7 @@ export class ChangePasswordDialogComponent implements OnDestroy {
   constructor(private dialogRef: MatDialogRef<ChangePasswordDialogComponent>,
               private formValidationService: FormValidationService,
               private snackBarService: SnackBarService,
-              private authService: AuthService,
+              private loginService: LoginService,
               private formBuilder: FormBuilder) {
   }
 
@@ -60,7 +60,7 @@ export class ChangePasswordDialogComponent implements OnDestroy {
   }
 
   changePassword() {
-    this.authService.changePassword(this.changePasswordForm.value)
+    this.loginService.changePassword(this.changePasswordForm.value)
       .pipe(
         untilDestroyed(this)
       )

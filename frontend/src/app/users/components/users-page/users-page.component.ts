@@ -7,9 +7,9 @@ import { Observable, of } from 'rxjs';
 import { ConfirmationDialogComponent } from '../../../common/dialogs/confirmation-dialog/component';
 import { UserDialogComponent } from '../../dialogs/user-dialog/user-dialog.component';
 import { SnackBarService } from '../../../core/services/snack-bar';
-import { AuthService } from '../../../core/services/auth';
 import { UserService } from '../../../core/services/user';
 import { UserModel } from '../../../common/models/user';
+import { LoginService } from '../../../login';
 
 
 @UntilDestroy()
@@ -27,10 +27,10 @@ export class UsersPageComponent implements OnInit, OnDestroy {
   users$: Observable<UserModel[]>;
 
   constructor(private readonly snackBarService: SnackBarService,
-              private readonly authService: AuthService,
+              private readonly loginService: LoginService,
               private readonly userService: UserService,
               private dialog: MatDialog) {
-    this.isAdmin = this.authService.currentUser.role === 'admin';
+    this.isAdmin = this.loginService.currentUser.role === 'admin';
   }
 
   ngOnDestroy(): void {

@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
 
 import { ActivityTypeModel, DirectionModel } from '../../../models/dictionary';
 import { DictionaryService } from '../../../../core/services/dictionary';
-import { AuthService } from '../../../../core/services/auth';
 import { DictionaryParam } from '../../../models/params';
 import { prepareFilteredArray } from '../../../utils';
+import { LoginService } from '../../../../login';
 
 
 @UntilDestroy()
@@ -37,9 +37,9 @@ export class ActivityTypeDialogComponent implements OnInit, OnDestroy {
   constructor(private dialogRef: MatDialogRef<ActivityTypeDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public activityType: ActivityTypeModel,
               private readonly dictionaryService: DictionaryService,
-              private readonly authService: AuthService,
+              private readonly loginService: LoginService,
               private formBuilder: FormBuilder) {
-    this.userId = this.authService.currentUser.id;
+    this.userId = this.loginService.currentUser.id;
     if (this.activityType) {
       this.title = 'Редактирование';
     } else {

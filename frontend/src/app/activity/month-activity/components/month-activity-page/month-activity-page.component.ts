@@ -10,8 +10,8 @@ import { MonthActivityParam } from '../../../../common/models/params';
 import { WeekListModel } from '../../../../common/models/dictionary';
 import { ActivityService } from '../../../../core/services/activity';
 import { SubjectService } from '../../../../core/services/subject';
-import { AuthService } from '../../../../core/services/auth';
 import { DateValue } from '../../../data';
+import { LoginService } from '../../../../login';
 
 
 @UntilDestroy()
@@ -25,13 +25,13 @@ export class MonthActivityPageComponent implements OnDestroy {
   monthFormat: string = 'LLLL yyyy';
   currentDate: Date = new Date();
   weekList: WeekListModel[] = [];
-  userId: number = this.authService.currentUser.id;
+  userId: number = this.loginService.currentUser.id;
   start: Date;
   end: Date;
 
   constructor(private activityService: ActivityService,
               private subjectService: SubjectService,
-              private authService: AuthService) {
+              private loginService: LoginService) {
     this.subscribeSubject();
     this.prepareMonthData();
   }

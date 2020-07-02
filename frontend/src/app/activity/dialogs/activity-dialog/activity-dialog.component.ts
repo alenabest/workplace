@@ -14,8 +14,8 @@ import { DictionaryService } from '../../../core/services/dictionary';
 import { DictionaryParam } from '../../../common/models/params';
 import { SnackBarService } from '../../../core/services/snack-bar';
 import { SubjectService } from '../../../core/services/subject';
-import { AuthService } from '../../../core/services/auth';
 import { ActivityDialogService } from './activity-dialog.service';
+import { LoginService } from '../../../login';
 
 
 @UntilDestroy()
@@ -73,9 +73,9 @@ export class ActivityDialogComponent implements OnInit, OnDestroy {
               private readonly snackBarService: SnackBarService,
               private readonly activityDialogService: ActivityDialogService,
               private readonly subjectService: SubjectService,
-              private readonly authService: AuthService,
+              private readonly loginService: LoginService,
               private formBuilder: FormBuilder) {
-    this.userId = this.authService.currentUser.id;
+    this.userId = this.loginService.currentUser.id;
     if (this.activity.id) {
       this.title = 'Редактирование';
     }

@@ -3,18 +3,18 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {Observable, of} from 'rxjs';
 
-import {FormValidationService} from '../../../core/services/form-validation/';
-import {AuthService} from '../../../core/services/auth';
-import {UserModel} from '../../../common/models/user';
+import {FormValidationService} from '../core/services/form-validation';
+import {UserModel} from '../common/models/user';
+import { LoginService } from './login.service';
 
 
 @UntilDestroy()
 @Component({
   selector: 'login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class LoginPageComponent implements OnDestroy {
+export class LoginComponent implements OnDestroy {
   loginForm: FormGroup = this.initForm();
   hide: boolean = true;
 
@@ -28,7 +28,7 @@ export class LoginPageComponent implements OnDestroy {
 
   constructor(private formBuilder: FormBuilder,
               private formValidationService: FormValidationService,
-              private authService: AuthService) {
+              private loginService: LoginService) {
     localStorage.clear();
   }
 
@@ -53,7 +53,7 @@ export class LoginPageComponent implements OnDestroy {
 
       return of();
     }
-    return this.authService.login(this.loginForm.value);
+    return this.loginService.login(this.loginForm.value);
   }
 
   initForm(): FormGroup {

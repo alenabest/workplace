@@ -2,7 +2,7 @@ import { Injectable, Injector, OnDestroy } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-import { AuthService } from '../auth';
+import { LoginService } from '../../../login';
 
 
 @UntilDestroy()
@@ -19,7 +19,7 @@ export class StartupService implements OnDestroy {
   }
 
   initializeApp() {
-    const authService = this.injector.get(AuthService);
+    const authService = this.injector.get(LoginService);
 
     return authService.getProfile()
       .toPromise()

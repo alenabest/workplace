@@ -5,10 +5,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { UserModel, UserPasswordModel } from '../../../common/models/user';
-import { OkTrueModel } from '../../../common/models/response';
-import { addLocalStorageItem } from '../../../common/utils';
-import {prepareObject} from '../../helpers';
+import { UserModel, UserPasswordModel } from '../common/models/user';
+import { OkTrueModel } from '../common/models/response';
+import { addLocalStorageItem } from '../common/utils';
+import {prepareObject} from '../core/helpers';
 
 
 const AUTH_API = '/workplace/api/';
@@ -16,7 +16,7 @@ const AUTH_API = '/workplace/api/';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class LoginService {
 
   currentUser: UserModel;
 

@@ -1,11 +1,11 @@
 import { Route } from '@angular/router';
+import { LoginComponent } from './login.component';
 
-import { LoginPageComponent } from './components/login-page';
 
 
 export let LOGIN_ROUTES: Route[] = [
   {
     path: 'login',
-    component: LoginPageComponent
+    component: LoginComponent
   }
 ];

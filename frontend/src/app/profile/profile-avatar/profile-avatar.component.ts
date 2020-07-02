@@ -8,7 +8,7 @@ import { ImageViewerDialogComponent } from '../../common/dialogs/image-viewer-di
 import { AvatarEditorDialogComponent } from '../avatar-editor-dialog';
 import { SnackBarService } from '../../core/services/snack-bar';
 import { UserService } from '../../core/services/user';
-import { AuthService } from '../../core/services/auth';
+import { LoginService } from '../../login';
 
 
 @UntilDestroy()
@@ -24,10 +24,10 @@ export class ProfileAvatarComponent implements OnDestroy {
 
   constructor(private snackBarService: SnackBarService,
               private userService: UserService,
-              private authService: AuthService,
+              private loginService: LoginService,
               private dialog: MatDialog) {
-    this.userId = this.authService.currentUser.id;
-    this.userAvatar = this.authService.currentUser.avatar;
+    this.userId = this.loginService.currentUser.id;
+    this.userAvatar = this.loginService.currentUser.avatar;
   }
 
   ngOnDestroy() {
@@ -79,7 +79,7 @@ export class ProfileAvatarComponent implements OnDestroy {
 
   completeActions(url: string, avatarUrl: string, message: string) {
     this.userAvatar = avatarUrl;
-    this.authService.currentUser.avatar = url;
+    this.loginService.currentUser.avatar = url;
     this.snackBarService.success(message);
   }
 }

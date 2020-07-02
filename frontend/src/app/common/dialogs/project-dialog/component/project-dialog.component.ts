@@ -5,8 +5,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 
 import { DictionaryService } from '../../../../core/services/dictionary';
-import { AuthService } from '../../../../core/services/auth';
 import { ProjectModel } from '../../../models/dictionary';
+import { LoginService } from '../../../../login';
 
 
 @UntilDestroy()
@@ -28,9 +28,9 @@ export class ProjectDialogComponent implements OnDestroy{
   constructor(private dialogRef: MatDialogRef<ProjectDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public project: ProjectModel,
               private readonly dictionaryService: DictionaryService,
-              private readonly authService: AuthService,
+              private readonly loginService: LoginService,
               private formBuilder: FormBuilder) {
-    this.userId = this.authService.currentUser.id;
+    this.userId = this.loginService.currentUser.id;
     if (this.project) {
       this.title = 'Редактирование';
     } else {

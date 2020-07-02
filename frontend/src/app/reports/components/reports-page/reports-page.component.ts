@@ -7,7 +7,7 @@ import { SubjectService } from '../../../core/services/subject';
 import { ReportService } from '../../../core/services/report';
 import { ReportModel } from '../../../common/models/report';
 import { ByUserParam } from '../../../common/models/params';
-import { AuthService } from '../../../core/services/auth';
+import { LoginService } from '../../../login';
 
 
 @UntilDestroy()
@@ -22,8 +22,8 @@ export class ReportsPageComponent implements OnInit, OnDestroy {
 
   constructor(private readonly reportService: ReportService,
               private readonly subjectService: SubjectService,
-              private readonly authService: AuthService) {
-    this.userId = this.authService.currentUser.id;
+              private readonly loginService: LoginService) {
+    this.userId = this.loginService.currentUser.id;
     this.subscribeSubjectResult();
   }
 

@@ -11,7 +11,7 @@ import { SubjectService } from '../../../../core/services/subject';
 import { ActivityModel } from '../../../../common/models/activity';
 import { cloneDeep, compareDates } from '../../../../common/utils';
 import { DateValue, TimeArray, TimeModel } from '../../../data';
-import { AuthService } from '../../../../core/services/auth';
+import { LoginService } from '../../../../login';
 
 
 @UntilDestroy()
@@ -31,8 +31,8 @@ export class DayActivityPageComponent implements OnInit, OnDestroy {
 
   constructor(private readonly activityService: ActivityService,
               private readonly subjectService: SubjectService,
-              private readonly authService: AuthService) {
-    this.userId = this.authService.currentUser.id;
+              private readonly loginService: LoginService) {
+    this.userId = this.loginService.currentUser.id;
     this.subscribeSubject();
   }
 

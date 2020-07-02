@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {getHours} from 'date-fns';
 
-import { AuthService } from '../../services/auth';
+import { LoginService } from '../../../login';
 
 
 @Component({
@@ -27,10 +27,10 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  constructor(private authService: AuthService,
+  constructor(private loginService: LoginService,
               private router: Router) {
-    if (this.authService.currentUser.firstName) {
-      this.userFirstName = this.authService.currentUser.firstName;
+    if (this.loginService.currentUser.firstName) {
+      this.userFirstName = this.loginService.currentUser.firstName;
     }
   }
 
@@ -42,6 +42,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
+    this.loginService.logout();
   }
 }
