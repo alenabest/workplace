@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 
 import { DateFormatPipeModule } from '../../../common/pipes/date-format';
-import { MonthActivityCardComponent } from './month-activity-card';
 import { MonthActivityPageComponent } from './month-activity-page';
+import { MonthActivityCardComponent } from './month-activity-card';
 import { CoreModule, MaterialModules } from '../../../core';
 import { ActivityComponentsModule } from '../../components';
 
 
 
 @NgModule({
-  declarations: [MonthActivityPageComponent, MonthActivityCardComponent],
+  declarations: [MonthActivityCardComponent, MonthActivityPageComponent],
   imports: [
     CoreModule,
     MaterialModules,
     DateFormatPipeModule,
     ActivityComponentsModule
   ],
-  exports: [MonthActivityPageComponent]
+  exports: []
 })
 export class MonthActivityComponentsModule { }

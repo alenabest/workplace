@@ -1,6 +1,5 @@
-import { Directive, HostListener, Input } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { takeUntil } from 'rxjs/operators';
+import { Directive, HostListener, Input, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 
 import { ActivityTypeDialogComponent } from '../../../dialogs/activity-type-dialog/component';
@@ -8,28 +7,29 @@ import { DirectionDialogComponent } from '../../../dialogs/direction-dialog/comp
 import { ProjectDialogComponent } from '../../../dialogs/project-dialog/component';
 import { DictionaryService } from '../../../../core/services/dictionary';
 import { SubjectService } from '../../../../core/services/subject';
-import { BaseDestroy } from '../../../models/base-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 
+@UntilDestroy()
 @Directive({
   selector: '[editOption]'
 })
-export class EditOptionDirective extends BaseDestroy {
+export class EditOptionDirective implements OnDestroy {
   @Input() editOption: object;
   @Input() editOptionApi: string;
 
   @HostListener('click') onKeyUp() {
     this.getOpenedDialog()
-      .pipe(
-        takeUntil(this.destroy$)
-      )
+      .pipe(untilDestroyed(this))
       .subscribe(result => this.completeClose(result));
   }
 
   constructor(private readonly dictionaryService?: DictionaryService,
               private readonly subjectService?: SubjectService,
               private dialog?: MatDialog) {
-    super();
+  }
+
+  ngOnDestroy() {
   }
 
   completeClose(result: boolean) {

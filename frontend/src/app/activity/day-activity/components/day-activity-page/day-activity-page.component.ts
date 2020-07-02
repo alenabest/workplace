@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDatepickerInputEvent } from '@angular/material';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { add} from 'date-fns';
 
 import { ActivityService } from '../../../../core/services/activity';
-import { BaseDestroy } from '../../../../common/models/base-destroy';
 import { DayActivityParam } from '../../../../common/models/params';
 import { SubjectService } from '../../../../core/services/subject';
 import { ActivityModel } from '../../../../common/models/activity';
@@ -14,12 +14,13 @@ import { DateValue, TimeArray, TimeModel } from '../../../data';
 import { AuthService } from '../../../../core/services/auth';
 
 
+@UntilDestroy()
 @Component({
   selector: 'day-activity-page',
   templateUrl: './day-activity-page.component.html',
   styleUrls: ['./day-activity-page.component.scss']
 })
-export class DayActivityPageComponent extends BaseDestroy implements OnInit {
+export class DayActivityPageComponent implements OnInit, OnDestroy {
   isNotToday: boolean = false;
   currentDate: Date = new Date();
   dayFormat: string = 'dd MMMM yyyy, cccc';
@@ -31,16 +32,16 @@ export class DayActivityPageComponent extends BaseDestroy implements OnInit {
   constructor(private readonly activityService: ActivityService,
               private readonly subjectService: SubjectService,
               private readonly authService: AuthService) {
-    super();
     this.userId = this.authService.currentUser.id;
     this.subscribeSubject();
   }
 
+  ngOnDestroy() {
+  }
+
   subscribeSubject() {
     this.subjectService.getActivitySubject
-      .pipe(
-        takeUntil(this.destroy$)
-      )
+      .pipe(untilDestroyed(this))
       .subscribe(() => this.getActivities());
   }
 

@@ -1,22 +1,24 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { map, takeUntil } from 'rxjs/operators';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+
 import { ActivityTypeModel, DirectionModel } from '../../../models/dictionary';
 import { DictionaryService } from '../../../../core/services/dictionary';
-import { DictionaryParam } from '../../../models/params';
 import { AuthService } from '../../../../core/services/auth';
-import { BaseDestroy } from '../../../models/base-destroy';
+import { DictionaryParam } from '../../../models/params';
 import { prepareFilteredArray } from '../../../utils';
 
 
+@UntilDestroy()
 @Component({
   selector: 'activity-type-dialog',
   templateUrl: './activity-type-dialog.component.html',
   styleUrls: ['./activity-type-dialog.component.scss']
 })
-export class ActivityTypeDialogComponent extends BaseDestroy implements OnInit {
+export class ActivityTypeDialogComponent implements OnInit, OnDestroy {
   directions$: Observable<DirectionModel[]>;
 
   title: string = 'Создание';
@@ -37,13 +39,15 @@ export class ActivityTypeDialogComponent extends BaseDestroy implements OnInit {
               private readonly dictionaryService: DictionaryService,
               private readonly authService: AuthService,
               private formBuilder: FormBuilder) {
-    super();
     this.userId = this.authService.currentUser.id;
     if (this.activityType) {
       this.title = 'Редактирование';
     } else {
       this.activityType = new ActivityTypeModel(this.userId);
     }
+  }
+
+  ngOnDestroy() {
   }
 
   ngOnInit(): void {
@@ -64,9 +68,7 @@ export class ActivityTypeDialogComponent extends BaseDestroy implements OnInit {
 
   saveProject() {
     this.createOrUpdateProject()
-      .pipe(
-        takeUntil(this.destroy$)
-      )
+      .pipe(untilDestroyed(this))
       .subscribe(() => this.dialogRef.close(true));
   }
 

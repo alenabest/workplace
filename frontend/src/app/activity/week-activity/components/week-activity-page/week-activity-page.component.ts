@@ -1,27 +1,28 @@
-import { Component } from '@angular/core';
-import { MatDatepickerInputEvent } from '@angular/material';
-import { map, takeUntil, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { map, tap } from 'rxjs/operators';
 import { addWeeks} from 'date-fns';
+import { Observable } from 'rxjs';
 
 import { ActivityModel, WeekActivityModel } from '../../../../common/models/activity';
 import { WeekLabelModel } from '../../../../common/models/dictionary';
 import { WeekActivityParam } from '../../../../common/models/params';
 import { ActivityService } from '../../../../core/services/activity';
 import { SubjectService } from '../../../../core/services/subject';
-import { BaseWeekActivity } from '../../../../common/models/base';
 import { DateValue, TimeArray, TimeModel } from '../../../data';
 import { AuthService } from '../../../../core/services/auth';
 import { cloneDeep } from '../../../../common/utils';
 
 
+@UntilDestroy()
 @Component({
   selector: 'week-activity-page',
   templateUrl: './week-activity-page.component.html',
   styleUrls: ['./week-activity-page.component.scss']
 })
 
-export class WeekActivityPageComponent extends BaseWeekActivity {
+export class WeekActivityPageComponent implements OnDestroy{
   weekFormat: string = 'dd MMMM yyyy';
   currentDate: Date = new Date();
   weekArray: WeekLabelModel[];
@@ -36,17 +37,17 @@ export class WeekActivityPageComponent extends BaseWeekActivity {
   constructor(private readonly activityService: ActivityService,
               private readonly subjectService: SubjectService,
               private readonly authService: AuthService) {
-    super();
     this.userId = this.authService.currentUser.id;
     this.subscribeSubject();
     this.prepareWeekData();
   }
 
+  ngOnDestroy() {
+  }
+
   subscribeSubject() {
     this.subjectService.getActivitySubject
-      .pipe(
-        takeUntil(this.destroy$)
-      )
+      .pipe(untilDestroyed(this))
       .subscribe(() => this.getWeekActivity());
   }
 
@@ -55,8 +56,8 @@ export class WeekActivityPageComponent extends BaseWeekActivity {
   }
 
   prepareWeekData() {
-    [this.monday, this.sunday] = this.getMondaySunday(this.currentDate);
-    this.weekArray = this.getWeekArray(this.monday);
+    [this.monday, this.sunday] = this.activityService.getMondaySunday(this.currentDate);
+    this.weekArray = this.activityService.getWeekArray(this.monday);
     this.getWeekActivity();
   }
 

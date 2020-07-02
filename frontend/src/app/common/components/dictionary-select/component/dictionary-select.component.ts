@@ -1,16 +1,15 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
-
-import { BaseDestroy } from '../../../models/base-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 
+@UntilDestroy()
 @Component({
   selector: 'dictionary-select',
   templateUrl: './dictionary-select.component.html',
   styleUrls: ['./dictionary-select.component.scss']
 })
-export class DictionarySelectComponent extends BaseDestroy {
+export class DictionarySelectComponent implements OnDestroy {
   @Input() control: FormControl | AbstractControl;
   @Input() defaultEqual: (o1?: any, o2?: any) => boolean;
   @Input() required: boolean = false;
@@ -26,8 +25,10 @@ export class DictionarySelectComponent extends BaseDestroy {
 
   filterBySearch: FormControl = new FormControl();
   constructor() {
-    super();
     this.subscribeFormControl();
+  }
+
+  ngOnDestroy() {
   }
 
   trackByFn(index, item) {
@@ -36,7 +37,7 @@ export class DictionarySelectComponent extends BaseDestroy {
 
   subscribeFormControl() {
     this.filterBySearch.valueChanges
-      .pipe(takeUntil(this.destroy$))
+      .pipe(untilDestroyed(this))
       .subscribe(() => this.changeSearch());
   }
 

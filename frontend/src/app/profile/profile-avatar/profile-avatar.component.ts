@@ -1,22 +1,23 @@
-import { Component } from '@angular/core';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
-import { MatDialog } from '@angular/material';
+import { Component, OnDestroy } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { MatDialog } from '@angular/material/dialog';
+import { map, switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
-import { ImageViewerDialogComponent } from '../../../common/dialogs/image-viewer-dialog/component';
-import { AvatarEditorDialogComponent } from '../../dialogs/avatar-editor-dialog';
-import { SnackBarService } from '../../../core/services/snack-bar';
-import { BaseDestroy } from '../../../common/models/base-destroy';
-import { UserService } from '../../../core/services/user';
-import { AuthService } from '../../../core/services/auth';
+import { ImageViewerDialogComponent } from '../../common/dialogs/image-viewer-dialog/component';
+import { AvatarEditorDialogComponent } from '../avatar-editor-dialog';
+import { SnackBarService } from '../../core/services/snack-bar';
+import { UserService } from '../../core/services/user';
+import { AuthService } from '../../core/services/auth';
 
 
+@UntilDestroy()
 @Component({
   selector: 'profile-avatar',
   templateUrl: './profile-avatar.component.html',
   styleUrls: ['./profile-avatar.component.scss']
 })
-export class ProfileAvatarComponent extends BaseDestroy {
+export class ProfileAvatarComponent implements OnDestroy {
   userId: number;
   userAvatar: string;
   noAvatarUrl = 'assets/images/no-image.png';
@@ -25,21 +26,21 @@ export class ProfileAvatarComponent extends BaseDestroy {
               private userService: UserService,
               private authService: AuthService,
               private dialog: MatDialog) {
-    super();
     this.userId = this.authService.currentUser.id;
     this.userAvatar = this.authService.currentUser.avatar;
   }
 
+  ngOnDestroy() {
+  }
+
   deleteAvatar() {
-    this.userService.updateUser(this.userId, { avatar: null })
-      .pipe(
-        takeUntil(this.destroy$)
-      )
+    this.userService.updateUser(this.userId, {avatar: null})
+      .pipe(untilDestroyed(this))
       .subscribe(() => this.completeActions(null, null, 'Фото удалено'));
   }
 
   openImageViewerDialog() {
-    this.dialog.open(ImageViewerDialogComponent, { data: [this.userAvatar] });
+    this.dialog.open(ImageViewerDialogComponent, {data: [this.userAvatar]});
   }
 
   openAvatarEditorDialog(imageChangedEvent: Event) {
@@ -52,7 +53,7 @@ export class ProfileAvatarComponent extends BaseDestroy {
       .afterClosed()
       .pipe(
         switchMap((avatar: Blob) => this.checkAvatar(avatar)),
-        takeUntil(this.destroy$)
+        untilDestroyed(this)
       )
       .subscribe((url: string) => this.completeActions(url, this.getAvatarUrl(url), 'Фото обновлено'));
   }

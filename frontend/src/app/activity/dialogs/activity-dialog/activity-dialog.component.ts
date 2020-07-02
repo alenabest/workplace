@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClassType } from 'class-transformer/ClassTransformer';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { map, switchMap} from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
 import { ActivityTypeModel, DirectionModel, ProjectModel } from '../../../common/models/dictionary';
@@ -12,18 +13,18 @@ import { getTimeMessage, prepareFilteredArray } from '../../../common/utils';
 import { DictionaryService } from '../../../core/services/dictionary';
 import { DictionaryParam } from '../../../common/models/params';
 import { SnackBarService } from '../../../core/services/snack-bar';
-import { BaseDestroy } from '../../../common/models/base-destroy';
-import { ActivityService } from '../../../core/services/activity';
 import { SubjectService } from '../../../core/services/subject';
 import { AuthService } from '../../../core/services/auth';
+import { ActivityDialogService } from './activity-dialog.service';
 
 
+@UntilDestroy()
 @Component({
   selector: 'activity-dialog',
   templateUrl: './activity-dialog.component.html',
   styleUrls: ['./activity-dialog.component.scss']
 })
-export class ActivityDialogComponent extends BaseDestroy implements OnInit {
+export class ActivityDialogComponent implements OnInit, OnDestroy {
   title: string = 'Создание';
 
   userId: number;
@@ -70,11 +71,10 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
               @Inject(MAT_DIALOG_DATA) public activity: ActivityModel,
               private readonly dictionaryService: DictionaryService,
               private readonly snackBarService: SnackBarService,
-              private readonly activityService: ActivityService,
+              private readonly activityDialogService: ActivityDialogService,
               private readonly subjectService: SubjectService,
               private readonly authService: AuthService,
               private formBuilder: FormBuilder) {
-    super();
     this.userId = this.authService.currentUser.id;
     if (this.activity.id) {
       this.title = 'Редактирование';
@@ -82,11 +82,12 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
     this.subscribeToSubject();
   }
 
+  ngOnDestroy() {
+  }
+
   subscribeToSubject() {
     this.subjectService.getDictionarySubject
-      .pipe(
-        takeUntil(this.destroy$)
-      )
+      .pipe(untilDestroyed(this))
       .subscribe(result => this.subjectAction(result));
   }
 
@@ -160,16 +161,18 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
   saveActivity() {
     this.validateActivity()
       .pipe(
-        switchMap(result => {
-          if (result.ok) {
-            return this.createOrUpdateActivity();
-          }
-          this.openSnackBar(result);
-          return of();
-        }),
-        takeUntil(this.destroy$)
+        switchMap(result => this.checkValidationResultAndSave(result)),
+        untilDestroyed(this)
       )
       .subscribe(() => this.completeSave());
+  }
+
+  checkValidationResultAndSave(result: ActivityValidation): Observable<ActivityModel> {
+    if (result.ok) {
+      return this.createOrUpdateActivity();
+    }
+    this.openSnackBar(result);
+    return of();
   }
 
   completeSave() {
@@ -183,7 +186,7 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
   }
 
   validateActivity(): Observable<ActivityValidation> {
-    return this.activityService.validateActivity(this.activityForm.value);
+    return this.activityDialogService.validateActivity(this.activityForm.value);
   }
 
   createOrUpdateActivity(): Observable<ActivityModel> {
@@ -194,11 +197,11 @@ export class ActivityDialogComponent extends BaseDestroy implements OnInit {
   }
 
   createActivity(): Observable<ActivityModel> {
-    return this.activityService.createActivity(this.activityForm.value);
+    return this.activityDialogService.createActivity(this.activityForm.value);
   }
 
   updateActivity(): Observable<ActivityModel> {
-    return this.activityService.updateActivity(this.activity.id, this.activityForm.value);
+    return this.activityDialogService.updateActivity(this.activity.id, this.activityForm.value);
   }
 
   getDictionary<T>(api: string, cls: ClassType<T>, search: string): Observable<T[]> {

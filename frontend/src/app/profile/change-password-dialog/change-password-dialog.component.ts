@@ -1,13 +1,14 @@
 import {Component, HostListener, OnDestroy} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {untilDestroyed} from 'ngx-take-until-destroy';
-import {MatDialogRef} from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-import {FormValidationService} from '../../../core/services/form-validation';
-import {SnackBarService} from '../../../core/services/snack-bar';
-import {AuthService} from '../../../core/services/auth';
+import {FormValidationService} from '../../core/services/form-validation';
+import {SnackBarService} from '../../core/services/snack-bar';
+import {AuthService} from '../../core/services/auth';
 
 
+@UntilDestroy()
 @Component({
   selector: 'change-password-dialog',
   templateUrl: './change-password-dialog.component.html',

@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { map, share, switchMap, takeUntil } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { map, share, switchMap } from 'rxjs/operators';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 
 import { ConfirmationDialogComponent } from '../../../common/dialogs/confirmation-dialog/component';
 import { UserDialogComponent } from '../../dialogs/user-dialog/user-dialog.component';
 import { SnackBarService } from '../../../core/services/snack-bar';
-import { BaseDestroy } from '../../../common/models/base-destroy';
 import { AuthService } from '../../../core/services/auth';
 import { UserService } from '../../../core/services/user';
 import { UserModel } from '../../../common/models/user';
 
 
+@UntilDestroy()
 @Component({
   selector: 'users-page',
   templateUrl: './users-page.component.html',
   styleUrls: ['./users-page.component.scss']
 })
-export class UsersPageComponent extends BaseDestroy implements OnInit {
+export class UsersPageComponent implements OnInit, OnDestroy {
   inputFlex = '160px';
   isAdmin: boolean = false;
 
@@ -29,8 +30,10 @@ export class UsersPageComponent extends BaseDestroy implements OnInit {
               private readonly authService: AuthService,
               private readonly userService: UserService,
               private dialog: MatDialog) {
-    super();
     this.isAdmin = this.authService.currentUser.role === 'admin';
+  }
+
+  ngOnDestroy(): void {
   }
 
   ngOnInit() {
@@ -62,16 +65,18 @@ export class UsersPageComponent extends BaseDestroy implements OnInit {
     })
       .afterClosed()
       .pipe(
-        switchMap(result => {
-          if (result) {
-            return this.createOrUpdateUser(result);
-          }
-
-          return of();
-        }),
-        takeUntil(this.destroy$)
+        switchMap(result => this.checkUserDialogResult(result)),
+        untilDestroyed(this)
       )
       .subscribe(() => this.completeAction(message));
+  }
+
+  checkUserDialogResult(result: UserModel): Observable<UserModel> {
+    if (result) {
+      return this.createOrUpdateUser(result);
+    }
+
+    return of();
   }
 
   openDeleteDialog(user: UserModel) {
@@ -79,16 +84,18 @@ export class UsersPageComponent extends BaseDestroy implements OnInit {
     this.dialog.open(ConfirmationDialogComponent, {data: message, disableClose: true})
       .afterClosed()
       .pipe(
-        switchMap(result => {
-          if (result) {
-            return this.userService.deleteUser(user.id);
-          }
-
-          return of();
-        }),
-        takeUntil(this.destroy$)
+        switchMap(result => this.checkDeletedDialogResult(result, user.id)),
+        untilDestroyed(this)
       )
       .subscribe(() => this.completeAction('Пользователь удалён'));
+  }
+
+  checkDeletedDialogResult(result: boolean, userId: number): Observable<boolean> {
+    if (result) {
+      return this.userService.deleteUser(userId);
+    }
+
+    return of();
   }
 
   getUsers() {

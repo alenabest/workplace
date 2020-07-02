@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { MAT_DATE_FORMATS, MatDatepicker } from '@angular/material';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
 import { FormControl } from '@angular/forms';
 
 export const MY_FORMATS = {
