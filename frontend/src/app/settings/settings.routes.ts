@@ -1,11 +1,11 @@
 import { Route } from '@angular/router';
+import { SettingsComponent } from './settings.component';
 
-import { SettingsPageComponent } from './components/settings-page';
 
 
 export const SETTINGS_ROUTES: Route[] = [
   {
     path: 'app/settings',
-    component: SettingsPageComponent
+    component: SettingsComponent
   }
 ];
