@@ -2,7 +2,7 @@ import { Transform, Type } from 'class-transformer';
 
 import { formatDateToClass, formatDateToPlain, formatObjectToField } from '../../../core/helpers';
 import { ActivityTypeModel, DirectionModel, ProjectModel } from '../dictionary';
-import { UserModel } from '../user';
+import { UserModel } from '../../../server-api';
 
 
 export class ActivityModel {

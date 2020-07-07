@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatDialog } from '@angular/material/dialog';
 import { switchMap } from 'rxjs/operators';
 
@@ -8,10 +8,10 @@ import { ChangePasswordDialogComponent } from './change-password-dialog';
 import { FormValidationService } from '../core/services/form-validation';
 import { SnackBarService } from '../core/services/snack-bar';
 import { UserService } from '../core/services/user';
-import { UserModel } from '../common/models/user';
+import { UserModel } from '../server-api';
 import { LoginService } from '../login';
 
-
+@UntilDestroy()
 @Component({
   selector: 'profile-page',
   templateUrl: './profile.component.html',

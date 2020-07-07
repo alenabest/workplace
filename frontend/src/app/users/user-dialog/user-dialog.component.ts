@@ -3,8 +3,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { RoleModel, UserModel } from '../../../common/models/user';
-import { UserService } from '../../../core/services/user';
+import { RoleModel, UserModel } from '../../server-api';
+import { UserService } from '../../core/services/user';
 import { map, share } from 'rxjs/operators';
 
 

@@ -4,8 +4,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {Observable, of} from 'rxjs';
 
 import {FormValidationService} from '../core/services/form-validation';
-import {UserModel} from '../common/models/user';
 import { LoginService } from './login.service';
+import { UserModel } from '../server-api';
 
 
 @UntilDestroy()
