@@ -5,10 +5,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { UserModel, UserPasswordModel } from '../common/models/user';
+import { UserPasswordModel } from '../common/models/user';
 import { OkTrueModel } from '../common/models/response';
 import { addLocalStorageItem } from '../common/utils';
 import {prepareObject} from '../core/helpers';
+import { UserModel } from '../server-api';
 
 
 const AUTH_API = '/workplace/api/';

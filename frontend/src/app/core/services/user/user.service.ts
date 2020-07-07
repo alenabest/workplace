@@ -5,9 +5,9 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { IResponse, prepareObject, serializeResponse } from '../../helpers';
-import { RoleModel, UserModel } from '../../../common/models/user';
 import { UserParam } from '../../../common/models/params';
 import { generateQuery } from '../../../common/utils';
+import { RoleModel, UserModel } from '../../../server-api';
 
 
 const USER_API = '/workplace/api/user/';

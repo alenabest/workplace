@@ -4,21 +4,21 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 
-import { ConfirmationDialogComponent } from '../../../common/dialogs/confirmation-dialog/component';
-import { UserDialogComponent } from '../../dialogs/user-dialog/user-dialog.component';
-import { SnackBarService } from '../../../core/services/snack-bar';
-import { UserService } from '../../../core/services/user';
-import { UserModel } from '../../../common/models/user';
-import { LoginService } from '../../../login';
+import { ConfirmationDialogComponent } from '../common/dialogs/confirmation-dialog/component';
+import { UserDialogComponent } from './user-dialog/user-dialog.component';
+import { SnackBarService } from '../core/services/snack-bar';
+import { UserService } from '../core/services/user';
+import { LoginService } from '../login';
+import { UserModel } from '../server-api';
 
 
 @UntilDestroy()
 @Component({
   selector: 'users-page',
-  templateUrl: './users-page.component.html',
-  styleUrls: ['./users-page.component.scss']
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss']
 })
-export class UsersPageComponent implements OnInit, OnDestroy {
+export class UsersComponent implements OnInit, OnDestroy {
   inputFlex = '160px';
   isAdmin: boolean = false;
 

@@ -12,7 +12,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
-import { ImageViewerDialogComponent } from '../common/dialogs/image-viewer-dialog/component';
 import { ProfileAvatarComponent } from './profile-avatar/profile-avatar.component';
 import { ImageViewerDialogModule } from '../common/dialogs/image-viewer-dialog';
 import { PhoneMaskDirectiveModule } from '../common/directives/phone-mask';
@@ -45,11 +44,6 @@ import { PROFILE_ROUTES } from './profile.routes';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-  ],
-  entryComponents: [
-    ChangePasswordDialogComponent,
-    AvatarEditorDialogComponent,
-    ImageViewerDialogComponent
   ],
   exports: [ProfileComponent]
 })
