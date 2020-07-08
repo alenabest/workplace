@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {getHours} from 'date-fns';
 
-import { LoginService } from '../../../login';
+import { LoginService } from '../login';
 
 
 @Component({

@@ -7,31 +7,31 @@ import { FlexModule } from '@angular/flex-layout';
 
 import { CustomHttpInterceptor } from './core/custom-http-interceptor';
 import { AppDateAdapter, MAT_DATE_FNS_DATE_FORMATS } from './app-date-adapter';
-import { CoreComponentsModule } from './core/components';
-import { StartupService } from './core/services/startup';
 import { AppRoutingModule } from './app-routing.module';
+import { AppStartService } from './app-start.service';
 import { AppComponent } from './app.component';
 import { ActivityModule } from './activity';
 import { SettingsModule } from './settings';
 import { ProfileModule } from './profile';
-import { ReportsModule } from './reports';
+import { SidebarModule } from './sidebar';
+import { HeaderModule } from './header';
 import { LoginModule } from './login';
 import { UsersModule } from './users';
 
 
-export function startupServiceFactory(startupService: StartupService) {
+export function startupServiceFactory(startupService: AppStartService) {
   return () => startupService.initializeApp();
 }
 
 const modules = [
-  CoreComponentsModule,
+  HeaderModule,
+  SidebarModule,
 
   LoginModule,
   ProfileModule,
   SettingsModule,
   ActivityModule,
-  ReportsModule,
-  UsersModule
+  UsersModule,
 ];
 
 @NgModule({
@@ -52,8 +52,8 @@ const modules = [
     FlexModule
   ],
   providers: [
-    StartupService,
-    { provide: APP_INITIALIZER, useFactory: startupServiceFactory, deps: [StartupService], multi: true },
+    AppStartService,
+    { provide: APP_INITIALIZER, useFactory: startupServiceFactory, deps: [AppStartService], multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },
     { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: MAT_DATE_FNS_DATE_FORMATS }
