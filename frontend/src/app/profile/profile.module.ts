@@ -12,11 +12,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
-import { ProfileAvatarComponent } from './profile-avatar/profile-avatar.component';
 import { ImageViewerDialogModule } from '../common/dialogs/image-viewer-dialog';
 import { PhoneMaskDirectiveModule } from '../common/directives/phone-mask';
 import { ChangePasswordDialogComponent } from './change-password-dialog';
 import { AvatarEditorDialogComponent } from './avatar-editor-dialog';
+import { ProfileAvatarComponent } from './profile-avatar';
 import { ProfileComponent } from './profile.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { PROFILE_ROUTES } from './profile.routes';

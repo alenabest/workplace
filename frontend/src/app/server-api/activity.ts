@@ -1,0 +1,41 @@
+import { Transform } from 'class-transformer';
+import { formatDateToClass, formatDateToPlain, formatObjectToField } from '../core/helpers';
+import { ActivityTypeModel, DirectionModel, ProjectModel } from './dictionary';
+import { UserModel } from './user';
+
+
+export class ActivityModel {
+  constructor(private currentDate?: Date, private startTime?: string) {
+    this.activityDate = currentDate;
+    this.start = startTime;
+  }
+
+  id: number;
+  start: string;
+  end: string;
+  description: string;
+  marginBottom: string;
+  marginTop: string;
+  backgroundColor: string;
+  height: string;
+  startHour: number;
+  startMinute: number;
+  endHour: number;
+  endMinute: number;
+  duration: number;
+
+  @Transform(formatDateToPlain(), { toPlainOnly: true })
+  @Transform(formatDateToClass(), { toClassOnly: true })
+  activityDate?: Date | string;
+
+  @Transform(formatObjectToField<ProjectModel, 'id'>('id'), { toPlainOnly: true })
+  project: ProjectModel;
+
+  @Transform(formatObjectToField<DirectionModel, 'id'>('id'), { toPlainOnly: true })
+  direction: DirectionModel;
+
+  @Transform(formatObjectToField<ActivityModel, 'id'>('id'), { toPlainOnly: true })
+  type: ActivityTypeModel;
+
+  user: UserModel;
+}

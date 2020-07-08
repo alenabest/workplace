@@ -1,5 +1,5 @@
 import { formatDateToBacked } from '../../../core/helpers';
-import { WeekListModel } from '../dictionary';
+import { WeekListModel } from '../../../activity/week-activity';
 
 
 export class ByUserParam {
@@ -75,16 +75,4 @@ export class DictionaryParam {
   directions: number;
   search: string;
   ordering: string = 'name';
-}
-
-export class ReportParam {
-  constructor(type: number, startDate: Date, endDate: Date) {
-    this.type = type;
-    this.start = formatDateToBacked(startDate);
-    this.end = formatDateToBacked(endDate);
-  }
-
-  type: number;
-  start: string;
-  end: string;
 }

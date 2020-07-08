@@ -1,22 +1,30 @@
 import { Route } from '@angular/router';
 
-import { MonthActivityPageComponent } from './month-activity/components/month-activity-page';
-import { WeekActivityPageComponent } from './week-activity/components/week-activity-page';
-import { DayActivityPageComponent } from './day-activity/components/day-activity-page';
+import { MonthActivityComponent } from './month-activity';
+import { ActivityComponent } from './activity.component';
+import { WeekActivityComponent } from './week-activity';
+import { DayActivityComponent } from './day-activity';
+
 
 
 
 export const ACTIVITY_ROUTES: Route[] = [
   {
-    path: 'app/activity/day',
-    component: DayActivityPageComponent
+    path: 'app/activity',
+    component: ActivityComponent,
+    children: [
+      {
+        path: 'day',
+        component: DayActivityComponent
+      },
+      {
+        path: 'week',
+        component: WeekActivityComponent
+      },
+      {
+        path: 'month',
+        component: MonthActivityComponent
+      }
+    ]
   },
-  {
-    path: 'app/activity/week',
-    component: WeekActivityPageComponent
-  },
-  {
-    path: 'app/activity/month',
-    component: MonthActivityPageComponent
-  }
 ];

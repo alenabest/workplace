@@ -1,13 +1,12 @@
 import { Directive, HostListener, Input, OnDestroy } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 
-import { ActivityTypeDialogComponent } from '../../../dialogs/activity-type-dialog/component';
-import { DirectionDialogComponent } from '../../../dialogs/direction-dialog/component';
-import { ProjectDialogComponent } from '../../../dialogs/project-dialog/component';
-import { DictionaryService } from '../../../../core/services/dictionary';
+import { ActivityTypeDialogComponent } from '../../../components/dictionary-select/activity-type-dialog';
+import { DirectionDialogComponent } from '../../../components/dictionary-select/direction-dialog';
+import { ProjectDialogComponent } from '../../../components/dictionary-select/project-dialog';
 import { SubjectService } from '../../../../core/services/subject';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 
 @UntilDestroy()
@@ -24,8 +23,7 @@ export class EditOptionDirective implements OnDestroy {
       .subscribe(result => this.completeClose(result));
   }
 
-  constructor(private readonly dictionaryService?: DictionaryService,
-              private readonly subjectService?: SubjectService,
+  constructor(private readonly subjectService?: SubjectService,
               private dialog?: MatDialog) {
   }
 

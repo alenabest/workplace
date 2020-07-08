@@ -18,6 +18,7 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { DateDistanceModule } from '../common/pipes/date-distance';
 import { UsersComponent } from './users.component';
 import { USERS_ROUTES } from './users.routes';
+import { ConfirmationDialogModule } from '../common/dialogs/confirmation-dialog';
 
 
 
@@ -43,7 +44,8 @@ import { USERS_ROUTES } from './users.routes';
     MatDialogModule,
     DateDistanceModule,
     MatProgressSpinnerModule,
-    FormsModule
+    FormsModule,
+    ConfirmationDialogModule
   ]
 })
 export class UsersModule {
